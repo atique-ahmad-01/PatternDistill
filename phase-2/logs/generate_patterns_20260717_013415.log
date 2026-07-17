@@ -1,0 +1,14 @@
+01:34:15 Log     : /home/students/PatternDistill/phase-2/logs/generate_patterns_20260717_013415.log
+01:34:15 Backend : transformers
+01:34:15 Dataset : HuggingFaceH4/MATH-500
+01:34:19 Problems: 400
+01:34:19 Resuming — 5 already done
+01:34:19 To do   : 395
+01:34:21 Device  : cuda
+01:34:21 GPU     : NVIDIA GeForce RTX 5070 Ti
+01:34:21 VRAM    : 16.6 GB
+01:34:21 Loading teacher: Qwen/Qwen3-8B
+01:34:25   Free VRAM 14.9GB — loading in 4-bit quant
+01:34:42 Teacher loaded
+01:34:59   [1/395] id=5 Prealgebra L2 | pattern=✓ | lat=17.3s tps=60 | tok=1037
+01:35:14   [2/395] id=6 Number Theory L3 | pattern=✓ | lat=14.4s tps=67 | tok=968

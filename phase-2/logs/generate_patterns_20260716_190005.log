@@ -1,0 +1,7 @@
+19:00:05 Log     : /Users/ebricks/Desktop/PatternDistill/phase-2/logs/generate_patterns_20260716_190005.log
+19:00:05 Dataset : HuggingFaceH4/MATH-500
+19:00:10 Smoke-test mode: 5 problems
+19:00:10 To do   : 5
+19:00:10 Device  : cpu
+19:00:10 Loading teacher: Qwen/Qwen3-8B
+19:00:11   No CUDA — loading in float32 on CPU (slow, smoke-test only)

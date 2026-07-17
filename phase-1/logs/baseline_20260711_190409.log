@@ -1,0 +1,37 @@
+19:04:09 Log file : /home/students/PatternDistill/logs/baseline_20260711_190409.log
+19:04:09 Device   : cuda
+19:04:09 GPU      : NVIDIA GeForce RTX 5070 Ti
+19:04:09 VRAM     : 16.6 GB
+19:04:09 Loading dataset: HuggingFaceH4/MATH-500
+19:04:13   Smoke-test mode: 5 problems
+19:04:13 
+============================================================
+19:04:13 Running Qwen 1.7B (Qwen/Qwen3-1.7B) ...
+19:04:13 ============================================================
+19:04:13   Resuming — 5 already done, skipping
+19:04:13   All problems already done.
+19:04:13 
+============================================================
+19:04:13 Qwen 1.7B — 5 problems
+19:04:13   Accuracy:       0.600  (3/5)
+19:04:13   Avg latency:    19.093s
+19:04:13   Avg tokens out: 2278.4
+19:04:13   Avg tokens/s:   118.27
+19:04:13 
+  By subject:
+19:04:13     Algebra                             acc=0.500  (n=2)
+19:04:13     Intermediate Algebra                acc=1.000  (n=1)
+19:04:13     Number Theory                       acc=1.000  (n=1)
+19:04:13     Precalculus                         acc=0.000  (n=1)
+19:04:13 
+  By difficulty level:
+19:04:13     Level 2: acc=0.000  (n=2)
+19:04:13     Level 3: acc=1.000  (n=2)
+19:04:13     Level 5: acc=1.000  (n=1)
+19:04:13 
+============================================================
+19:04:13 Running Qwen 8B (Qwen/Qwen3-8B) ...
+19:04:13 ============================================================
+19:04:13   Loading tokenizer: Qwen/Qwen3-8B
+19:04:15   Loading model: Qwen/Qwen3-8B
+19:04:15   Free VRAM: 16.1GB — 4-bit quant

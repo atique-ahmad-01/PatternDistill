@@ -1,0 +1,11 @@
+01:18:31 Log     : /home/students/PatternDistill/phase-2/logs/inject_and_eval_20260717_011831.log
+01:18:31 Backend : transformers
+01:18:31 Dataset : HuggingFaceH4/MATH-500
+01:18:35 Capped at: 5 problems
+01:18:35 To do   : 5
+01:18:35 Memory bank: 5 entries, FAISS ntotal=5
+01:18:37 Device  : cuda
+01:18:37 GPU     : NVIDIA GeForce RTX 5070 Ti
+01:18:37 VRAM    : 16.6 GB
+01:18:37 Loading student: Qwen/Qwen3-1.7B
+01:18:46 Student loaded

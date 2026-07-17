@@ -1,0 +1,11 @@
+22:26:04 Log     : /home/students/PatternDistill/phase-2/logs/generate_patterns_20260716_222604.log
+22:26:04 Backend : transformers
+22:26:04 Dataset : HuggingFaceH4/MATH-500
+22:26:12 Problems: 400
+22:26:12 Resuming — 7 already done
+22:26:12 To do   : 393
+22:26:16 Device  : cuda
+22:26:16 GPU     : NVIDIA GeForce RTX 5070
+22:26:16 VRAM    : 12.3 GB
+22:26:16 Loading teacher: Qwen/Qwen3-8B
+22:26:20   Free VRAM 12.2GB — loading in 4-bit quant

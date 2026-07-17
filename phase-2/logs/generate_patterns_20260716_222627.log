@@ -1,0 +1,8 @@
+22:26:27 Log     : /home/students/PatternDistill/phase-2/logs/generate_patterns_20260716_222627.log
+22:26:27 Backend : transformers
+22:26:27 Dataset : HuggingFaceH4/MATH-500
+22:26:31 Smoke-test mode: 5 problems
+22:26:31 Resuming — 7 already done
+22:26:31 To do   : 2
+22:27:39 Device  : cpu
+22:27:39 Loading teacher: Qwen/Qwen3-8B

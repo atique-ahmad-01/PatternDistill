@@ -1,0 +1,14 @@
+22:29:11 Log file : /home/students/PatternDistill/logs/baseline_20260711_222911.log
+22:29:11 Device   : cuda
+22:29:11 GPU      : NVIDIA GeForce RTX 5070 Ti
+22:29:11 VRAM     : 16.6 GB
+22:29:11 Loading dataset: HuggingFaceH4/MATH-500
+22:29:15   Smoke-test mode: 5 problems
+22:29:15 
+============================================================
+22:29:15 Running Qwen 1.7B (Qwen/Qwen3-1.7B) ...
+22:29:15 ============================================================
+22:29:15   Loading tokenizer: Qwen/Qwen3-1.7B
+22:29:18   Loading model: Qwen/Qwen3-1.7B
+22:29:18   Free VRAM (GPU 0): 16.0GB | Total across all GPUs: 28.9GB
+22:29:18   Loading as: bfloat16 (multi-GPU)

@@ -1,0 +1,78 @@
+Note: Environment variable`HF_TOKEN` is set and is the current active token independently from the token you've just configured.
+Log file : /home/students/PatternDistill/logs/baseline_20260711_234703.log
+Device   : cuda
+GPU      : NVIDIA GeForce RTX 5070 Ti
+VRAM     : 16.6 GB
+Loading dataset: HuggingFaceH4/MATH-500
+  500 problems
+
+============================================================
+Running Qwen 1.7B (Qwen/Qwen3-1.7B) ...
+============================================================
+  Loading tokenizer: Qwen/Qwen3-1.7B
+  Loading model: Qwen/Qwen3-1.7B
+  Free VRAM: 13.6GB — 4-bit quant (GPU 0)
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:   2%|▏         | 5/311 [00:00<00:06, 49.55it/s]Loading weights:  43%|████▎     | 134/311 [00:00<00:00, 775.38it/s]Loading weights:  83%|████████▎ | 259/311 [00:00<00:00, 983.65it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 912.80it/s]
+  Model loaded
+/home/students/miniforge3/envs/ms-atique/lib/python3.11/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+  [Qwen 1.7B] [1/500] Precalculus L2 | ✓ | lat=16.29s tps=92.9 | acc=1.000
+  [Qwen 1.7B] [2/500] Intermediate Algebra L5 | ✓ | lat=30.54s tps=94.7 | acc=1.000
+  [Qwen 1.7B] [3/500] Algebra L3 | ✓ | lat=12.01s tps=94.6 | acc=1.000
+  [Qwen 1.7B] [4/500] Number Theory L3 | ✓ | lat=16.62s tps=94.7 | acc=1.000
+  [Qwen 1.7B] [5/500] Algebra L2 | ✗ | lat=86.76s tps=94.4 | acc=0.800
+  [Qwen 1.7B] [6/500] Prealgebra L2 | ✓ | lat=17.28s tps=94.3 | acc=0.833
+  [Qwen 1.7B] [7/500] Number Theory L3 | ✓ | lat=35.66s tps=94.0 | acc=0.857
+  [Qwen 1.7B] [8/500] Precalculus L4 | ✗ | lat=87.28s tps=93.9 | acc=0.750
+  [Qwen 1.7B] [9/500] Algebra L3 | ✓ | lat=16.09s tps=94.2 | acc=0.778
+  [Qwen 1.7B] [10/500] Prealgebra L5 | ✗ | lat=87.05s tps=94.1 | acc=0.700
+  [Qwen 1.7B] [11/500] Number Theory L3 | ✓ | lat=29.86s tps=94.3 | acc=0.727
+  [Qwen 1.7B] [12/500] Intermediate Algebra L5 | ✗ | lat=87.05s tps=94.1 | acc=0.667
+  [Qwen 1.7B] [13/500] Number Theory L5 | ✗ | lat=52.13s tps=94.0 | acc=0.615
+  [Qwen 1.7B] [14/500] Geometry L2 | ✓ | lat=13.99s tps=94.1 | acc=0.643
+  [Qwen 1.7B] [15/500] Precalculus L1 | ✓ | lat=61.16s tps=94.3 | acc=0.667
+  [Qwen 1.7B] [16/500] Precalculus L5 | ✗ | lat=86.89s tps=94.3 | acc=0.625
+  [Qwen 1.7B] [17/500] Intermediate Algebra L1 | ✓ | lat=48.51s tps=94.3 | acc=0.647
+  [Qwen 1.7B] [18/500] Precalculus L4 | ✓ | lat=25.22s tps=94.1 | acc=0.667
+  [Qwen 1.7B] [19/500] Geometry L1 | ✗ | lat=87.02s tps=94.1 | acc=0.632
+  [Qwen 1.7B] [20/500] Intermediate Algebra L3 | ✗ | lat=86.94s tps=94.2 | acc=0.600
+  [Qwen 1.7B] [21/500] Algebra L3 | ✓ | lat=9.17s tps=94.5 | acc=0.619
+  [Qwen 1.7B] [22/500] Intermediate Algebra L3 | ✗ | lat=87.10s tps=94.1 | acc=0.591
+  [Qwen 1.7B] [23/500] Algebra L5 | ✗ | lat=40.43s tps=94.4 | acc=0.565
+  [Qwen 1.7B] [24/500] Algebra L5 | ✗ | lat=17.12s tps=94.4 | acc=0.542
+  [Qwen 1.7B] [25/500] Algebra L5 | ✗ | lat=87.14s tps=94.0 | acc=0.520
+  [Qwen 1.7B] [26/500] Intermediate Algebra L5 | ✗ | lat=87.05s tps=94.1 | acc=0.500
+  [Qwen 1.7B] [27/500] Counting & Probability L5 | ✗ | lat=87.12s tps=94.0 | acc=0.481
+  [Qwen 1.7B] [28/500] Prealgebra L2 | ✗ | lat=87.09s tps=94.1 | acc=0.464
+  [Qwen 1.7B] [29/500] Precalculus L2 | ✓ | lat=11.81s tps=94.1 | acc=0.483
+  [Qwen 1.7B] [30/500] Counting & Probability L2 | ✗ | lat=9.04s tps=93.9 | acc=0.467
+  [Qwen 1.7B] [31/500] Number Theory L3 | ✓ | lat=15.01s tps=94.2 | acc=0.484
+  [Qwen 1.7B] [32/500] Prealgebra L4 | ✗ | lat=6.47s tps=94.1 | acc=0.469
+  [Qwen 1.7B] [33/500] Counting & Probability L4 | ✓ | lat=55.28s tps=94.0 | acc=0.485
+  [Qwen 1.7B] [34/500] Algebra L4 | ✓ | lat=53.30s tps=94.0 | acc=0.500
+  [Qwen 1.7B] [35/500] Counting & Probability L4 | ✗ | lat=32.09s tps=93.9 | acc=0.486
+  [Qwen 1.7B] [36/500] Number Theory L2 | ✓ | lat=27.93s tps=94.3 | acc=0.500
+  [Qwen 1.7B] [37/500] Intermediate Algebra L2 | ✗ | lat=87.12s tps=94.0 | acc=0.486
+  [Qwen 1.7B] [38/500] Geometry L3 | ✓ | lat=39.25s tps=94.0 | acc=0.500
+  [Qwen 1.7B] [39/500] Algebra L1 | ✗ | lat=6.11s tps=94.1 | acc=0.487
+  [Qwen 1.7B] [40/500] Number Theory L3 | ✓ | lat=42.12s tps=94.1 | acc=0.500
+  [Qwen 1.7B] [41/500] Prealgebra L2 | ✓ | lat=13.44s tps=94.2 | acc=0.512
+  [Qwen 1.7B] [42/500] Geometry L4 | ✓ | lat=56.14s tps=94.2 | acc=0.524
+  [Qwen 1.7B] [43/500] Algebra L2 | ✓ | lat=18.25s tps=93.9 | acc=0.535
+  [Qwen 1.7B] [44/500] Intermediate Algebra L5 | ✗ | lat=87.10s tps=94.1 | acc=0.523
+  [Qwen 1.7B] [45/500] Prealgebra L5 | ✗ | lat=14.96s tps=94.2 | acc=0.511
+  [Qwen 1.7B] [46/500] Geometry L3 | ✓ | lat=23.55s tps=94.2 | acc=0.522
+  [Qwen 1.7B] [47/500] Precalculus L2 | ✗ | lat=86.96s tps=94.2 | acc=0.511
+  [Qwen 1.7B] [48/500] Algebra L5 | ✓ | lat=26.68s tps=94.0 | acc=0.521
+  [Qwen 1.7B] [49/500] Algebra L2 | ✓ | lat=9.00s tps=94.2 | acc=0.531
+  [Qwen 1.7B] [50/500] Prealgebra L4 | ✓ | lat=11.48s tps=93.9 | acc=0.540
+  [Qwen 1.7B] [51/500] Number Theory L5 | ✗ | lat=86.63s tps=94.6 | acc=0.529
+  [Qwen 1.7B] [52/500] Intermediate Algebra L2 | ✓ | lat=52.29s tps=94.4 | acc=0.538
+  [Qwen 1.7B] [53/500] Prealgebra L5 | ✓ | lat=19.29s tps=94.2 | acc=0.547
+  [Qwen 1.7B] [54/500] Precalculus L2 | ✓ | lat=18.43s tps=94.3 | acc=0.556
+  [Qwen 1.7B] [55/500] Prealgebra L2 | ✓ | lat=1.34s tps=94.0 | acc=0.564
+  [Qwen 1.7B] [56/500] Algebra L4 | ✓ | lat=31.51s tps=94.1 | acc=0.571
+  [Qwen 1.7B] [57/500] Algebra L3 | ✓ | lat=6.43s tps=94.0 | acc=0.579
+  [Qwen 1.7B] [58/500] Intermediate Algebra L2 | ✓ | lat=11.77s tps=94.1 | acc=0.586
+  [Qwen 1.7B] [59/500] Algebra L1 | ✓ | lat=13.81s tps=93.7 | acc=0.593
+  [Qwen 1.7B] [60/500] Prealgebra L2 | ✗ | lat=86.85s tps=94.3 | acc=0.583

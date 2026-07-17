@@ -1,0 +1,81 @@
+Note: Environment variable`HF_TOKEN` is set and is the current active token independently from the token you've just configured.
+Log file : /home/students/PatternDistill/logs/baseline_20260711_232522.log
+Device   : cuda
+GPU      : NVIDIA GeForce RTX 5070 Ti
+VRAM     : 16.6 GB
+Loading dataset: HuggingFaceH4/MATH-500
+  Smoke-test mode: 5 problems
+
+============================================================
+Running Qwen 1.7B (Qwen/Qwen3-1.7B) ...
+============================================================
+  Loading tokenizer: Qwen/Qwen3-1.7B
+  Loading model: Qwen/Qwen3-1.7B
+  Free VRAM: 13.7GB — 4-bit quant (GPU 0)
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:   1%|▏         | 4/311 [00:00<00:08, 36.87it/s]Loading weights:  41%|████      | 127/311 [00:00<00:00, 713.77it/s]Loading weights:  77%|███████▋  | 241/311 [00:00<00:00, 895.58it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 617.06it/s]
+  Model loaded
+/home/students/miniforge3/envs/ms-atique/lib/python3.11/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+  [Qwen 1.7B] [1/5] Precalculus L2 | ✓ | lat=16.70s tps=90.6 | acc=1.000
+  [Qwen 1.7B] [2/5] Intermediate Algebra L5 | ✓ | lat=30.77s tps=94.0 | acc=1.000
+  [Qwen 1.7B] [3/5] Algebra L3 | ✓ | lat=12.09s tps=94.0 | acc=1.000
+  [Qwen 1.7B] [4/5] Number Theory L3 | ✓ | lat=16.81s tps=93.6 | acc=1.000
+  [Qwen 1.7B] [5/5] Algebra L2 | ✗ | lat=87.73s tps=93.4 | acc=0.800
+  VRAM after cleanup: 13.3GB free
+
+============================================================
+Qwen 1.7B — 5 problems
+  Accuracy:       0.800  (4/5)
+  Avg latency:    32.822s
+  Avg tokens out: 3061.8
+  Avg tokens/s:   93.12
+
+  By subject:
+    Algebra                             acc=0.500  (n=2)
+    Intermediate Algebra                acc=1.000  (n=1)
+    Number Theory                       acc=1.000  (n=1)
+    Precalculus                         acc=1.000  (n=1)
+
+  By difficulty level:
+    Level 2: acc=0.500  (n=2)
+    Level 3: acc=1.000  (n=2)
+    Level 5: acc=1.000  (n=1)
+
+============================================================
+Running Qwen 8B (Qwen/Qwen3-8B) ...
+============================================================
+  Loading tokenizer: Qwen/Qwen3-8B
+  Loading model: Qwen/Qwen3-8B
+  Free VRAM: 13.3GB — 4-bit quant (GPU 0)
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:00<02:23,  2.77it/s]Loading weights:   1%|          | 2/399 [00:00<02:22,  2.79it/s]Loading weights:   3%|▎         | 12/399 [00:00<00:18, 20.99it/s]Loading weights:   5%|▌         | 21/399 [00:00<00:10, 35.05it/s]Loading weights:   8%|▊         | 32/399 [00:01<00:07, 51.16it/s]Loading weights:  11%|█         | 42/399 [00:01<00:05, 62.92it/s]Loading weights:  13%|█▎        | 51/399 [00:01<00:05, 67.51it/s]Loading weights:  15%|█▌        | 61/399 [00:01<00:04, 74.24it/s]Loading weights:  18%|█▊        | 72/399 [00:01<00:03, 82.11it/s]Loading weights:  21%|██        | 83/399 [00:01<00:03, 87.69it/s]Loading weights:  24%|██▎       | 94/399 [00:01<00:03, 88.78it/s]Loading weights:  26%|██▌       | 104/399 [00:01<00:03, 91.75it/s]Loading weights:  29%|██▉       | 115/399 [00:01<00:03, 91.49it/s]Loading weights:  32%|███▏      | 126/399 [00:02<00:02, 93.73it/s]Loading weights:  34%|███▍      | 137/399 [00:02<00:02, 95.15it/s]Loading weights:  37%|███▋      | 148/399 [00:02<00:02, 95.41it/s]Loading weights:  40%|███▉      | 159/399 [00:02<00:02, 95.08it/s]Loading weights:  43%|████▎     | 170/399 [00:02<00:02, 94.66it/s]Loading weights:  45%|████▌     | 181/399 [00:02<00:02, 96.77it/s]Loading weights:  48%|████▊     | 192/399 [00:02<00:02, 97.50it/s]Loading weights:  51%|█████     | 203/399 [00:02<00:02, 96.66it/s]Loading weights:  54%|█████▎    | 214/399 [00:02<00:01, 95.93it/s]Loading weights:  56%|█████▋    | 225/399 [00:03<00:01, 95.03it/s]Loading weights:  59%|█████▉    | 236/399 [00:03<00:01, 92.99it/s]Loading weights:  62%|██████▏   | 247/399 [00:03<00:01, 92.01it/s]Loading weights:  64%|██████▍   | 257/399 [00:03<00:01, 93.98it/s]Loading weights:  67%|██████▋   | 268/399 [00:03<00:01, 94.28it/s]Loading weights:  70%|██████▉   | 279/399 [00:03<00:01, 92.00it/s]Loading weights:  73%|███████▎  | 290/399 [00:03<00:01, 94.42it/s]Loading weights:  75%|███████▌  | 301/399 [00:03<00:01, 95.81it/s]Loading weights:  78%|███████▊  | 312/399 [00:03<00:00, 96.69it/s]Loading weights:  81%|████████  | 323/399 [00:04<00:00, 96.39it/s]Loading weights:  84%|████████▎ | 334/399 [00:04<00:00, 95.99it/s]Loading weights:  86%|████████▋ | 345/399 [00:04<00:00, 97.31it/s]Loading weights:  89%|████████▉ | 356/399 [00:04<00:00, 98.34it/s]Loading weights:  92%|█████████▏| 367/399 [00:04<00:00, 99.14it/s]Loading weights:  95%|█████████▍| 378/399 [00:04<00:00, 99.37it/s]Loading weights:  97%|█████████▋| 389/399 [00:04<00:00, 96.66it/s]Loading weights: 100%|██████████| 399/399 [00:04<00:00, 82.12it/s]
+  Model loaded
+  [Qwen 8B] [1/5] Precalculus L2 | ✓ | lat=23.55s tps=70.2 | acc=1.000
+  [Qwen 8B] [2/5] Intermediate Algebra L5 | ✓ | lat=77.83s tps=70.0 | acc=1.000
+  [Qwen 8B] [3/5] Algebra L3 | ✓ | lat=31.93s tps=69.7 | acc=1.000
+  [Qwen 8B] [4/5] Number Theory L3 | ✓ | lat=26.54s tps=69.7 | acc=1.000
+  [Qwen 8B] [5/5] Algebra L2 | ✓ | lat=59.90s tps=69.3 | acc=1.000
+  VRAM after cleanup: 13.3GB free
+
+============================================================
+Qwen 8B — 5 problems
+  Accuracy:       1.000  (5/5)
+  Avg latency:    43.949s
+  Avg tokens out: 3065.2
+  Avg tokens/s:   69.77
+
+  By subject:
+    Algebra                             acc=1.000  (n=2)
+    Intermediate Algebra                acc=1.000  (n=1)
+    Number Theory                       acc=1.000  (n=1)
+    Precalculus                         acc=1.000  (n=1)
+
+  By difficulty level:
+    Level 2: acc=1.000  (n=2)
+    Level 3: acc=1.000  (n=2)
+    Level 5: acc=1.000  (n=1)
+
+============================================================
+  Qwen 1.7B accuracy: 0.800
+  Qwen 8B   accuracy: 1.000
+  Gap (8B - 1.7B):    +0.200  ← this is what we aim to close
+============================================================

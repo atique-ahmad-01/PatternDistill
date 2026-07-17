@@ -1,0 +1,24 @@
+19:19:22 Log     : /Users/ebricks/Desktop/PatternDistill/phase-2/logs/build_memory_bank_20260716_191922.log
+19:19:22 Loaded 5 records from /Users/ebricks/Desktop/PatternDistill/phase-2/data/patterns/patterns.json
+19:19:22   Embedding 5 records
+19:19:22   Ollama OK — nomic-embed-text available
+19:19:22 
+Embedding problems ...
+19:19:23   Embedded batch 1 (1–5/5) in 0.9s
+19:19:23 Vectors shape: (5, 768)
+19:19:23 
+Building FAISS index ...
+19:19:23   FAISS index built — 5 vectors, dim=768
+19:19:23 Saved metadata → /Users/ebricks/Desktop/PatternDistill/phase-2/memory/bank.json  (5 entries)
+19:19:23 Saved FAISS index → /Users/ebricks/Desktop/PatternDistill/phase-2/memory/bank.index
+19:19:23 
+── Memory Bank Summary ──────────────────────────────────────
+19:19:23   Total entries : 5
+19:19:23   Vector dim    : 768
+19:19:23   Index type    : IndexFlatIP (cosine sim via L2-norm)
+19:19:23 
+  By subject:
+19:19:23     Algebra                             2
+19:19:23     Intermediate Algebra                1
+19:19:23     Number Theory                       1
+19:19:23     Precalculus                         1

@@ -1,0 +1,104 @@
+{
+  "n": 5,
+  "n_injected": 0,
+  "n_low_sim": 5,
+  "similarity_threshold": 0.7,
+  "vanilla": {
+    "accuracy": 0.6,
+    "avg_latency_s": 38.522,
+    "avg_output_tokens": 4205.4,
+    "by_subject": {
+      "Counting & Probability": {
+        "accuracy": 1.0,
+        "n": 1
+      },
+      "Geometry": {
+        "accuracy": 0.0,
+        "n": 1
+      },
+      "Intermediate Algebra": {
+        "accuracy": 0.0,
+        "n": 1
+      },
+      "Number Theory": {
+        "accuracy": 1.0,
+        "n": 1
+      },
+      "Precalculus": {
+        "accuracy": 1.0,
+        "n": 1
+      }
+    },
+    "by_level": {
+      "1": {
+        "accuracy": 1.0,
+        "n": 1
+      },
+      "3": {
+        "accuracy": 1.0,
+        "n": 1
+      },
+      "4": {
+        "accuracy": 1.0,
+        "n": 1
+      },
+      "5": {
+        "accuracy": 0.0,
+        "n": 2
+      }
+    }
+  },
+  "injection": {
+    "accuracy": 0.6,
+    "avg_latency_s": 37.961,
+    "avg_output_tokens": 4205.4,
+    "by_subject": {
+      "Counting & Probability": {
+        "accuracy": 1.0,
+        "n": 1
+      },
+      "Geometry": {
+        "accuracy": 0.0,
+        "n": 1
+      },
+      "Intermediate Algebra": {
+        "accuracy": 0.0,
+        "n": 1
+      },
+      "Number Theory": {
+        "accuracy": 1.0,
+        "n": 1
+      },
+      "Precalculus": {
+        "accuracy": 1.0,
+        "n": 1
+      }
+    },
+    "by_level": {
+      "1": {
+        "accuracy": 1.0,
+        "n": 1
+      },
+      "3": {
+        "accuracy": 1.0,
+        "n": 1
+      },
+      "4": {
+        "accuracy": 1.0,
+        "n": 1
+      },
+      "5": {
+        "accuracy": 0.0,
+        "n": 2
+      }
+    }
+  },
+  "delta": {
+    "accuracy": 0.0
+  },
+  "phase_1_baseline": {
+    "student_1_7b": 0.508,
+    "teacher_8b": 0.718,
+    "gap": 0.21
+  }
+}

@@ -1,0 +1,61 @@
+DONE:
+- Phase 1 complete — 1.7B: 50.8% | 8B: 71.8% | Gap: +21pp
+- Results: results/baseline/summary.json, results/baseline/histogram.png
+
+NEXT — Phase 2:
+- Write method_a/scripts/generate_patterns.py
+- Run 8B on MATH-500[0:400]
+- Output → method_a/data/patterns/patterns.json
+
+WHAT THE PATTERNS ARE USED FOR:
+
+Method A — Memory Injection (method_a/)
+  At inference time, embed the test problem, retrieve the most similar pattern
+  from the bank, and inject it into the 1.7B prompt. The small model sees the
+  pattern but has NOT been trained on it. Tests whether showing a pattern at
+  runtime is enough.
+
+Method B — Neural Distillation (method_b/)
+  Fine-tune the 1.7B on the 400 pattern-augmented examples using LoRA. At
+  inference time, no pattern is injected — the model must rely on what was
+  baked into its weights during training. Tests whether internalizing patterns
+  beats just seeing them.
+
+RESEARCH QUESTION:
+  Which works better — injecting patterns at runtime (A) or distilling them
+  into weights (B)?
+
+
+
+
+**DONE**
+
+* Phase 1 completed:
+
+  * **1.7B:** 50.8%
+  * **8B:** 71.8%
+  * **Performance gap:** +21 percentage points
+* Evaluation results are attached in **histogram.png**.
+* The evaluation was run on an **RTX 5070 Ti (16GB GPU)** and took approximately **11 hours** to complete the full **MATH-500** dataset.
+
+**NEXT PLAN — Phase 2**
+
+* Develop scripts to generate reasoning patterns.
+* Run the **8B** model on **MATH-500[0:400]**.
+* Generate the output file: **patterns.json**.
+
+**Purpose of the Generated Patterns**
+
+**Method A — Memory Injection (`method_a/`)**
+
+* During inference, the test problem is embedded and matched with the most similar pattern from the pattern bank.
+* The retrieved pattern is injected into the **1.7B** model's prompt.
+* The model is **not fine-tuned** on these patterns; it only uses them at runtime.
+* This evaluates whether providing reasoning patterns during inference improves performance.
+
+**Method B — Neural Distillation (`method_b/`)**
+
+* Fine-tune the **1.7B** model using **LoRA** on the **400 pattern-augmented examples**.
+* During inference, **no pattern is injected**.
+* The model relies solely on the reasoning patterns learned during fine-tuning.
+* This evaluates whether internalizing reasoning patterns into the model weights performs better than runtime pattern injection.

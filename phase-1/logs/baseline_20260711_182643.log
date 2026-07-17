@@ -1,0 +1,44 @@
+18:26:43 Log file : /home/students/PatternDistill/logs/baseline_20260711_182643.log
+18:26:43 Device   : cuda
+18:26:43 GPU      : NVIDIA GeForce RTX 5070 Ti
+18:26:43 VRAM     : 16.6 GB
+18:26:43 Loading dataset: HuggingFaceH4/MATH-500
+18:26:49   Smoke-test mode: 5 problems
+18:26:49 
+============================================================
+18:26:49 Running Qwen 1.7B (Qwen/Qwen3-1.7B) ...
+18:26:49 ============================================================
+18:26:49   Loading tokenizer: Qwen/Qwen3-1.7B
+18:26:58   Loading model: Qwen/Qwen3-1.7B
+18:34:21   Model loaded
+18:34:30   [Qwen 1.7B] [1/5] Precalculus L2 | ✗ | lat=8.96s tps=111.1 | acc=0.000
+18:34:58   [Qwen 1.7B] [2/5] Intermediate Algebra L5 | ✓ | lat=28.01s tps=120.9 | acc=0.500
+18:35:13   [Qwen 1.7B] [3/5] Algebra L3 | ✓ | lat=15.30s tps=120.1 | acc=0.667
+18:35:22   [Qwen 1.7B] [4/5] Number Theory L3 | ✓ | lat=9.05s tps=119.4 | acc=0.750
+18:35:56   [Qwen 1.7B] [5/5] Algebra L2 | ✗ | lat=34.14s tps=119.9 | acc=0.600
+18:35:56 
+============================================================
+18:35:56 Qwen 1.7B — 5 problems
+18:35:56   Accuracy:       0.600  (3/5)
+18:35:56   Avg latency:    19.093s
+18:35:56   Avg tokens out: 2278.4
+18:35:56   Avg tokens/s:   118.27
+18:35:56 
+  By subject:
+18:35:56     Algebra                             acc=0.500  (n=2)
+18:35:56     Intermediate Algebra                acc=1.000  (n=1)
+18:35:56     Number Theory                       acc=1.000  (n=1)
+18:35:56     Precalculus                         acc=0.000  (n=1)
+18:35:56 
+  By difficulty level:
+18:35:56     Level 2: acc=0.000  (n=2)
+18:35:56     Level 3: acc=1.000  (n=2)
+18:35:56     Level 5: acc=1.000  (n=1)
+18:35:56 
+============================================================
+18:35:56 Running Qwen 8B (Qwen/Qwen3-8B) ...
+18:35:56 ============================================================
+18:35:56   Loading tokenizer: Qwen/Qwen3-8B
+18:36:04   Loading model: Qwen/Qwen3-8B
+18:47:50   Model loaded
+18:52:59   [Qwen 8B] [1/5] Precalculus L2 | ✓ | lat=309.51s tps=4.7 | acc=1.000

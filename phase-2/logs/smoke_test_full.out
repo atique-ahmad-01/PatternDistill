@@ -1,0 +1,117 @@
+STEP1
+Log     : /home/students/PatternDistill/phase-2/logs/generate_patterns_20260716_224740.log
+Backend : transformers
+Dataset : HuggingFaceH4/MATH-500
+Smoke-test mode: 5 problems
+To do   : 5
+Device  : cuda
+GPU     : NVIDIA GeForce RTX 5070 Ti
+VRAM    : 16.6 GB
+Loading teacher: Qwen/Qwen3-8B
+  Free VRAM 14.4GB — loading in 4-bit quant
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:01<06:45,  1.02s/it]Loading weights:   1%|          | 2/399 [00:02<07:25,  1.12s/it]Loading weights:   1%|          | 4/399 [00:02<03:00,  2.18it/s]Loading weights:   1%|▏         | 5/399 [00:02<02:17,  2.86it/s]Loading weights:   2%|▏         | 6/399 [00:02<01:48,  3.63it/s]Loading weights:   4%|▍         | 15/399 [00:02<00:27, 13.72it/s]Loading weights:   5%|▍         | 18/399 [00:02<00:27, 13.68it/s]Loading weights:   7%|▋         | 26/399 [00:03<00:17, 21.42it/s]Loading weights:   7%|▋         | 29/399 [00:03<00:19, 18.62it/s]Loading weights:   9%|▉         | 35/399 [00:03<00:14, 25.22it/s]Loading weights:  10%|▉         | 39/399 [00:03<00:19, 18.90it/s]Loading weights:  12%|█▏        | 48/399 [00:04<00:13, 26.98it/s]Loading weights:  13%|█▎        | 52/399 [00:04<00:12, 26.74it/s]Loading weights:  15%|█▍        | 59/399 [00:04<00:10, 32.25it/s]Loading weights:  16%|█▌        | 63/399 [00:04<00:10, 30.77it/s]Loading weights:  18%|█▊        | 70/399 [00:04<00:09, 35.62it/s]Loading weights:  19%|█▊        | 74/399 [00:04<00:09, 32.88it/s]Loading weights:  20%|██        | 81/399 [00:04<00:09, 35.17it/s]Loading weights:  21%|██▏       | 85/399 [00:05<00:10, 29.41it/s]Loading weights:  23%|██▎       | 92/399 [00:05<00:09, 30.82it/s]Loading weights:  24%|██▍       | 96/399 [00:05<00:11, 27.11it/s]Loading weights:  26%|██▌       | 103/399 [00:05<00:09, 30.47it/s]Loading weights:  27%|██▋       | 107/399 [00:05<00:10, 27.94it/s]Loading weights:  29%|██▊       | 114/399 [00:06<00:09, 31.30it/s]Loading weights:  30%|██▉       | 118/399 [00:06<00:09, 28.90it/s]Loading weights:  31%|███▏      | 125/399 [00:06<00:08, 32.64it/s]Loading weights:  32%|███▏      | 129/399 [00:06<00:09, 28.88it/s]Loading weights:  34%|███▍      | 136/399 [00:06<00:08, 32.28it/s]Loading weights:  35%|███▌      | 140/399 [00:06<00:08, 29.59it/s]Loading weights:  37%|███▋      | 147/399 [00:07<00:07, 33.49it/s]Loading weights:  38%|███▊      | 151/399 [00:07<00:07, 31.95it/s]Loading weights:  40%|███▉      | 158/399 [00:07<00:06, 38.78it/s]Loading weights:  41%|████      | 163/399 [00:07<00:06, 36.18it/s]Loading weights:  42%|████▏     | 169/399 [00:07<00:06, 34.35it/s]Loading weights:  43%|████▎     | 173/399 [00:07<00:07, 29.90it/s]Loading weights:  45%|████▌     | 180/399 [00:08<00:06, 33.51it/s]Loading weights:  46%|████▌     | 184/399 [00:08<00:07, 29.97it/s]Loading weights:  48%|████▊     | 191/399 [00:08<00:05, 35.09it/s]Loading weights:  49%|████▉     | 195/399 [00:08<00:06, 33.19it/s]Loading weights:  51%|█████     | 202/399 [00:08<00:05, 35.52it/s]Loading weights:  52%|█████▏    | 206/399 [00:08<00:06, 31.92it/s]Loading weights:  53%|█████▎    | 213/399 [00:09<00:04, 38.57it/s]Loading weights:  55%|█████▍    | 218/399 [00:09<00:04, 37.59it/s]Loading weights:  56%|█████▌    | 224/399 [00:09<00:04, 41.32it/s]Loading weights:  57%|█████▋    | 229/399 [00:09<00:04, 39.20it/s]Loading weights:  59%|█████▉    | 235/399 [00:09<00:04, 40.46it/s]Loading weights:  60%|██████    | 240/399 [00:09<00:04, 36.11it/s]Loading weights:  62%|██████▏   | 246/399 [00:09<00:04, 37.22it/s]Loading weights:  63%|██████▎   | 250/399 [00:10<00:04, 32.52it/s]Loading weights:  64%|██████▍   | 257/399 [00:10<00:04, 34.98it/s]Loading weights:  65%|██████▌   | 261/399 [00:10<00:04, 30.28it/s]Loading weights:  67%|██████▋   | 268/399 [00:10<00:03, 32.90it/s]Loading weights:  68%|██████▊   | 272/399 [00:10<00:04, 29.58it/s]Loading weights:  70%|██████▉   | 279/399 [00:10<00:03, 33.54it/s]Loading weights:  71%|███████   | 283/399 [00:11<00:03, 29.25it/s]Loading weights:  73%|███████▎  | 290/399 [00:11<00:03, 32.22it/s]Loading weights:  74%|███████▎  | 294/399 [00:11<00:03, 29.67it/s]Loading weights:  75%|███████▌  | 301/399 [00:11<00:02, 33.35it/s]Loading weights:  76%|███████▋  | 305/399 [00:11<00:03, 30.22it/s]Loading weights:  78%|███████▊  | 312/399 [00:11<00:02, 34.41it/s]Loading weights:  79%|███████▉  | 316/399 [00:12<00:02, 30.26it/s]Loading weights:  81%|████████  | 323/399 [00:12<00:02, 33.58it/s]Loading weights:  82%|████████▏ | 327/399 [00:12<00:02, 30.28it/s]Loading weights:  84%|████████▎ | 334/399 [00:12<00:01, 34.45it/s]Loading weights:  85%|████████▍ | 338/399 [00:12<00:01, 30.51it/s]Loading weights:  86%|████████▋ | 345/399 [00:13<00:01, 34.13it/s]Loading weights:  87%|████████▋ | 349/399 [00:13<00:01, 30.33it/s]Loading weights:  89%|████████▉ | 356/399 [00:13<00:01, 33.77it/s]Loading weights:  90%|█████████ | 360/399 [00:13<00:01, 30.13it/s]Loading weights:  92%|█████████▏| 367/399 [00:13<00:00, 33.61it/s]Loading weights:  93%|█████████▎| 371/399 [00:13<00:00, 29.20it/s]Loading weights:  95%|█████████▍| 378/399 [00:14<00:00, 32.38it/s]Loading weights:  96%|█████████▌| 382/399 [00:14<00:00, 27.31it/s]Loading weights:  97%|█████████▋| 386/399 [00:14<00:00, 28.53it/s]Loading weights:  97%|█████████▋| 389/399 [00:14<00:00, 28.07it/s]Loading weights:  98%|█████████▊| 392/399 [00:14<00:00, 23.25it/s]Loading weights: 100%|██████████| 399/399 [00:14<00:00, 26.90it/s]
+Teacher loaded
+/home/students/miniforge3/envs/ms-atique/lib/python3.11/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+  [1/5] id=0 Precalculus L2 | pattern=✓ | lat=14.7s tps=59 | tok=868
+  [2/5] id=1 Intermediate Algebra L5 | pattern=✓ | lat=49.1s tps=63 | tok=3101
+  [3/5] id=2 Algebra L3 | pattern=✓ | lat=16.1s tps=61 | tok=981
+  [4/5] id=3 Number Theory L3 | pattern=✓ | lat=8.0s tps=64 | tok=512
+  [5/5] id=4 Algebra L2 | pattern=✓ | lat=15.7s tps=63 | tok=992
+VRAM free: 14.3 GB
+
+Done. Missing <pattern>: 0/5
+
+Wrote 5 records → /home/students/PatternDistill/phase-2/data/patterns/patterns.json
+  Patterns extracted : 5/5
+  Missing patterns   : 0
+
+  By subject:
+    Algebra                             2/2 patterns
+    Intermediate Algebra                1/1 patterns
+    Number Theory                       1/1 patterns
+    Precalculus                         1/1 patterns
+STEP2
+Log     : /home/students/PatternDistill/phase-2/logs/build_memory_bank_20260716_224950.log
+Loaded 5 records from /home/students/PatternDistill/phase-2/data/patterns/patterns.json
+  Embedding 5 records
+Traceback (most recent call last):
+  File "/home/students/miniforge3/envs/ms-atique/lib/python3.11/site-packages/urllib3/connection.py", line 204, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/students/miniforge3/envs/ms-atique/lib/python3.11/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/home/students/miniforge3/envs/ms-atique/lib/python3.11/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/students/miniforge3/envs/ms-atique/lib/python3.11/site-packages/urllib3/connectionpool.py", line 788, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/home/students/miniforge3/envs/ms-atique/lib/python3.11/site-packages/urllib3/connectionpool.py", line 493, in _make_request
+    conn.request(
+  File "/home/students/miniforge3/envs/ms-atique/lib/python3.11/site-packages/urllib3/connection.py", line 500, in request
+    self.endheaders()
+  File "/home/students/miniforge3/envs/ms-atique/lib/python3.11/http/client.py", line 1318, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/home/students/miniforge3/envs/ms-atique/lib/python3.11/http/client.py", line 1078, in _send_output
+    self.send(msg)
+  File "/home/students/miniforge3/envs/ms-atique/lib/python3.11/http/client.py", line 1016, in send
+    self.connect()
+  File "/home/students/miniforge3/envs/ms-atique/lib/python3.11/site-packages/urllib3/connection.py", line 331, in connect
+    self.sock = self._new_conn()
+                ^^^^^^^^^^^^^^^^
+  File "/home/students/miniforge3/envs/ms-atique/lib/python3.11/site-packages/urllib3/connection.py", line 219, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: HTTPConnection(host='localhost', port=11434): Failed to establish a new connection: [Errno 111] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/students/miniforge3/envs/ms-atique/lib/python3.11/site-packages/requests/adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "/home/students/miniforge3/envs/ms-atique/lib/python3.11/site-packages/urllib3/connectionpool.py", line 842, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "/home/students/miniforge3/envs/ms-atique/lib/python3.11/site-packages/urllib3/util/retry.py", line 543, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/tags (Caused by NewConnectionError("HTTPConnection(host='localhost', port=11434): Failed to establish a new connection: [Errno 111] Connection refused"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/students/PatternDistill/phase-2/scripts/build_memory_bank.py", line 72, in check_ollama
+    r = requests.get(f"{OLLAMA_URL}/api/tags", timeout=5)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/students/miniforge3/envs/ms-atique/lib/python3.11/site-packages/requests/api.py", line 87, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/students/miniforge3/envs/ms-atique/lib/python3.11/site-packages/requests/api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/students/miniforge3/envs/ms-atique/lib/python3.11/site-packages/requests/sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/students/miniforge3/envs/ms-atique/lib/python3.11/site-packages/requests/sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/students/miniforge3/envs/ms-atique/lib/python3.11/site-packages/requests/adapters.py", line 729, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/tags (Caused by NewConnectionError("HTTPConnection(host='localhost', port=11434): Failed to establish a new connection: [Errno 111] Connection refused"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/students/PatternDistill/phase-2/scripts/build_memory_bank.py", line 229, in <module>
+    main()
+  File "/home/students/PatternDistill/phase-2/scripts/build_memory_bank.py", line 172, in main
+    check_ollama(log)
+  File "/home/students/PatternDistill/phase-2/scripts/build_memory_bank.py", line 80, in check_ollama
+    raise RuntimeError(
+RuntimeError: Cannot reach Ollama at http://localhost:11434. Start it with: ollama serve
+Error: HTTPConnectionPool(host='localhost', port=11434): Max retries exceeded with url: /api/tags (Caused by NewConnectionError("HTTPConnection(host='localhost', port=11434): Failed to establish a new connection: [Errno 111] Connection refused"))

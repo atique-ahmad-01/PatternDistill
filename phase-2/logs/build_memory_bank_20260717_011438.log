@@ -1,0 +1,4 @@
+01:14:38 Log     : /home/students/PatternDistill/phase-2/logs/build_memory_bank_20260717_011438.log
+01:14:38 Loaded 5 records from /home/students/PatternDistill/phase-2/data/patterns/patterns.json
+01:14:38   Embedding 5 records
+01:14:43 Loading embed model: nomic-ai/nomic-embed-text-v1 on cuda

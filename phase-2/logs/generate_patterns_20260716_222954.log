@@ -1,0 +1,27 @@
+22:29:54 Log     : /home/students/PatternDistill/phase-2/logs/generate_patterns_20260716_222954.log
+22:29:54 Backend : transformers
+22:29:54 Dataset : HuggingFaceH4/MATH-500
+22:30:03 Smoke-test mode: 5 problems
+22:30:03 Resuming — 7 already done
+22:30:03 To do   : 2
+22:30:06 Device  : cuda
+22:30:06 GPU     : NVIDIA GeForce RTX 5070 Ti
+22:30:06 VRAM    : 16.6 GB
+22:30:06 Loading teacher: Qwen/Qwen3-8B
+22:30:08   Free VRAM 14.4GB — loading in 4-bit quant
+22:30:29 Teacher loaded
+22:30:38   [1/2] id=3 Number Theory L3 | pattern=✓ | lat=9.0s tps=57 | tok=512
+22:30:53   [2/2] id=4 Algebra L2 | pattern=✓ | lat=15.7s tps=63 | tok=992
+22:30:54 VRAM free: 14.3 GB
+22:30:54 
+Done. Missing <pattern>: 0/2
+22:30:54 
+Wrote 9 records → /home/students/PatternDistill/phase-2/data/patterns/patterns.json
+22:30:54   Patterns extracted : 8/9
+22:30:54   Missing patterns   : 1
+22:30:54 
+  By subject:
+22:30:54     Algebra                             2/2 patterns
+22:30:54     Intermediate Algebra                1/2 patterns
+22:30:54     Number Theory                       1/1 patterns
+22:30:54     Precalculus                         4/4 patterns

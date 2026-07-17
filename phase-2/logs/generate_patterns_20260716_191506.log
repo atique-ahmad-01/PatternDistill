@@ -1,0 +1,23 @@
+19:15:06 Log     : /Users/ebricks/Desktop/PatternDistill/phase-2/logs/generate_patterns_20260716_191506.log
+19:15:06 Backend : ollama
+19:15:06 Dataset : HuggingFaceH4/MATH-500
+19:15:09 Smoke-test mode: 5 problems
+19:15:09 To do   : 5
+19:15:09 Ollama OK at http://localhost:11434
+19:15:53   [1/5] id=0 Precalculus L2 | pattern=✓ | lat=43.6s tps=20 | tok=868
+19:17:12   [2/5] id=1 Intermediate Algebra L5 | pattern=✓ | lat=78.6s tps=23 | tok=1794
+19:18:01   [3/5] id=2 Algebra L3 | pattern=✓ | lat=49.7s tps=23 | tok=1142
+19:18:22   [4/5] id=3 Number Theory L3 | pattern=✓ | lat=20.2s tps=23 | tok=468
+19:18:52   [5/5] id=4 Algebra L2 | pattern=✓ | lat=30.5s tps=22 | tok=674
+19:18:52 
+Done. Missing <pattern>: 0/5
+19:18:52 
+Wrote 5 records → /Users/ebricks/Desktop/PatternDistill/phase-2/data/patterns/patterns.json
+19:18:52   Patterns extracted : 5/5
+19:18:52   Missing patterns   : 0
+19:18:52 
+  By subject:
+19:18:52     Algebra                             2/2 patterns
+19:18:52     Intermediate Algebra                1/1 patterns
+19:18:52     Number Theory                       1/1 patterns
+19:18:52     Precalculus                         1/1 patterns

@@ -1,0 +1,26 @@
+01:20:17 Log     : /home/students/PatternDistill/phase-2/logs/build_memory_bank_20260717_012017.log
+01:20:17 Loaded 5 records from /home/students/PatternDistill/phase-2/data/patterns/patterns.json
+01:20:17   Embedding 5 records
+01:20:20 Loading embed model: nomic-ai/nomic-embed-text-v1 on cuda
+01:20:31 Embed model loaded
+01:20:31 
+Embedding problems ...
+01:20:31   Embedded batch 1 (1–5/5) in 0.2s
+01:20:31 Vectors shape: (5, 768)
+01:20:31 
+Building FAISS index ...
+01:20:31   FAISS index built — 5 vectors, dim=768
+01:20:31 Saved metadata → /home/students/PatternDistill/phase-2/memory/bank.json  (5 entries)
+01:20:31 Saved FAISS index → /home/students/PatternDistill/phase-2/memory/bank.index
+01:20:31 
+── Memory Bank Summary ──────────────────────────────────────
+01:20:31   Total entries : 5
+01:20:31   Vector dim    : 768
+01:20:31   Embed model   : nomic-ai/nomic-embed-text-v1
+01:20:31   Index type    : IndexFlatIP (cosine sim via L2-norm)
+01:20:31 
+  By subject:
+01:20:31     Algebra                             2
+01:20:31     Intermediate Algebra                1
+01:20:31     Number Theory                       1
+01:20:31     Precalculus                         1

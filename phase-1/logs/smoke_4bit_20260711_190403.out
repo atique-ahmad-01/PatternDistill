@@ -1,0 +1,61 @@
+Note: Environment variable`HF_TOKEN` is set and is the current active token independently from the token you've just configured.
+Log file : /home/students/PatternDistill/logs/baseline_20260711_190409.log
+Device   : cuda
+GPU      : NVIDIA GeForce RTX 5070 Ti
+VRAM     : 16.6 GB
+Loading dataset: HuggingFaceH4/MATH-500
+  Smoke-test mode: 5 problems
+
+============================================================
+Running Qwen 1.7B (Qwen/Qwen3-1.7B) ...
+============================================================
+  Resuming — 5 already done, skipping
+  All problems already done.
+
+============================================================
+Qwen 1.7B — 5 problems
+  Accuracy:       0.600  (3/5)
+  Avg latency:    19.093s
+  Avg tokens out: 2278.4
+  Avg tokens/s:   118.27
+
+  By subject:
+    Algebra                             acc=0.500  (n=2)
+    Intermediate Algebra                acc=1.000  (n=1)
+    Number Theory                       acc=1.000  (n=1)
+    Precalculus                         acc=0.000  (n=1)
+
+  By difficulty level:
+    Level 2: acc=0.000  (n=2)
+    Level 3: acc=1.000  (n=2)
+    Level 5: acc=1.000  (n=1)
+
+============================================================
+Running Qwen 8B (Qwen/Qwen3-8B) ...
+============================================================
+  Loading tokenizer: Qwen/Qwen3-8B
+  Loading model: Qwen/Qwen3-8B
+  Free VRAM: 16.1GB — 4-bit quant
+Traceback (most recent call last):
+  File "/home/students/PatternDistill/scripts/baseline.py", line 389, in <module>
+    main()
+  File "/home/students/PatternDistill/scripts/baseline.py", line 369, in main
+    results = run_model(model_id, label, problems, OUT_DIR / filename, log)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/students/PatternDistill/scripts/baseline.py", line 222, in run_model
+    model, tokenizer = load_model(model_id, log)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/students/PatternDistill/scripts/baseline.py", line 190, in load_model
+    model = AutoModelForCausalLM.from_pretrained(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/students/miniforge3/envs/ms-atique/lib/python3.11/site-packages/transformers/models/auto/auto_factory.py", line 402, in from_pretrained
+    return model_class.from_pretrained(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/students/miniforge3/envs/ms-atique/lib/python3.11/site-packages/transformers/modeling_utils.py", line 4244, in from_pretrained
+    hf_quantizer, config, device_map = get_hf_quantizer(
+                                       ^^^^^^^^^^^^^^^^^
+  File "/home/students/miniforge3/envs/ms-atique/lib/python3.11/site-packages/transformers/quantizers/auto.py", line 354, in get_hf_quantizer
+    hf_quantizer.validate_environment(
+  File "/home/students/miniforge3/envs/ms-atique/lib/python3.11/site-packages/transformers/quantizers/quantizer_bnb_4bit.py", line 62, in validate_environment
+    raise ImportError(
+ImportError: Using `bitsandbytes` 4-bit quantization requires bitsandbytes: `pip install -U bitsandbytes>=0.46.1`

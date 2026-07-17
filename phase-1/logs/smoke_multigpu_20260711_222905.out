@@ -1,0 +1,17 @@
+Note: Environment variable`HF_TOKEN` is set and is the current active token independently from the token you've just configured.
+Log file : /home/students/PatternDistill/logs/baseline_20260711_222911.log
+Device   : cuda
+GPU      : NVIDIA GeForce RTX 5070 Ti
+VRAM     : 16.6 GB
+Loading dataset: HuggingFaceH4/MATH-500
+  Smoke-test mode: 5 problems
+
+============================================================
+Running Qwen 1.7B (Qwen/Qwen3-1.7B) ...
+============================================================
+  Loading tokenizer: Qwen/Qwen3-1.7B
+  Loading model: Qwen/Qwen3-1.7B
+  Free VRAM (GPU 0): 16.0GB | Total across all GPUs: 28.9GB
+  Loading as: bfloat16 (multi-GPU)
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:  11%|█▏        | 35/311 [00:00<00:00, 349.23it/s]Loading weights:  23%|██▎       | 71/311 [00:00<00:00, 329.60it/s]Loading weights:  34%|███▍      | 105/311 [00:00<00:00, 275.38it/s]Loading weights:  43%|████▎     | 134/311 [00:03<00:06, 25.90it/s] Loading weights:  49%|████▉     | 152/311 [00:08<00:14, 10.64it/s]Loading weights:  53%|█████▎    | 164/311 [00:10<00:17,  8.45it/s]Loading weights:  55%|█████▌    | 172/311 [00:13<00:20,  6.69it/s]Loading weights:  57%|█████▋    | 178/311 [00:14<00:19,  7.00it/s]Loading weights:  59%|█████▊    | 182/311 [00:16<00:24,  5.31it/s]Loading weights:  60%|█████▉    | 186/311 [00:16<00:21,  5.80it/s]Loading weights:  61%|██████    | 189/311 [00:17<00:20,  5.90it/s]Loading weights:  61%|██████▏   | 191/311 [00:17<00:23,  5.22it/s]Loading weights:  62%|██████▏   | 193/311 [00:19<00:30,  3.82it/s]Loading weights:  63%|██████▎   | 196/311 [00:19<00:24,  4.69it/s]Loading weights:  64%|██████▎   | 198/311 [00:19<00:25,  4.45it/s]Loading weights:  64%|██████▍   | 200/311 [00:20<00:21,  5.27it/s]Loading weights:  65%|██████▍   | 202/311 [00:20<00:24,  4.41it/s]Loading weights:  65%|██████▌   | 203/311 [00:21<00:32,  3.33it/s]Loading weights:  66%|██████▌   | 204/311 [00:22<00:40,  2.66it/s]Loading weights:  67%|██████▋   | 207/311 [00:22<00:25,  4.14it/s]Loading weights:  67%|██████▋   | 208/311 [00:22<00:28,  3.61it/s]Loading weights:  68%|██████▊   | 211/311 [00:22<00:18,  5.46it/s]Loading weights:  68%|██████▊   | 213/311 [00:23<00:23,  4.19it/s]Loading weights:  69%|██████▉   | 214/311 [00:24<00:31,  3.06it/s]Loading weights:  69%|██████▉   | 215/311 [00:25<00:39,  2.44it/s]Loading weights:  70%|███████   | 218/311 [01:45<19:05, 12.32s/it]Loading weights:  70%|███████   | 219/311 [01:53<17:42, 11.55s/it]Loading weights:  71%|███████   | 220/311 [02:01<16:26, 10.84s/it]Loading weights:  71%|███████▏  | 222/311 [02:05<11:16,  7.60s/it]Loading weights:  72%|███████▏  | 224/311 [02:53<19:11, 13.23s/it]

@@ -1,0 +1,49 @@
+22:38:21 Log file : /home/students/PatternDistill/logs/baseline_20260711_223821.log
+22:38:21 Device   : cuda
+22:38:21 GPU      : NVIDIA GeForce RTX 5070 Ti
+22:38:21 VRAM     : 16.6 GB
+22:38:21 Loading dataset: HuggingFaceH4/MATH-500
+22:38:25   Smoke-test mode: 5 problems
+22:38:25 
+============================================================
+22:38:25 Running Qwen 1.7B (Qwen/Qwen3-1.7B) ...
+22:38:25 ============================================================
+22:38:25   Loading tokenizer: Qwen/Qwen3-1.7B
+22:38:27   Loading model: Qwen/Qwen3-1.7B
+22:38:27   Free VRAM (GPU 0): 13.4GB | GPUs available: 1 | Total VRAM: 16.6GB
+22:38:27   Strategy: 4-bit quant
+22:38:29   Model loaded
+22:38:46   [Qwen 1.7B] [1/5] Precalculus L2 | ✓ | lat=16.39s tps=92.3 | acc=1.000
+22:39:16   [Qwen 1.7B] [2/5] Intermediate Algebra L5 | ✓ | lat=30.69s tps=94.3 | acc=1.000
+22:39:28   [Qwen 1.7B] [3/5] Algebra L3 | ✓ | lat=12.03s tps=94.5 | acc=1.000
+22:39:45   [Qwen 1.7B] [4/5] Number Theory L3 | ✓ | lat=16.65s tps=94.5 | acc=1.000
+22:41:12   [Qwen 1.7B] [5/5] Algebra L2 | ✗ | lat=87.32s tps=93.8 | acc=0.800
+22:41:13   VRAM after cleanup: 13.0GB free
+22:41:13 
+============================================================
+22:41:13 Qwen 1.7B — 5 problems
+22:41:13   Accuracy:       0.800  (4/5)
+22:41:13   Avg latency:    32.616s
+22:41:13   Avg tokens out: 3061.8
+22:41:13   Avg tokens/s:   93.88
+22:41:13 
+  By subject:
+22:41:13     Algebra                             acc=0.500  (n=2)
+22:41:13     Intermediate Algebra                acc=1.000  (n=1)
+22:41:13     Number Theory                       acc=1.000  (n=1)
+22:41:13     Precalculus                         acc=1.000  (n=1)
+22:41:13 
+  By difficulty level:
+22:41:13     Level 2: acc=0.500  (n=2)
+22:41:13     Level 3: acc=1.000  (n=2)
+22:41:13     Level 5: acc=1.000  (n=1)
+22:41:13 
+============================================================
+22:41:13 Running Qwen 8B (Qwen/Qwen3-8B) ...
+22:41:13 ============================================================
+22:41:13   Loading tokenizer: Qwen/Qwen3-8B
+22:41:15   Loading model: Qwen/Qwen3-8B
+22:41:15   Free VRAM (GPU 0): 13.0GB | GPUs available: 1 | Total VRAM: 16.6GB
+22:41:15   Strategy: 4-bit quant
+22:41:18   Model loaded
+22:41:41   [Qwen 8B] [1/5] Precalculus L2 | ✓ | lat=23.58s tps=70.1 | acc=1.000

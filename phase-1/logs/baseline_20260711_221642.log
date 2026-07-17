@@ -1,0 +1,74 @@
+22:16:42 Log file : /home/students/PatternDistill/logs/baseline_20260711_221642.log
+22:16:42 Device   : cuda
+22:16:42 GPU      : NVIDIA GeForce RTX 5070 Ti
+22:16:42 VRAM     : 16.6 GB
+22:16:42 Loading dataset: HuggingFaceH4/MATH-500
+22:16:46   Smoke-test mode: 5 problems
+22:16:46 
+============================================================
+22:16:46 Running Qwen 1.7B (Qwen/Qwen3-1.7B) ...
+22:16:46 ============================================================
+22:16:46   Loading tokenizer: Qwen/Qwen3-1.7B
+22:16:48   Loading model: Qwen/Qwen3-1.7B
+22:16:49   Free VRAM: 16.0GB — 4-bit quant
+22:16:51   Model loaded
+22:17:07   [Qwen 1.7B] [1/5] Precalculus L2 | ✓ | lat=16.17s tps=93.6 | acc=1.000
+22:17:38   [Qwen 1.7B] [2/5] Intermediate Algebra L5 | ✓ | lat=31.27s tps=92.6 | acc=1.000
+22:17:52   [Qwen 1.7B] [3/5] Algebra L3 | ✓ | lat=13.17s tps=86.3 | acc=1.000
+22:18:10   [Qwen 1.7B] [4/5] Number Theory L3 | ✓ | lat=18.33s tps=85.9 | acc=1.000
+22:19:53   [Qwen 1.7B] [5/5] Algebra L2 | ✗ | lat=103.44s tps=79.2 | acc=0.800
+22:19:53 
+============================================================
+22:19:53 Qwen 1.7B — 5 problems
+22:19:53   Accuracy:       0.800  (4/5)
+22:19:53   Avg latency:    36.474s
+22:19:53   Avg tokens out: 3061.8
+22:19:53   Avg tokens/s:   87.5
+22:19:53 
+  By subject:
+22:19:53     Algebra                             acc=0.500  (n=2)
+22:19:53     Intermediate Algebra                acc=1.000  (n=1)
+22:19:53     Number Theory                       acc=1.000  (n=1)
+22:19:53     Precalculus                         acc=1.000  (n=1)
+22:19:53 
+  By difficulty level:
+22:19:53     Level 2: acc=0.500  (n=2)
+22:19:53     Level 3: acc=1.000  (n=2)
+22:19:53     Level 5: acc=1.000  (n=1)
+22:19:53 
+============================================================
+22:19:53 Running Qwen 8B (Qwen/Qwen3-8B) ...
+22:19:53 ============================================================
+22:19:53   Loading tokenizer: Qwen/Qwen3-8B
+22:19:56   Loading model: Qwen/Qwen3-8B
+22:19:56   Free VRAM: 10.8GB — 4-bit quant
+22:19:59   Model loaded
+22:20:32   [Qwen 8B] [1/5] Precalculus L2 | ✓ | lat=32.48s tps=50.9 | acc=1.000
+22:22:45   [Qwen 8B] [2/5] Intermediate Algebra L5 | ✓ | lat=132.97s tps=41.0 | acc=1.000
+22:23:39   [Qwen 8B] [3/5] Algebra L3 | ✓ | lat=54.15s tps=41.1 | acc=1.000
+22:24:22   [Qwen 8B] [4/5] Number Theory L3 | ✓ | lat=43.27s tps=42.7 | acc=1.000
+22:26:01   [Qwen 8B] [5/5] Algebra L2 | ✓ | lat=98.73s tps=42.0 | acc=1.000
+22:26:01 
+============================================================
+22:26:01 Qwen 8B — 5 problems
+22:26:01   Accuracy:       1.000  (5/5)
+22:26:01   Avg latency:    72.32s
+22:26:01   Avg tokens out: 3065.2
+22:26:01   Avg tokens/s:   43.55
+22:26:01 
+  By subject:
+22:26:01     Algebra                             acc=1.000  (n=2)
+22:26:01     Intermediate Algebra                acc=1.000  (n=1)
+22:26:01     Number Theory                       acc=1.000  (n=1)
+22:26:01     Precalculus                         acc=1.000  (n=1)
+22:26:01 
+  By difficulty level:
+22:26:01     Level 2: acc=1.000  (n=2)
+22:26:01     Level 3: acc=1.000  (n=2)
+22:26:01     Level 5: acc=1.000  (n=1)
+22:26:01 
+============================================================
+22:26:01   Qwen 1.7B accuracy: 0.800
+22:26:01   Qwen 8B   accuracy: 1.000
+22:26:01   Gap (8B - 1.7B):    +0.200  ← this is what we aim to close
+22:26:01 ============================================================

@@ -1,0 +1,10 @@
+19:34:55 Log     : /Users/ebricks/Desktop/PatternDistill/phase-2/logs/generate_patterns_20260716_193455.log
+19:34:55 Backend : ollama
+19:34:55 Dataset : HuggingFaceH4/MATH-500
+19:34:59 Subject filter: ['Intermediate Algebra', 'Precalculus', 'Counting & Probability'] → 150/400 problems
+19:34:59 Smoke-test mode: 15 problems
+19:34:59 To do   : 15
+19:34:59 Ollama OK at http://localhost:11434
+19:35:36   [1/15] id=0 Precalculus L2 | pattern=✓ | lat=37.6s tps=20 | tok=763
+19:36:36   [2/15] id=1 Intermediate Algebra L5 | pattern=✓ | lat=59.9s tps=23 | tok=1351
+19:37:46   [3/15] id=7 Precalculus L4 | pattern=✓ | lat=69.9s tps=22 | tok=1568

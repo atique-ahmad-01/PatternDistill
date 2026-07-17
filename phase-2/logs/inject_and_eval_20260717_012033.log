@@ -1,0 +1,51 @@
+01:20:33 Log     : /home/students/PatternDistill/phase-2/logs/inject_and_eval_20260717_012033.log
+01:20:33 Backend : transformers
+01:20:33 Dataset : HuggingFaceH4/MATH-500
+01:20:37 Capped at: 5 problems
+01:20:37 To do   : 5
+01:20:37 Memory bank: 5 entries, FAISS ntotal=5
+01:20:39 Loading embed model: nomic-ai/nomic-embed-text-v1 on cuda
+01:20:50 Embed model loaded
+01:20:50 Device  : cuda
+01:20:50 GPU     : NVIDIA GeForce RTX 5070 Ti
+01:20:50 VRAM    : 16.6 GB
+01:20:50 Loading student: Qwen/Qwen3-1.7B
+01:20:54 Student loaded
+01:20:54   [1/5] id=400 Geometry L5 | sim=0.516 < 0.7 → skip injection
+01:23:25   [1/5] id=400 Geometry L5 | sim=0.516 | van=✗(76s) inj=✗(75s) | =
+01:23:25   [2/5] id=401 Intermediate Algebra L5 | sim=0.462 < 0.7 → skip injection
+01:25:43   [2/5] id=401 Intermediate Algebra L5 | sim=0.462 | van=✗(69s) inj=✗(68s) | =
+01:25:43   [3/5] id=402 Precalculus L3 | sim=0.477 < 0.7 → skip injection
+01:26:11   [3/5] id=402 Precalculus L3 | sim=0.477 | van=✓(14s) inj=✓(14s) | =
+01:26:11   [4/5] id=403 Number Theory L4 | sim=0.455 < 0.7 → skip injection
+01:26:59   [4/5] id=403 Number Theory L4 | sim=0.455 | van=✓(24s) inj=✓(24s) | =
+01:26:59   [5/5] id=404 Counting & Probability L1 | sim=0.390 < 0.7 → skip injection
+01:27:16   [5/5] id=404 Counting & Probability L1 | sim=0.390 | van=✓(9s) inj=✓(9s) | =
+01:27:17 VRAM free: 13.9 GB
+01:27:17 
+Wrote 5 records → /home/students/PatternDistill/phase-2/results/results.json
+01:27:17 Wrote summary → /home/students/PatternDistill/phase-2/results/summary.json
+01:27:17 
+============================================================
+01:27:17 Phase 2 — Memory Injection Results
+01:27:17   n=5  injected=0  low_sim_skipped=5
+01:27:17 
+  Vanilla   accuracy : 0.600
+01:27:17   Injection accuracy : 0.600
+01:27:17   Delta              : +0.000
+01:27:17 
+  Phase 1 baseline   : 1.7B=0.508  8B=0.718
+01:27:17   Gap closed         : 0.0% of the 21pp Phase 1 gap
+01:27:17 
+  Injection accuracy by subject:
+01:27:17     Counting & Probability              inj=1.000  van=1.000  delta=+0.000  (n=1)
+01:27:17     Geometry                            inj=0.000  van=0.000  delta=+0.000  (n=1)
+01:27:17     Intermediate Algebra                inj=0.000  van=0.000  delta=+0.000  (n=1)
+01:27:17     Number Theory                       inj=1.000  van=1.000  delta=+0.000  (n=1)
+01:27:17     Precalculus                         inj=1.000  van=1.000  delta=+0.000  (n=1)
+01:27:17 
+  Injection accuracy by difficulty:
+01:27:17     Level 1: inj=1.000  van=1.000  delta=+0.000  (n=1)
+01:27:17     Level 3: inj=1.000  van=1.000  delta=+0.000  (n=1)
+01:27:17     Level 4: inj=1.000  van=1.000  delta=+0.000  (n=1)
+01:27:17     Level 5: inj=0.000  van=0.000  delta=+0.000  (n=2)

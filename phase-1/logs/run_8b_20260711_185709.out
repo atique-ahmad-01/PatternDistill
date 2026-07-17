@@ -1,0 +1,43 @@
+Note: Environment variable`HF_TOKEN` is set and is the current active token independently from the token you've just configured.
+Log file : /home/students/PatternDistill/logs/baseline_20260711_185715.log
+Device   : cuda
+GPU      : NVIDIA GeForce RTX 5070 Ti
+VRAM     : 16.6 GB
+Loading dataset: HuggingFaceH4/MATH-500
+  Smoke-test mode: 5 problems
+
+============================================================
+Running Qwen 1.7B (Qwen/Qwen3-1.7B) ...
+============================================================
+  Resuming — 5 already done, skipping
+  All problems already done.
+
+============================================================
+Qwen 1.7B — 5 problems
+  Accuracy:       0.600  (3/5)
+  Avg latency:    19.093s
+  Avg tokens out: 2278.4
+  Avg tokens/s:   118.27
+
+  By subject:
+    Algebra                             acc=0.500  (n=2)
+    Intermediate Algebra                acc=1.000  (n=1)
+    Number Theory                       acc=1.000  (n=1)
+    Precalculus                         acc=0.000  (n=1)
+
+  By difficulty level:
+    Level 2: acc=0.000  (n=2)
+    Level 3: acc=1.000  (n=2)
+    Level 5: acc=1.000  (n=1)
+
+============================================================
+Running Qwen 8B (Qwen/Qwen3-8B) ...
+============================================================
+  Loading tokenizer: Qwen/Qwen3-8B
+  Loading model: Qwen/Qwen3-8B
+  Free VRAM: 16.1GB — bfloat16
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   1%|          | 2/399 [00:00<00:41,  9.51it/s]Loading weights:   4%|▍         | 15/399 [00:00<00:06, 55.14it/s]Loading weights:   6%|▋         | 25/399 [00:00<00:05, 67.29it/s]Loading weights:   9%|▉         | 37/399 [00:00<00:04, 82.27it/s]Loading weights:  12%|█▏        | 47/399 [00:00<00:04, 86.64it/s]Loading weights:  20%|██        | 80/399 [00:00<00:02, 152.05it/s]Loading weights:  24%|██▍       | 96/399 [00:00<00:02, 130.10it/s]Loading weights:  28%|██▊       | 110/399 [00:01<00:02, 121.97it/s]Loading weights:  35%|███▍      | 138/399 [00:01<00:01, 157.11it/s]Loading weights:  39%|███▉      | 155/399 [00:01<00:01, 141.53it/s]Loading weights:  43%|████▎     | 170/399 [00:01<00:01, 120.02it/s]Loading weights:  46%|████▌     | 183/399 [00:01<00:01, 110.01it/s]Loading weights:  49%|████▉     | 195/399 [00:01<00:01, 105.61it/s]Loading weights:  52%|█████▏    | 206/399 [00:01<00:01, 104.88it/s]Loading weights:  59%|█████▉    | 236/399 [00:01<00:01, 152.50it/s]Loading weights:  63%|██████▎   | 253/399 [00:02<00:01, 139.53it/s]Loading weights:  67%|██████▋   | 268/399 [00:02<00:01, 126.73it/s]Loading weights:  71%|███████   | 282/399 [00:02<00:01, 112.19it/s]Loading weights:  74%|███████▎  | 294/399 [00:02<00:00, 110.66it/s]Loading weights:  77%|███████▋  | 306/399 [00:02<00:00, 109.21it/s]Loading weights:  80%|███████▉  | 318/399 [00:02<00:00, 103.96it/s]Loading weights:  82%|████████▏ | 329/399 [00:02<00:00, 103.29it/s]Loading weights: 100%|██████████| 399/399 [00:03<00:00, 132.16it/s]
+Some parameters are on the meta device because they were offloaded to the cpu.
+  Model loaded
+  [Qwen 8B] [1/5] Precalculus L2 | ✓ | lat=281.97s tps=5.2 | acc=1.000

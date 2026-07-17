@@ -1,0 +1,57 @@
+[
+  {
+    "index": 0,
+    "id": 0,
+    "problem": "Convert the point $(0,3)$ in rectangular coordinates to polar coordinates.  Enter your answer in the form $(r,\\theta),$ where $r > 0$ and $0 \\le \\theta < 2 \\pi.$",
+    "subject": "Precalculus",
+    "level": 2,
+    "gold_answer": "\\left( 3, \\frac{\\pi}{2} \\right)",
+    "cot": "To convert the rectangular coordinates (0, 3) to polar coordinates, first calculate the radius $ r $ using the formula $ r = \\sqrt{x^2 + y^2} $. Substituting $ x = 0 $ and $ y = 3 $, we get $ r = \\sqrt{0^2 + 3^2} = 3 $. Next, determine the angle $ \\theta $ by recognizing that the point lies on the positive y-axis. Since $ x = 0 $ and $ y > 0 $, the angle $ \\theta $ is $ \\frac{\\pi}{2} $ radians. Thus, the polar coordinates are $ (3, \\frac{\\pi}{2}) $.",
+    "pattern": "When converting rectangular coordinates (x, y) to polar coordinates (r, \u03b8), first calculate $ r = \\sqrt{x^2 + y^2} $, then determine \u03b8 by identifying the quadrant and using arctangent, adjusting for cases where x = 0 or y = 0.",
+    "teacher_answer": "(3, \u03c0/2)"
+  },
+  {
+    "index": 1,
+    "id": 1,
+    "problem": "Define\n\\[p = \\sum_{k = 1}^\\infty \\frac{1}{k^2} \\quad \\text{and} \\quad q = \\sum_{k = 1}^\\infty \\frac{1}{k^3}.\\]Find a way to write\n\\[\\sum_{j = 1}^\\infty \\sum_{k = 1}^\\infty \\frac{1}{(j + k)^3}\\]in terms of $p$ and $q.$",
+    "subject": "Intermediate Algebra",
+    "level": 5,
+    "gold_answer": "p - q",
+    "cot": "To evaluate the double sum $\\sum_{j=1}^\\infty \\sum_{k=1}^\\infty \\frac{1}{(j + k)^3}$, we reindex the sum by letting $n = j + k$. For each $n \\geq 2$, the number of pairs $(j, k)$ such that $j + k = n$ is $n - 1$. Thus, the double sum becomes $\\sum_{n=2}^\\infty \\frac{n - 1}{n^3}$. This can be rewritten as $\\sum_{n=2}^\\infty \\left(\\frac{1}{n^2} - \\frac{1}{n^3}\\right)$. Separating the sums gives $\\left(\\sum_{n=2}^\\infty \\frac{1}{n^2}\\right) - \\left(\\sum_{n=2}^\\infty \\frac{1}{n^3}\\right)$. Using the definitions of $p$ and $q$, we find $\\sum_{n=2}^\\infty \\frac{1}{n^2} = p - 1$ and $\\sum_{n=2}^\\infty \\frac{1}{n^3} = q - 1$. Therefore, the original sum simplifies to $(p - 1) - (q - 1) = p - q$.",
+    "pattern": "When dealing with a double sum over $j$ and $k$ of a function symmetric in $j$ and $k$, reindex by letting $n = j + k$, then express the sum as a single sum over $n$ with the number of terms for each $n$ being $n - 1$.",
+    "teacher_answer": "p - q"
+  },
+  {
+    "index": 2,
+    "id": 2,
+    "problem": "If $f(x) = \\frac{3x-2}{x-2}$, what is the value of $f(-2) +f(-1)+f(0)$? Express your answer as a common fraction.",
+    "subject": "Algebra",
+    "level": 3,
+    "gold_answer": "\\frac{14}{3}",
+    "cot": "To find $ f(-2) + f(-1) + f(0) $, first compute each function value by substituting the input into $ f(x) = \\frac{3x - 2}{x - 2} $:\n\n- $ f(-2) = \\frac{3(-2) - 2}{-2 - 2} = \\frac{-8}{-4} = 2 $\n- $ f(-1) = \\frac{3(-1) - 2}{-1 - 2} = \\frac{-5}{-3} = \\frac{5}{3} $\n- $ f(0) = \\frac{3(0) - 2}{0 - 2} = \\frac{-2}{-2} = 1 $\n\nAdd the results: $ 2 + \\frac{5}{3} + 1 = \\frac{14}{3} $.",
+    "pattern": "When evaluating a sum of function values at specific points, compute each function value individually by substituting the input into the function, then add the results.",
+    "teacher_answer": "14/3"
+  },
+  {
+    "index": 3,
+    "id": 3,
+    "problem": "How many positive whole-number divisors does 196 have?",
+    "subject": "Number Theory",
+    "level": 3,
+    "gold_answer": "9",
+    "cot": "To determine the number of positive divisors of 196, start by finding its prime factorization. 196 is divisible by 2, so divide by 2 repeatedly: 196 \u00f7 2 = 98, 98 \u00f7 2 = 49. Now, 49 is 7\u00b2. Thus, the prime factorization is 2\u00b2 \u00d7 7\u00b2. The number of divisors is calculated by adding 1 to each exponent in the prime factorization and multiplying: (2+1)(2+1) = 3\u00d73 = 9. Therefore, 196 has 9 positive divisors.",
+    "pattern": "When finding the number of positive divisors of a number, first perform prime factorization, then add 1 to each exponent of the prime factors and multiply those values together.",
+    "teacher_answer": "9"
+  },
+  {
+    "index": 4,
+    "id": 4,
+    "problem": "The results of a cross-country team's training run are graphed below. Which student has the greatest average speed? [asy]\nfor ( int i = 1; i <= 7; ++i )\n{\n\ndraw((i,0)--(i,6));\n}\n\nfor ( int i = 1; i <= 5; ++i )\n{\n\ndraw((0,i)--(8,i));\n}\ndraw((-0.5,0)--(8,0), linewidth(1));\ndraw((0,-0.5)--(0,6), linewidth(1));\nlabel(\"$O$\", (0,0), SW);\nlabel(scale(.85)*rotate(90)*\"distance\", (0, 3), W);\nlabel(scale(.85)*\"time\", (4, 0), S);\ndot((1.25, 4.5));\nlabel(scale(.85)*\"Evelyn\", (1.25, 4.8), N);\ndot((2.5, 2.2));\nlabel(scale(.85)*\"Briana\", (2.5, 2.2), S);\ndot((4.25,5.2));\nlabel(scale(.85)*\"Carla\", (4.25, 5.2), SE);\ndot((5.6, 2.8));\nlabel(scale(.85)*\"Debra\", (5.6, 2.8), N);\ndot((6.8, 1.4));\nlabel(scale(.85)*\"Angela\", (6.8, 1.4), E);\n[/asy]",
+    "subject": "Algebra",
+    "level": 2,
+    "gold_answer": "\\text{Evelyn}",
+    "cot": "To determine the student with the greatest average speed, we calculate the ratio of distance to time for each student's plotted point. \n\n- Evelyn: (1.25, 4.5) \u2192 4.5 / 1.25 = 3.6\n- Briana: (2.5, 2.2) \u2192 2.2 / 2.5 = 0.88\n- Carla: (4.25, 5.2) \u2192 5.2 / 4.25 \u2248 1.2235\n- Debra: (5.6, 2.8) \u2192 2.8 / 5.6 = 0.5\n- Angela: (6.8, 1.4) \u2192 1.4 / 6.8 \u2248 0.2059\n\nEvelyn's speed of 3.6 is the highest.",
+    "pattern": "When comparing average speeds from distance-time graphs, calculate the ratio of distance (y-coordinate) to time (x-coordinate) for each point, then identify the maximum value.",
+    "teacher_answer": "Evelyn"
+  }
+]
