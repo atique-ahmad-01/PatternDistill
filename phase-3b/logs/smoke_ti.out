@@ -1,0 +1,61 @@
+Log: /home/students/PatternDistill/phase-3b/logs/inject_and_eval_ti_20260726_101439.log
+============================================================
+Phase 3B — Thinking Intervention (TI)
+============================================================
+Backend : transformers
+Method  : template injected inside <think> tags
+Capped at: 5 problems
+To do   : 5
+Thought graph: 1600 nodes, 1200 seq + 2830 sem edges
+Phase-2d bank: 400 entries, dim=768
+Loading embed model: nomic-ai/nomic-embed-text-v1 on cuda
+<All keys matched successfully>
+Embed model loaded
+Device  : cuda:0
+GPU     : NVIDIA GeForce RTX 5070 Ti
+VRAM    : 16.6 GB
+Loading student: Qwen/Qwen3-1.7B
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:   1%|          | 2/311 [00:00<00:24, 12.80it/s]Loading weights:  26%|██▌       | 81/311 [00:00<00:00, 380.82it/s]Loading weights:  51%|█████     | 159/311 [00:00<00:00, 537.92it/s]Loading weights:  76%|███████▌  | 237/311 [00:00<00:00, 621.47it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 563.36it/s]
+Student loaded
+<All keys matched successfully>
+Embed model reloaded on CPU (student on GPU)
+[transformers] Detected the usage of `get_extended_attention_mask`: This function is deprecated and will be removed in v5.12.0. Please use the new API in `transformers.masking_utils`
+  [1/5] id=400 Geometry L5 | sim=0.664 thr=0.55 | TI 4steps | van=✗(71s) ti=✓(39s) | ↑
+  [2/5] id=401 Intermediate Algebra L5 | sim=0.699 thr=0.6 | TI 4steps | van=✗(64s) ti=✓(52s) | ↑
+  [3/5] id=402 Precalculus L3 | sim=0.716 thr=0.65 | TI 4steps | van=✓(13s) ti=✓(3s) | =
+  [4/5] id=403 Number Theory L4 | sim=0.647 < thr=0.65 → skip injection
+  [4/5] id=403 Number Theory L4 | sim=0.647 thr=0.65 | skip 0steps | van=✓(22s) ti=✓(22s) | =
+  [5/5] id=404 Counting & Probability L1 | sim=0.565 thr=0.5 | TI 4steps | van=✓(8s) ti=✓(2s) | =
+VRAM free: 16.0 GB
+
+Wrote 5 records → /home/students/PatternDistill/phase-3b/results/results.json
+Wrote summary → /home/students/PatternDistill/phase-3b/results/summary.json
+
+============================================================
+Phase 3B — Thinking Intervention (TI) Results
+============================================================
+  n=5  injected=4  skipped=1
+
+  Vanilla   accuracy : 0.600
+  TI        accuracy : 1.000
+  Delta              : +0.400
+  Gap closed         : 190.5% of the 21pp Phase 1 gap
+
+  vs Phase 2D (prompt injection): +0.060
+  vs Phase 3 v2 (prompt inject): +0.060
+  TI improvement over 2D:        +0.340
+  TI improvement over v2:        +0.340
+
+  By subject:
+    Counting & Probability              ti=1.000  van=1.000  delta=+0.000  (n=1  thr=0.5)
+    Geometry                            ti=1.000  van=0.000  delta=+1.000  (n=1  thr=0.55)
+    Intermediate Algebra                ti=1.000  van=0.000  delta=+1.000  (n=1  thr=0.6)
+    Number Theory                       ti=1.000  van=1.000  delta=+0.000  (n=1  thr=0.65)
+    Precalculus                         ti=1.000  van=1.000  delta=+0.000  (n=1  thr=0.65)
+
+  By difficulty:
+    Level 1: ti=1.000  van=1.000  delta=+0.000  (n=1)
+    Level 3: ti=1.000  van=1.000  delta=+0.000  (n=1)
+    Level 4: ti=1.000  van=1.000  delta=+0.000  (n=1)
+    Level 5: ti=1.000  van=0.000  delta=+1.000  (n=2)

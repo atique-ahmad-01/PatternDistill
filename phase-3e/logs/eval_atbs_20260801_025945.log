@@ -1,0 +1,55 @@
+02:59:45 Log: /home/students/PatternDistill/phase-3e/logs/eval_atbs_20260801_025945.log
+02:59:45 ============================================================
+02:59:45 Phase 3E — ATBS Evaluation
+02:59:45   max_new_tokens = 24576
+02:59:45   early-exit on \boxed{}
+02:59:45   dual-attempt (2nd-best template on retry)
+02:59:45 ============================================================
+02:59:53 Eval set: 100 MATH + 187 AIME = 287 total
+02:59:53 Capped at: 5
+02:59:53 To do: 5
+02:59:53 Buffer: 1146 templates, dim=768
+03:00:05 Device: cuda:0
+03:00:05 GPU: NVIDIA GeForce RTX 5070 Ti
+03:00:11 Student loaded
+03:00:20 Embed on CPU, student on GPU
+03:04:09   [1/5] math_400 (MATH-500) | sim=0.658 | van=N(162s/15949t) atbs=N(67s/7742t) | =
+03:07:33   [2/5] math_401 (MATH-500) | sim=0.591 < 0.6 -> skip
+03:07:33   [2/5] math_401 (MATH-500) | sim=0.591 | van=Y(102s/11085t) atbs=Y(102s/11085t) | =
+03:08:08   [3/5] math_402 (MATH-500) | sim=0.618 < 0.65 -> skip
+03:08:08   [3/5] math_402 (MATH-500) | sim=0.618 | van=Y(18s/2159t) atbs=Y(18s/2159t) | =
+03:09:02   [4/5] math_403 (MATH-500) | sim=0.606 < 0.65 -> skip
+03:09:02   [4/5] math_403 (MATH-500) | sim=0.606 | van=Y(27s/3222t) atbs=Y(27s/3222t) | =
+03:09:14   [5/5] math_404 (MATH-500) | sim=0.503 | van=Y(7s/792t) atbs=Y(6s/688t) | =
+03:09:14 
+Wrote 5 -> /home/students/PatternDistill/phase-3e/results/results.json
+03:09:14 
+============================================================
+03:09:14 Phase 3E — ATBS Results
+03:09:14 ============================================================
+03:09:14   Total: n=5 (MATH=5, AIME=0)
+03:09:14   Injected: 2  Skipped: 3  Retried (2nd template): 0
+03:09:14   Budget: 24576 tokens
+03:09:14 
+  OVERALL:
+03:09:14     Vanilla:  0.800
+03:09:14     ATBS:     0.800
+03:09:14     Delta:    +0.000
+03:09:14 
+  MATH-500:
+03:09:14     Vanilla:  0.800
+03:09:14     ATBS:     0.800
+03:09:14     Delta:    +0.000
+03:09:14 
+  AIME:
+03:09:14     Vanilla:  0.000
+03:09:14     ATBS:     0.000
+03:09:14     Delta:    +0.000
+03:09:14 
+============================================================
+03:09:14 Comparison: Phase 3E (ATBS) vs Phase 3D (ATGI)
+03:09:14 ============================================================
+03:09:14                           3D ATGI    3E ATBS       Diff
+03:09:14   Overall                  +0.035     +0.000     -0.035
+03:09:14   MATH-500                 +0.040     +0.000     -0.040
+03:09:14   AIME                     +0.032     +0.000     -0.032

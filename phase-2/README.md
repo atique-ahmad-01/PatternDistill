@@ -1,10 +1,5 @@
 # Phase 2 — Memory Injection (Method A)
 
-
-  When you come back, just check progress with:                                                                                                                  
-  ssh students@100.118.158.78                                                                                                                                    
-  tmux attach -t phase2_hf
-  
 > **Hypothesis:** Injecting a retrieved reasoning pattern into the 1.7B student's prompt at inference time will meaningfully close the 21pp accuracy gap established in Phase 1.
 
 ---
@@ -203,10 +198,10 @@ python scripts/inject_and_eval.py --max-problems 5
 # Sync to GPU machine
 rsync -avz --exclude '__pycache__' --exclude '*.pyc' \
   ~/Desktop/PatternDistill/phase-2/ \
-  students@100.118.158.78:~/PatternDistill/phase-2/
+  students@<gpu-host>:~/PatternDistill/phase-2/
 
 # SSH in and run
-ssh students@100.118.158.78
+ssh students@<gpu-host>
 export CUDA_VISIBLE_DEVICES=0
 cd ~/PatternDistill/phase-2
 
@@ -219,7 +214,7 @@ python scripts/inject_and_eval.py     # ~2 hrs for 100 problems (runs each twice
 
 ```bash
 rsync -avz \
-  students@100.118.158.78:~/PatternDistill/phase-2/results/ \
+  students@<gpu-host>:~/PatternDistill/phase-2/results/ \
   ~/Desktop/PatternDistill/phase-2/results/
 ```
 

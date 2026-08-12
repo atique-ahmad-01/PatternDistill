@@ -1,0 +1,11 @@
+Log     : /home/students/PatternDistill/phase-2/logs/generate_patterns_20260717_190357.log
+Backend : transformers
+Dataset : HuggingFaceH4/MATH-500
+Problems: 400
+Resuming — 372 already done
+To do   : 28
+Device  : cpu
+Loading teacher: Qwen/Qwen3-8B
+  No CUDA — loading in float32 on CPU (slow)
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:01<12:32,  1.89s/it]Loading weights:  15%|█▍        | 59/399 [00:02<00:08, 39.33it/s]Loading weights:  20%|██        | 80/399 [00:02<00:06, 49.89it/s]Loading weights:  24%|██▍       | 96/399 [00:02<00:06, 48.00it/s]Loading weights:  27%|██▋       | 108/399 [00:02<00:05, 51.28it/s]Loading weights:  30%|██▉       | 118/399 [00:02<00:05, 52.08it/s]Loading weights:  32%|███▏      | 127/399 [00:03<00:05, 51.89it/s]Loading weights:  34%|███▍      | 136/399 [00:03<00:04, 53.43it/s]Loading weights:  37%|███▋      | 147/399 [00:03<00:04, 55.06it/s]Loading weights:  40%|███▉      | 158/399 [00:03<00:04, 56.61it/s]Loading weights:  42%|████▏     | 169/399 [00:03<00:04, 56.43it/s]Loading weights:  45%|████▌     | 180/399 [00:04<00:04, 45.13it/s]Loading weights:  48%|████▊     | 191/399 [00:04<00:05, 35.07it/s]Loading weights:  49%|████▉     | 196/399 [00:04<00:05, 36.05it/s]Loading weights:  51%|█████     | 202/399 [00:05<00:05, 34.47it/s]Loading weights:  53%|█████▎    | 213/399 [00:05<00:04, 40.52it/s]Loading weights:  56%|█████▌    | 224/399 [00:05<00:03, 45.73it/s]Loading weights:  59%|█████▉    | 235/399 [00:05<00:03, 50.55it/s]Loading weights:  62%|██████▏   | 246/399 [00:05<00:02, 51.39it/s]Loading weights:  64%|██████▍   | 257/399 [00:05<00:02, 57.43it/s]Loading weights:  67%|██████▋   | 268/399 [00:06<00:02, 57.23it/s]Loading weights:  70%|██████▉   | 279/399 [00:06<00:01, 60.07it/s]Loading weights:  73%|███████▎  | 290/399 [00:06<00:01, 59.74it/s]Loading weights:  75%|███████▌  | 301/399 [00:06<00:01, 60.28it/s]Loading weights:  78%|███████▊  | 312/399 [00:06<00:01, 59.69it/s]Loading weights:  81%|████████  | 323/399 [00:07<00:01, 59.03it/s]Loading weights:  84%|████████▎ | 334/399 [00:07<00:01, 58.98it/s]Loading weights:  86%|████████▋ | 345/399 [00:07<00:00, 57.51it/s]

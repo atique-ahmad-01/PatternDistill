@@ -1,0 +1,56 @@
+22:29:10 Log: /home/students/PatternDistill/phase-3/logs/inject_and_eval_atgi_20260725_222910.log
+22:29:10 ============================================================
+22:29:10 Phase 3 — Adaptive Thought Graph Injection (ATGI)
+22:29:10 ============================================================
+22:29:10 Backend : transformers
+22:29:10 Hyperparameters: α=0.8, β=0.6, τ_stop=0.4, max_steps=6
+22:29:15 Capped at: 5 problems
+22:29:15 To do   : 5
+22:29:15 Thought graph: 1600 nodes, 1200 seq + 28312 sem edges, τ_semantic=0.9
+22:29:15 Phase-2d bank: 400 entries (for worked example retrieval)
+22:29:17 Loading embed model: nomic-ai/nomic-embed-text-v1 on cuda
+22:29:31 Embed model loaded
+22:29:31 Device  : cuda:0
+22:29:31 GPU     : NVIDIA GeForce RTX 5070 Ti
+22:29:31 VRAM    : 16.6 GB
+22:29:31 Loading student: Qwen/Qwen3-1.7B
+22:29:37 Student loaded
+22:29:50 Embed model reloaded on CPU (student on GPU)
+22:32:12   [1/5] id=400 Geometry L5 | sim=0.649 thr=0.52 | trav=4steps 1pat→ | van=✗(71s) atgi=✗(71s) | =
+22:34:26   [2/5] id=401 Intermediate Algebra L5 | sim=0.540 thr=0.51 | trav=4steps 1pat→ | van=✗(64s) atgi=✗(71s) | =
+22:34:54   [3/5] id=402 Precalculus L3 | sim=0.522 thr=0.52 | trav=6steps 2pat⚡ | van=✓(13s) atgi=✓(15s) | =
+22:35:53   [4/5] id=403 Number Theory L4 | sim=0.563 thr=0.5 | trav=6steps 3pat⚡ | van=✓(22s) atgi=✓(36s) | =
+22:35:53   [5/5] id=404 Counting & Probability L1 | sim=0.427 < thr=0.47 → skip injection
+22:36:09   [5/5] id=404 Counting & Probability L1 | sim=0.427 thr=0.47 | trav=0steps 0pat→ | van=✓(8s) atgi=✓(8s) | =
+22:36:09 VRAM free: 16.0 GB
+22:36:09 
+Wrote 5 records → /home/students/PatternDistill/phase-3/results/results.json
+22:36:09 Wrote summary → /home/students/PatternDistill/phase-3/results/summary.json
+22:36:09 
+============================================================
+22:36:09 Phase 3 — ATGI (Adaptive Thought Graph Injection) Results
+22:36:09 ============================================================
+22:36:09   n=5  injected=4  skipped=1
+22:36:09   Avg template length : 5.0 steps
+22:36:09   Cross-pattern assembled: 2 (50%)
+22:36:09 
+  Vanilla   accuracy : 0.600
+22:36:09   ATGI      accuracy : 0.600
+22:36:09   Delta              : +0.000
+22:36:09   Gap closed         : 0.0% of the 21pp Phase 1 gap
+22:36:09 
+  vs Phase 2D (static top-1 injection): +0.060
+22:36:09   ATGI improvement over Phase 2D     : -0.060
+22:36:09 
+  By subject:
+22:36:09     Counting & Probability              atgi=1.000  van=1.000  delta=+0.000  (n=1  thr=0.47)
+22:36:09     Geometry                            atgi=0.000  van=0.000  delta=+0.000  (n=1  thr=0.52)
+22:36:09     Intermediate Algebra                atgi=0.000  van=0.000  delta=+0.000  (n=1  thr=0.51)
+22:36:09     Number Theory                       atgi=1.000  van=1.000  delta=+0.000  (n=1  thr=0.5)
+22:36:09     Precalculus                         atgi=1.000  van=1.000  delta=+0.000  (n=1  thr=0.52)
+22:36:09 
+  By difficulty:
+22:36:09     Level 1: atgi=1.000  van=1.000  delta=+0.000  (n=1)
+22:36:09     Level 3: atgi=1.000  van=1.000  delta=+0.000  (n=1)
+22:36:09     Level 4: atgi=1.000  van=1.000  delta=+0.000  (n=1)
+22:36:09     Level 5: atgi=0.000  van=0.000  delta=+0.000  (n=2)

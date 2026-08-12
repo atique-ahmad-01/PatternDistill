@@ -72,7 +72,7 @@ STUDENT_MODEL_OLLAMA = "qwen3:1.7b"
 DATASET              = "HuggingFaceH4/MATH-500"
 EVAL_SLICE           = slice(400, 500)
 MAX_NEW_TOKENS       = 8192
-SIMILARITY_THRESHOLD = 0.70
+SIMILARITY_THRESHOLD = 0.40
 
 OLLAMA_URL  = "http://localhost:11434"
 EMBED_MODEL = "nomic-ai/nomic-embed-text-v1"   # via sentence-transformers, no Ollama needed

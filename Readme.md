@@ -27,11 +27,11 @@ Scripts accept a `--max-problems N` flag so they can be smoke-tested locally (N=
 
 ## Connecting to the GPU Machine
 
-Connect via Tailscale (100.118.158.78):
+Connect via Tailscale (<gpu-host>):
 
 ```bash
 sudo brew services start tailscale && sudo tailscale up
-ssh students@100.118.158.78
+ssh students@<gpu-host>
 ```
 
 Sync your local code to the GPU machine:
@@ -39,14 +39,14 @@ Sync your local code to the GPU machine:
 ```bash
 rsync -avz --exclude '__pycache__' --exclude '*.pyc' \
   ~/Desktop/PatternDistill/ \
-  students@100.118.158.78:~/PatternDistill/
+  students@<gpu-host>:~/PatternDistill/
 ```
 
 Pull results back to your Mac after a run:
 
 ```bash
 rsync -avz \
-  students@100.118.158.78:~/PatternDistill/results/ \
+  students@<gpu-host>:~/PatternDistill/results/ \
   ~/Desktop/PatternDistill/results/
 ```
 

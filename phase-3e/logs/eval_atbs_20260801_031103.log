@@ -1,0 +1,14 @@
+03:11:03 Log: /home/students/PatternDistill/phase-3e/logs/eval_atbs_20260801_031103.log
+03:11:03 ============================================================
+03:11:03 Phase 3E — ATBS Evaluation
+03:11:03   max_new_tokens = 24576
+03:11:03   early-exit on \boxed{}
+03:11:03   dual-attempt (2nd-best template on retry)
+03:11:03 ============================================================
+03:11:12 Eval set: 100 MATH + 187 AIME = 287 total
+03:11:12 To do: 287
+03:11:12 Buffer: 1146 templates, dim=768
+03:11:23 Device: cuda:0
+03:11:23 GPU: NVIDIA GeForce RTX 5070 Ti
+03:11:26 Student loaded
+03:11:36 Embed on CPU, student on GPU

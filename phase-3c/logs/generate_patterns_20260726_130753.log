@@ -1,0 +1,26 @@
+13:07:53 Log: /home/students/PatternDistill/phase-3c/logs/generate_patterns_20260726_130753.log
+13:07:53 ============================================================
+13:07:53 Phase 3C — MBPP Pattern Generation
+13:07:53 ============================================================
+13:07:53 Backend : transformers
+13:07:58 Loaded 374 MBPP training problems
+13:07:58 Capped at: 5
+13:07:58 To do   : 5
+13:07:59 Device: cuda:0
+13:07:59 GPU: NVIDIA GeForce RTX 5070 Ti
+13:07:59 Free VRAM: 16.3 GB
+13:07:59 Loading teacher: Qwen/Qwen3-8B
+13:08:02   VRAM limited — 4-bit quantization
+13:08:06 Teacher loaded
+13:08:11   [1/5] task_id=601 | ✓step | pat=True ex=True | 5.0s 307tok
+13:08:15   [2/5] task_id=602 | ✓step | pat=True ex=True | 3.9s 264tok
+13:08:20   [3/5] task_id=603 | ✓step | pat=True ex=True | 4.6s 315tok
+13:08:22   [4/5] task_id=604 | ✓step | pat=True ex=True | 2.4s 162tok
+13:08:26   [5/5] task_id=605 | ✓step | pat=True ex=True | 3.9s 265tok
+13:08:26 
+Compiled 5 records → /home/students/PatternDistill/phase-3c/data/patterns/patterns.json
+13:08:26   Has pattern      : 5/5
+13:08:26   Step-level       : 5/5
+13:08:26   Has worked example: 5/5
+13:08:26 
+Next: run build_memory_bank.py to build MBPP memory bank

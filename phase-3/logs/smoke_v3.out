@@ -1,0 +1,63 @@
+Log: /home/students/PatternDistill/phase-3/logs/inject_and_eval_atgi_20260726_004317.log
+============================================================
+Phase 3 — ATGI v2 (Anchor-First + Novelty Gate)
+============================================================
+Backend        : transformers
+Max bonus steps: 1
+Novelty thresh : 0.85
+Thresholds     : phase-2d (full-problem based)
+Capped at: 5 problems
+To do   : 5
+Thought graph v2: 1600 nodes, 1200 seq + 2830 sem edges, τ=0.9, format=context_enriched: problem_summary | step_text
+Phase-2d bank: 400 entries, dim=768
+Loading embed model: nomic-ai/nomic-embed-text-v1 on cuda
+<All keys matched successfully>
+Embed model loaded
+Device  : cuda:0
+GPU     : NVIDIA GeForce RTX 5070 Ti
+VRAM    : 16.6 GB
+Loading student: Qwen/Qwen3-1.7B
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:   1%|          | 2/311 [00:00<00:27, 11.06it/s]Loading weights:  27%|██▋       | 83/311 [00:00<00:00, 360.54it/s]Loading weights:  53%|█████▎    | 164/311 [00:00<00:00, 533.17it/s]Loading weights:  78%|███████▊  | 244/311 [00:00<00:00, 626.94it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 545.82it/s]
+Student loaded
+<All keys matched successfully>
+Embed model reloaded on CPU (student on GPU)
+[transformers] Detected the usage of `get_extended_attention_mask`: This function is deprecated and will be removed in v5.12.0. Please use the new API in `transformers.masking_utils`
+  [1/5] id=400 Geometry L5 | sim=0.664 thr=0.55 | 4steps | van=✗(71s) atgi=✗(71s) | =
+  [2/5] id=401 Intermediate Algebra L5 | sim=0.699 thr=0.6 | 4steps | van=✗(65s) atgi=✓(49s) | ↑
+  [3/5] id=402 Precalculus L3 | sim=0.716 thr=0.65 | 4steps | van=✓(13s) atgi=✓(12s) | =
+  [4/5] id=403 Number Theory L4 | sim=0.647 < thr=0.65 → skip injection
+  [4/5] id=403 Number Theory L4 | sim=0.647 thr=0.65 | 0steps | van=✓(22s) atgi=✓(22s) | =
+  [5/5] id=404 Counting & Probability L1 | sim=0.565 thr=0.5 | 4steps | van=✓(8s) atgi=✓(7s) | =
+VRAM free: 16.0 GB
+
+Wrote 5 records → /home/students/PatternDistill/phase-3/results/results.json
+Wrote summary → /home/students/PatternDistill/phase-3/results/summary.json
+
+============================================================
+Phase 3 — ATGI v2 (Anchor-First + Novelty Gate) Results
+============================================================
+  n=5  injected=4  skipped=1  bonus=0
+
+  Vanilla   accuracy : 0.600
+  ATGI v2   accuracy : 0.800
+  Delta              : +0.200
+  Gap closed         : 95.2% of the 21pp Phase 1 gap
+
+  vs Phase 2D (static top-1):      +0.060
+  vs Phase 3 v1 (graph traversal): +0.030
+  ATGI v2 improvement over 2D:     +0.140
+  ATGI v2 improvement over v1:     +0.170
+
+  By subject:
+    Counting & Probability              atgi=1.000  van=1.000  delta=+0.000  (n=1  thr=0.5)
+    Geometry                            atgi=0.000  van=0.000  delta=+0.000  (n=1  thr=0.55)
+    Intermediate Algebra                atgi=1.000  van=0.000  delta=+1.000  (n=1  thr=0.6)
+    Number Theory                       atgi=1.000  van=1.000  delta=+0.000  (n=1  thr=0.65)
+    Precalculus                         atgi=1.000  van=1.000  delta=+0.000  (n=1  thr=0.65)
+
+  By difficulty:
+    Level 1: atgi=1.000  van=1.000  delta=+0.000  (n=1)
+    Level 3: atgi=1.000  van=1.000  delta=+0.000  (n=1)
+    Level 4: atgi=1.000  van=1.000  delta=+0.000  (n=1)
+    Level 5: atgi=0.500  van=0.000  delta=+0.500  (n=2)

@@ -1,0 +1,143 @@
+\documentclass[a4, 12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Department of CS, ITU}
+\cfoot{\thepage}
+\rfoot{Atique Ahmad (MSDS25030)}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0.5pt}
+
+\begin{document}
+
+\begin{titlepage}
+
+\begin{figure}
+   \begin{minipage}{0.48\textwidth}
+   \begin{flushleft}
+     \includegraphics[scale=0.5]{Images/ITULog.png}
+   \end{flushleft}
+   \end{minipage}\hfill
+\end{figure}
+
+\thispagestyle{fancy}
+
+\vspace{1in}
+
+\center
+
+\textsc{\large THESIS PROPOSAL}
+
+\vspace{0.5in}
+
+\noindent\makebox[\linewidth]{\rule{\linewidth}{1.2pt}}
+\textsc{ \textbf{\large Closing the Reasoning Gap Between Small and Large Language Models via Inference-Time Knowledge Transfer }}
+\noindent\makebox[\linewidth]{\rule{\linewidth}{1.2pt}}
+
+\vspace{0.5in}
+
+\begin{minipage}{0.48\textwidth}
+    \begin{flushleft}
+        Student Name: Atique Ahmad   \\
+        Student ID: MSDS25030\\
+        Semester: Fall 2026\\
+        \vspace{10pt}
+    Supervisor Name: Dr. Ali Murtaza \\
+    (Assistant Professor, alimurtaza@itu.edu.pk) \\
+    \vspace{14pt}
+    \end{flushleft}
+\end{minipage}
+
+\vspace{2in}
+
+\textbf{\large Department of Computer Science} \\
+  \vspace{14pt}
+\textbf{\large Information Technology University (ITU)}   \vspace{14pt}
+
+\today
+
+\end{titlepage}
+
+\newpage
+\setcounter{page}{2}
+\tableofcontents
+\newpage
+
+\section{Title, Field of Research and Summary}
+
+\textbf{Title:} Closing the Reasoning Gap Between Small and Large Language Models via Inference-Time Knowledge Transfer
+
+\textbf{Research Area:} Natural Language Processing, Machine Learning, Efficient/Small Language Models
+
+\textbf{Abstract:} Large language models (LLMs) show a strong, well-documented capability gap on multi-step reasoning tasks between smaller and larger variants of the same model family: smaller models are cheaper and faster to run, but consistently underperform their larger counterparts on tasks that require multi-step, structured reasoning. Fine-tuning is the traditional way to close such a gap, but it is expensive to run repeatedly, risks degrading a model's general abilities, and must be redone whenever the target task distribution shifts. This thesis proposes to study an alternative: transferring reasoning capability from a larger ``teacher'' model to a smaller ``student'' model \emph{at inference time}, without updating the student's weights, by extracting reusable reasoning knowledge from the teacher and supplying it to the student as retrieved, structured context. Thesis-I will formalize this research direction, survey and position it against related knowledge-transfer paradigms, and carry out a set of pilot experiments to establish a sound experimental methodology, evaluation protocol, and initial feasibility evidence. Thesis-II will build on this foundation to scale the study across model families, sizes, and task domains, and to rigorously benchmark inference-time transfer against alternative approaches such as parameter-efficient fine-tuning.
+
+\section{Introduction and Background}
+
+Language models exhibit emergent multi-step reasoning ability that scales strongly with parameter count \cite{brown2020language, wei2022chain}. This creates a practical tension for anyone deploying LLMs under real-world constraints: large models reason more reliably but are slower, more expensive, and harder to deploy on limited hardware, while small models are efficient but far less reliable on tasks that demand careful, multi-step reasoning, such as mathematical problem solving \cite{hendrycks2021measuring, cobbe2021training}. Organizations and researchers with constrained compute budgets are therefore forced to either accept the small model's lower reasoning accuracy or pay the cost of running a much larger model, or of fine-tuning the small model repeatedly as requirements change.
+
+Chain-of-thought prompting \cite{wei2022chain} and related decomposition strategies \cite{zhou2023leasttomost} showed that a model's latent reasoning ability can often be elicited more effectively purely through how a problem is presented, without changing any weights. Separately, knowledge distillation \cite{hinton2015distilling} and parameter-efficient fine-tuning methods such as LoRA \cite{hu2021lora} show that a smaller model can absorb some of a larger model's behavior when trained on the larger model's outputs. Retrieval-augmented generation \cite{lewis2020retrieval} demonstrated that a language model's effective knowledge can be extended at inference time by retrieving relevant information from an external store and conditioning generation on it, and later work on tool use \cite{schick2023toolformer} extended this idea to retrieving and using external procedures rather than only facts. However, retrieving and using not just facts, but \emph{reasoning strategies} distilled from a stronger model, to help a weaker model reason through a novel problem at inference time, remains comparatively underexplored, and the conditions under which such transfer helps or hurts are not well characterized -- for instance, how the position and framing of injected context affects small models disproportionately \cite{liu2023lost}.
+
+Preliminary, exploratory work carried out by the author prior to this proposal (informal pilot experiments comparing small and large variants of the same open-weight model family on a standard mathematical reasoning benchmark, both with and without inference-time contextual guidance derived from the larger model) suggests that: (i) a substantial and consistent accuracy gap exists between small and large variants of the same model family on multi-step reasoning problems, and the gap widens with problem difficulty; (ii) supplying a small model with retrieved, problem-relevant reasoning guidance at inference time -- without any weight updates -- can shift its accuracy on held-out problems, though the size and reliability of this effect appears to depend heavily on how the guidance is retrieved, formatted, and presented, and on the task domain. These observations motivate a more rigorous and systematic thesis-level investigation, which is the subject of this proposal.
+
+\section{Problem Statement and Related Work}
+
+\textbf{Problem Statement.} Given a small, resource-efficient language model and a larger, more capable model from the same or a related family, how can reasoning capability be transferred from the larger model to the smaller model \emph{at inference time} -- without modifying the smaller model's weights -- in a way that reliably improves the smaller model's accuracy on multi-step reasoning tasks, and under what conditions (task domain, problem difficulty, model scale, retrieval quality) does such transfer help, have no effect, or hurt?
+
+This problem matters because weight-preserving transfer, if it can be made reliable, would let practitioners deploy a single small model and adapt its effective reasoning ability on demand by updating an external knowledge store, rather than retraining -- which is cheaper, more auditable, and easier to keep up to date than repeated fine-tuning.
+
+\textbf{Related Work.} The proposed direction sits at the intersection of four established lines of research:
+
+\begin{itemize}
+    \item \textbf{Knowledge distillation.} Classical distillation \cite{hinton2015distilling} transfers a teacher's behavior into a student's weights via a training objective on the teacher's outputs (e.g., soft labels or generated rationales). This requires a training run per update and modifies the student permanently.
+    \item \textbf{Parameter-efficient fine-tuning.} Methods such as LoRA \cite{hu2021lora} reduce the cost of adapting a model's weights to new data, but still require a training loop, labeled/generated training examples, and produce a model tied to the data it was tuned on.
+    \item \textbf{Prompting and reasoning elicitation.} Chain-of-thought \cite{wei2022chain} and decomposition-based prompting \cite{zhou2023leasttomost} show that reasoning quality is highly sensitive to how a problem is presented to a model, independent of its weights, but these methods do not involve transferring knowledge from a separate, stronger model.
+    \item \textbf{Retrieval-augmented generation.} RAG \cite{lewis2020retrieval} and tool-augmented models \cite{schick2023toolformer} retrieve external information at inference time to extend a model's effective knowledge, and work on context utilization \cite{liu2023lost} shows that \emph{where} retrieved content is placed in a prompt strongly affects whether a model uses it, an effect that is more pronounced for smaller models.
+\end{itemize}
+
+The gap this thesis targets is the combination of these threads: using retrieval, as in RAG, but over a knowledge store of \emph{reasoning strategies distilled from a larger model} rather than factual documents, to improve a smaller model's reasoning at inference time without any training step, and systematically characterizing when this substitutes for, complements, or falls short of weight-based transfer methods.
+
+\section{Proposed Work and Thesis-I Plan}
+
+\textbf{Objectives.}
+\begin{enumerate}
+    \item Characterize the reasoning-accuracy gap between small and large models of the same family across varying problem difficulty and task domain, to establish a clear, reproducible baseline that any transfer method must be measured against.
+    \item Design a general framework for extracting reusable reasoning knowledge from a larger teacher model and organizing it into a form that can be retrieved and reused for new, unseen problems.
+    \item Design and evaluate inference-time methods for presenting retrieved reasoning knowledge to a smaller student model so that it improves the student's accuracy without any weight updates.
+    \item Compare inference-time transfer against a weight-based baseline (e.g., parameter-efficient fine-tuning on the same extracted knowledge) on accuracy, computational cost, and ease of adaptation to new data.
+    \item Identify the conditions -- task domain, problem difficulty, model scale, and retrieval reliability -- under which inference-time reasoning transfer helps, has no effect, or hurts, so that the method's boundaries are understood rather than assumed.
+\end{enumerate}
+
+\textbf{Thesis-I Plan.} Thesis-I will focus on establishing a sound methodology and initial feasibility evidence, rather than a fully scaled evaluation, which is reserved for Thesis-II. The planned activities for the semester are:
+
+\begin{enumerate}
+    \item \textbf{Literature review and formalization (Weeks 1--3).} Complete a structured review of knowledge distillation, retrieval-augmented generation, and reasoning-elicitation literature; formally define the transfer problem, evaluation metrics, and success criteria for this thesis.
+    \item \textbf{Baseline characterization (Weeks 4--5).} Select one open-weight model family with at least two size variants and one publicly available multi-step reasoning benchmark; measure and document the baseline accuracy gap by task difficulty and subject/category.
+    \item \textbf{Knowledge extraction and store design (Weeks 6--8).} Design and implement a pipeline that uses the larger model to produce reusable reasoning knowledge from a held-out training split, and organizes it into a retrievable store.
+    \item \textbf{Inference-time transfer, pilot (Weeks 9--11).} Implement and evaluate at least one inference-time method for retrieving and presenting this knowledge to the smaller model on a held-out test split, comparing against the unmodified baseline.
+    \item \textbf{Analysis and refinement (Weeks 12--13).} Analyze pilot results by problem difficulty and category to identify where the approach helps or fails, and use these findings to refine the design and scope the full evaluation plan for Thesis-II.
+    \item \textbf{Thesis-I report (Weeks 14--16).} Document methodology, baseline results, pilot findings, and a detailed Thesis-II plan (additional model families/sizes, additional task domains, a fine-tuning baseline comparison, and statistical validation of results).
+\end{enumerate}
+
+\section{Methods and Tools, Relevant Courses}
+
+\textbf{Methods.} Open-weight large language models at multiple parameter scales within a family will serve as teacher/student pairs; dense text embeddings and vector similarity search will be used for retrieval from the extracted knowledge store; controlled, paired comparisons (same model, same problem, with and without transferred knowledge) will be used to isolate the effect of the intervention; parameter-efficient fine-tuning will be used as a weight-based comparison baseline; results will be evaluated using accuracy on held-out problems, broken down by task difficulty and domain, together with computational cost (latency, token usage).
+
+\textbf{Tools.} Python; open-source model-serving and fine-tuning libraries (e.g., Hugging Face Transformers, PEFT); a local or self-hosted inference stack; a vector similarity search library (e.g., FAISS) for the retrieval component; GPU compute for model inference and fine-tuning experiments.
+
+\textbf{Relevant Courses.} Machine Learning; Deep Learning; Natural Language Processing; Information Retrieval; Applied Statistics / Research Methods -- these provide the modeling, retrieval, and evaluation-methodology background this thesis builds on.
+
+\section{Scope and Limitations}
+
+The scope of this thesis is limited to text-based, multi-step reasoning tasks (e.g., mathematical problem solving) as a controlled and well-benchmarked testbed for studying inference-time knowledge transfer; the primary evaluation will use open-weight models from one or a small number of model families, constrained by available compute. Thesis-I in particular is scoped to establishing methodology and pilot feasibility on a single model family and benchmark, with broader coverage (additional model families, sizes, and task domains) planned for Thesis-II.
+
+Limitations that will be explicitly acknowledged: findings on one task domain (e.g., mathematics) may not generalize to other reasoning domains such as code or commonsense reasoning without further validation; the quality of the retrieval component depends on the embedding model chosen, which is itself a confound; compute constraints limit the number of model sizes, families, and benchmark scales that can be tested within the thesis timeline; and evaluation will rely primarily on final-answer correctness, which does not fully capture reasoning quality or faithfulness.
+
+\bibliography{sources}
+\bibliographystyle{IEEEtran}
+\end{document}

@@ -1,0 +1,22 @@
+{
+  "n": 287,
+  "n_math": 100,
+  "n_aime": 187,
+  "n_injected": 267,
+  "n_skipped": 20,
+  "overall": {
+    "vanilla": 0.5087,
+    "atgi": 0.5436,
+    "delta": 0.0349
+  },
+  "math500": {
+    "vanilla": 0.85,
+    "atgi": 0.89,
+    "delta": 0.04
+  },
+  "aime": {
+    "vanilla": 0.3262,
+    "atgi": 0.3583,
+    "delta": 0.0321
+  }
+}

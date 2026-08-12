@@ -1,0 +1,46 @@
+19:29:31 Log: /home/students/PatternDistill/phase-3d/logs/build_memory_and_graph_20260726_192931.log
+19:29:31 ============================================================
+19:29:31 Phase 3D — AIME Bank + Combined Graph (MATH-500 + AIME)
+19:29:31 ============================================================
+19:29:31 AIME patterns: 746
+19:29:31 MATH-500 bank: 400
+19:29:33 Loading embed model: nomic-ai/nomic-embed-text-v1 on cuda
+19:29:47 Embed model loaded
+19:29:47 
+============================================================
+19:29:47 Stage 1: Building AIME Memory Bank
+19:29:47 ============================================================
+19:29:47 Valid: 746/746
+19:29:51   AIME problems: (746, 768) in 3.9s
+19:29:51 Saved AIME bank → /home/students/PatternDistill/phase-3d/memory/bank.json (746 entries)
+19:29:51 Saved FAISS → /home/students/PatternDistill/phase-3d/memory/bank.index
+19:29:51 
+============================================================
+19:29:51 Stage 2: Combined Thought Graph (MATH-500 + AIME)
+19:29:51 ============================================================
+19:29:51 Total nodes: 4584 (MATH-500: 1600, AIME: 2984)
+19:29:57   combined: (4584, 768) in 5.8s
+19:29:57 Sequential edges: 3438
+19:29:57 Building semantic edges (τ=0.9)...
+19:29:57 Semantic edges: 32850 (16425 unique) in 0.9s
+19:29:57   Same-domain:   13684
+19:29:57   Cross-domain:  2741 (MATH-500 ↔ AIME)
+19:29:57   Sim range: [0.900, 1.000], mean=0.912
+19:29:58 Saved graph → /home/students/PatternDistill/phase-3d/graph/thought_graph.json
+19:29:58 Saved embeddings → /home/students/PatternDistill/phase-3d/graph/step_embeddings.npy (4584, 768)
+19:29:58 Saved FAISS → /home/students/PatternDistill/phase-3d/graph/step_faiss.index
+19:29:58 
+============================================================
+19:29:58 COMBINED GRAPH SUMMARY (MATH-500 + AIME)
+19:29:58 ============================================================
+19:29:58   MATH-500 nodes:  1600
+19:29:58   AIME nodes:      2984
+19:29:58   Total:           4584
+19:29:58   Sequential:      3438
+19:29:58   Semantic:        32850 (16425 unique)
+19:29:58     Same-domain:   13684
+19:29:58     Cross-domain:  2741 (MATH-500 ↔ AIME)
+19:29:58   Avg degree:      7.9
+19:29:58   Max degree:      161
+19:29:58 
+Done! Next: run inject_and_eval_aime.py

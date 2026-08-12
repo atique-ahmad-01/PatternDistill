@@ -1,0 +1,20 @@
+18:50:07 Log: /home/students/PatternDistill/phase-3/logs/build_thought_graph_20260725_185007.log
+18:50:07 ============================================================
+18:50:07 Phase 3 — Build Thought Graph (ATGI)
+18:50:07 ============================================================
+18:50:07 Bank:         /home/students/PatternDistill/phase-2d/memory/bank.json
+18:50:07 τ_semantic:   0.8
+18:50:07 max_patterns: 5
+18:50:07 Loaded 400 entries from memory bank
+18:50:07 
+── Step 1.1: Parsing patterns into steps ──
+18:50:07 Parsed 5 patterns → 20 step nodes
+18:50:07   Steps/pattern: min=4, max=4, avg=4.0, median=4
+18:50:07   By subject:
+18:50:07     Algebra                        8 nodes
+18:50:07     Intermediate Algebra           4 nodes
+18:50:07     Number Theory                  4 nodes
+18:50:07     Precalculus                    4 nodes
+18:50:07 
+── Step 1.2: Embedding steps ──
+18:50:09 Loading embed model: nomic-ai/nomic-embed-text-v1 on cuda

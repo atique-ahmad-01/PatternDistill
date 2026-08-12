@@ -1,0 +1,107 @@
+13:47:27 Log: /home/students/PatternDistill/phase-3c/logs/build_memory_and_graph_20260726_134727.log
+13:47:27 ============================================================
+13:47:27 Phase 3C — Build MBPP Memory Bank + Combined Graph
+13:47:27 ============================================================
+13:47:27 MBPP patterns: 374
+13:47:27 MATH-500 bank: 400
+13:47:29 Loading embed model: nomic-ai/nomic-embed-text-v1 on cuda
+13:47:42 Embed model loaded
+13:47:42 
+============================================================
+13:47:42 Stage 1: Building MBPP Memory Bank
+13:47:42 ============================================================
+13:47:42 Valid patterns: 374/374
+13:47:42   MBPP problems batch 1 (1–64/374) 0.1s
+13:47:42   MBPP problems batch 2 (65–128/374) 0.0s
+13:47:42   MBPP problems batch 3 (129–192/374) 0.0s
+13:47:42   MBPP problems batch 4 (193–256/374) 0.0s
+13:47:42   MBPP problems batch 5 (257–320/374) 0.0s
+13:47:42   MBPP problems batch 6 (321–374/374) 0.0s
+13:47:42   MBPP problems: (374, 768) in 0.3s
+13:47:42 Saved MBPP bank → /home/students/PatternDistill/phase-3c/memory/bank.json (374 entries)
+13:47:42 Saved MBPP FAISS → /home/students/PatternDistill/phase-3c/memory/bank.index
+13:47:42 
+============================================================
+13:47:42 Stage 2: Building Combined Thought Graph
+13:47:42 ============================================================
+13:47:42 Total nodes: 3096 (MATH: 1600, MBPP: 1496)
+13:47:42 
+Embedding all nodes (context-enriched)...
+13:47:42   combined batch 1 (1–64/3096) 0.1s
+13:47:42   combined batch 2 (65–128/3096) 0.1s
+13:47:42   combined batch 3 (129–192/3096) 0.1s
+13:47:42   combined batch 4 (193–256/3096) 0.1s
+13:47:43   combined batch 5 (257–320/3096) 0.1s
+13:47:43   combined batch 6 (321–384/3096) 0.1s
+13:47:43   combined batch 7 (385–448/3096) 0.1s
+13:47:43   combined batch 8 (449–512/3096) 0.1s
+13:47:43   combined batch 9 (513–576/3096) 0.1s
+13:47:43   combined batch 10 (577–640/3096) 0.1s
+13:47:43   combined batch 11 (641–704/3096) 0.1s
+13:47:43   combined batch 12 (705–768/3096) 0.1s
+13:47:43   combined batch 13 (769–832/3096) 0.1s
+13:47:43   combined batch 14 (833–896/3096) 0.1s
+13:47:43   combined batch 15 (897–960/3096) 0.1s
+13:47:43   combined batch 16 (961–1024/3096) 0.1s
+13:47:44   combined batch 17 (1025–1088/3096) 0.1s
+13:47:44   combined batch 18 (1089–1152/3096) 0.1s
+13:47:44   combined batch 19 (1153–1216/3096) 0.1s
+13:47:44   combined batch 20 (1217–1280/3096) 0.1s
+13:47:44   combined batch 21 (1281–1344/3096) 0.1s
+13:47:44   combined batch 22 (1345–1408/3096) 0.1s
+13:47:44   combined batch 23 (1409–1472/3096) 0.1s
+13:47:44   combined batch 24 (1473–1536/3096) 0.1s
+13:47:44   combined batch 25 (1537–1600/3096) 0.1s
+13:47:44   combined batch 26 (1601–1664/3096) 0.0s
+13:47:44   combined batch 27 (1665–1728/3096) 0.0s
+13:47:44   combined batch 28 (1729–1792/3096) 0.0s
+13:47:44   combined batch 29 (1793–1856/3096) 0.0s
+13:47:44   combined batch 30 (1857–1920/3096) 0.0s
+13:47:44   combined batch 31 (1921–1984/3096) 0.0s
+13:47:44   combined batch 32 (1985–2048/3096) 0.0s
+13:47:44   combined batch 33 (2049–2112/3096) 0.0s
+13:47:45   combined batch 34 (2113–2176/3096) 0.0s
+13:47:45   combined batch 35 (2177–2240/3096) 0.0s
+13:47:45   combined batch 36 (2241–2304/3096) 0.0s
+13:47:45   combined batch 37 (2305–2368/3096) 0.0s
+13:47:45   combined batch 38 (2369–2432/3096) 0.0s
+13:47:45   combined batch 39 (2433–2496/3096) 0.0s
+13:47:45   combined batch 40 (2497–2560/3096) 0.0s
+13:47:45   combined batch 41 (2561–2624/3096) 0.0s
+13:47:45   combined batch 42 (2625–2688/3096) 0.0s
+13:47:45   combined batch 43 (2689–2752/3096) 0.0s
+13:47:45   combined batch 44 (2753–2816/3096) 0.0s
+13:47:45   combined batch 45 (2817–2880/3096) 0.0s
+13:47:45   combined batch 46 (2881–2944/3096) 0.1s
+13:47:45   combined batch 47 (2945–3008/3096) 0.0s
+13:47:45   combined batch 48 (3009–3072/3096) 0.0s
+13:47:45   combined batch 49 (3073–3096/3096) 0.0s
+13:47:45   combined: (3096, 768) in 3.0s
+13:47:45 
+Building sequential edges...
+13:47:45 Sequential edges: 2322
+13:47:45 
+Building semantic edges (τ=0.9)...
+13:47:46 Semantic edges: 74822 (37411 unique pairs) in 0.4s
+13:47:46   Same-domain pairs:  37389
+13:47:46   Cross-domain pairs: 22 (math↔code)
+13:47:46   Sim range: [0.900, 0.999], mean=0.912
+13:47:46 
+Saved graph → /home/students/PatternDistill/phase-3c/graph/thought_graph.json
+13:47:46 Saved embeddings → /home/students/PatternDistill/phase-3c/graph/step_embeddings.npy (3096, 768)
+13:47:46 Saved FAISS → /home/students/PatternDistill/phase-3c/graph/step_faiss.index (3096 vectors)
+13:47:46 
+============================================================
+13:47:46 COMBINED THOUGHT GRAPH SUMMARY
+13:47:46 ============================================================
+13:47:46   MATH nodes:          1600
+13:47:46   MBPP nodes:          1496
+13:47:46   Total nodes:         3096
+13:47:46   Sequential edges:    2322
+13:47:46   Semantic edges:      74822 (37411 unique)
+13:47:46     Same-domain:       37389
+13:47:46     Cross-domain:      22
+13:47:46   Avg degree:          24.9
+13:47:46   Max degree:          219
+13:47:46 
+Done! Next: run inject_and_eval_mbpp.py

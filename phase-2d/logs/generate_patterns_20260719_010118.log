@@ -1,0 +1,37 @@
+01:01:18 Log: /home/students/PatternDistill/phase-2d/logs/generate_patterns_20260719_010118.log
+01:01:18 Backend      : transformers
+01:01:18 MAX_NEW_TOKENS: 16384  (with /no_think: avg ~300-600 tokens)
+01:01:18 Dataset      : HuggingFaceH4/MATH-500 train[0:400]
+01:01:22 Capped at: 5
+01:01:22 Total problems: 5 | Remaining: 5
+01:01:23 GPUs available: 2 but cuda:1 not usable — teacher on cuda:0
+01:01:23 GPU name : NVIDIA GeForce RTX 5070 Ti
+01:01:23 VRAM     : 16.6 GB
+01:01:23 Loading teacher: Qwen/Qwen3-8B
+01:01:25   Free VRAM 14.6GB — 4-bit quant
+01:01:29 Teacher loaded
+01:01:34   [1/5] id=0 Precalculus L2 | pat=✓ step=✓ ex=✓ | lat=5.1s tok=319
+01:01:40   [2/5] id=1 Intermediate Algebra L5 | pat=✓ step=✓ ex=✓ | lat=5.5s tok=373
+01:01:46   [3/5] id=2 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=6.1s tok=415
+01:01:49   [4/5] id=3 Number Theory L3 | pat=✓ step=✓ ex=✓ | lat=2.9s tok=197
+01:01:54   [5/5] id=4 Algebra L2 | pat=✓ step=✓ ex=✓ | lat=5.5s tok=373
+01:01:54 VRAM free after cleanup: 14.5 GB
+01:01:54 
+Run complete:
+01:01:54   Missing pattern : 0
+01:01:54   Non-step-level  : 0
+01:01:54   By subject this run: {'Precalculus': 1, 'Intermediate Algebra': 1, 'Algebra': 2, 'Number Theory': 1}
+01:01:54 
+==================================================
+01:01:54 Compiled 5 records → /home/students/PatternDistill/phase-2d/data/patterns/patterns.json
+01:01:54   Has pattern    : 5/5
+01:01:54   Step-level     : 5/5
+01:01:54   Has example    : 5/5
+01:01:54 
+  By subject:
+01:01:54     Algebra                             total=2  pattern=2  step=2
+01:01:54     Intermediate Algebra                total=1  pattern=1  step=1
+01:01:54     Number Theory                       total=1  pattern=1  step=1
+01:01:54     Precalculus                         total=1  pattern=1  step=1
+01:01:54 
+Next: run build_memory_bank.py to build FAISS index

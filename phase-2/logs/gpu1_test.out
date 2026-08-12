@@ -1,0 +1,20 @@
+Log     : /home/students/PatternDistill/phase-2/logs/generate_patterns_20260717_185654.log
+Backend : transformers
+Dataset : HuggingFaceH4/MATH-500
+Smoke-test mode: 3 problems
+Resuming — 364 already done
+To do   : 0
+All problems already done — compiling JSON.
+
+Wrote 364 records → /home/students/PatternDistill/phase-2/data/patterns/patterns.json
+  Patterns extracted : 324/364
+  Missing patterns   : 40
+
+  By subject:
+    Algebra                             88/90 patterns
+    Counting & Probability              27/31 patterns
+    Geometry                            25/32 patterns
+    Intermediate Algebra                52/70 patterns
+    Number Theory                       41/42 patterns
+    Prealgebra                          55/58 patterns
+    Precalculus                         36/41 patterns

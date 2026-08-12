@@ -1,0 +1,16 @@
+19:53:47 Log: /home/students/PatternDistill/phase-4/logs/eval_qwen3-4b_20260802_195347.log
+19:53:47 ============================================================
+19:53:47 Phase 4 — Multi-Model Eval: Qwen3-4B
+19:53:47   HF ID: Qwen/Qwen3-4B
+19:53:47   Max context: 32768
+19:53:47   Max new tokens: 8192
+19:53:47 ============================================================
+19:53:58 Eval set: 100 MATH + 187 AIME = 287
+19:53:58 To do: 287
+19:53:58 Combined bank: 400 MATH + 746 AIME = 1146
+19:53:58 Graph: 4584 nodes, cross=2741
+19:54:12 Device: cuda:0
+19:54:12 GPU: NVIDIA GeForce RTX 5070 Ti
+19:54:12 Loading model: Qwen/Qwen3-4B
+19:54:17 Student loaded: Qwen/Qwen3-4B
+19:54:17 Embed on CPU, student on GPU

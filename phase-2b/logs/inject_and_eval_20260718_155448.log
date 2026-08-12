@@ -1,0 +1,9 @@
+15:54:48 Log     : /Users/ebricks/Desktop/PatternDistill/phase-2b/logs/inject_and_eval_20260718_155448.log
+15:54:48 Backend : ollama
+15:54:48 Retrieval: subject-filtered (Phase 2B fix)
+15:54:48 Dataset : HuggingFaceH4/MATH-500
+15:54:55 Capped at: 3 problems
+15:54:55 To do   : 3
+15:54:55 Memory bank: 356 entries, dim=768
+15:54:55 Subject-filtered retrieval: ON
+15:54:59 Loading embed model: nomic-ai/nomic-embed-text-v1 on cpu

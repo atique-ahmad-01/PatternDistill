@@ -1,0 +1,9 @@
+19:03:57 Log     : /home/students/PatternDistill/phase-2/logs/generate_patterns_20260717_190357.log
+19:03:57 Backend : transformers
+19:03:57 Dataset : HuggingFaceH4/MATH-500
+19:04:01 Problems: 400
+19:04:01 Resuming — 372 already done
+19:04:01 To do   : 28
+19:04:02 Device  : cpu
+19:04:02 Loading teacher: Qwen/Qwen3-8B
+19:04:04   No CUDA — loading in float32 on CPU (slow)

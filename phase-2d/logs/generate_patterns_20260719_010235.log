@@ -1,0 +1,34 @@
+01:02:35 Log: /home/students/PatternDistill/phase-2d/logs/generate_patterns_20260719_010235.log
+01:02:35 Backend      : transformers
+01:02:35 MAX_NEW_TOKENS: 16384  (with /no_think: avg ~300-600 tokens)
+01:02:35 Dataset      : HuggingFaceH4/MATH-500 train[0:400]
+01:02:39 Total problems: 400 | Remaining: 400
+01:02:42 GPUs available: 2 but cuda:1 not usable — teacher on cuda:0
+01:02:42 GPU name : NVIDIA GeForce RTX 5070 Ti
+01:02:42 VRAM     : 16.6 GB
+01:02:42 Loading teacher: Qwen/Qwen3-8B
+01:02:44   Free VRAM 13.4GB — 4-bit quant
+01:02:59 Teacher loaded
+01:03:05   [1/400] id=0 Precalculus L2 | pat=✓ step=✓ ex=✓ | lat=5.6s tok=319
+01:03:10   [2/400] id=1 Intermediate Algebra L5 | pat=✓ step=✓ ex=✓ | lat=5.4s tok=373
+01:03:16   [3/400] id=2 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=6.0s tok=415
+01:03:19   [4/400] id=3 Number Theory L3 | pat=✓ step=✓ ex=✓ | lat=2.9s tok=197
+01:03:24   [5/400] id=4 Algebra L2 | pat=✓ step=✓ ex=✓ | lat=5.4s tok=373
+01:03:28   [6/400] id=5 Prealgebra L2 | pat=✓ step=✓ ex=✓ | lat=3.3s tok=226
+01:03:31   [7/400] id=6 Number Theory L3 | pat=✓ step=✓ ex=✓ | lat=3.7s tok=252
+01:03:38   [8/400] id=7 Precalculus L4 | pat=✓ step=✓ ex=✓ | lat=6.1s tok=420
+01:03:42   [9/400] id=8 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=4.1s tok=282
+01:03:45   [10/400] id=9 Prealgebra L5 | pat=✓ step=✓ ex=✓ | lat=3.7s tok=257
+01:03:49   [11/400] id=10 Number Theory L3 | pat=✓ step=✓ ex=✓ | lat=3.4s tok=234
+01:03:54   [12/400] id=11 Intermediate Algebra L5 | pat=✓ step=✓ ex=✓ | lat=5.3s tok=366
+01:04:00   [13/400] id=12 Number Theory L5 | pat=✓ step=✓ ex=✓ | lat=6.2s tok=425
+01:04:04   [14/400] id=13 Geometry L2 | pat=✓ step=✓ ex=✓ | lat=3.2s tok=220
+01:04:07   [15/400] id=14 Precalculus L1 | pat=✓ step=✓ ex=✓ | lat=3.5s tok=237
+01:04:13   [16/400] id=15 Precalculus L5 | pat=✓ step=✓ ex=✓ | lat=5.9s tok=409
+01:04:16   [17/400] id=16 Intermediate Algebra L1 | pat=✓ step=✓ ex=✓ | lat=2.9s tok=198
+01:04:20   [18/400] id=17 Precalculus L4 | pat=✓ step=✓ ex=✓ | lat=4.2s tok=282
+01:04:25   [19/400] id=18 Geometry L1 | pat=✓ step=✓ ex=✓ | lat=4.5s tok=304
+01:04:29   [20/400] id=19 Intermediate Algebra L3 | pat=✓ step=✓ ex=✓ | lat=4.7s tok=315
+01:04:32   [21/400] id=20 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=2.8s tok=190
+01:04:46   [22/400] id=21 Intermediate Algebra L3 | pat=✓ step=✓ ex=✓ | lat=13.8s tok=949
+01:04:54   [23/400] id=22 Algebra L5 | pat=✓ step=✓ ex=✓ | lat=8.1s tok=554

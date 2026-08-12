@@ -1,0 +1,172 @@
+10:20:44 Log: /home/students/PatternDistill/phase-3b/logs/inject_and_eval_ti_20260726_102044.log
+10:20:44 ============================================================
+10:20:44 Phase 3B — Thinking Intervention (TI)
+10:20:44 ============================================================
+10:20:44 Backend : transformers
+10:20:44 Method  : template injected inside <think> tags
+10:20:49 Eval set: 100 problems
+10:20:49 To do   : 100
+10:20:49 Thought graph: 1600 nodes, 1200 seq + 2830 sem edges
+10:20:49 Phase-2d bank: 400 entries, dim=768
+10:20:51 Loading embed model: nomic-ai/nomic-embed-text-v1 on cuda
+10:21:04 Embed model loaded
+10:21:04 Device  : cuda:0
+10:21:04 GPU     : NVIDIA GeForce RTX 5070 Ti
+10:21:04 VRAM    : 16.6 GB
+10:21:04 Loading student: Qwen/Qwen3-1.7B
+10:21:08 Student loaded
+10:21:20 Embed model reloaded on CPU (student on GPU)
+10:23:11   [1/100] id=400 Geometry L5 | sim=0.664 thr=0.55 | TI 4steps | van=✗(71s) ti=✓(39s) | ↑
+10:25:08   [2/100] id=401 Intermediate Algebra L5 | sim=0.699 thr=0.6 | TI 4steps | van=✗(65s) ti=✓(53s) | ↑
+10:25:24   [3/100] id=402 Precalculus L3 | sim=0.716 thr=0.65 | TI 4steps | van=✓(13s) ti=✓(3s) | =
+10:25:24   [4/100] id=403 Number Theory L4 | sim=0.647 < thr=0.65 → skip injection
+10:26:09   [4/100] id=403 Number Theory L4 | sim=0.647 thr=0.65 | skip 0steps | van=✓(22s) ti=✓(23s) | =
+10:26:20   [5/100] id=404 Counting & Probability L1 | sim=0.565 thr=0.5 | TI 4steps | van=✓(8s) ti=✓(2s) | =
+10:26:35   [6/100] id=405 Prealgebra L4 | sim=0.553 thr=0.5 | TI 4steps | van=✓(8s) ti=✓(7s) | =
+10:26:35   [7/100] id=406 Number Theory L1 | sim=0.564 < thr=0.65 → skip injection
+10:26:50   [7/100] id=406 Number Theory L1 | sim=0.564 thr=0.65 | skip 0steps | van=✓(7s) ti=✓(7s) | =
+10:27:02   [8/100] id=407 Algebra L4 | sim=0.644 thr=0.5 | TI 4steps | van=✓(8s) ti=✓(4s) | =
+10:27:46   [9/100] id=408 Precalculus L5 | sim=0.735 thr=0.65 | TI 4steps | van=✗(33s) ti=✗(11s) | =
+10:29:02   [10/100] id=409 Intermediate Algebra L4 | sim=0.664 thr=0.6 | TI 4steps | van=✗(71s) ti=✓(5s) | ↑
+10:29:19   [11/100] id=410 Prealgebra L2 | sim=0.544 thr=0.5 | TI 4steps | van=✓(9s) ti=✓(8s) | =
+10:29:32   [12/100] id=411 Prealgebra L3 | sim=0.505 thr=0.5 | TI 4steps | van=✗(9s) ti=✓(4s) | ↑
+10:30:45   [13/100] id=412 Intermediate Algebra L4 | sim=0.647 thr=0.6 | TI 4steps | van=✓(51s) ti=✓(22s) | =
+10:30:56   [14/100] id=413 Algebra L2 | sim=0.661 thr=0.5 | TI 4steps | van=✓(8s) ti=✓(3s) | =
+10:31:19   [15/100] id=414 Algebra L4 | sim=0.639 thr=0.5 | TI 4steps | van=✓(16s) ti=✓(7s) | =
+10:31:58   [16/100] id=415 Number Theory L5 | sim=0.671 thr=0.65 | TI 4steps | van=✓(24s) ti=✓(14s) | =
+10:33:30   [17/100] id=416 Precalculus L3 | sim=0.704 thr=0.65 | TI 4steps | van=✓(46s) ti=✓(46s) | =
+10:33:47   [18/100] id=417 Algebra L5 | sim=0.647 thr=0.5 | TI 4steps | van=✓(14s) ti=✓(4s) | =
+10:34:09   [19/100] id=418 Algebra L5 | sim=0.661 thr=0.5 | TI 4steps | van=✓(16s) ti=✓(5s) | =
+10:36:31   [20/100] id=419 Precalculus L4 | sim=0.791 thr=0.65 | TI 4steps | van=✗(71s) ti=✗(71s) | =
+10:37:08   [21/100] id=420 Precalculus L3 | sim=0.722 thr=0.65 | TI 4steps | van=✗(24s) ti=✗(12s) | =
+10:38:30   [22/100] id=421 Precalculus L5 | sim=0.699 thr=0.65 | TI 4steps | van=✓(58s) ti=✓(24s) | =
+10:40:53   [23/100] id=422 Intermediate Algebra L5 | sim=0.683 thr=0.6 | TI 4steps | van=✗(71s) ti=✗(72s) | =
+10:40:53   [24/100] id=423 Number Theory L5 | sim=0.590 < thr=0.65 → skip injection
+10:42:07   [24/100] id=423 Number Theory L5 | sim=0.590 thr=0.65 | skip 0steps | van=✓(37s) ti=✓(37s) | =
+10:42:28   [25/100] id=424 Algebra L5 | sim=0.598 thr=0.5 | TI 4steps | van=✓(16s) ti=✓(5s) | =
+10:44:50   [26/100] id=425 Precalculus L5 | sim=0.681 thr=0.65 | TI 4steps | van=✗(71s) ti=✗(71s) | =
+10:45:13   [27/100] id=426 Geometry L3 | sim=0.728 thr=0.55 | TI 4steps | van=✓(12s) ti=✓(11s) | =
+10:45:20   [28/100] id=427 Algebra L2 | sim=0.535 thr=0.5 | TI 4steps | van=✓(5s) ti=✓(2s) | =
+10:46:48   [29/100] id=428 Intermediate Algebra L4 | sim=0.795 thr=0.6 | TI 4steps | van=✓(64s) ti=✓(24s) | =
+10:47:17   [30/100] id=429 Intermediate Algebra L3 | sim=0.651 thr=0.6 | TI 4steps | van=✓(23s) ti=✓(6s) | =
+10:47:21   [31/100] id=430 Prealgebra L2 | sim=0.642 thr=0.5 | TI 4steps | van=✓(3s) ti=✓(1s) | =
+10:47:21   [32/100] id=431 Precalculus L4 | sim=0.638 < thr=0.65 → skip injection
+10:48:28   [32/100] id=431 Precalculus L4 | sim=0.638 thr=0.65 | skip 0steps | van=✓(33s) ti=✓(34s) | =
+10:48:28   [33/100] id=432 Intermediate Algebra L5 | sim=0.588 < thr=0.6 → skip injection
+10:50:50   [33/100] id=432 Intermediate Algebra L5 | sim=0.588 thr=0.6 | skip 0steps | van=✓(71s) ti=✓(71s) | =
+10:51:05   [34/100] id=433 Number Theory L2 | sim=0.735 thr=0.65 | TI 4steps | van=✗(13s) ti=✗(2s) | =
+10:51:18   [35/100] id=434 Prealgebra L5 | sim=0.645 thr=0.5 | TI 4steps | van=✓(10s) ti=✓(3s) | =
+10:51:38   [36/100] id=435 Algebra L5 | sim=0.622 thr=0.5 | TI 4steps | van=✓(15s) ti=✗(4s) | ↓
+10:52:07   [37/100] id=436 Counting & Probability L4 | sim=0.718 thr=0.5 | TI 4steps | van=✓(25s) ti=✓(4s) | =
+10:52:32   [38/100] id=437 Algebra L3 | sim=0.630 thr=0.5 | TI 4steps | van=✓(14s) ti=✓(11s) | =
+10:52:32   [39/100] id=438 Number Theory L2 | sim=0.591 < thr=0.65 → skip injection
+10:53:06   [39/100] id=438 Number Theory L2 | sim=0.591 thr=0.65 | skip 0steps | van=✓(17s) ti=✓(16s) | =
+10:53:42   [40/100] id=439 Intermediate Algebra L3 | sim=0.678 thr=0.6 | TI 4steps | van=✓(27s) ti=✓(10s) | =
+10:53:54   [41/100] id=440 Algebra L3 | sim=0.738 thr=0.5 | TI 4steps | van=✓(7s) ti=✓(5s) | =
+10:53:54   [42/100] id=441 Prealgebra L4 | sim=0.455 < thr=0.5 → skip injection
+10:54:01   [42/100] id=441 Prealgebra L4 | sim=0.455 thr=0.5 | skip 0steps | van=✓(3s) ti=✓(3s) | =
+10:54:15   [43/100] id=442 Algebra L4 | sim=0.602 thr=0.5 | TI 4steps | van=✓(12s) ti=✓(2s) | =
+10:54:27   [44/100] id=443 Algebra L4 | sim=0.630 thr=0.5 | TI 4steps | van=✗(6s) ti=✓(6s) | ↑
+10:55:58   [45/100] id=444 Counting & Probability L5 | sim=0.652 thr=0.5 | TI 4steps | van=✗(71s) ti=✗(19s) | =
+10:58:21   [46/100] id=445 Intermediate Algebra L4 | sim=0.693 thr=0.6 | TI 4steps | van=✗(71s) ti=✗(72s) | =
+10:58:50   [47/100] id=446 Algebra L4 | sim=0.667 thr=0.5 | TI 4steps | van=✓(18s) ti=✓(11s) | =
+10:59:02   [48/100] id=447 Prealgebra L1 | sim=0.653 thr=0.5 | TI 4steps | van=✓(9s) ti=✓(3s) | =
+10:59:02   [49/100] id=448 Number Theory L5 | sim=0.643 < thr=0.65 → skip injection
+10:59:47   [49/100] id=448 Number Theory L5 | sim=0.643 thr=0.65 | skip 0steps | van=✓(22s) ti=✓(22s) | =
+11:00:01   [50/100] id=449 Algebra L1 | sim=0.554 thr=0.5 | TI 4steps | van=✓(10s) ti=✓(4s) | =
+11:00:01   [51/100] id=450 Number Theory L5 | sim=0.584 < thr=0.65 → skip injection
+11:00:29   [51/100] id=450 Number Theory L5 | sim=0.584 thr=0.65 | skip 0steps | van=✓(14s) ti=✓(14s) | =
+11:00:29   [52/100] id=451 Number Theory L3 | sim=0.553 < thr=0.65 → skip injection
+11:00:57   [52/100] id=451 Number Theory L3 | sim=0.553 thr=0.65 | skip 0steps | van=✓(14s) ti=✓(14s) | =
+11:01:15   [53/100] id=452 Algebra L2 | sim=0.624 thr=0.5 | TI 4steps | van=✓(12s) ti=✓(6s) | =
+11:01:25   [54/100] id=453 Algebra L2 | sim=0.590 thr=0.5 | TI 4steps | van=✓(8s) ti=✗(2s) | ↓
+11:02:23   [55/100] id=454 Precalculus L5 | sim=0.753 thr=0.65 | TI 4steps | van=✓(25s) ti=✗(34s) | ↓
+11:02:30   [56/100] id=455 Counting & Probability L2 | sim=0.663 thr=0.5 | TI 4steps | van=✗(5s) ti=✓(1s) | ↑
+11:03:07   [57/100] id=456 Intermediate Algebra L1 | sim=0.694 thr=0.6 | TI 4steps | van=✓(31s) ti=✗(6s) | ↓
+11:03:13   [58/100] id=457 Number Theory L1 | sim=0.668 thr=0.65 | TI 4steps | van=✓(5s) ti=✗(1s) | ↓
+11:04:10   [59/100] id=458 Prealgebra L3 | sim=0.601 thr=0.5 | TI 4steps | van=✗(55s) ti=✗(2s) | =
+11:04:42   [60/100] id=459 Algebra L5 | sim=0.578 thr=0.5 | TI 4steps | van=✗(27s) ti=✗(4s) | =
+11:07:04   [61/100] id=460 Prealgebra L4 | sim=0.831 thr=0.5 | TI 4steps | van=✗(71s) ti=✗(71s) | =
+11:07:25   [62/100] id=461 Algebra L4 | sim=0.623 thr=0.5 | TI 4steps | van=✓(11s) ti=✓(9s) | =
+11:07:25   [63/100] id=462 Number Theory L2 | sim=0.625 < thr=0.65 → skip injection
+11:09:47   [63/100] id=462 Number Theory L2 | sim=0.625 thr=0.65 | skip 0steps | van=✗(71s) ti=✗(71s) | =
+11:09:55   [64/100] id=463 Algebra L2 | sim=0.635 thr=0.5 | TI 4steps | van=✓(5s) ti=✓(4s) | =
+11:10:20   [65/100] id=464 Intermediate Algebra L3 | sim=0.660 thr=0.6 | TI 4steps | van=✓(18s) ti=✓(7s) | =
+11:10:20   [66/100] id=465 Number Theory L4 | sim=0.599 < thr=0.65 → skip injection
+11:10:36   [66/100] id=465 Number Theory L4 | sim=0.599 thr=0.65 | skip 0steps | van=✓(8s) ti=✓(8s) | =
+11:10:36   [67/100] id=466 Precalculus L5 | sim=0.631 < thr=0.65 → skip injection
+11:12:59   [67/100] id=466 Precalculus L5 | sim=0.631 thr=0.65 | skip 0steps | van=✗(71s) ti=✗(71s) | =
+11:13:23   [68/100] id=467 Prealgebra L2 | sim=0.734 thr=0.5 | TI 4steps | van=✗(18s) ti=✗(6s) | =
+11:13:37   [69/100] id=468 Algebra L4 | sim=0.633 thr=0.5 | TI 4steps | van=✓(10s) ti=✓(3s) | =
+11:13:46   [70/100] id=469 Algebra L3 | sim=0.642 thr=0.5 | TI 4steps | van=✓(5s) ti=✓(3s) | =
+11:14:59   [71/100] id=470 Intermediate Algebra L5 | sim=0.666 thr=0.6 | TI 4steps | van=✓(40s) ti=✓(33s) | =
+11:15:10   [72/100] id=471 Prealgebra L3 | sim=0.559 thr=0.5 | TI 4steps | van=✓(7s) ti=✓(3s) | =
+11:15:17   [73/100] id=472 Algebra L1 | sim=0.568 thr=0.5 | TI 4steps | van=✗(5s) ti=✗(2s) | =
+11:17:01   [74/100] id=473 Prealgebra L5 | sim=0.660 thr=0.5 | TI 4steps | van=✗(71s) ti=✓(33s) | ↑
+11:17:21   [75/100] id=474 Intermediate Algebra L1 | sim=0.665 thr=0.6 | TI 4steps | van=✓(16s) ti=✓(5s) | =
+11:18:45   [76/100] id=475 Counting & Probability L5 | sim=0.704 thr=0.5 | TI 4steps | van=✓(58s) ti=✓(26s) | =
+11:18:54   [77/100] id=476 Prealgebra L2 | sim=0.583 thr=0.5 | TI 4steps | van=✓(6s) ti=✓(2s) | =
+11:18:54   [78/100] id=477 Number Theory L3 | sim=0.608 < thr=0.65 → skip injection
+11:19:23   [78/100] id=477 Number Theory L3 | sim=0.608 thr=0.65 | skip 0steps | van=✓(15s) ti=✓(15s) | =
+11:21:46   [79/100] id=478 Intermediate Algebra L5 | sim=0.673 thr=0.6 | TI 4steps | van=✗(71s) ti=✗(72s) | =
+11:21:46   [80/100] id=479 Number Theory L5 | sim=0.616 < thr=0.65 → skip injection
+11:22:14   [80/100] id=479 Number Theory L5 | sim=0.616 thr=0.65 | skip 0steps | van=✓(14s) ti=✓(14s) | =
+11:23:06   [81/100] id=480 Precalculus L2 | sim=0.671 thr=0.65 | TI 4steps | van=✓(21s) ti=✓(31s) | =
+11:25:28   [82/100] id=481 Intermediate Algebra L5 | sim=0.634 thr=0.6 | TI 4steps | van=✗(71s) ti=✗(71s) | =
+11:25:28   [83/100] id=482 Number Theory L5 | sim=0.575 < thr=0.65 → skip injection
+11:26:54   [83/100] id=482 Number Theory L5 | sim=0.575 thr=0.65 | skip 0steps | van=✓(43s) ti=✓(43s) | =
+11:27:32   [84/100] id=483 Precalculus L3 | sim=0.728 thr=0.65 | TI 4steps | van=✓(23s) ti=✓(15s) | =
+11:28:11   [85/100] id=484 Intermediate Algebra L3 | sim=0.652 thr=0.6 | TI 4steps | van=✓(27s) ti=✓(12s) | =
+11:29:42   [86/100] id=485 Counting & Probability L2 | sim=0.657 thr=0.5 | TI 4steps | van=✓(19s) ti=✗(72s) | ↓
+11:30:19   [87/100] id=486 Geometry L3 | sim=0.591 thr=0.55 | TI 4steps | van=✓(22s) ti=✗(15s) | ↓
+11:30:31   [88/100] id=487 Number Theory L1 | sim=0.776 thr=0.65 | TI 4steps | van=✓(10s) ti=✓(2s) | =
+11:30:31   [89/100] id=488 Prealgebra L5 | sim=0.478 < thr=0.5 → skip injection
+11:30:40   [89/100] id=488 Prealgebra L5 | sim=0.478 thr=0.5 | skip 0steps | van=✗(5s) ti=✗(5s) | =
+11:30:41   [90/100] id=489 Intermediate Algebra L3 | sim=0.591 < thr=0.6 → skip injection
+11:31:51   [90/100] id=489 Intermediate Algebra L3 | sim=0.591 thr=0.6 | skip 0steps | van=✓(35s) ti=✓(35s) | =
+11:34:14   [91/100] id=490 Intermediate Algebra L5 | sim=0.615 thr=0.6 | TI 4steps | van=✗(71s) ti=✓(71s) | ↑
+11:35:31   [92/100] id=491 Prealgebra L5 | sim=0.572 thr=0.5 | TI 4steps | van=✗(63s) ti=✗(15s) | =
+11:35:43   [93/100] id=492 Precalculus L3 | sim=0.753 thr=0.65 | TI 4steps | van=✓(9s) ti=✓(3s) | =
+11:36:26   [94/100] id=493 Algebra L5 | sim=0.770 thr=0.5 | TI 4steps | van=✓(36s) ti=✓(7s) | =
+11:38:49   [95/100] id=494 Intermediate Algebra L5 | sim=0.644 thr=0.6 | TI 4steps | van=✗(71s) ti=✗(71s) | =
+11:39:35   [96/100] id=495 Intermediate Algebra L4 | sim=0.630 thr=0.6 | TI 4steps | van=✓(31s) ti=✗(15s) | ↓
+11:39:35   [97/100] id=496 Intermediate Algebra L3 | sim=0.587 < thr=0.6 → skip injection
+11:40:04   [97/100] id=496 Intermediate Algebra L3 | sim=0.587 thr=0.6 | skip 0steps | van=✓(14s) ti=✓(15s) | =
+11:42:04   [98/100] id=497 Geometry L5 | sim=0.654 thr=0.55 | TI 4steps | van=✗(71s) ti=✓(49s) | ↑
+11:42:59   [99/100] id=498 Intermediate Algebra L5 | sim=0.648 thr=0.6 | TI 4steps | van=✓(36s) ti=✗(19s) | ↓
+11:43:25   [100/100] id=499 Geometry L4 | sim=0.694 thr=0.55 | TI 4steps | van=✗(19s) ti=✗(7s) | =
+11:43:25 VRAM free: 16.0 GB
+11:43:25 
+Wrote 100 records → /home/students/PatternDistill/phase-3b/results/results.json
+11:43:25 Wrote summary → /home/students/PatternDistill/phase-3b/results/summary.json
+11:43:25 
+============================================================
+11:43:25 Phase 3B — Thinking Intervention (TI) Results
+11:43:25 ============================================================
+11:43:25   n=100  injected=81  skipped=19
+11:43:25 
+  Vanilla   accuracy : 0.700
+11:43:25   TI        accuracy : 0.700
+11:43:25   Delta              : +0.000
+11:43:25   Gap closed         : 0.0% of the 21pp Phase 1 gap
+11:43:25 
+  vs Phase 2D (prompt injection): +0.060
+11:43:25   vs Phase 3 v2 (prompt inject): +0.060
+11:43:25   TI improvement over 2D:        -0.060
+11:43:25   TI improvement over v2:        -0.060
+11:43:25 
+  By subject:
+11:43:25     Algebra                             ti=0.826  van=0.870  delta=-0.044  (n=23  thr=0.5)
+11:43:25     Counting & Probability              ti=0.667  van=0.667  delta=+0.000  (n=6  thr=0.5)
+11:43:25     Geometry                            ti=0.600  van=0.400  delta=+0.200  (n=5  thr=0.55)
+11:43:25     Intermediate Algebra                ti=0.636  van=0.636  delta=+0.000  (n=22  thr=0.6)
+11:43:25     Number Theory                       ti=0.812  van=0.875  delta=-0.062  (n=16  thr=0.65)
+11:43:25     Prealgebra                          ti=0.667  van=0.533  delta=+0.133  (n=15  thr=0.5)
+11:43:25     Precalculus                         ti=0.538  van=0.615  delta=-0.077  (n=13  thr=0.65)
+11:43:25 
+  By difficulty:
+11:43:25     Level 1: ti=0.667  van=0.889  delta=-0.222  (n=9)
+11:43:25     Level 2: ti=0.667  van=0.733  delta=-0.067  (n=15)
+11:43:25     Level 3: ti=0.857  van=0.857  delta=+0.000  (n=21)
+11:43:25     Level 4: ti=0.762  van=0.714  delta=+0.048  (n=21)
+11:43:25     Level 5: ti=0.588  van=0.529  delta=+0.059  (n=34)

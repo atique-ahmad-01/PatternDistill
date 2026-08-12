@@ -1,0 +1,37 @@
+Log: /home/students/PatternDistill/phase-3c/logs/inject_and_eval_mbpp_20260726_140818.log
+============================================================
+Phase 3C — MBPP ATGI v2 Evaluation
+============================================================
+Capped at: 5 problems
+To do: 5
+MBPP bank: 374 entries, dim=768
+Combined graph: 3096 nodes (1600 math + 1496 code), cross-domain=22 pairs
+Loading embed model: nomic-ai/nomic-embed-text-v1 on cuda
+<All keys matched successfully>
+Embed model loaded
+Device: cuda:0
+GPU: NVIDIA GeForce RTX 5070 Ti
+Loading student: Qwen/Qwen3-1.7B
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:   1%|          | 2/311 [00:00<00:25, 11.89it/s]Loading weights:  27%|██▋       | 83/311 [00:00<00:00, 375.53it/s]Loading weights:  53%|█████▎    | 164/311 [00:00<00:00, 546.45it/s]Loading weights:  78%|███████▊  | 244/311 [00:00<00:00, 636.60it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 558.39it/s]
+Student loaded
+<All keys matched successfully>
+Embed model reloaded on CPU
+[transformers] Detected the usage of `get_extended_attention_mask`: This function is deprecated and will be removed in v5.12.0. Please use the new API in `transformers.masking_utils`
+  [1/5] task=11 | sim=0.716 | van=✓(1s) atgi=✗(1s) | ↓
+  [2/5] task=12 | sim=0.681 | van=✓(1s) atgi=✓(1s) | =
+  [3/5] task=13 | sim=0.738 | van=✗(0s) atgi=✗(0s) | =
+  [4/5] task=14 | sim=0.631 | van=✓(0s) atgi=✗(0s) | ↓
+  [5/5] task=15 | sim=0.776 | van=✗(2s) atgi=✗(0s) | =
+
+Wrote 5 records → /home/students/PatternDistill/phase-3c/results/results.json
+Wrote summary → /home/students/PatternDistill/phase-3c/results/summary.json
+
+============================================================
+Phase 3C — MBPP ATGI Results
+============================================================
+  n=5  injected=5  skipped=0  bonus=0  cross-domain=0
+
+  Vanilla   pass rate : 0.600
+  ATGI      pass rate : 0.200
+  Delta               : -0.400

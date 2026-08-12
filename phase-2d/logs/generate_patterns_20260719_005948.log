@@ -1,0 +1,7 @@
+00:59:48 Log: /home/students/PatternDistill/phase-2d/logs/generate_patterns_20260719_005948.log
+00:59:48 Backend      : transformers
+00:59:48 MAX_NEW_TOKENS: 16384  (with /no_think: avg ~300-600 tokens)
+00:59:48 Dataset      : HuggingFaceH4/MATH-500 train[0:400]
+00:59:52 Capped at: 5
+00:59:52 Total problems: 5 | Remaining: 5
+00:59:53 GPUs available: 2 — teacher on cuda:1

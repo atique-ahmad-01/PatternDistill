@@ -1,0 +1,61 @@
+Log     : /home/students/PatternDistill/phase-2/logs/generate_patterns_20260717_190751.log
+Backend : transformers
+Dataset : HuggingFaceH4/MATH-500
+Problems: 400
+Resuming — 372 already done
+To do   : 28
+Device  : cuda
+GPU     : NVIDIA GeForce RTX 5070 Ti
+VRAM    : 16.6 GB
+Loading teacher: Qwen/Qwen3-8B
+  Free VRAM 16.4GB — loading in 4-bit quant
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:00<05:53,  1.13it/s]Loading weights:   1%|          | 2/399 [00:01<06:28,  1.02it/s]Loading weights:   1%|▏         | 5/399 [00:02<02:06,  3.12it/s]Loading weights:   3%|▎         | 10/399 [00:02<00:52,  7.42it/s]Loading weights:   4%|▍         | 15/399 [00:02<00:31, 12.06it/s]Loading weights:   5%|▍         | 18/399 [00:02<00:29, 12.99it/s]Loading weights:   7%|▋         | 26/399 [00:02<00:17, 20.92it/s]Loading weights:   8%|▊         | 30/399 [00:02<00:17, 21.49it/s]Loading weights:   9%|▉         | 37/399 [00:03<00:13, 27.72it/s]Loading weights:  10%|█         | 41/399 [00:03<00:13, 27.09it/s]Loading weights:  12%|█▏        | 48/399 [00:03<00:11, 31.74it/s]Loading weights:  13%|█▎        | 52/399 [00:03<00:12, 27.81it/s]Loading weights:  15%|█▍        | 59/399 [00:03<00:10, 31.36it/s]Loading weights:  16%|█▌        | 63/399 [00:03<00:11, 28.15it/s]Loading weights:  18%|█▊        | 70/399 [00:04<00:10, 31.64it/s]Loading weights:  19%|█▊        | 74/399 [00:04<00:11, 28.16it/s]Loading weights:  20%|██        | 81/399 [00:04<00:09, 32.01it/s]Loading weights:  21%|██▏       | 85/399 [00:04<00:11, 28.03it/s]Loading weights:  23%|██▎       | 92/399 [00:04<00:09, 30.99it/s]Loading weights:  24%|██▍       | 96/399 [00:05<00:10, 27.66it/s]Loading weights:  26%|██▌       | 103/399 [00:05<00:09, 31.34it/s]Loading weights:  27%|██▋       | 107/399 [00:05<00:10, 28.40it/s]Loading weights:  29%|██▊       | 114/399 [00:05<00:08, 32.37it/s]Loading weights:  30%|██▉       | 118/399 [00:05<00:09, 30.51it/s]Loading weights:  31%|███▏      | 125/399 [00:05<00:08, 33.81it/s]Loading weights:  32%|███▏      | 129/399 [00:06<00:08, 30.45it/s]Loading weights:  34%|███▍      | 136/399 [00:06<00:07, 34.02it/s]Loading weights:  35%|███▌      | 140/399 [00:06<00:08, 31.23it/s]Loading weights:  37%|███▋      | 147/399 [00:06<00:07, 34.50it/s]Loading weights:  38%|███▊      | 151/399 [00:06<00:08, 30.21it/s]Loading weights:  40%|███▉      | 158/399 [00:06<00:06, 34.44it/s]Loading weights:  41%|████      | 162/399 [00:07<00:07, 31.17it/s]Loading weights:  42%|████▏     | 169/399 [00:07<00:06, 34.34it/s]Loading weights:  43%|████▎     | 173/399 [00:07<00:07, 30.34it/s]Loading weights:  45%|████▌     | 180/399 [00:07<00:06, 33.47it/s]Loading weights:  46%|████▌     | 184/399 [00:07<00:07, 29.23it/s]Loading weights:  48%|████▊     | 191/399 [00:07<00:06, 32.65it/s]Loading weights:  49%|████▉     | 195/399 [00:08<00:07, 28.53it/s]Loading weights:  51%|█████     | 202/399 [00:08<00:06, 31.80it/s]Loading weights:  52%|█████▏    | 206/399 [00:08<00:06, 29.29it/s]Loading weights:  53%|█████▎    | 213/399 [00:08<00:05, 33.89it/s]Loading weights:  54%|█████▍    | 217/399 [00:08<00:05, 30.76it/s]Loading weights:  56%|█████▌    | 224/399 [00:08<00:05, 34.90it/s]Loading weights:  57%|█████▋    | 228/399 [00:09<00:05, 30.56it/s]Loading weights:  59%|█████▉    | 235/399 [00:09<00:04, 34.15it/s]Loading weights:  60%|█████▉    | 239/399 [00:09<00:05, 31.64it/s]Loading weights:  62%|██████▏   | 246/399 [00:09<00:04, 35.98it/s]Loading weights:  63%|██████▎   | 250/399 [00:09<00:04, 32.20it/s]Loading weights:  64%|██████▍   | 257/399 [00:09<00:03, 36.45it/s]Loading weights:  65%|██████▌   | 261/399 [00:10<00:04, 31.92it/s]Loading weights:  67%|██████▋   | 268/399 [00:10<00:03, 34.93it/s]Loading weights:  68%|██████▊   | 272/399 [00:10<00:04, 30.30it/s]Loading weights:  70%|██████▉   | 279/399 [00:10<00:03, 33.23it/s]Loading weights:  71%|███████   | 283/399 [00:10<00:03, 29.74it/s]Loading weights:  73%|███████▎  | 290/399 [00:11<00:03, 33.61it/s]Loading weights:  74%|███████▎  | 294/399 [00:11<00:03, 30.29it/s]Loading weights:  75%|███████▌  | 301/399 [00:11<00:02, 33.93it/s]Loading weights:  76%|███████▋  | 305/399 [00:11<00:03, 31.27it/s]Loading weights:  78%|███████▊  | 312/399 [00:11<00:02, 35.41it/s]Loading weights:  79%|███████▉  | 316/399 [00:11<00:02, 31.65it/s]Loading weights:  81%|████████  | 323/399 [00:12<00:02, 34.18it/s]Loading weights:  82%|████████▏ | 327/399 [00:12<00:02, 30.74it/s]Loading weights:  84%|████████▎ | 334/399 [00:12<00:01, 33.74it/s]Loading weights:  85%|████████▍ | 338/399 [00:12<00:02, 29.66it/s]Loading weights:  86%|████████▋ | 345/399 [00:12<00:01, 32.93it/s]Loading weights:  87%|████████▋ | 349/399 [00:12<00:01, 29.75it/s]Loading weights:  89%|████████▉ | 356/399 [00:13<00:01, 33.40it/s]Loading weights:  90%|█████████ | 360/399 [00:13<00:01, 29.42it/s]Loading weights:  92%|█████████▏| 367/399 [00:13<00:00, 32.41it/s]Loading weights:  93%|█████████▎| 371/399 [00:13<00:00, 28.93it/s]Loading weights:  95%|█████████▍| 378/399 [00:13<00:00, 32.17it/s]Loading weights:  96%|█████████▌| 382/399 [00:13<00:00, 28.84it/s]Loading weights:  97%|█████████▋| 389/399 [00:14<00:00, 31.93it/s]Loading weights:  98%|█████████▊| 393/399 [00:14<00:00, 28.78it/s]Loading weights: 100%|██████████| 399/399 [00:14<00:00, 27.68it/s]
+Teacher loaded
+/home/students/miniforge3/envs/ms-atique/lib/python3.11/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+  [1/28] id=372 Geometry L2 | pattern=✓ | lat=79.6s tps=70 | tok=5562
+  [2/28] id=373 Algebra L5 | pattern=✓ | lat=20.5s tps=70 | tok=1426
+  [3/28] id=374 Algebra L1 | pattern=✓ | lat=7.1s tps=69 | tok=495
+  [4/28] id=375 Number Theory L5 | pattern=✓ | lat=17.0s tps=70 | tok=1181
+  [5/28] id=376 Geometry L4 | pattern=✓ | lat=18.9s tps=69 | tok=1311
+  [6/28] id=377 Number Theory L3 | pattern=✓ | lat=24.0s tps=70 | tok=1682
+  [7/28] id=378 Prealgebra L3 | pattern=✓ | lat=19.1s tps=70 | tok=1337
+  [WARN] No <pattern> tag for problem 379
+  [8/28] id=379 Prealgebra L4 | pattern=✗ | lat=117.2s tps=70 | tok=8192
+  [9/28] id=380 Intermediate Algebra L4 | pattern=✓ | lat=27.1s tps=70 | tok=1885
+  [10/28] id=381 Counting & Probability L5 | pattern=✓ | lat=103.8s tps=63 | tok=6532
+  [11/28] id=382 Intermediate Algebra L5 | pattern=✓ | lat=47.7s tps=70 | tok=3332
+  [12/28] id=383 Algebra L4 | pattern=✓ | lat=14.0s tps=70 | tok=984
+  [13/28] id=384 Prealgebra L2 | pattern=✓ | lat=6.1s tps=70 | tok=423
+  [14/28] id=385 Prealgebra L5 | pattern=✓ | lat=8.9s tps=70 | tok=626
+  [15/28] id=386 Algebra L3 | pattern=✓ | lat=19.3s tps=70 | tok=1355
+  [16/28] id=387 Algebra L1 | pattern=✓ | lat=8.7s tps=70 | tok=607
+  [17/28] id=388 Algebra L5 | pattern=✓ | lat=22.0s tps=70 | tok=1533
+  [18/28] id=389 Geometry L3 | pattern=✓ | lat=34.9s tps=69 | tok=2422
+  [19/28] id=390 Algebra L5 | pattern=✓ | lat=35.2s tps=70 | tok=2458
+  [20/28] id=391 Algebra L5 | pattern=✓ | lat=51.5s tps=69 | tok=3574
+  [WARN] No <pattern> tag for problem 392
+  [21/28] id=392 Precalculus L5 | pattern=✗ | lat=145.3s tps=56 | tok=8192
+  [22/28] id=393 Algebra L3 | pattern=✓ | lat=33.8s tps=57 | tok=1924
+  [23/28] id=394 Intermediate Algebra L5 | pattern=✓ | lat=45.9s tps=55 | tok=2515
+  [24/28] id=395 Algebra L1 | pattern=✓ | lat=25.6s tps=55 | tok=1400
+  [25/28] id=396 Prealgebra L3 | pattern=✓ | lat=44.2s tps=55 | tok=2427
+  [26/28] id=397 Prealgebra L2 | pattern=✓ | lat=13.6s tps=55 | tok=753
+  [27/28] id=398 Prealgebra L4 | pattern=✓ | lat=30.4s tps=58 | tok=1760
+  [28/28] id=399 Prealgebra L2 | pattern=✓ | lat=10.6s tps=59 | tok=623
+VRAM free: 14.9 GB
+
+Done. Missing <pattern>: 2/28
+
+Wrote 400 records → /home/students/PatternDistill/phase-2/data/patterns/patterns.json
+  Patterns extracted : 356/400
+  Missing patterns   : 44
+
+  By subject:
+    Algebra                             99/101 patterns
+    Counting & Probability              28/32 patterns
+    Geometry                            29/36 patterns
+    Intermediate Algebra                56/75 patterns
+    Number Theory                       44/46 patterns
+    Prealgebra                          63/67 patterns
+    Precalculus                         37/43 patterns

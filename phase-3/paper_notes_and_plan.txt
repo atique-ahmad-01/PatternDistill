@@ -1,0 +1,188 @@
+Phase-3 Paper Notes & Implementation Plan
+==========================================
+Generated: 2026-07-25
+
+=== PAPER SUMMARIES ===
+
+1. BoT (Buffer of Thoughts) — NeurIPS 2024
+   Paper: arxiv 2406.04271
+   Authors: Ling Yang et al. (Peking University, UC Berkeley, Stanford)
+   GitHub: https://github.com/YangLing0818/buffer-of-thought-llm
+
+   Core idea: Store high-level reusable thought-templates (not problem-specific),
+   retrieve by embedding similarity, and instantiate them for each new problem.
+
+   Pipeline:
+   1. Problem Distiller — LLM extracts key info/constraints from input problem
+      - Formula: x_d = LLM(φ(x))
+      - Focuses on: essential parameters, variables, objectives, constraints
+      - Translates specific problems into high-level concepts/structures
+   2. Meta-Buffer — Library of thought-templates (T_i, Description_T_i, Category_k)
+      - 6 categories: Text Comprehension, Creative Language, Common Sense,
+        Mathematical Reasoning, Code Programming, Application Scheduling
+      - Retrieved via embedding similarity: j = argmax_i Sim(f(x_d), f(D_T_i))
+      - Threshold δ = 0.5–0.7 to determine if task is new
+   3. Instantiated Reasoning — LLM solves using (distilled_problem, retrieved_template)
+      - S_x = LLM_instantiation(x_d, T_j)
+      - Adaptively fills template with problem-specific reasoning
+   4. Buffer Manager — After solving, distills new templates and adds to buffer if novel
+      - Template Distillation prompt (3 steps):
+        a. Core task summarization (identify problem type, challenges)
+        b. Solution steps description (general procedure)
+        c. General answer template (reusable approach)
+      - T_new = LLM_distill(x_d, S_x)
+      - Dynamic update rule: add only if Max(Sim(D_T_new, {D_T_i})) < δ
+
+   Key Results:
+   - +11% on Game of 24, +20% on Geometric Shapes, +51% on Checkmate-in-One
+   - Only 12% of the cost of multi-query methods (ToT, GoT)
+   - BoT+Llama3-8B surpasses standalone Llama3-70B
+   - Time breakdown: problem-distiller 15.6%, reasoner 52.7%, meta-buffer 8.9%, buffer-manager 21.3%
+
+   Key Insight for PatternDistill:
+   - Templates are HIGH-LEVEL guidelines, not problem-specific solutions
+   - Problem distiller separates comprehension from reasoning
+   - Buffer grows dynamically — starts empty or seeded, expands as problems are solved
+
+
+2. RoT (Retrieval of Thoughts) — ICLR 2026
+   Paper: arxiv 2509.21743
+   Authors: Ammar Ahmed et al. (U. Minnesota, UC Santa Cruz, Argonne)
+   GitHub: https://github.com/ahme0599/Retrieval-of-Thought
+
+   Core idea: Decompose solutions into individual steps, organize in a graph with
+   sequential + semantic edges, then dynamically assemble problem-specific templates
+   via reward-guided traversal.
+
+   Definitions:
+   - Template t ∈ D: ordered sequence of reasoning steps S^t = (s_0, s_1, ..., s_{l_t-1})
+   - Node (t, i): step i from template t
+   - Thought Graph G = (V, E_Sequential ∪ E_Semantic, w)
+
+   Graph Construction:
+   - Built from 3.34k templates (ReasonFlux-v2 dataset)
+   - Embeddings: jina-embeddings-v2-small-en, cosine similarity
+   - Sequential edges: connect consecutive steps (t,i) → (t,i+1) within same template
+   - Semantic edges: connect steps across templates if normalized sim ≥ τ = 0.85
+     - sim_normalized(a,b) = (sim(a,b) + 1) / 2 (rescaled to [0,1])
+     - Bidirectional
+   - Edge weights: w = 1 for sequential, w = sim_normalized for semantic
+
+   Algorithm 1 — RoT Inference:
+   Input: Query Q, Thought Graph G, Reasoning Model M
+   1. Filter nodes by metadata (template type, knowledge tags)
+   2. Score initial nodes: R_initial = α·R_Q + (1-α)·R_S
+      - α = 0.8
+      - R_Q = cosine similarity between query and node embedding
+      - R_S = 1 if node is step-0, 0 otherwise
+   3. Select v_0 = argmax R_initial
+   4. Initialize template T ← [v_0]
+   5. WHILE termination condition not met:
+      a. Evaluate neighbors of current node: R = R_Q + R_F
+         - R_F = 1 if ((t,i), (t,i+1)) ∈ E_Sequential, 0 otherwise
+      b. Select v* = argmax R
+      c. Append v* to T
+   6. Termination: max(R) < τ OR len(T) ≥ l_max=8 OR no candidates
+   7. Construct prompt P = (Q, T) with <think> tags
+   8. Call model: ŷ ← M(P)
+
+   Two variants:
+   - RoT: template in prompt directly
+   - RoT+TI: template inside <think> and </think> tags (Thinking Intervention)
+
+   Key Results (Qwen3 family, AIME/AMC benchmarks):
+   - Qwen3-1.7B: RoT+TI reaches ~44% accuracy (vs 46% CoT) with ~3k fewer tokens
+   - Qwen3-4B: 72% accuracy, 800 fewer tokens vs CoT
+   - Qwen3-8B: RoT+TI 83% accuracy, slightly better than RAG (80%)
+   - Token reduction: 20-40%
+   - Latency reduction: up to 82% (smaller models benefit most)
+   - Cost reduction: up to 59%
+   - Retrieval overhead: only 0.034-0.044s per query
+   - Path switching reduced by up to 81.8%
+
+   Key Insight for PatternDistill:
+   - Step-level decomposition enables cross-problem recombination
+   - Reward-guided traversal assembles custom templates dynamically
+   - Smaller models benefit MORE from RoT (stronger instruction following)
+   - Graph memory footprint: only 1.7 GB (4.3% of total GPU memory)
+
+
+3. ReasonFlux-PRM (arxiv 2506.18896) — NOT "ReasonFlex"
+   Paper: "Trajectory-Aware PRMs for Long Chain-of-Thought Reasoning"
+
+   This is a Process Reward Model paper, not a retrieval/composition method.
+   - Evaluates intermediate reasoning steps with trajectory-aware context
+   - Less directly applicable to our memory injection approach
+   - Could be useful for scoring retrieved patterns (future work)
+
+   Note: The "ReasonFlex" entry in todo.txt may refer to a different paper
+   or may be a misremembered name. The URL maps to ReasonFlux-PRM.
+
+
+=== PHASE-3 IMPLEMENTATION PLAN ===
+
+All experiments reuse:
+- Teacher: Qwen3-8B (pattern generation, already done)
+- Student: Qwen3-1.7B (evaluation)
+- Embeddings: nomic-embed-text (768-dim)
+- Dataset: MATH-500 (400 train / 100 test)
+- Memory bank: phase-2d's 400 step-level patterns
+- GPU: students@100.118.158.78
+
+--- Phase-3A: Top-K Full-Problem Matching ---
+Complexity: Low
+Description: Retrieve top-k (k=3) similar problems instead of top-1.
+             Inject multiple patterns + examples into prompt.
+
+Changes from phase-2d:
+- FAISS search returns k=3 instead of k=1
+- Prompt includes multiple "Reasoning Strategy" sections
+- Per-subject thresholds still apply (filter retrieved items below threshold)
+
+Expected outcome: Test whether more context helps or hurts the 1.7B model.
+
+--- Phase-3B: BoT-Style (Problem Distiller + Template Retrieval) ---
+Complexity: Medium
+Description: Add problem distiller stage before retrieval.
+             Retrieve template based on distilled problem, not raw text.
+             After eval, distill new high-level templates from successful solutions.
+
+New components:
+1. Problem distiller prompt (LLM call to extract structure/constraints)
+2. Modified retrieval: embed distilled output, search meta-buffer
+3. Instantiation prompt: combine distilled info + retrieved template
+4. Buffer manager: post-eval template extraction for novel problems
+
+--- Phase-3C: RoT-Style (Step-Level Graph + Reward-Guided Traversal) ---
+Complexity: High
+Description: Decompose all 400 patterns into individual steps.
+             Build thought graph with sequential + semantic edges.
+             At inference, retrieve initial node and traverse graph
+             to assemble a custom multi-step template.
+
+New components:
+1. Step decomposition: parse "Step 1: ... Step 2: ... Step 3: ..." from all 400 patterns
+2. Step embedding: embed each individual step with nomic-embed-text
+3. Graph construction:
+   - Nodes: ~1200 steps (avg 3 steps per pattern)
+   - Sequential edges: within-pattern step order
+   - Semantic edges: cross-pattern cosine sim > 0.85
+4. Initial node retrieval: score = 0.8*query_sim + 0.2*is_step_0
+5. Reward-guided traversal: R = query_sim + sequential_bonus
+6. Template assembly: collect traversed steps into prompt
+7. Termination: max(R) < τ, len ≥ 8, or no candidates
+
+Adaptation from original RoT:
+- Use nomic-embed-text instead of jina-embeddings
+- Graph built from our 400 teacher-generated patterns (not ReasonFlux-v2)
+- Metadata filtering by math subject (Algebra, Geometry, etc.)
+- Integrate with existing per-subject threshold logic
+
+
+=== EXECUTION ORDER ===
+
+1. Phase-3A first (simplest, establishes multi-pattern baseline)
+2. Phase-3C next (highest novelty, most aligned with RoT paper)
+3. Phase-3B last (BoT-style, requires rethinking template abstraction level)
+
+All results compared against phase-2d baseline: 70% vanilla → 76% injection (+6.0pp)

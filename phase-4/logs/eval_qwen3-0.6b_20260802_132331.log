@@ -1,0 +1,47 @@
+13:23:31 Log: /home/students/PatternDistill/phase-4/logs/eval_qwen3-0.6b_20260802_132331.log
+13:23:31 ============================================================
+13:23:31 Phase 4 — Multi-Model Eval: Qwen3-0.6B
+13:23:31   HF ID: Qwen/Qwen3-0.6B
+13:23:31   Max context: 32768
+13:23:31 ============================================================
+13:23:41 Eval set: 100 MATH + 187 AIME = 287
+13:23:41 To do: 287
+13:23:41 Combined bank: 400 MATH + 746 AIME = 1146
+13:23:41 Graph: 4584 nodes, cross=2741
+13:23:56 Device: cuda:0
+13:23:56 GPU: NVIDIA GeForce RTX 5070 Ti
+13:23:56 Loading model: Qwen/Qwen3-0.6B
+13:24:00 Student loaded: Qwen/Qwen3-0.6B
+13:24:00 Embed on CPU, student on GPU
+13:27:26   [1/287] math_400 (MATH-500) | sim=0.721 | van=N(138s/16384t) inj=N(67s/8531t) | =
+13:28:40   [2/287] math_401 (MATH-500) | sim=0.699 | van=N(31s/3922t) inj=N(44s/5558t) | =
+13:29:41   [3/287] math_402 (MATH-500) | sim=0.716 | van=Y(53s/6720t) inj=N(8s/1033t) | v
+13:29:41   [4/287] math_403 (MATH-500) | sim=0.647 < 0.65 -> skip
+13:30:34   [4/287] math_403 (MATH-500) | sim=0.647 | van=N(26s/3350t) inj=N(26s/3350t) | =
+13:30:49   [5/287] math_404 (MATH-500) | sim=0.565 | van=Y(6s/706t) inj=N(9s/1143t) | v
+13:31:00   [6/287] math_405 (MATH-500) | sim=0.553 | van=Y(4s/556t) inj=Y(7s/942t) | =
+13:31:00   [7/287] math_406 (MATH-500) | sim=0.564 < 0.65 -> skip
+13:31:10   [7/287] math_406 (MATH-500) | sim=0.564 | van=Y(5s/612t) inj=Y(5s/612t) | =
+13:31:21   [8/287] math_407 (MATH-500) | sim=0.644 | van=Y(5s/688t) inj=Y(5s/668t) | =
+13:32:36   [9/287] math_408 (MATH-500) | sim=0.735 | van=Y(45s/5598t) inj=N(30s/3791t) | v
+13:33:40   [10/287] math_409 (MATH-500) | sim=0.664 | van=Y(21s/2674t) inj=Y(43s/5407t) | =
+13:34:00   [11/287] math_410 (MATH-500) | sim=0.544 | van=Y(10s/1269t) inj=Y(10s/1319t) | =
+13:34:11   [12/287] math_411 (MATH-500) | sim=0.652 | van=Y(5s/585t) inj=N(6s/777t) | v
+13:36:50   [13/287] math_412 (MATH-500) | sim=0.912 | van=N(138s/16384t) inj=Y(20s/2583t) | ^
+13:37:00   [14/287] math_413 (MATH-500) | sim=0.661 | van=Y(6s/778t) inj=Y(4s/544t) | =
+13:37:40   [15/287] math_414 (MATH-500) | sim=0.639 | van=Y(10s/1297t) inj=Y(30s/3765t) | =
+13:38:16   [16/287] math_415 (MATH-500) | sim=0.671 | van=Y(19s/2415t) inj=Y(16s/2093t) | =
+13:41:04   [17/287] math_416 (MATH-500) | sim=0.704 | van=N(138s/16384t) inj=Y(30s/3825t) | ^
+13:41:17   [18/287] math_417 (MATH-500) | sim=0.647 | van=Y(7s/904t) inj=Y(6s/766t) | =
+13:41:35   [19/287] math_418 (MATH-500) | sim=0.661 | van=Y(11s/1379t) inj=Y(7s/935t) | =
+13:43:33   [20/287] math_419 (MATH-500) | sim=0.791 | van=N(54s/6861t) inj=N(64s/8111t) | =
+13:46:01   [21/287] math_420 (MATH-500) | sim=0.722 | van=N(10s/1306t) inj=N(138s/16384t) | =
+13:49:46   [22/287] math_421 (MATH-500) | sim=0.699 | van=Y(112s/13855t) inj=N(113s/13840t) | v
+13:54:22   [23/287] math_422 (MATH-500) | sim=0.739 | van=N(138s/16384t) inj=N(137s/16384t) | =
+13:54:22   [24/287] math_423 (MATH-500) | sim=0.590 < 0.65 -> skip
+13:55:06   [24/287] math_423 (MATH-500) | sim=0.590 | van=Y(22s/2767t) inj=Y(22s/2767t) | =
+13:55:38   [25/287] math_424 (MATH-500) | sim=0.598 | van=Y(19s/2377t) inj=Y(13s/1683t) | =
+14:00:14   [26/287] math_425 (MATH-500) | sim=0.681 | van=N(138s/16384t) inj=N(138s/16384t) | =
+14:00:32   [27/287] math_426 (MATH-500) | sim=0.728 | van=Y(9s/1134t) inj=Y(9s/1088t) | =
+14:00:46   [28/287] math_427 (MATH-500) | sim=0.535 | van=Y(5s/680t) inj=Y(8s/1017t) | =
+14:03:29   [29/287] math_428 (MATH-500) | sim=0.795 | van=Y(32s/4084t) inj=N(131s/15700t) | v

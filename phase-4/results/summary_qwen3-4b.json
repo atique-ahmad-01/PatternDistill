@@ -1,0 +1,25 @@
+{
+  "model": "Qwen3-4B",
+  "n": 287,
+  "n_math": 100,
+  "n_aime": 187,
+  "overall": {
+    "vanilla": 0.4913,
+    "injection": 0.5087,
+    "delta": 0.0174,
+    "vanilla_correct": 141,
+    "injection_correct": 146,
+    "regressions": 15,
+    "improvements": 20
+  },
+  "math500": {
+    "vanilla": 0.86,
+    "injection": 0.9,
+    "delta": 0.04
+  },
+  "aime": {
+    "vanilla": 0.2941,
+    "injection": 0.2995,
+    "delta": 0.0054
+  }
+}

@@ -1,0 +1,58 @@
+19:07:51 Log     : /home/students/PatternDistill/phase-2/logs/generate_patterns_20260717_190751.log
+19:07:51 Backend : transformers
+19:07:51 Dataset : HuggingFaceH4/MATH-500
+19:08:06 Problems: 400
+19:08:06 Resuming — 372 already done
+19:08:06 To do   : 28
+19:08:09 Device  : cuda
+19:08:09 GPU     : NVIDIA GeForce RTX 5070 Ti
+19:08:09 VRAM    : 16.6 GB
+19:08:09 Loading teacher: Qwen/Qwen3-8B
+19:08:11   Free VRAM 16.4GB — loading in 4-bit quant
+19:08:27 Teacher loaded
+19:09:47   [1/28] id=372 Geometry L2 | pattern=✓ | lat=79.6s tps=70 | tok=5562
+19:10:07   [2/28] id=373 Algebra L5 | pattern=✓ | lat=20.5s tps=70 | tok=1426
+19:10:14   [3/28] id=374 Algebra L1 | pattern=✓ | lat=7.1s tps=69 | tok=495
+19:10:31   [4/28] id=375 Number Theory L5 | pattern=✓ | lat=17.0s tps=70 | tok=1181
+19:10:50   [5/28] id=376 Geometry L4 | pattern=✓ | lat=18.9s tps=69 | tok=1311
+19:11:14   [6/28] id=377 Number Theory L3 | pattern=✓ | lat=24.0s tps=70 | tok=1682
+19:11:33   [7/28] id=378 Prealgebra L3 | pattern=✓ | lat=19.1s tps=70 | tok=1337
+19:13:30   [WARN] No <pattern> tag for problem 379
+19:13:30   [8/28] id=379 Prealgebra L4 | pattern=✗ | lat=117.2s tps=70 | tok=8192
+19:13:58   [9/28] id=380 Intermediate Algebra L4 | pattern=✓ | lat=27.1s tps=70 | tok=1885
+19:15:41   [10/28] id=381 Counting & Probability L5 | pattern=✓ | lat=103.8s tps=63 | tok=6532
+19:16:29   [11/28] id=382 Intermediate Algebra L5 | pattern=✓ | lat=47.7s tps=70 | tok=3332
+19:16:43   [12/28] id=383 Algebra L4 | pattern=✓ | lat=14.0s tps=70 | tok=984
+19:16:49   [13/28] id=384 Prealgebra L2 | pattern=✓ | lat=6.1s tps=70 | tok=423
+19:16:58   [14/28] id=385 Prealgebra L5 | pattern=✓ | lat=8.9s tps=70 | tok=626
+19:17:17   [15/28] id=386 Algebra L3 | pattern=✓ | lat=19.3s tps=70 | tok=1355
+19:17:26   [16/28] id=387 Algebra L1 | pattern=✓ | lat=8.7s tps=70 | tok=607
+19:17:48   [17/28] id=388 Algebra L5 | pattern=✓ | lat=22.0s tps=70 | tok=1533
+19:18:23   [18/28] id=389 Geometry L3 | pattern=✓ | lat=34.9s tps=69 | tok=2422
+19:18:58   [19/28] id=390 Algebra L5 | pattern=✓ | lat=35.2s tps=70 | tok=2458
+19:19:50   [20/28] id=391 Algebra L5 | pattern=✓ | lat=51.5s tps=69 | tok=3574
+19:22:15   [WARN] No <pattern> tag for problem 392
+19:22:15   [21/28] id=392 Precalculus L5 | pattern=✗ | lat=145.3s tps=56 | tok=8192
+19:22:49   [22/28] id=393 Algebra L3 | pattern=✓ | lat=33.8s tps=57 | tok=1924
+19:23:35   [23/28] id=394 Intermediate Algebra L5 | pattern=✓ | lat=45.9s tps=55 | tok=2515
+19:24:00   [24/28] id=395 Algebra L1 | pattern=✓ | lat=25.6s tps=55 | tok=1400
+19:24:45   [25/28] id=396 Prealgebra L3 | pattern=✓ | lat=44.2s tps=55 | tok=2427
+19:24:58   [26/28] id=397 Prealgebra L2 | pattern=✓ | lat=13.6s tps=55 | tok=753
+19:25:29   [27/28] id=398 Prealgebra L4 | pattern=✓ | lat=30.4s tps=58 | tok=1760
+19:25:39   [28/28] id=399 Prealgebra L2 | pattern=✓ | lat=10.6s tps=59 | tok=623
+19:25:39 VRAM free: 14.9 GB
+19:25:39 
+Done. Missing <pattern>: 2/28
+19:25:39 
+Wrote 400 records → /home/students/PatternDistill/phase-2/data/patterns/patterns.json
+19:25:39   Patterns extracted : 356/400
+19:25:39   Missing patterns   : 44
+19:25:39 
+  By subject:
+19:25:39     Algebra                             99/101 patterns
+19:25:39     Counting & Probability              28/32 patterns
+19:25:39     Geometry                            29/36 patterns
+19:25:39     Intermediate Algebra                56/75 patterns
+19:25:39     Number Theory                       44/46 patterns
+19:25:39     Prealgebra                          63/67 patterns
+19:25:39     Precalculus                         37/43 patterns

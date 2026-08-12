@@ -1,0 +1,32 @@
+14:02:26 Log: /home/students/PatternDistill/phase-3c/logs/inject_and_eval_mbpp_20260726_140226.log
+14:02:26 ============================================================
+14:02:26 Phase 3C — MBPP ATGI v2 Evaluation
+14:02:26 ============================================================
+14:02:31 Capped at: 5 problems
+14:02:31 To do: 5
+14:02:31 MBPP bank: 374 entries, dim=768
+14:02:31 Combined graph: 3096 nodes (1600 math + 1496 code), cross-domain=22 pairs
+14:02:33 Loading embed model: nomic-ai/nomic-embed-text-v1 on cuda
+14:02:45 Embed model loaded
+14:02:45 Device: cuda:0
+14:02:45 GPU: NVIDIA GeForce RTX 5070 Ti
+14:02:45 Loading student: Qwen/Qwen3-1.7B
+14:02:49 Student loaded
+14:03:01 Embed model reloaded on CPU
+14:03:04   [1/5] task=11 | sim=0.716 | van=✗(1s) atgi=✗(1s) | =
+14:03:04   [2/5] task=12 | sim=0.681 | van=✗(0s) atgi=✗(0s) | =
+14:03:05   [3/5] task=13 | sim=0.738 | van=✗(0s) atgi=✗(0s) | =
+14:03:06   [4/5] task=14 | sim=0.631 | van=✗(0s) atgi=✗(0s) | =
+14:03:07   [5/5] task=15 | sim=0.776 | van=✗(1s) atgi=✗(0s) | =
+14:03:07 
+Wrote 5 records → /home/students/PatternDistill/phase-3c/results/results.json
+14:03:07 Wrote summary → /home/students/PatternDistill/phase-3c/results/summary.json
+14:03:07 
+============================================================
+14:03:07 Phase 3C — MBPP ATGI Results
+14:03:07 ============================================================
+14:03:07   n=5  injected=5  skipped=0  bonus=0  cross-domain=0
+14:03:07 
+  Vanilla   pass rate : 0.000
+14:03:07   ATGI      pass rate : 0.000
+14:03:07   Delta               : +0.000

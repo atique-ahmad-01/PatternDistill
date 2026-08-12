@@ -1,0 +1,434 @@
+01:04:57 Log: /home/students/PatternDistill/phase-2d/logs/generate_patterns_20260719_010457.log
+01:04:57 Backend      : transformers
+01:04:57 MAX_NEW_TOKENS: 16384  (with /no_think: avg ~300-600 tokens)
+01:04:57 Dataset      : HuggingFaceH4/MATH-500 train[0:400]
+01:05:00 Total problems: 400 | Remaining: 400
+01:05:03 GPUs available: 2 but cuda:1 not usable — teacher on cuda:0
+01:05:03 GPU name : NVIDIA GeForce RTX 5070 Ti
+01:05:03 VRAM     : 16.6 GB
+01:05:03 Loading teacher: Qwen/Qwen3-8B
+01:05:05   Free VRAM 14.6GB — 4-bit quant
+01:05:17 Teacher loaded
+01:05:22   [1/400] id=0 Precalculus L2 | pat=✓ step=✓ ex=✓ | lat=5.1s tok=319
+01:05:27   [2/400] id=1 Intermediate Algebra L5 | pat=✓ step=✓ ex=✓ | lat=5.5s tok=373
+01:05:33   [3/400] id=2 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=6.1s tok=415
+01:05:36   [4/400] id=3 Number Theory L3 | pat=✓ step=✓ ex=✓ | lat=2.9s tok=197
+01:05:42   [5/400] id=4 Algebra L2 | pat=✓ step=✓ ex=✓ | lat=5.5s tok=373
+01:05:45   [6/400] id=5 Prealgebra L2 | pat=✓ step=✓ ex=✓ | lat=3.4s tok=226
+01:05:49   [7/400] id=6 Number Theory L3 | pat=✓ step=✓ ex=✓ | lat=3.7s tok=252
+01:05:55   [8/400] id=7 Precalculus L4 | pat=✓ step=✓ ex=✓ | lat=6.2s tok=420
+01:05:59   [9/400] id=8 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=4.2s tok=282
+01:06:03   [10/400] id=9 Prealgebra L5 | pat=✓ step=✓ ex=✓ | lat=3.8s tok=257
+01:06:06   [11/400] id=10 Number Theory L3 | pat=✓ step=✓ ex=✓ | lat=3.5s tok=234
+01:06:12   [12/400] id=11 Intermediate Algebra L5 | pat=✓ step=✓ ex=✓ | lat=5.4s tok=366
+01:06:18   [13/400] id=12 Number Theory L5 | pat=✓ step=✓ ex=✓ | lat=6.2s tok=425
+01:06:21   [14/400] id=13 Geometry L2 | pat=✓ step=✓ ex=✓ | lat=3.3s tok=220
+01:06:25   [15/400] id=14 Precalculus L1 | pat=✓ step=✓ ex=✓ | lat=3.5s tok=237
+01:06:31   [16/400] id=15 Precalculus L5 | pat=✓ step=✓ ex=✓ | lat=6.0s tok=409
+01:06:34   [17/400] id=16 Intermediate Algebra L1 | pat=✓ step=✓ ex=✓ | lat=2.9s tok=198
+01:06:38   [18/400] id=17 Precalculus L4 | pat=✓ step=✓ ex=✓ | lat=4.2s tok=282
+01:06:42   [19/400] id=18 Geometry L1 | pat=✓ step=✓ ex=✓ | lat=4.5s tok=304
+01:06:47   [20/400] id=19 Intermediate Algebra L3 | pat=✓ step=✓ ex=✓ | lat=4.6s tok=315
+01:06:50   [21/400] id=20 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=2.8s tok=190
+01:07:04   [22/400] id=21 Intermediate Algebra L3 | pat=✓ step=✓ ex=✓ | lat=13.8s tok=949
+01:07:12   [23/400] id=22 Algebra L5 | pat=✓ step=✓ ex=✓ | lat=8.1s tok=554
+01:07:18   [24/400] id=23 Algebra L5 | pat=✓ step=✓ ex=✓ | lat=6.0s tok=406
+01:07:21   [25/400] id=24 Algebra L5 | pat=✓ step=✓ ex=✓ | lat=3.3s tok=220
+01:07:28   [26/400] id=25 Intermediate Algebra L5 | pat=✓ step=✓ ex=✓ | lat=7.3s tok=504
+01:07:33   [27/400] id=26 Counting & Probability L5 | pat=✓ step=✓ ex=✓ | lat=4.3s tok=295
+01:07:37   [28/400] id=27 Prealgebra L2 | pat=✓ step=✓ ex=✓ | lat=4.4s tok=299
+01:07:41   [29/400] id=28 Precalculus L2 | pat=✓ step=✓ ex=✓ | lat=3.3s tok=224
+01:07:44   [30/400] id=29 Counting & Probability L2 | pat=✓ step=✓ ex=✓ | lat=3.8s tok=258
+01:07:47   [31/400] id=30 Number Theory L3 | pat=✓ step=✓ ex=✓ | lat=3.0s tok=199
+01:07:51   [32/400] id=31 Prealgebra L4 | pat=✓ step=✓ ex=✓ | lat=3.5s tok=234
+01:07:55   [33/400] id=32 Counting & Probability L4 | pat=✓ step=✓ ex=✓ | lat=3.7s tok=247
+01:12:21   [34/400] id=33 Algebra L4 | pat=✓ step=✓ ex=✓ | lat=266.8s tok=16384
+01:12:25   [35/400] id=34 Counting & Probability L4 | pat=✓ step=✓ ex=✓ | lat=4.1s tok=277
+01:12:31   [36/400] id=35 Number Theory L2 | pat=✓ step=✓ ex=✓ | lat=5.2s tok=360
+01:12:39   [37/400] id=36 Intermediate Algebra L2 | pat=✓ step=✓ ex=✓ | lat=8.6s tok=594
+01:12:42   [38/400] id=37 Geometry L3 | pat=✓ step=✓ ex=✓ | lat=2.5s tok=170
+01:12:45   [39/400] id=38 Algebra L1 | pat=✓ step=✓ ex=✓ | lat=3.1s tok=210
+01:12:49   [40/400] id=39 Number Theory L3 | pat=✓ step=✓ ex=✓ | lat=4.0s tok=274
+01:12:53   [41/400] id=40 Prealgebra L2 | pat=✓ step=✓ ex=✓ | lat=3.8s tok=257
+01:13:01   [42/400] id=41 Geometry L4 | pat=✓ step=✓ ex=✓ | lat=8.5s tok=583
+01:13:05   [43/400] id=42 Algebra L2 | pat=✓ step=✓ ex=✓ | lat=3.3s tok=221
+01:13:09   [44/400] id=43 Intermediate Algebra L5 | pat=✓ step=✓ ex=✓ | lat=4.8s tok=329
+01:13:13   [45/400] id=44 Prealgebra L5 | pat=✓ step=✓ ex=✓ | lat=3.8s tok=260
+01:13:15   [46/400] id=45 Geometry L3 | pat=✓ step=✓ ex=✓ | lat=2.3s tok=150
+01:13:20   [47/400] id=46 Precalculus L2 | pat=✓ step=✓ ex=✓ | lat=4.1s tok=280
+01:13:24   [48/400] id=47 Algebra L5 | pat=✓ step=✓ ex=✓ | lat=4.8s tok=328
+01:13:28   [49/400] id=48 Algebra L2 | pat=✓ step=✓ ex=✓ | lat=3.7s tok=254
+01:13:32   [50/400] id=49 Prealgebra L4 | pat=✓ step=✓ ex=✓ | lat=3.4s tok=232
+01:13:38   [51/400] id=50 Number Theory L5 | pat=✓ step=✓ ex=✓ | lat=6.8s tok=469
+01:13:42   [52/400] id=51 Intermediate Algebra L2 | pat=✓ step=✓ ex=✓ | lat=3.4s tok=232
+01:13:45   [53/400] id=52 Prealgebra L5 | pat=✓ step=✓ ex=✓ | lat=3.5s tok=235
+01:13:49   [54/400] id=53 Precalculus L2 | pat=✓ step=✓ ex=✓ | lat=4.0s tok=269
+01:13:52   [55/400] id=54 Prealgebra L2 | pat=✓ step=✓ ex=✓ | lat=3.0s tok=202
+01:13:56   [56/400] id=55 Algebra L4 | pat=✓ step=✓ ex=✓ | lat=3.8s tok=259
+01:13:59   [57/400] id=56 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=3.1s tok=208
+01:14:03   [58/400] id=57 Intermediate Algebra L2 | pat=✓ step=✓ ex=✓ | lat=3.7s tok=252
+01:14:08   [59/400] id=58 Algebra L1 | pat=✓ step=✓ ex=✓ | lat=4.8s tok=329
+01:14:11   [60/400] id=59 Prealgebra L2 | pat=✓ step=✓ ex=✓ | lat=3.6s tok=243
+01:14:17   [61/400] id=60 Intermediate Algebra L5 | pat=✓ step=✓ ex=✓ | lat=5.0s tok=344
+01:14:23   [62/400] id=61 Intermediate Algebra L3 | pat=✓ step=✓ ex=✓ | lat=6.8s tok=463
+01:14:31   [63/400] id=62 Precalculus L5 | pat=✓ step=✓ ex=✓ | lat=8.1s tok=552
+01:14:37   [64/400] id=63 Intermediate Algebra L5 | pat=✓ step=✓ ex=✓ | lat=5.2s tok=352
+01:14:40   [65/400] id=64 Precalculus L4 | pat=✓ step=✓ ex=✓ | lat=3.2s tok=214
+01:14:42   [66/400] id=65 Prealgebra L1 | pat=✓ step=✓ ex=✓ | lat=2.5s tok=166
+01:14:46   [67/400] id=66 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=3.9s tok=268
+01:14:51   [68/400] id=67 Prealgebra L4 | pat=✓ step=✓ ex=✓ | lat=4.4s tok=302
+01:14:57   [69/400] id=68 Precalculus L4 | pat=✓ step=✓ ex=✓ | lat=6.4s tok=436
+01:15:03   [70/400] id=69 Intermediate Algebra L4 | pat=✓ step=✓ ex=✓ | lat=6.4s tok=440
+01:15:07   [71/400] id=70 Number Theory L2 | pat=✓ step=✓ ex=✓ | lat=4.0s tok=270
+01:15:12   [72/400] id=71 Number Theory L4 | pat=✓ step=✓ ex=✓ | lat=4.6s tok=315
+01:15:15   [73/400] id=72 Geometry L2 | pat=✓ step=✓ ex=✓ | lat=3.4s tok=231
+01:15:20   [74/400] id=73 Algebra L4 | pat=✓ step=✓ ex=✓ | lat=4.1s tok=280
+01:15:24   [75/400] id=74 Precalculus L2 | pat=✓ step=✓ ex=✓ | lat=4.5s tok=309
+01:15:28   [76/400] id=75 Counting & Probability L4 | pat=✓ step=✓ ex=✓ | lat=3.6s tok=244
+01:15:31   [77/400] id=76 Intermediate Algebra L2 | pat=✓ step=✓ ex=✓ | lat=3.4s tok=230
+01:15:36   [78/400] id=77 Algebra L1 | pat=✓ step=✓ ex=✓ | lat=4.5s tok=309
+01:15:45   [79/400] id=78 Intermediate Algebra L4 | pat=✓ step=✓ ex=✓ | lat=9.1s tok=627
+01:15:48   [80/400] id=79 Prealgebra L1 | pat=✓ step=✓ ex=✓ | lat=3.2s tok=214
+01:15:52   [81/400] id=80 Intermediate Algebra L5 | pat=✓ step=✓ ex=✓ | lat=4.3s tok=291
+01:15:57   [82/400] id=81 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=5.0s tok=344
+01:16:02   [83/400] id=82 Algebra L5 | pat=✓ step=✓ ex=✓ | lat=5.3s tok=367
+01:16:07   [84/400] id=83 Intermediate Algebra L2 | pat=✓ step=✓ ex=✓ | lat=4.4s tok=298
+01:16:13   [85/400] id=84 Algebra L4 | pat=✓ step=✓ ex=✓ | lat=5.8s tok=399
+01:16:17   [86/400] id=85 Geometry L4 | pat=✓ step=✓ ex=✓ | lat=4.6s tok=316
+01:16:20   [87/400] id=86 Prealgebra L1 | pat=✓ step=✓ ex=✓ | lat=2.6s tok=175
+01:16:25   [88/400] id=87 Algebra L1 | pat=✓ step=✓ ex=✓ | lat=5.1s tok=349
+01:16:32   [89/400] id=88 Algebra L5 | pat=✓ step=✓ ex=✓ | lat=6.6s tok=453
+01:16:36   [90/400] id=89 Number Theory L4 | pat=✓ step=✓ ex=✓ | lat=4.7s tok=316
+01:16:38   [91/400] id=90 Prealgebra L3 | pat=✓ step=✓ ex=✓ | lat=2.1s tok=141
+01:16:43   [92/400] id=91 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=4.9s tok=334
+01:16:47   [93/400] id=92 Counting & Probability L4 | pat=✓ step=✓ ex=✓ | lat=3.2s tok=218
+01:16:52   [94/400] id=93 Algebra L4 | pat=✓ step=✓ ex=✓ | lat=5.5s tok=373
+01:16:58   [95/400] id=94 Prealgebra L5 | pat=✓ step=✓ ex=✓ | lat=6.1s tok=418
+01:17:04   [96/400] id=95 Precalculus L2 | pat=✓ step=✓ ex=✓ | lat=6.2s tok=425
+01:17:11   [97/400] id=96 Intermediate Algebra L5 | pat=✓ step=✓ ex=✓ | lat=6.1s tok=421
+01:17:14   [98/400] id=97 Prealgebra L1 | pat=✓ step=✓ ex=✓ | lat=3.9s tok=266
+01:17:16   [99/400] id=98 Prealgebra L2 | pat=✓ step=✓ ex=✓ | lat=2.0s tok=135
+01:17:24   [100/400] id=99 Precalculus L3 | pat=✓ step=✓ ex=✓ | lat=7.4s tok=505
+01:17:28   [101/400] id=100 Geometry L5 | pat=✓ step=✓ ex=✓ | lat=4.4s tok=294
+01:17:37   [102/400] id=101 Intermediate Algebra L5 | pat=✓ step=✓ ex=✓ | lat=8.6s tok=584
+01:17:40   [103/400] id=102 Intermediate Algebra L1 | pat=✓ step=✓ ex=✓ | lat=3.1s tok=207
+01:17:43   [104/400] id=103 Intermediate Algebra L5 | pat=✓ step=✓ ex=✓ | lat=3.6s tok=238
+01:17:48   [105/400] id=104 Intermediate Algebra L4 | pat=✓ step=✓ ex=✓ | lat=4.1s tok=277
+01:17:52   [106/400] id=105 Prealgebra L3 | pat=✓ step=✓ ex=✓ | lat=4.4s tok=292
+01:17:56   [107/400] id=106 Intermediate Algebra L2 | pat=✓ step=✓ ex=✓ | lat=3.7s tok=252
+01:18:02   [108/400] id=107 Number Theory L2 | pat=✓ step=✓ ex=✓ | lat=6.1s tok=413
+01:18:06   [109/400] id=108 Intermediate Algebra L3 | pat=✓ step=✓ ex=✓ | lat=4.6s tok=312
+01:18:19   [110/400] id=109 Precalculus L5 | pat=✓ step=✓ ex=✓ | lat=12.9s tok=880
+01:18:25   [111/400] id=110 Intermediate Algebra L4 | pat=✓ step=✓ ex=✓ | lat=6.0s tok=405
+01:18:29   [112/400] id=111 Counting & Probability L3 | pat=✓ step=✓ ex=✓ | lat=3.4s tok=231
+01:18:34   [113/400] id=112 Algebra L4 | pat=✓ step=✓ ex=✓ | lat=5.6s tok=382
+01:18:38   [114/400] id=113 Algebra L2 | pat=✓ step=✓ ex=✓ | lat=3.9s tok=266
+01:18:46   [115/400] id=114 Intermediate Algebra L3 | pat=✓ step=✓ ex=✓ | lat=7.5s tok=517
+01:18:49   [116/400] id=115 Counting & Probability L2 | pat=✓ step=✓ ex=✓ | lat=2.9s tok=196
+01:18:53   [117/400] id=116 Algebra L2 | pat=✓ step=✓ ex=✓ | lat=4.0s tok=273
+01:18:56   [118/400] id=117 Algebra L2 | pat=✓ step=✓ ex=✓ | lat=3.6s tok=243
+01:19:00   [119/400] id=118 Intermediate Algebra L5 | pat=✓ step=✓ ex=✓ | lat=3.9s tok=269
+01:19:06   [120/400] id=119 Prealgebra L3 | pat=✓ step=✓ ex=✓ | lat=5.3s tok=364
+01:19:09   [121/400] id=120 Intermediate Algebra L2 | pat=✓ step=✓ ex=✓ | lat=3.0s tok=204
+01:19:12   [122/400] id=121 Prealgebra L2 | pat=✓ step=✓ ex=✓ | lat=3.2s tok=219
+01:19:16   [123/400] id=122 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=4.1s tok=274
+01:19:22   [124/400] id=123 Geometry L4 | pat=✓ step=✓ ex=✓ | lat=6.0s tok=405
+01:19:28   [125/400] id=124 Algebra L4 | pat=✓ step=✓ ex=✓ | lat=6.5s tok=444
+01:19:32   [126/400] id=125 Algebra L4 | pat=✓ step=✓ ex=✓ | lat=4.1s tok=277
+01:19:39   [127/400] id=126 Intermediate Algebra L4 | pat=✓ step=✓ ex=✓ | lat=6.9s tok=473
+01:19:45   [128/400] id=127 Number Theory L3 | pat=✓ step=✓ ex=✓ | lat=5.9s tok=405
+01:19:48   [129/400] id=128 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=2.8s tok=190
+01:19:53   [130/400] id=129 Geometry L5 | pat=✓ step=✓ ex=✓ | lat=5.2s tok=352
+01:19:59   [131/400] id=130 Number Theory L4 | pat=✓ step=✓ ex=✓ | lat=5.3s tok=363
+01:20:04   [132/400] id=131 Algebra L4 | pat=✓ step=✓ ex=✓ | lat=6.0s tok=410
+01:20:08   [133/400] id=132 Prealgebra L3 | pat=✓ step=✓ ex=✓ | lat=3.6s tok=247
+01:20:13   [134/400] id=133 Prealgebra L3 | pat=✓ step=✓ ex=✓ | lat=5.1s tok=349
+01:20:19   [135/400] id=134 Intermediate Algebra L4 | pat=✓ step=✓ ex=✓ | lat=6.0s tok=409
+01:20:24   [136/400] id=135 Prealgebra L5 | pat=✓ step=✓ ex=✓ | lat=5.3s tok=361
+01:20:32   [137/400] id=136 Intermediate Algebra L5 | pat=✓ step=✓ ex=✓ | lat=7.6s tok=525
+01:20:36   [138/400] id=137 Number Theory L4 | pat=✓ step=✓ ex=✓ | lat=3.8s tok=256
+01:20:40   [139/400] id=138 Counting & Probability L4 | pat=✓ step=✓ ex=✓ | lat=3.7s tok=248
+01:20:45   [140/400] id=139 Intermediate Algebra L3 | pat=✓ step=✓ ex=✓ | lat=5.0s tok=339
+01:20:49   [141/400] id=140 Number Theory L4 | pat=✓ step=✓ ex=✓ | lat=4.1s tok=274
+01:20:53   [142/400] id=141 Number Theory L1 | pat=✓ step=✓ ex=✓ | lat=4.6s tok=313
+01:20:57   [143/400] id=142 Counting & Probability L5 | pat=✓ step=✓ ex=✓ | lat=3.6s tok=243
+01:21:02   [144/400] id=143 Precalculus L3 | pat=✓ step=✓ ex=✓ | lat=5.5s tok=375
+01:21:07   [145/400] id=144 Precalculus L1 | pat=✓ step=✓ ex=✓ | lat=4.3s tok=290
+01:21:11   [146/400] id=145 Intermediate Algebra L5 | pat=✓ step=✓ ex=✓ | lat=4.8s tok=325
+01:21:15   [147/400] id=146 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=3.5s tok=232
+01:25:40   [148/400] id=147 Intermediate Algebra L5 | pat=✓ step=✓ ex=✗ | lat=264.7s tok=16384
+01:25:43   [149/400] id=148 Algebra L1 | pat=✓ step=✓ ex=✓ | lat=3.1s tok=208
+01:25:47   [150/400] id=149 Number Theory L2 | pat=✓ step=✓ ex=✓ | lat=4.0s tok=265
+01:30:13   [151/400] id=150 Intermediate Algebra L5 | pat=✓ step=✓ ex=✗ | lat=266.2s tok=16384
+01:30:18   [152/400] id=151 Precalculus L5 | pat=✓ step=✓ ex=✓ | lat=5.3s tok=363
+01:30:21   [153/400] id=152 Geometry L5 | pat=✓ step=✓ ex=✓ | lat=3.1s tok=210
+01:30:25   [154/400] id=153 Counting & Probability L4 | pat=✓ step=✓ ex=✓ | lat=3.7s tok=253
+01:30:29   [155/400] id=154 Geometry L5 | pat=✓ step=✓ ex=✓ | lat=4.1s tok=274
+01:30:33   [156/400] id=155 Counting & Probability L4 | pat=✓ step=✓ ex=✓ | lat=4.1s tok=247
+01:30:43   [157/400] id=156 Precalculus L3 | pat=✓ step=✓ ex=✓ | lat=10.3s tok=416
+01:30:50   [158/400] id=157 Intermediate Algebra L2 | pat=✓ step=✓ ex=✓ | lat=6.8s tok=257
+01:30:58   [159/400] id=158 Algebra L4 | pat=✓ step=✓ ex=✓ | lat=7.7s tok=328
+01:31:02   [160/400] id=159 Algebra L4 | pat=✓ step=✓ ex=✓ | lat=4.5s tok=244
+01:31:07   [161/400] id=160 Number Theory L2 | pat=✓ step=✓ ex=✓ | lat=5.0s tok=271
+01:31:11   [162/400] id=161 Algebra L2 | pat=✓ step=✓ ex=✓ | lat=3.6s tok=194
+01:31:16   [163/400] id=162 Prealgebra L5 | pat=✓ step=✓ ex=✓ | lat=4.9s tok=228
+01:31:26   [164/400] id=163 Algebra L5 | pat=✓ step=✓ ex=✓ | lat=9.9s tok=512
+01:31:32   [165/400] id=164 Precalculus L2 | pat=✓ step=✓ ex=✓ | lat=5.6s tok=363
+01:31:36   [166/400] id=165 Prealgebra L4 | pat=✓ step=✓ ex=✓ | lat=4.2s tok=231
+01:31:44   [167/400] id=166 Prealgebra L5 | pat=✓ step=✓ ex=✓ | lat=8.1s tok=300
+01:31:50   [168/400] id=167 Algebra L1 | pat=✓ step=✓ ex=✓ | lat=6.0s tok=221
+01:31:59   [169/400] id=168 Counting & Probability L5 | pat=✓ step=✓ ex=✓ | lat=9.6s tok=401
+01:32:05   [170/400] id=169 Geometry L2 | pat=✓ step=✓ ex=✓ | lat=5.6s tok=301
+01:32:15   [171/400] id=170 Algebra L5 | pat=✓ step=✓ ex=✓ | lat=9.6s tok=501
+01:32:20   [172/400] id=171 Prealgebra L1 | pat=✓ step=✓ ex=✓ | lat=5.6s tok=251
+01:32:25   [173/400] id=172 Algebra L1 | pat=✓ step=✓ ex=✓ | lat=5.1s tok=323
+01:32:29   [174/400] id=173 Algebra L5 | pat=✓ step=✓ ex=✓ | lat=4.1s tok=257
+01:32:37   [175/400] id=174 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=7.2s tok=308
+01:32:45   [176/400] id=175 Intermediate Algebra L2 | pat=✓ step=✓ ex=✓ | lat=8.7s tok=333
+01:32:52   [177/400] id=176 Number Theory L3 | pat=✓ step=✓ ex=✓ | lat=7.2s tok=271
+01:32:57   [178/400] id=177 Geometry L3 | pat=✓ step=✓ ex=✓ | lat=4.7s tok=242
+01:33:00   [179/400] id=178 Prealgebra L2 | pat=✓ step=✓ ex=✓ | lat=2.7s tok=145
+01:33:10   [180/400] id=179 Precalculus L4 | pat=✓ step=✓ ex=✓ | lat=10.2s tok=541
+01:33:15   [181/400] id=180 Prealgebra L3 | pat=✓ step=✓ ex=✓ | lat=4.7s tok=221
+01:33:24   [182/400] id=181 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=8.8s tok=462
+01:33:27   [183/400] id=182 Prealgebra L2 | pat=✓ step=✓ ex=✓ | lat=3.2s tok=217
+01:33:33   [184/400] id=183 Algebra L4 | pat=✓ step=✓ ex=✓ | lat=6.0s tok=409
+01:33:38   [185/400] id=184 Intermediate Algebra L5 | pat=✓ step=✓ ex=✓ | lat=5.8s tok=396
+01:33:41   [186/400] id=185 Algebra L1 | pat=✓ step=✓ ex=✓ | lat=2.9s tok=198
+01:33:46   [187/400] id=186 Number Theory L4 | pat=✓ step=✓ ex=✓ | lat=5.0s tok=348
+01:33:49   [188/400] id=187 Algebra L1 | pat=✓ step=✓ ex=✓ | lat=2.7s tok=180
+01:33:55   [189/400] id=188 Algebra L5 | pat=✓ step=✓ ex=✓ | lat=5.8s tok=397
+01:34:00   [190/400] id=189 Geometry L5 | pat=✓ step=✓ ex=✓ | lat=4.6s tok=314
+01:34:04   [191/400] id=190 Counting & Probability L5 | pat=✓ step=✓ ex=✓ | lat=4.9s tok=294
+01:34:09   [192/400] id=191 Algebra L2 | pat=✓ step=✓ ex=✓ | lat=4.4s tok=265
+01:34:14   [193/400] id=192 Geometry L3 | pat=✓ step=✓ ex=✓ | lat=5.1s tok=320
+01:34:18   [194/400] id=193 Intermediate Algebra L3 | pat=✓ step=✓ ex=✓ | lat=4.6s tok=306
+01:34:22   [195/400] id=194 Intermediate Algebra L5 | pat=✓ step=✓ ex=✓ | lat=3.5s tok=223
+01:34:30   [196/400] id=195 Intermediate Algebra L4 | pat=✓ step=✓ ex=✓ | lat=8.5s tok=386
+01:34:37   [197/400] id=196 Algebra L1 | pat=✓ step=✓ ex=✓ | lat=6.1s tok=234
+01:34:48   [198/400] id=197 Number Theory L5 | pat=✓ step=✓ ex=✓ | lat=11.9s tok=494
+01:34:52   [199/400] id=198 Counting & Probability L3 | pat=✓ step=✓ ex=✓ | lat=3.6s tok=194
+01:34:57   [200/400] id=199 Prealgebra L2 | pat=✓ step=✓ ex=✓ | lat=5.1s tok=270
+01:35:03   [201/400] id=200 Prealgebra L4 | pat=✓ step=✓ ex=✓ | lat=5.7s tok=295
+01:35:08   [202/400] id=201 Number Theory L4 | pat=✓ step=✓ ex=✓ | lat=5.6s tok=250
+01:35:14   [203/400] id=202 Algebra L5 | pat=✓ step=✓ ex=✓ | lat=5.8s tok=323
+01:35:20   [204/400] id=203 Intermediate Algebra L3 | pat=✓ step=✓ ex=✓ | lat=5.7s tok=364
+01:35:25   [205/400] id=204 Intermediate Algebra L5 | pat=✓ step=✓ ex=✓ | lat=4.9s tok=232
+01:35:47   [206/400] id=205 Precalculus L3 | pat=✓ step=✓ ex=✓ | lat=21.6s tok=867
+01:35:53   [207/400] id=206 Precalculus L2 | pat=✓ step=✓ ex=✓ | lat=6.7s tok=361
+01:35:58   [208/400] id=207 Counting & Probability L2 | pat=✓ step=✓ ex=✓ | lat=4.4s tok=234
+01:36:02   [209/400] id=208 Number Theory L3 | pat=✓ step=✓ ex=✓ | lat=4.4s tok=213
+01:36:07   [210/400] id=209 Number Theory L2 | pat=✓ step=✓ ex=✓ | lat=5.3s tok=248
+01:36:11   [211/400] id=210 Prealgebra L4 | pat=✓ step=✓ ex=✓ | lat=4.1s tok=246
+01:36:16   [212/400] id=211 Prealgebra L2 | pat=✓ step=✓ ex=✓ | lat=4.3s tok=280
+01:36:21   [213/400] id=212 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=5.4s tok=284
+01:36:36   [214/400] id=213 Intermediate Algebra L4 | pat=✓ step=✓ ex=✓ | lat=14.5s tok=556
+01:36:46   [215/400] id=214 Counting & Probability L5 | pat=✓ step=✓ ex=✓ | lat=9.9s tok=454
+01:36:51   [216/400] id=215 Algebra L4 | pat=✓ step=✓ ex=✓ | lat=5.4s tok=292
+01:36:55   [217/400] id=216 Prealgebra L4 | pat=✓ step=✓ ex=✓ | lat=3.6s tok=197
+01:36:59   [218/400] id=217 Number Theory L4 | pat=✓ step=✓ ex=✓ | lat=4.2s tok=212
+01:37:03   [219/400] id=218 Algebra L2 | pat=✓ step=✓ ex=✓ | lat=4.3s tok=191
+01:37:10   [220/400] id=219 Counting & Probability L4 | pat=✓ step=✓ ex=✓ | lat=6.6s tok=357
+01:37:13   [221/400] id=220 Prealgebra L5 | pat=✓ step=✓ ex=✓ | lat=3.1s tok=210
+01:37:18   [222/400] id=221 Number Theory L3 | pat=✓ step=✓ ex=✓ | lat=4.9s tok=341
+01:37:22   [223/400] id=222 Geometry L4 | pat=✓ step=✓ ex=✓ | lat=4.6s tok=318
+01:37:27   [224/400] id=223 Number Theory L3 | pat=✓ step=✓ ex=✓ | lat=4.6s tok=314
+01:37:30   [225/400] id=224 Precalculus L4 | pat=✓ step=✓ ex=✓ | lat=3.4s tok=236
+01:37:34   [226/400] id=225 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=3.3s tok=222
+01:37:38   [227/400] id=226 Counting & Probability L3 | pat=✓ step=✓ ex=✓ | lat=4.1s tok=280
+01:37:40   [228/400] id=227 Precalculus L3 | pat=✓ step=✓ ex=✓ | lat=2.4s tok=161
+01:37:47   [229/400] id=228 Precalculus L4 | pat=✓ step=✓ ex=✓ | lat=6.5s tok=442
+01:37:49   [230/400] id=229 Prealgebra L4 | pat=✓ step=✓ ex=✓ | lat=2.5s tok=165
+01:37:58   [231/400] id=230 Intermediate Algebra L4 | pat=✓ step=✓ ex=✓ | lat=9.3s tok=646
+01:38:03   [232/400] id=231 Algebra L4 | pat=✓ step=✓ ex=✓ | lat=4.4s tok=300
+01:38:07   [233/400] id=232 Intermediate Algebra L5 | pat=✓ step=✓ ex=✓ | lat=4.3s tok=298
+01:38:13   [234/400] id=233 Precalculus L2 | pat=✓ step=✓ ex=✓ | lat=5.5s tok=377
+01:38:19   [235/400] id=234 Intermediate Algebra L3 | pat=✓ step=✓ ex=✓ | lat=6.4s tok=444
+01:38:23   [236/400] id=235 Prealgebra L4 | pat=✓ step=✓ ex=✓ | lat=4.1s tok=281
+01:38:30   [237/400] id=236 Precalculus L4 | pat=✓ step=✓ ex=✓ | lat=7.1s tok=489
+01:38:35   [238/400] id=237 Intermediate Algebra L1 | pat=✓ step=✓ ex=✓ | lat=4.5s tok=296
+01:38:43   [239/400] id=238 Algebra L5 | pat=✓ step=✓ ex=✓ | lat=8.0s tok=440
+01:38:55   [240/400] id=239 Geometry L5 | pat=✓ step=✓ ex=✓ | lat=12.7s tok=486
+01:39:01   [241/400] id=240 Prealgebra L4 | pat=✓ step=✓ ex=✓ | lat=5.9s tok=216
+01:39:08   [242/400] id=241 Algebra L5 | pat=✓ step=✓ ex=✓ | lat=6.6s tok=351
+01:39:12   [243/400] id=242 Algebra L5 | pat=✓ step=✓ ex=✓ | lat=4.6s tok=250
+01:39:17   [244/400] id=243 Geometry L2 | pat=✓ step=✓ ex=✓ | lat=5.0s tok=273
+01:39:24   [245/400] id=244 Prealgebra L5 | pat=✓ step=✓ ex=✓ | lat=6.8s tok=371
+01:39:35   [246/400] id=245 Intermediate Algebra L4 | pat=✓ step=✓ ex=✓ | lat=10.8s tok=589
+01:39:38   [247/400] id=246 Algebra L2 | pat=✓ step=✓ ex=✓ | lat=3.4s tok=182
+01:39:47   [248/400] id=247 Intermediate Algebra L3 | pat=✓ step=✓ ex=✓ | lat=8.1s tok=429
+01:39:54   [249/400] id=248 Precalculus L4 | pat=✓ step=✓ ex=✓ | lat=7.9s tok=380
+01:39:59   [250/400] id=249 Number Theory L4 | pat=✓ step=✓ ex=✓ | lat=4.1s tok=267
+01:40:05   [251/400] id=250 Algebra L4 | pat=✓ step=✓ ex=✓ | lat=5.9s tok=326
+01:40:10   [252/400] id=251 Counting & Probability L5 | pat=✓ step=✓ ex=✓ | lat=4.9s tok=184
+01:40:18   [253/400] id=252 Algebra L5 | pat=✓ step=✓ ex=✓ | lat=8.8s tok=338
+01:40:22   [254/400] id=253 Prealgebra L3 | pat=✓ step=✓ ex=✓ | lat=3.6s tok=134
+01:40:27   [255/400] id=254 Counting & Probability L5 | pat=✓ step=✓ ex=✓ | lat=5.3s tok=242
+01:40:32   [256/400] id=255 Precalculus L2 | pat=✓ step=✓ ex=✓ | lat=4.9s tok=257
+01:40:37   [257/400] id=256 Prealgebra L3 | pat=✓ step=✓ ex=✓ | lat=5.1s tok=272
+01:40:43   [258/400] id=257 Geometry L4 | pat=✓ step=✓ ex=✓ | lat=5.6s tok=297
+01:40:48   [259/400] id=258 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=5.4s tok=296
+01:40:53   [260/400] id=259 Intermediate Algebra L1 | pat=✓ step=✓ ex=✓ | lat=4.5s tok=244
+01:41:02   [261/400] id=260 Precalculus L3 | pat=✓ step=✓ ex=✓ | lat=9.2s tok=504
+01:41:08   [262/400] id=261 Geometry L3 | pat=✓ step=✓ ex=✓ | lat=6.4s tok=339
+01:41:14   [263/400] id=262 Prealgebra L1 | pat=✓ step=✓ ex=✓ | lat=5.9s tok=268
+01:41:20   [264/400] id=263 Geometry L4 | pat=✓ step=✓ ex=✓ | lat=6.0s tok=287
+01:41:25   [265/400] id=264 Geometry L5 | pat=✓ step=✓ ex=✓ | lat=4.5s tok=267
+01:41:29   [266/400] id=265 Algebra L2 | pat=✓ step=✓ ex=✓ | lat=3.9s tok=248
+01:41:33   [267/400] id=266 Prealgebra L3 | pat=✓ step=✓ ex=✓ | lat=3.8s tok=190
+01:41:40   [268/400] id=267 Geometry L1 | pat=✓ step=✓ ex=✓ | lat=7.8s tok=294
+01:41:46   [269/400] id=268 Number Theory L1 | pat=✓ step=✓ ex=✓ | lat=5.2s tok=194
+01:41:51   [270/400] id=269 Counting & Probability L3 | pat=✓ step=✓ ex=✓ | lat=5.1s tok=191
+01:41:57   [271/400] id=270 Algebra L1 | pat=✓ step=✓ ex=✓ | lat=6.2s tok=296
+01:42:05   [272/400] id=271 Number Theory L4 | pat=✓ step=✓ ex=✓ | lat=8.6s tok=470
+01:42:11   [273/400] id=272 Number Theory L4 | pat=✓ step=✓ ex=✓ | lat=6.0s tok=325
+01:42:16   [274/400] id=273 Prealgebra L4 | pat=✓ step=✓ ex=✓ | lat=4.6s tok=249
+01:42:20   [275/400] id=274 Geometry L5 | pat=✓ step=✓ ex=✓ | lat=3.7s tok=200
+01:42:24   [276/400] id=275 Algebra L2 | pat=✓ step=✓ ex=✓ | lat=3.8s tok=205
+01:42:31   [277/400] id=276 Algebra L5 | pat=✓ step=✓ ex=✓ | lat=7.0s tok=381
+01:42:34   [278/400] id=277 Prealgebra L4 | pat=✓ step=✓ ex=✓ | lat=3.7s tok=203
+01:42:38   [279/400] id=278 Number Theory L3 | pat=✓ step=✓ ex=✓ | lat=3.5s tok=180
+01:42:45   [280/400] id=279 Prealgebra L5 | pat=✓ step=✓ ex=✓ | lat=6.8s tok=327
+01:42:50   [281/400] id=280 Number Theory L4 | pat=✓ step=✓ ex=✓ | lat=5.6s tok=302
+01:42:54   [282/400] id=281 Prealgebra L4 | pat=✓ step=✓ ex=✓ | lat=4.2s tok=282
+01:42:59   [283/400] id=282 Algebra L4 | pat=✓ step=✓ ex=✓ | lat=4.7s tok=325
+01:43:04   [284/400] id=283 Prealgebra L3 | pat=✓ step=✓ ex=✓ | lat=4.7s tok=323
+01:43:10   [285/400] id=284 Precalculus L5 | pat=✓ step=✓ ex=✓ | lat=6.0s tok=410
+01:43:18   [286/400] id=285 Intermediate Algebra L4 | pat=✓ step=✓ ex=✓ | lat=7.9s tok=550
+01:47:42   [287/400] id=286 Intermediate Algebra L5 | pat=✓ step=✓ ex=✗ | lat=263.9s tok=16384
+01:47:46   [288/400] id=287 Number Theory L5 | pat=✓ step=✓ ex=✓ | lat=4.7s tok=321
+01:47:56   [289/400] id=288 Precalculus L5 | pat=✓ step=✓ ex=✓ | lat=9.2s tok=641
+01:48:01   [290/400] id=289 Intermediate Algebra L3 | pat=✓ step=✓ ex=✓ | lat=5.9s tok=408
+01:48:07   [291/400] id=290 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=5.6s tok=390
+01:48:12   [292/400] id=291 Counting & Probability L4 | pat=✓ step=✓ ex=✓ | lat=4.4s tok=302
+01:48:15   [293/400] id=292 Intermediate Algebra L4 | pat=✓ step=✓ ex=✓ | lat=4.0s tok=272
+01:48:22   [294/400] id=293 Algebra L5 | pat=✓ step=✓ ex=✓ | lat=6.0s tok=415
+01:48:26   [295/400] id=294 Number Theory L4 | pat=✓ step=✓ ex=✓ | lat=4.7s tok=323
+01:48:32   [296/400] id=295 Precalculus L3 | pat=✓ step=✓ ex=✓ | lat=6.0s tok=412
+01:48:39   [297/400] id=296 Intermediate Algebra L2 | pat=✓ step=✓ ex=✓ | lat=6.3s tok=431
+01:48:42   [298/400] id=297 Number Theory L4 | pat=✓ step=✓ ex=✓ | lat=3.4s tok=226
+01:48:55   [299/400] id=298 Precalculus L4 | pat=✓ step=✓ ex=✓ | lat=13.2s tok=906
+01:48:59   [300/400] id=299 Geometry L4 | pat=✓ step=✓ ex=✓ | lat=4.0s tok=277
+01:49:02   [301/400] id=300 Counting & Probability L4 | pat=✓ step=✓ ex=✓ | lat=2.6s tok=175
+01:49:07   [302/400] id=301 Prealgebra L5 | pat=✓ step=✓ ex=✓ | lat=5.4s tok=366
+01:49:11   [303/400] id=302 Prealgebra L4 | pat=✓ step=✓ ex=✓ | lat=3.5s tok=238
+01:49:15   [304/400] id=303 Geometry L5 | pat=✓ step=✓ ex=✓ | lat=4.7s tok=322
+01:49:22   [305/400] id=304 Intermediate Algebra L3 | pat=✓ step=✓ ex=✓ | lat=6.9s tok=479
+01:49:26   [306/400] id=305 Algebra L4 | pat=✓ step=✓ ex=✓ | lat=4.2s tok=285
+01:49:31   [307/400] id=306 Intermediate Algebra L5 | pat=✓ step=✓ ex=✓ | lat=4.2s tok=285
+01:49:35   [308/400] id=307 Precalculus L2 | pat=✓ step=✓ ex=✓ | lat=4.6s tok=315
+01:49:40   [309/400] id=308 Geometry L5 | pat=✓ step=✓ ex=✓ | lat=5.2s tok=358
+01:49:44   [310/400] id=309 Number Theory L3 | pat=✓ step=✓ ex=✓ | lat=3.5s tok=237
+01:49:48   [311/400] id=310 Algebra L2 | pat=✓ step=✓ ex=✓ | lat=4.3s tok=292
+01:49:56   [312/400] id=311 Number Theory L4 | pat=✓ step=✓ ex=✓ | lat=7.5s tok=521
+01:49:58   [313/400] id=312 Intermediate Algebra L1 | pat=✓ step=✓ ex=✓ | lat=2.6s tok=177
+01:50:02   [314/400] id=313 Prealgebra L5 | pat=✓ step=✓ ex=✓ | lat=3.6s tok=242
+01:50:05   [315/400] id=314 Geometry L2 | pat=✓ step=✓ ex=✓ | lat=3.3s tok=221
+01:50:10   [316/400] id=315 Algebra L4 | pat=✓ step=✓ ex=✓ | lat=5.1s tok=344
+01:50:14   [317/400] id=316 Algebra L2 | pat=✓ step=✓ ex=✓ | lat=3.7s tok=247
+01:50:18   [318/400] id=317 Intermediate Algebra L5 | pat=✓ step=✓ ex=✓ | lat=3.9s tok=261
+01:50:22   [319/400] id=318 Algebra L2 | pat=✓ step=✓ ex=✓ | lat=4.0s tok=273
+01:50:25   [320/400] id=319 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=3.6s tok=245
+01:50:30   [321/400] id=320 Geometry L5 | pat=✓ step=✓ ex=✓ | lat=5.1s tok=347
+01:50:35   [322/400] id=321 Prealgebra L5 | pat=✓ step=✓ ex=✓ | lat=4.5s tok=304
+01:50:39   [323/400] id=322 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=4.4s tok=301
+01:50:43   [324/400] id=323 Counting & Probability L5 | pat=✓ step=✓ ex=✓ | lat=4.1s tok=275
+01:50:49   [325/400] id=324 Geometry L4 | pat=✓ step=✓ ex=✓ | lat=5.7s tok=386
+01:50:53   [326/400] id=325 Geometry L2 | pat=✓ step=✓ ex=✓ | lat=3.5s tok=235
+01:50:57   [327/400] id=326 Precalculus L2 | pat=✓ step=✓ ex=✓ | lat=4.7s tok=321
+01:51:03   [328/400] id=327 Intermediate Algebra L5 | pat=✓ step=✓ ex=✓ | lat=5.6s tok=378
+01:51:09   [329/400] id=328 Algebra L5 | pat=✓ step=✓ ex=✓ | lat=5.9s tok=405
+01:51:13   [330/400] id=329 Prealgebra L4 | pat=✓ step=✓ ex=✓ | lat=3.8s tok=260
+01:51:16   [331/400] id=330 Counting & Probability L5 | pat=✓ step=✓ ex=✓ | lat=3.3s tok=222
+01:51:22   [332/400] id=331 Algebra L5 | pat=✓ step=✓ ex=✓ | lat=6.5s tok=438
+01:51:30   [333/400] id=332 Intermediate Algebra L4 | pat=✓ step=✓ ex=✓ | lat=7.1s tok=485
+01:51:33   [334/400] id=333 Intermediate Algebra L4 | pat=✓ step=✓ ex=✓ | lat=3.7s tok=252
+01:51:39   [335/400] id=334 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=6.2s tok=419
+01:51:43   [336/400] id=335 Number Theory L4 | pat=✓ step=✓ ex=✓ | lat=4.0s tok=271
+01:51:47   [337/400] id=336 Algebra L1 | pat=✓ step=✓ ex=✓ | lat=3.7s tok=247
+01:51:53   [338/400] id=337 Prealgebra L3 | pat=✓ step=✓ ex=✓ | lat=6.3s tok=427
+01:51:58   [339/400] id=338 Number Theory L3 | pat=✓ step=✓ ex=✓ | lat=4.4s tok=299
+01:52:02   [340/400] id=339 Intermediate Algebra L3 | pat=✓ step=✓ ex=✓ | lat=4.5s tok=306
+01:52:08   [341/400] id=340 Precalculus L3 | pat=✓ step=✓ ex=✓ | lat=5.6s tok=382
+01:52:12   [342/400] id=341 Algebra L4 | pat=✓ step=✓ ex=✓ | lat=4.0s tok=275
+01:52:16   [343/400] id=342 Prealgebra L3 | pat=✓ step=✓ ex=✓ | lat=4.0s tok=275
+01:52:19   [344/400] id=343 Counting & Probability L2 | pat=✓ step=✓ ex=✓ | lat=3.4s tok=231
+01:52:24   [345/400] id=344 Intermediate Algebra L2 | pat=✓ step=✓ ex=✓ | lat=4.1s tok=281
+01:52:27   [346/400] id=345 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=3.4s tok=229
+01:52:31   [347/400] id=346 Algebra L4 | pat=✓ step=✓ ex=✓ | lat=3.9s tok=262
+01:52:35   [348/400] id=347 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=4.2s tok=289
+01:52:40   [349/400] id=348 Counting & Probability L2 | pat=✓ step=✓ ex=✓ | lat=5.3s tok=357
+01:52:43   [350/400] id=349 Counting & Probability L4 | pat=✓ step=✓ ex=✓ | lat=2.3s tok=156
+01:52:47   [351/400] id=350 Number Theory L2 | pat=✓ step=✓ ex=✓ | lat=4.0s tok=275
+01:52:54   [352/400] id=351 Precalculus L3 | pat=✓ step=✓ ex=✓ | lat=7.5s tok=519
+01:53:05   [353/400] id=352 Precalculus L4 | pat=✓ step=✓ ex=✓ | lat=10.6s tok=729
+01:53:08   [354/400] id=353 Counting & Probability L4 | pat=✓ step=✓ ex=✓ | lat=3.2s tok=214
+01:53:12   [355/400] id=354 Algebra L4 | pat=✓ step=✓ ex=✓ | lat=4.2s tok=285
+01:53:17   [356/400] id=355 Intermediate Algebra L5 | pat=✓ step=✓ ex=✓ | lat=4.5s tok=312
+01:53:23   [357/400] id=356 Algebra L5 | pat=✓ step=✓ ex=✓ | lat=6.2s tok=420
+01:53:28   [358/400] id=357 Prealgebra L5 | pat=✓ step=✓ ex=✓ | lat=5.2s tok=352
+01:53:32   [359/400] id=358 Intermediate Algebra L2 | pat=✓ step=✓ ex=✓ | lat=3.5s tok=235
+01:53:48   [360/400] id=359 Intermediate Algebra L4 | pat=✓ step=✓ ex=✓ | lat=16.4s tok=1124
+01:53:53   [361/400] id=360 Precalculus L3 | pat=✓ step=✓ ex=✓ | lat=4.9s tok=326
+01:53:58   [362/400] id=361 Intermediate Algebra L4 | pat=✓ step=✓ ex=✓ | lat=4.8s tok=325
+01:54:00   [363/400] id=362 Counting & Probability L1 | pat=✓ step=✓ ex=✓ | lat=2.7s tok=176
+01:54:04   [364/400] id=363 Algebra L2 | pat=✓ step=✓ ex=✓ | lat=3.4s tok=229
+01:54:10   [365/400] id=364 Intermediate Algebra L4 | pat=✓ step=✓ ex=✓ | lat=6.2s tok=420
+01:54:17   [366/400] id=365 Number Theory L5 | pat=✓ step=✓ ex=✓ | lat=6.4s tok=432
+01:54:21   [367/400] id=366 Number Theory L4 | pat=✓ step=✓ ex=✓ | lat=4.1s tok=274
+01:54:25   [368/400] id=367 Algebra L4 | pat=✓ step=✓ ex=✓ | lat=3.9s tok=263
+01:54:28   [369/400] id=368 Geometry L2 | pat=✓ step=✓ ex=✓ | lat=3.7s tok=248
+01:54:32   [370/400] id=369 Prealgebra L2 | pat=✓ step=✓ ex=✓ | lat=3.8s tok=256
+01:54:36   [371/400] id=370 Precalculus L1 | pat=✓ step=✓ ex=✓ | lat=3.6s tok=238
+01:54:42   [372/400] id=371 Intermediate Algebra L5 | pat=✓ step=✓ ex=✓ | lat=6.4s tok=429
+01:54:48   [373/400] id=372 Geometry L2 | pat=✓ step=✓ ex=✓ | lat=6.5s tok=433
+01:54:55   [374/400] id=373 Algebra L5 | pat=✓ step=✓ ex=✓ | lat=6.1s tok=415
+01:54:57   [375/400] id=374 Algebra L1 | pat=✓ step=✓ ex=✓ | lat=2.5s tok=171
+01:55:02   [376/400] id=375 Number Theory L5 | pat=✓ step=✓ ex=✓ | lat=4.5s tok=305
+01:55:07   [377/400] id=376 Geometry L4 | pat=✓ step=✓ ex=✓ | lat=5.8s tok=396
+01:55:11   [378/400] id=377 Number Theory L3 | pat=✓ step=✓ ex=✓ | lat=3.4s tok=228
+01:55:14   [379/400] id=378 Prealgebra L3 | pat=✓ step=✓ ex=✓ | lat=2.8s tok=186
+01:55:23   [380/400] id=379 Prealgebra L4 | pat=✓ step=✓ ex=✓ | lat=9.1s tok=625
+01:55:27   [381/400] id=380 Intermediate Algebra L4 | pat=✓ step=✓ ex=✓ | lat=4.4s tok=296
+01:55:33   [382/400] id=381 Counting & Probability L5 | pat=✓ step=✓ ex=✓ | lat=5.4s tok=362
+01:55:40   [383/400] id=382 Intermediate Algebra L5 | pat=✓ step=✓ ex=✓ | lat=7.0s tok=476
+01:55:43   [384/400] id=383 Algebra L4 | pat=✓ step=✓ ex=✓ | lat=3.4s tok=232
+01:55:46   [385/400] id=384 Prealgebra L2 | pat=✓ step=✓ ex=✓ | lat=3.2s tok=219
+01:55:51   [386/400] id=385 Prealgebra L5 | pat=✓ step=✓ ex=✓ | lat=4.6s tok=314
+01:55:55   [387/400] id=386 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=3.7s tok=254
+01:55:58   [388/400] id=387 Algebra L1 | pat=✓ step=✓ ex=✓ | lat=3.6s tok=240
+01:56:02   [389/400] id=388 Algebra L5 | pat=✓ step=✓ ex=✓ | lat=4.4s tok=292
+01:56:08   [390/400] id=389 Geometry L3 | pat=✓ step=✓ ex=✓ | lat=5.1s tok=340
+01:56:13   [391/400] id=390 Algebra L5 | pat=✓ step=✓ ex=✓ | lat=5.2s tok=352
+01:56:17   [392/400] id=391 Algebra L5 | pat=✓ step=✓ ex=✓ | lat=4.7s tok=316
+01:56:25   [393/400] id=392 Precalculus L5 | pat=✓ step=✓ ex=✓ | lat=7.7s tok=516
+01:56:29   [394/400] id=393 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=3.5s tok=238
+01:56:35   [395/400] id=394 Intermediate Algebra L5 | pat=✓ step=✓ ex=✓ | lat=6.3s tok=433
+01:56:40   [396/400] id=395 Algebra L1 | pat=✓ step=✓ ex=✓ | lat=4.6s tok=315
+01:56:43   [397/400] id=396 Prealgebra L3 | pat=✓ step=✓ ex=✓ | lat=3.2s tok=213
+01:56:47   [398/400] id=397 Prealgebra L2 | pat=✓ step=✓ ex=✓ | lat=3.9s tok=259
+01:56:52   [399/400] id=398 Prealgebra L4 | pat=✓ step=✓ ex=✓ | lat=5.5s tok=370
+01:56:55   [400/400] id=399 Prealgebra L2 | pat=✓ step=✓ ex=✓ | lat=2.6s tok=176
+01:56:55 VRAM free after cleanup: 14.5 GB
+01:56:55 
+Run complete:
+01:56:55   Missing pattern : 0
+01:56:55   Non-step-level  : 0
+01:56:55   By subject this run: {'Precalculus': 43, 'Intermediate Algebra': 75, 'Algebra': 101, 'Number Theory': 46, 'Prealgebra': 67, 'Geometry': 36, 'Counting & Probability': 32}
+01:56:55 
+==================================================
+01:56:55 Compiled 400 records → /home/students/PatternDistill/phase-2d/data/patterns/patterns.json
+01:56:55   Has pattern    : 400/400
+01:56:55   Step-level     : 400/400
+01:56:55   Has example    : 397/400
+01:56:55 
+  By subject:
+01:56:55     Algebra                             total=101  pattern=101  step=101
+01:56:55     Counting & Probability              total=32  pattern=32  step=32
+01:56:55     Geometry                            total=36  pattern=36  step=36
+01:56:55     Intermediate Algebra                total=75  pattern=75  step=75
+01:56:55     Number Theory                       total=46  pattern=46  step=46
+01:56:55     Prealgebra                          total=67  pattern=67  step=67
+01:56:55     Precalculus                         total=43  pattern=43  step=43
+01:56:55 
+Next: run build_memory_bank.py to build FAISS index

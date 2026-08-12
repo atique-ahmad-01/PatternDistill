@@ -1,0 +1,147 @@
+Log: /home/students/PatternDistill/phase-3e/logs/eval_atbs_20260801_132159.log
+============================================================
+Phase 3E — ATBS Evaluation
+  max_new_tokens = 20480
+  early-exit on \boxed{}
+  dual-attempt (2nd-best template on retry)
+============================================================
+Eval set: 100 MATH + 187 AIME = 287 total
+Resuming — 136 done
+To do: 151
+Buffer: 1146 templates, dim=768
+<All keys matched successfully>
+Device: cuda:0
+GPU: NVIDIA GeForce RTX 5070 Ti
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:   0%|          | 1/311 [00:01<05:50,  1.13s/it]Loading weights:   5%|▌         | 16/311 [00:01<00:17, 17.22it/s]Loading weights:   9%|▉         | 28/311 [00:01<00:09, 30.54it/s]Loading weights:  14%|█▎        | 42/311 [00:01<00:05, 47.85it/s]Loading weights:  17%|█▋        | 54/311 [00:01<00:04, 61.09it/s]Loading weights:  22%|██▏       | 67/311 [00:01<00:03, 75.12it/s]Loading weights:  26%|██▌       | 81/311 [00:01<00:02, 85.82it/s]Loading weights:  30%|██▉       | 93/311 [00:01<00:02, 91.56it/s]Loading weights:  34%|███▍      | 105/311 [00:02<00:02, 98.24it/s]Loading weights:  40%|████      | 125/311 [00:02<00:01, 118.67it/s]Loading weights:  45%|████▍     | 139/311 [00:02<00:01, 119.41it/s]Loading weights:  51%|█████     | 158/311 [00:02<00:01, 134.02it/s]Loading weights:  56%|█████▌    | 173/311 [00:02<00:01, 134.12it/s]Loading weights:  61%|██████▏   | 191/311 [00:02<00:00, 141.86it/s]Loading weights:  66%|██████▌   | 206/311 [00:02<00:00, 139.65it/s]Loading weights:  71%|███████   | 221/311 [00:02<00:00, 136.76it/s]Loading weights:  76%|███████▌  | 235/311 [00:02<00:00, 127.06it/s]Loading weights:  80%|███████▉  | 248/311 [00:03<00:00, 114.81it/s]Loading weights:  85%|████████▍ | 263/311 [00:03<00:00, 122.78it/s]Loading weights:  90%|████████▉ | 279/311 [00:03<00:00, 126.41it/s]Loading weights:  94%|█████████▍| 292/311 [00:03<00:00, 116.17it/s]Loading weights:  99%|█████████▊| 307/311 [00:03<00:00, 124.71it/s]Loading weights: 100%|██████████| 311/311 [00:03<00:00, 87.70it/s] 
+Student loaded
+<All keys matched successfully>
+Embed on CPU, student on GPU
+[transformers] Detected the usage of `get_extended_attention_mask`: This function is deprecated and will be removed in v5.12.0. Please use the new API in `transformers.masking_utils`
+[W801 13:29:24.800036996 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 44040192 bytes (free: 39321600, total: 16611278848).
+  [1/151] 2019-I-13 (AIME) | sim=0.703 | van=N(177s/17105t) atbs=N(227s/20451t) | =
+  [2/151] 2019-I-14 (AIME) | sim=0.588 | van=Y(103s/11167t) atbs=Y(43s/5174t) | =
+  [3/151] 2019-I-15 (AIME) | sim=0.669 | van=N(227s/20480t) atbs=Y(452s/40715t) R2 | ^
+  [4/151] 2019-II-1 (AIME) | sim=0.679 | van=Y(55s/6504t) atbs=N(139s/14171t) | v
+  [5/151] 2019-II-2 (AIME) | sim=0.599 | van=Y(60s/6981t) atbs=N(56s/6584t) | v
+  [6/151] 2019-II-3 (AIME) | sim=0.628 | van=Y(36s/4327t) atbs=Y(32s/3896t) | =
+  [7/151] 2019-II-4 (AIME) | sim=0.665 | van=N(226s/20480t) atbs=N(406s/37705t) R2 | =
+  [8/151] 2019-II-5 (AIME) | sim=0.671 | van=N(212s/19557t) atbs=N(150s/15060t) | =
+  [9/151] 2019-II-6 (AIME) | sim=0.648 | van=Y(43s/5227t) atbs=Y(21s/2501t) | =
+  [10/151] 2019-II-7 (AIME) | sim=0.747 | van=N(136s/13916t) atbs=N(86s/9568t) | =
+  [11/151] 2019-II-8 (AIME) | sim=0.630 | van=N(226s/20480t) atbs=Y(58s/6820t) | ^
+  [12/151] 2019-II-9 (AIME) | sim=0.658 | van=N(41s/4867t) atbs=Y(87s/9731t) | ^
+  [13/151] 2019-II-10 (AIME) | sim=0.591 | van=N(226s/20480t) atbs=N(455s/40960t) R2 | =
+  [14/151] 2019-II-11 (AIME) | sim=0.667 | van=N(227s/20480t) atbs=N(225s/20353t) | =
+  [15/151] 2019-II-12 (AIME) | sim=0.613 | van=N(174s/16889t) atbs=N(358s/34032t) R2 | =
+  [16/151] 2019-II-13 (AIME) | sim=0.649 | van=N(227s/20480t) atbs=N(156s/15443t) | =
+  [17/151] 2019-II-14 (AIME) | sim=0.588 | van=N(226s/20480t) atbs=N(75s/8505t) | =
+  [18/151] 2019-II-15 (AIME) | sim=0.659 | van=Y(107s/11530t) atbs=N(455s/40960t) R2 | v
+  [19/151] 2020-I-1 (AIME) | sim=0.649 | van=N(226s/20480t) atbs=N(132s/13608t) | =
+  [20/151] 2020-I-2 (AIME) | sim=0.655 | van=Y(21s/2511t) atbs=Y(21s/2563t) | =
+  [21/151] 2020-I-3 (AIME) | sim=0.692 | van=Y(57s/6709t) atbs=Y(28s/3428t) | =
+  [22/151] 2020-I-4 (AIME) | sim=0.656 | van=Y(45s/5383t) atbs=Y(74s/8434t) | =
+  [23/151] 2020-I-5 (AIME) | sim=0.671 | van=N(180s/17321t) atbs=N(162s/15981t) | =
+  [24/151] 2020-I-6 (AIME) | sim=0.651 | van=N(226s/20480t) atbs=N(96s/10549t) | =
+  [25/151] 2020-I-7 (AIME) | sim=0.632 | van=Y(188s/17883t) atbs=Y(44s/5239t) | =
+  [26/151] 2020-I-8 (AIME) | sim=0.627 | van=Y(56s/6565t) atbs=Y(35s/4240t) | =
+  [27/151] 2020-I-9 (AIME) | sim=0.629 | van=Y(134s/13781t) atbs=Y(34s/4114t) | =
+  [28/151] 2020-I-10 (AIME) | sim=0.623 | van=N(226s/20480t) atbs=N(392s/36701t) R2 | =
+  [29/151] 2020-I-11 (AIME) | sim=0.663 | van=N(121s/12781t) atbs=N(108s/11598t) | =
+  [30/151] 2020-I-12 (AIME) | sim=0.579 | van=Y(114s/12207t) atbs=N(87s/9766t) | v
+  [31/151] 2020-I-13 (AIME) | sim=0.692 | van=Y(50s/5953t) atbs=Y(60s/7079t) | =
+  [32/151] 2020-I-14 (AIME) | sim=0.661 | van=Y(66s/7697t) atbs=N(32s/3847t) | v
+  [33/151] 2020-I-15 (AIME) | sim=0.674 | van=N(222s/20150t) atbs=N(180s/17276t) | =
+  [34/151] 2020-II-1 (AIME) | sim=0.606 | van=Y(17s/2009t) atbs=Y(34s/4084t) | =
+  [35/151] 2020-II-2 (AIME) | sim=0.585 | van=Y(59s/6889t) atbs=Y(58s/6826t) | =
+  [36/151] 2020-II-3 (AIME) | sim=0.577 | van=Y(29s/3522t) atbs=Y(22s/2671t) | =
+  [37/151] 2020-II-4 (AIME) | sim=0.739 | van=N(227s/20480t) atbs=Y(35s/4213t) | ^
+  [38/151] 2020-II-5 (AIME) | sim=0.713 | van=N(178s/17137t) atbs=Y(309s/29650t) R2 | ^
+  [39/151] 2020-II-6 (AIME) | sim=0.650 | van=Y(139s/14203t) atbs=Y(55s/6433t) | =
+  [40/151] 2020-II-7 (AIME) | sim=0.694 | van=N(84s/9410t) atbs=N(98s/10661t) | =
+  [41/151] 2020-II-8 (AIME) | sim=0.662 | van=N(226s/20480t) atbs=N(454s/40960t) R2 | =
+  [42/151] 2020-II-9 (AIME) | sim=0.598 | van=N(195s/18352t) atbs=Y(119s/12489t) | ^
+  [43/151] 2020-II-10 (AIME) | sim=0.629 | van=N(30s/3571t) atbs=N(21s/2506t) | =
+  [44/151] 2020-II-11 (AIME) | sim=0.660 | van=N(216s/19759t) atbs=N(455s/40960t) R2 | =
+  [45/151] 2020-II-12 (AIME) | sim=0.587 | van=N(227s/20480t) atbs=N(452s/40732t) R2 | =
+  [46/151] 2020-II-13 (AIME) | sim=0.680 | van=Y(226s/20480t) atbs=N(107s/11522t) | v
+  [47/151] 2020-II-14 (AIME) | sim=0.721 | van=N(164s/16147t) atbs=N(130s/13371t) | =
+  [48/151] 2020-II-15 (AIME) | sim=0.598 | van=N(227s/20480t) atbs=N(175s/16895t) | =
+  [49/151] 2021-I-1 (AIME) | sim=0.621 | van=N(227s/20480t) atbs=N(455s/40960t) R2 | =
+  [50/151] 2021-I-2 (AIME) | sim=0.639 | van=Y(114s/12100t) atbs=Y(182s/17313t) | =
+  [51/151] 2021-I-3 (AIME) | sim=0.669 | van=Y(82s/9243t) atbs=Y(73s/8350t) | =
+  [52/151] 2021-I-4 (AIME) | sim=0.666 | van=Y(48s/5720t) atbs=Y(83s/9361t) | =
+  [53/151] 2021-I-5 (AIME) | sim=0.704 | van=Y(71s/8194t) atbs=Y(26s/3154t) | =
+  [54/151] 2021-I-6 (AIME) | sim=0.670 | van=N(203s/18899t) atbs=N(455s/40960t) R2 | =
+  [55/151] 2021-I-7 (AIME) | sim=0.592 | van=N(226s/20480t) atbs=N(146s/14720t) | =
+  [56/151] 2021-I-8 (AIME) | sim=0.626 | van=Y(223s/20258t) atbs=N(148s/14897t) | v
+  [57/151] 2021-I-9 (AIME) | sim=0.644 | van=Y(49s/5815t) atbs=Y(42s/5045t) | =
+  [58/151] 2021-I-10 (AIME) | sim=0.616 | van=N(226s/20480t) atbs=N(72s/8196t) | =
+  [59/151] 2021-I-11 (AIME) | sim=0.627 | van=N(226s/20480t) atbs=N(444s/40282t) R2 | =
+  [60/151] 2021-I-12 (AIME) | sim=0.605 | van=N(224s/20323t) atbs=N(385s/36029t) R2 | =
+  [61/151] 2021-I-13 (AIME) | sim=0.688 | van=N(226s/20480t) atbs=Y(281s/26886t) R2 | ^
+  [62/151] 2021-I-14 (AIME) | sim=0.653 | van=N(167s/16388t) atbs=N(78s/8811t) | =
+  [63/151] 2021-I-15 (AIME) | sim=0.571 | van=N(226s/20480t) atbs=N(160s/15809t) | =
+  [64/151] 2021-II-1 (AIME) | sim=0.766 <-MATH-500 | van=Y(24s/2867t) atbs=N(29s/3491t) | v
+  [65/151] 2021-II-2 (AIME) | sim=0.743 | van=N(209s/19208t) atbs=N(459s/40960t) R2 | =
+  [66/151] 2021-II-3 (AIME) | sim=0.640 | van=N(108s/11655t) atbs=N(150s/15007t) | =
+  [67/151] 2021-II-4 (AIME) | sim=0.651 | van=Y(67s/7727t) atbs=Y(39s/4740t) | =
+  [68/151] 2021-II-5 (AIME) | sim=0.590 | van=N(182s/17486t) atbs=N(361s/34272t) R2 | =
+  [69/151] 2021-II-6 (AIME) | sim=0.660 | van=Y(67s/7715t) atbs=Y(40s/4820t) | =
+  [70/151] 2021-II-7 (AIME) | sim=0.615 | van=N(227s/20480t) atbs=Y(126s/13048t) | ^
+  [71/151] 2021-II-8 (AIME) | sim=0.651 | van=N(227s/20480t) atbs=N(455s/40960t) R2 | =
+  [72/151] 2021-II-9 (AIME) | sim=0.614 | van=N(226s/20480t) atbs=N(131s/13571t) | =
+  [73/151] 2021-II-10 (AIME) | sim=0.697 | van=N(136s/13983t) atbs=N(58s/6776t) | =
+  [74/151] 2021-II-11 (AIME) | sim=0.659 | van=N(188s/17834t) atbs=N(161s/15804t) | =
+  [75/151] 2021-II-12 (AIME) | sim=0.644 | van=N(226s/20480t) atbs=N(171s/16609t) | =
+  [76/151] 2021-II-13 (AIME) | sim=0.607 | van=N(226s/20480t) atbs=N(454s/40960t) R2 | =
+  [77/151] 2021-II-14 (AIME) | sim=0.653 | van=N(199s/18624t) atbs=N(85s/9453t) | =
+  [78/151] 2021-II-15 (AIME) | sim=0.612 | van=N(227s/20480t) atbs=N(379s/35561t) R2 | =
+  [79/151] 2022-I-1 (AIME) | sim=0.728 | van=Y(23s/2802t) atbs=N(18s/2196t) | v
+  [80/151] 2022-I-2 (AIME) | sim=0.676 | van=N(85s/9456t) atbs=Y(34s/4103t) | ^
+  [81/151] 2022-I-3 (AIME) | sim=0.682 | van=N(73s/8360t) atbs=Y(56s/6545t) | ^
+  [82/151] 2022-I-4 (AIME) | sim=0.619 | van=N(77s/8741t) atbs=N(60s/7053t) | =
+  [83/151] 2022-I-5 (AIME) | sim=0.597 | van=Y(58s/6860t) atbs=N(173s/16795t) | v
+  [84/151] 2022-I-6 (AIME) | sim=0.654 | van=N(170s/16613t) atbs=N(146s/14739t) | =
+  [85/151] 2022-I-7 (AIME) | sim=0.657 | van=N(131s/13533t) atbs=N(142s/14429t) | =
+  [86/151] 2022-I-8 (AIME) | sim=0.708 | van=N(227s/20480t) atbs=N(431s/39316t) R2 | =
+  [87/151] 2022-I-9 (AIME) | sim=0.664 | van=N(99s/10832t) atbs=Y(70s/7970t) | ^
+  [88/151] 2022-I-10 (AIME) | sim=0.662 | van=Y(37s/4424t) atbs=Y(30s/3621t) | =
+  [89/151] 2022-I-11 (AIME) | sim=0.649 | van=N(228s/20480t) atbs=N(220s/19904t) | =
+  [90/151] 2022-I-12 (AIME) | sim=0.661 | van=N(214s/19591t) atbs=Y(86s/9550t) | ^
+  [91/151] 2022-I-13 (AIME) | sim=0.762 | van=N(227s/20480t) atbs=N(160s/15766t) | =
+  [92/151] 2022-I-14 (AIME) | sim=0.669 | van=N(227s/20480t) atbs=N(122s/12722t) | =
+  [93/151] 2022-I-15 (AIME) | sim=0.613 | van=N(227s/20480t) atbs=N(174s/16764t) | =
+  [94/151] 2022-II-1 (AIME) | sim=0.563 | van=Y(28s/3400t) atbs=Y(30s/3627t) | =
+  [95/151] 2022-II-2 (AIME) | sim=0.652 | van=N(93s/10204t) atbs=N(120s/12556t) | =
+  [96/151] 2022-II-3 (AIME) | sim=0.648 | van=Y(42s/4991t) atbs=Y(19s/2255t) | =
+  [97/151] 2022-II-4 (AIME) | sim=0.597 | van=Y(37s/4479t) atbs=Y(20s/2379t) | =
+  [98/151] 2022-II-5 (AIME) | sim=0.673 | van=N(142s/14458t) atbs=N(99s/10745t) | =
+  [99/151] 2022-II-6 (AIME) | sim=0.595 | van=N(71s/8147t) atbs=N(99s/10772t) | =
+  [100/151] 2022-II-7 (AIME) | sim=0.717 | van=Y(140s/14304t) atbs=N(49s/5850t) | v
+  [101/151] 2022-II-8 (AIME) | sim=0.742 | van=N(226s/20480t) atbs=N(158s/15556t) | =
+  [102/151] 2022-II-9 (AIME) | sim=0.611 | van=N(211s/19223t) atbs=N(127s/13024t) | =
+  [103/151] 2022-II-10 (AIME) | sim=0.638 | van=Y(78s/8875t) atbs=Y(97s/10611t) | =
+  [104/151] 2022-II-11 (AIME) | sim=0.676 | van=Y(110s/11766t) atbs=N(114s/12074t) | v
+  [105/151] 2022-II-12 (AIME) | sim=0.579 | van=N(205s/19031t) atbs=N(113s/11944t) | =
+  [106/151] 2022-II-13 (AIME) | sim=0.636 | van=Y(109s/11717t) atbs=N(224s/20281t) | v
+  [107/151] 2022-II-14 (AIME) | sim=0.660 | van=N(227s/20480t) atbs=N(77s/8748t) | =
+  [108/151] 2022-II-15 (AIME) | sim=0.663 | van=N(229s/20480t) atbs=N(179s/17011t) | =
+  [109/151] 2023-I-1 (AIME) | sim=0.653 | van=Y(83s/9325t) atbs=N(106s/11426t) | v
+  [110/151] 2023-I-2 (AIME) | sim=0.638 | van=Y(16s/1947t) atbs=Y(15s/1831t) | =
+  [111/151] 2023-I-3 (AIME) | sim=0.653 | van=Y(49s/5842t) atbs=Y(19s/2309t) | =
+  [112/151] 2023-I-4 (AIME) | sim=0.641 | van=Y(51s/5990t) atbs=Y(50s/6005t) | =
+  [113/151] 2023-I-5 (AIME) | sim=0.621 | van=Y(44s/5219t) atbs=Y(37s/4490t) | =
+  [114/151] 2023-I-6 (AIME) | sim=0.688 | van=Y(63s/7380t) atbs=N(140s/14191t) | v
+  [115/151] 2023-I-7 (AIME) | sim=0.674 | van=N(137s/14054t) atbs=N(74s/8412t) | =
+  [116/151] 2023-I-8 (AIME) | sim=0.692 | van=N(226s/20480t) atbs=Y(75s/8536t) | ^
+  [117/151] 2023-I-9 (AIME) | sim=0.631 | van=N(224s/20302t) atbs=N(69s/7873t) | =
+  [118/151] 2023-I-10 (AIME) | sim=0.690 | van=Y(134s/13750t) atbs=N(66s/7608t) | v
+  [119/151] 2023-I-11 (AIME) | sim=0.715 | van=N(129s/13368t) atbs=N(110s/11705t) | =
+  [120/151] 2023-I-12 (AIME) | sim=0.658 | van=N(226s/20480t) atbs=N(219s/19930t) | =
+  [121/151] 2023-I-13 (AIME) | sim=0.672 | van=N(227s/20480t) atbs=N(362s/34153t) R2 | =
+  [122/151] 2023-I-14 (AIME) | sim=0.601 | van=N(228s/20480t) atbs=N(390s/36198t) R2 | =
+  [123/151] 2023-II-1 (AIME) | sim=0.668 | van=Y(12s/1449t) atbs=Y(15s/1814t) | =
+  [124/151] 2023-II-2 (AIME) | sim=0.641 | van=N(138s/14070t) atbs=N(454s/40960t) R2 | =
+  [125/151] 2023-II-3 (AIME) | sim=0.701 | van=Y(135s/13842t) atbs=Y(28s/3368t) | =
+  [126/151] 2023-II-4 (AIME) | sim=0.673 | van=Y(72s/8280t) atbs=Y(70s/7986t) | =

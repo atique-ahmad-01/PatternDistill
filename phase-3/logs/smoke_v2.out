@@ -1,0 +1,61 @@
+Log: /home/students/PatternDistill/phase-3/logs/inject_and_eval_atgi_20260725_222910.log
+============================================================
+Phase 3 — Adaptive Thought Graph Injection (ATGI)
+============================================================
+Backend : transformers
+Hyperparameters: α=0.8, β=0.6, τ_stop=0.4, max_steps=6
+Capped at: 5 problems
+To do   : 5
+Thought graph: 1600 nodes, 1200 seq + 28312 sem edges, τ_semantic=0.9
+Phase-2d bank: 400 entries (for worked example retrieval)
+Loading embed model: nomic-ai/nomic-embed-text-v1 on cuda
+<All keys matched successfully>
+Embed model loaded
+Device  : cuda:0
+GPU     : NVIDIA GeForce RTX 5070 Ti
+VRAM    : 16.6 GB
+Loading student: Qwen/Qwen3-1.7B
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:   0%|          | 1/311 [00:00<02:31,  2.04it/s]Loading weights:   1%|          | 2/311 [00:01<02:43,  1.89it/s]Loading weights:   5%|▌         | 17/311 [00:01<00:13, 21.61it/s]Loading weights:  10%|█         | 32/311 [00:01<00:06, 41.92it/s]Loading weights:  14%|█▍        | 43/311 [00:01<00:04, 54.02it/s]Loading weights:  19%|█▉        | 59/311 [00:01<00:03, 73.00it/s]Loading weights:  23%|██▎       | 71/311 [00:01<00:02, 80.11it/s]Loading weights:  27%|██▋       | 83/311 [00:01<00:02, 85.43it/s]Loading weights:  32%|███▏      | 100/311 [00:01<00:01, 105.84it/s]Loading weights:  37%|███▋      | 114/311 [00:01<00:01, 111.78it/s]Loading weights:  41%|████      | 127/311 [00:02<00:01, 108.54it/s]Loading weights:  46%|████▋     | 144/311 [00:02<00:01, 122.32it/s]Loading weights:  51%|█████     | 158/311 [00:02<00:01, 123.34it/s]Loading weights:  55%|█████▍    | 171/311 [00:02<00:01, 119.79it/s]Loading weights:  81%|████████  | 252/311 [00:02<00:00, 305.38it/s]Loading weights: 100%|██████████| 311/311 [00:02<00:00, 120.49it/s]
+Student loaded
+<All keys matched successfully>
+Embed model reloaded on CPU (student on GPU)
+[transformers] Detected the usage of `get_extended_attention_mask`: This function is deprecated and will be removed in v5.12.0. Please use the new API in `transformers.masking_utils`
+  [1/5] id=400 Geometry L5 | sim=0.649 thr=0.52 | trav=4steps 1pat→ | van=✗(71s) atgi=✗(71s) | =
+  [2/5] id=401 Intermediate Algebra L5 | sim=0.540 thr=0.51 | trav=4steps 1pat→ | van=✗(64s) atgi=✗(71s) | =
+  [3/5] id=402 Precalculus L3 | sim=0.522 thr=0.52 | trav=6steps 2pat⚡ | van=✓(13s) atgi=✓(15s) | =
+  [4/5] id=403 Number Theory L4 | sim=0.563 thr=0.5 | trav=6steps 3pat⚡ | van=✓(22s) atgi=✓(36s) | =
+  [5/5] id=404 Counting & Probability L1 | sim=0.427 < thr=0.47 → skip injection
+  [5/5] id=404 Counting & Probability L1 | sim=0.427 thr=0.47 | trav=0steps 0pat→ | van=✓(8s) atgi=✓(8s) | =
+VRAM free: 16.0 GB
+
+Wrote 5 records → /home/students/PatternDistill/phase-3/results/results.json
+Wrote summary → /home/students/PatternDistill/phase-3/results/summary.json
+
+============================================================
+Phase 3 — ATGI (Adaptive Thought Graph Injection) Results
+============================================================
+  n=5  injected=4  skipped=1
+  Avg template length : 5.0 steps
+  Cross-pattern assembled: 2 (50%)
+
+  Vanilla   accuracy : 0.600
+  ATGI      accuracy : 0.600
+  Delta              : +0.000
+  Gap closed         : 0.0% of the 21pp Phase 1 gap
+
+  vs Phase 2D (static top-1 injection): +0.060
+  ATGI improvement over Phase 2D     : -0.060
+
+  By subject:
+    Counting & Probability              atgi=1.000  van=1.000  delta=+0.000  (n=1  thr=0.47)
+    Geometry                            atgi=0.000  van=0.000  delta=+0.000  (n=1  thr=0.52)
+    Intermediate Algebra                atgi=0.000  van=0.000  delta=+0.000  (n=1  thr=0.51)
+    Number Theory                       atgi=1.000  van=1.000  delta=+0.000  (n=1  thr=0.5)
+    Precalculus                         atgi=1.000  van=1.000  delta=+0.000  (n=1  thr=0.52)
+
+  By difficulty:
+    Level 1: atgi=1.000  van=1.000  delta=+0.000  (n=1)
+    Level 3: atgi=1.000  van=1.000  delta=+0.000  (n=1)
+    Level 4: atgi=1.000  van=1.000  delta=+0.000  (n=1)
+    Level 5: atgi=0.000  van=0.000  delta=+0.000  (n=2)

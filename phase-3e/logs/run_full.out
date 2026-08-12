@@ -1,0 +1,202 @@
+Log: /home/students/PatternDistill/phase-3e/logs/eval_atbs_20260801_031920.log
+============================================================
+Phase 3E — ATBS Evaluation
+  max_new_tokens = 20480
+  early-exit on \boxed{}
+  dual-attempt (2nd-best template on retry)
+============================================================
+Eval set: 100 MATH + 187 AIME = 287 total
+To do: 287
+Buffer: 1146 templates, dim=768
+<All keys matched successfully>
+Device: cuda:0
+GPU: NVIDIA GeForce RTX 5070 Ti
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:   0%|          | 1/311 [00:00<00:51,  6.03it/s]Loading weights:  22%|██▏       | 69/311 [00:00<00:00, 317.33it/s]Loading weights:  44%|████▍     | 137/311 [00:00<00:00, 456.60it/s]Loading weights:  65%|██████▌   | 203/311 [00:00<00:00, 527.20it/s]Loading weights:  87%|████████▋ | 272/311 [00:00<00:00, 581.05it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 496.80it/s]
+Student loaded
+<All keys matched successfully>
+Embed on CPU, student on GPU
+[transformers] Detected the usage of `get_extended_attention_mask`: This function is deprecated and will be removed in v5.12.0. Please use the new API in `transformers.masking_utils`
+[W801 03:23:38.872152299 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 27262976 bytes (fr  [3/287] math_402 (MATH-500) | si[W801 03:24:00.621377136 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 whil  [4/287] math_403 (MATH-500) | sim=0.606 < 0.65 -> skip
+  [4/287] math_403 (MATH-500) | sim=0.606 | van=Y(61s/3222t) atbs=Y(51s/3222t) | =
+  [5/287] math_404 (MATH-500) | sim=0.503 | van=Y(12s/792t) atbs=Y(11s/688t) | =
+  [6/287] math_405 (MATH-500) | sim=0.554 | van=Y(8s/499t) atbs=Y(12s/736t) | =
+  [7/287] math_406 (MATH-500) | sim=0.545 < 0.65 -> skip
+  [7/287] math_406 (MATH-500) | sim=0.545 | van=Y(32s/1886t) atbs=Y(30s/1886t) | =
+  [8/287] math_407 (MATH-500) | sim=0.553 | van=Y(14s/963t) atbs=Y(12s/790t) |   [2/287] math_401 (MATH-500) | sim=0.591 < 0.6 -> skip
+  [2/287] math_401 (MATH-500) | sim=0.591 | van=Y(185s/11085t) atbs=Y(189s/11085t) | =
+  [3/287] math_402 (MATH-500) | sim=0.618 < 0.65 -> skip
+  [3/287] math_402 (MATH-500) | sim=0.618 | van=Y(33s/2159t) atbs=Y(34s/2159t) | =
+  [4/287] math_403 (MATH-500) | sim=0.606 < 0.65 -> skip
+  [4/287] math_403 (MATH-500) | sim=0.606 | van=Y(51s/3222t) atbs=Y(49s/3222t) | =
+  [5/287] math_404 (MATH-500) | sim=0.503 | van=Y(12s/792t) atbs=Y(10s/688t) | =
+  [6/287] math_405 (MATH-500) | sim=0.554 | van=Y(7s/499t) atbs=Y(11s/736t) | =
+  [7/287] math_406 (MATH-500) | sim=0.545 < 0.65 -> skip
+  [7/287] math_406 (MATH-500) | sim=0.545 | van=Y(28s/1886t) atbs=Y(28s/1886t) | =
+  [8/287] math_407 (MATH-500) | sim=0.553 | van=Y(14s/963t) atbs=Y(12s/790t) | =
+  [9/287] math_408 (MATH-500) | sim=0.690 | van=N(36s/2356t) atbs=N(40s/2577t) | =
+  [10/287] math_409 (MATH-500) | sim=0.690 | van=Y(28s/1845t) atbs=Y(46s/3061t) | =
+  [11/287] math_410 (MATH-500) | sim=0.517 | van=Y(13s/838t) atbs=Y(11s/733t) | =
+  [12/287] math_411 (MATH-500) | sim=0.497 < 0.5 -> skip
+  [12/287] math_411 (MATH-500) | sim=0.497 | van=  [20/287] math_419 (MATH-500) | si  [13/287] math_412 (MATH-500) | sim=0.642 < 0.7 -> skip
+  [13/287] math_412 (MATH-500) | sim=0.642 <-AIME | van=Y(87s/5624t) atbs=Y(95s/5624t) | =
+  [14/287] math_413 (MATH-500) | sim=0.615   [22/287] math_421 (MATH-500) | sim=0.614 < 0.65 -> skip
+  [22/287] math_421 (MATH-500) | sim=0.614 | van=Y(132s/7905t) atb  [16/287] math_415 [W801 03:52:01.712880177 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 35651584 bytes (free: 20381696, total: 16611278848).
+[W801 03:53:20.612417176 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 41943040 bytes (free: 14090240, total: 16611278848).
+  [23/287] math_422 (MATH-500) | sim=0.646 | van=N(404s/20213t) atbs=N(430s/20326t) | =
+  [24/287] math_423 (MATH-500) | sim=0.607 < 0.75 -> skip
+  [24/287] math_423 (MATH-500) | sim=0.607 <-AIME | van=Y(53s/2853t) atbs=Y(52s/2853t) | =
+  [25/287] math_424 (MATH-500) | sim=0.556 | van=Y(21s/1202t) atbs=Y(21s/1225t) | =
+[W801 04:11:46.759016147 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 48234496 bytes (free: 20381696, total: 16611278848).
+[W801 04:12:19.208073140 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 50331648 bytes (free: 45547520, total: 16611278848).
+  [26/287] math_425 (MATH-500) | sim=0.595 < 0.65 -> skip
+  [26/287] math_425 (MATH-500) | sim=0.595 | van=N(574s/24576t) atbs=N(564s/24576t) | =
+  [27/287] math_426 (MATH-500) | sim=0.682 | van=Y(17s/990t) atbs=Y(15s/880t) | =
+  [28/287] math_427 (MATH-500) | sim=0.498 < 0.5 -> skip
+  [28/287] math_427 (MATH-500) | sim=0.498 | van=Y(19s/1122t) atbs=Y(20s/1122t) | =
+  [29/287] math_428 (MATH-500) | sim=0.612 | van=Y(52s/3275t) atbs=Y(115s/6600t) | =
+  [30/287] math_429 (MATH-500) | sim=0.576 < 0.6 -> skip
+  [30/287] math_429 (MATH-500) | sim=0.576 | van=Y(53s/2888t) atbs=Y(54s/2888t) | =
+  [31/287] math_430 (MATH-500) | sim=0.598 < 0.6 -> skip
+  [31/287] math_430 (MATH-500) | sim=0.598 <-AIME | van=Y(10s/586t) atbs=Y(10s/586t) | =
+  [32/287] math_431 (MATH-500) | sim=0.584 < 0.65 -> skip
+    [26/287] math_425 (MATH-500) | sim=0.595 < 0.65 -> skip
+  [26/287] math_425 (MAT  [33/287] math_432 (MATH-500) | sim=0.559 < 0.6 -> skip
+  [33/287] math_432 (MATH-500) | sim=0.559 | van=N(154s/9379t) atbs=N(159s/9379t) | =
+  [34/287] math_433 (MATH-500) | sim=0.591 < 0.65 -> skip
+  [34/287] math_433 (MATH-500) | sim=0.591 | van=Y(41s/2695t) atbs=Y(41s/2695t) | =
+  [35/287] math_434 (MATH-500) | sim=0.651 | van=Y(13s/835t) atbs=Y(11s/765t) | =
+  [36/287] math_435 (MATH-500) | sim=0.554 | van=Y(27s/1800t) atbs=Y(108s/6603t) | =
+  [37/287] math_436 (MATH-500) | sim=0.664 | van=Y(28s/1674t) atbs=Y(25s/1460t) | =
+  [38/287] math_437 (MATH-500) | sim=0.598 | van=Y(33s/1977t) atbs=Y(13s/884t) | =
+  [39/287] math_438 (MATH-500) | sim=0.583 < 0.75 -> skip
+  [39/287] math_438 (MATH-500) | sim=0.583 <-AIME | van=Y(35s/2217t) atbs=Y(37s/2217t) | =
+  [40/287] math_439 (MATH-500) | sim=0.582 < 0.6 -> skip
+  [40/287] math_439 (MATH-500) | sim=0.582 | van=Y(217s/12221t) atbs=Y(214s/12221t) | =
+  [41/287] math_440 (MATH-500) | sim=0.650 | van=Y(17s/1163t) atbs=Y(12s/804t) | =
+  [42/287] math_441 (MATH-500) | sim=0.411 < 0.5 -> skip
+  [42/287] math_441 (MATH-500) | sim=0.411 | van=Y(10s/691t) atbs=Y(10s/691t) | =
+  [43/287] math_442 (MATH-500) | sim=0.593 | van=Y(15s/974t) atbs=Y(18s/1219t) | =
+  [44/287] math_443 (MATH-500) | sim=0.579 | van=Y(12s/766t) atbs=Y(17s/1077t) | =
+  [45/287] math_444 (MATH-500) | sim=0.581 | van=N(520s/22934t) atbs=N(329s/16255t) | =
+  [46/287] math_445 (MATH-500) | sim=0.678 | van=Y(133s/7134t) atbs=Y(159s/8990t) | =
+  [47/287] math_446 (MATH-500) | sim=0.628 | van=Y(24s/1322t) atbs=Y(24s/1292t) | =
+  [48/287] math_447 (MATH-500) | sim=0.596 | van=Y(20s/1115t) atbs=Y(17s/989t) | =
+  [49/287] math_448 (MATH-500) | sim=0.648 < 0.65 -> skip
+  [49/287] math_448 (MATH-500) | sim=0.648 | van=Y(60s/3256t) atbs=Y(54s/3256t) | =
+  [50/287] math_449 (MATH-500) | sim=0.500 < 0.5 -> skip
+  [50/287] math_449 (MATH-500) | sim=0.500 | van=Y(35s/2221t) atbs=Y(36s/2221t) | =
+  [51/287] math_450 (MATH-500) | sim=0.593 < 0.65 -> skip
+  [51/287] math_450 (MATH-500) | sim=0.593 | van=Y(40s/2489t) atbs=Y(39s/2489t) | =
+  [52/287] math_451 (MATH-500) | sim=0.560 < 0.65 -> skip
+  [52/287] math_451 (MATH-500) | sim=0.560 | van=Y(29s/1784t) a  [46/287] math_445 (  [53/287] math_452 (MATH-500) | sim=0.618 | van=Y(18s/1045t) atbs=Y(67s/4272t) | =
+  [54/287] math_453 (MATH-500) | sim=0.535 | van=Y(17s/1166t) atbs=Y(15s/1046t) | =
+  [55/287] math_454 (MATH-500) | sim=0.695 | van=N(32s/2085t) atbs=Y(67s/4316t) | ^
+  [56/287] math_455 (MATH-500) | sim=0.611 | van=Y(13s/865t) atbs=Y(14s/947t) | =
+  [57/287] math_456 (MATH-500) | sim=0.611 | van=N(33s/2180t) atbs=N(26s/1710t) | =
+  [58/287] math_457 (MATH-500) | sim=0.638 < 0.65 -> skip
+  [58/287] math_457 (MATH-500) | sim=0.  [51/287] math_450 (MATH-500) | sim=0.59  [59/287] math_458 (MATH-500) | sim=0.523 | van=N(538s/24576t) atbs=N(147s/7623t) | =
+  [60/287] math_459 (MATH-500) | sim=0.585 | van=Y(44s/2330t) atbs=Y(29s/1656t) | =
+  [61/287] math_460 (MATH-500) | sim=0.591 | van=N(210s/11279t) atbs=N(79s/4737t) | =
+  [62/287] math_461 (MATH-500) | sim=0.649 <-AIME | van=Y(25s/1665t) atbs=Y(11s/763t) | =
+  [63/287] math_462 (MATH-500) | sim=0.515 < 0.65 -> skip
+  [63/287] math_462 (MATH-500) | sim=0.515 | van=N(107s/6362t) atbs=N(113s/6362t) | =
+  [64/287] math_463 (MATH-500) | sim=0.646 | van=Y(7s/439t) atbs=Y(9s/567t) | =
+  [65/287] math_464 (MATH-500) | sim=0.586 < 0.6 -> skip
+  [65/287] math_464 (MATH-500) | sim=0.586 | van=Y(27s/1699t) atbs=Y(26s/1699t) | =
+  [66/287] math_465 (MATH-500) | sim=0.576 < 0.65 -> skip
+  [66/287] math_465 (MATH-500) | sim=0.576 | van=Y(21s/1424t) atbs=Y(21s/1424t) | =
+  [67/287] math_466 (MATH-500) | sim=0.587 < 0.65 -> skip
+  [67/287] math_466 (MATH-500) | sim=0.587 | van=Y(117s/7043t) atbs=Y(116s/7043t) | =
+  [68/287] math_467 (MATH-500) | sim=0.614 | van=Y(33s/2228t) atbs=Y(22s/1477t) | =
+  [69/287] math_468 (MATH-500) | sim=0.620 | van=Y(17s/1145t) atbs=Y(17s/1113t) | =
+  [70/287] math_469 (MATH-500) | sim=0.548 | van=Y(15s/987t) atbs=Y(14s/898t) | =
+  [71/287] math_470 (MATH-500) | sim=0.566 < 0.6 -> skip
+  [71/287] math_470 (MATH-500) | sim=0.566 | van=Y(97s/5827t) atbs=Y(97s/5827t) | =
+  [72/287] math_471 (MATH-500) | sim=0.489 < 0.5 -> skip
+  [72/287] math_471 (MATH-500) | sim=0.489 | van=Y(15s/981t) atbs=Y(14s/981t) | =
+  [73/287] math_472 (MATH-500) | sim=0.496 < 0.5 -> skip
+  [73/287] math_472 (MATH-500) | sim=0.496 | van=Y(15s/1033t) atbs=Y(15s/1033t) | =
+  [74/287] math_473 (MATH-500) | sim=0.535 | van=N(559s/24576t) atbs=Y(69s/3645t) | ^
+  [75/287] math_474 (MATH-500) | sim=0.609 | van=Y(29s/1688t) atbs=Y(46s/2677t) | =
+  [76/287] math_475 (MATH-500) | sim=0.713 | van=Y(76s/4430t) atbs=Y(108s/6691t) | =
+  [77/287] math_476 (MATH-500) | sim=0.564 | van=Y(18s/1217t) atbs=Y(27s/1758t) | =
+  [78/287] math_477 (MATH-500) | sim=0.538 < 0.65 -> skip
+  [78/287] math_477 (MATH-500) | sim=0.538 | van=Y(43s/2776t) atbs=Y(43s/2776t) | =
+  [79/287] math_478 (MATH-500) | sim=0.578 < 0.6 -> skip
+  [79/287] math_478 (MATH-500) | sim=0.578 | van=Y(243s/13584t) atbs=Y(268s/13584t) | =
+  [80/287] math_479 (MATH-500) | sim=0.630 < 0.65 -> skip
+  [80/287] math_479 (MATH-500) | sim=0.630 | van=Y(23s/1455t) atbs=Y(24s/1455t) | =
+  [81/287] math_480 (MATH-500) | sim=0.620 < 0.65 -> skip
+  [81/287] math_480 (MATH-500) | sim=0.620 | van=Y(54s/3067t) atbs=Y(56s/3067t) | =
+  [82/287] math_481 (MATH-500) | sim=0.590 < 0.6 -> skip
+  [82/287] math_481 (MATH-500) | sim=0.590 | van=N(563s/24576t) atbs=N(572s/24576t) | =
+  [83/287] math_482 (MATH-500) | sim=0.525 < 0.65 -> skip
+  [83/287] math_482 (MATH-500) | sim=0.525 | van=Y(53s/3157t) atbs=Y(48s/3157t) | =
+  [84/287] math_483 (MATH-500) | sim=0.653 | van=Y(35s/2268t) atbs=Y(34s/2236t) | =
+  [85/287] math_484 (MATH-500) | sim=0.624 | van=Y(51s/3356t) atbs=Y(32s/2078t) | =
+  [86/287] math_485 (MATH-500) | sim=0.599 | van=Y(36s/2410t) atbs=Y(56s/3610t) | =
+  [87/287] math_486 (MATH-500) | sim=0.613 | van=Y(74s/4714t) atbs=Y(34s/2171t) | =
+  [88/287] math_487 (MATH-500) | sim=0.746 | van=Y(31s/2042t) atbs=Y(9s/633t) | =
+  [89/287] math_488 (MATH-500) | sim=0.476 < 0.5 -> skip
+  [89/287] math_488 (MATH-500) | sim=0.476 | van=Y(14s/975t) atbs=Y(14s/975t) | =
+  [90/287] math_489 (MATH-500) | sim=0.588 < 0.6 -> skip
+  [90/287] math_489 (MATH-500) | sim=0.588 | van=Y(56s/3673t) atbs=Y(57s/3673t) | =
+  [91/287] math_490 (MATH-500) | sim=0.592 < 0.6 -> skip
+  [91/287] math_490 (MATH-500) | sim=0.592 | van=N(539s/23311t) atbs=N(560s/23311t) | =
+  [92/287] math_491 (MATH-500) | sim=0.528 | van=N(110s/6506t) atbs=N(768s/34018t) R2 | =
+  [93/287] math_492 (MATH-500) | sim=0.665 | van=Y(15s/884t) atbs=Y(10s/581t) | =
+  [94/287] math_493 (MATH-500) | sim=0.624 | van=Y(70s/3865t) atbs=Y(58s/3103t) | =
+  [95/287] math_494 (MATH-500) | sim=0.637 | van=N(391s/19105t) atbs=Y(123s/7331t) | ^
+  [96/287] math_495 (MATH-500) | sim=0.653 | van=Y(34s/2170t) atbs=Y(27s/1658t) | =
+  [97/287] math_496 (MATH-500) | sim=0.523 < 0.6 -> skip
+  [97/287] math_496 (MATH-500) | sim=0.523 | van=Y(25s/1525t) atbs=Y(23s/1525t) | =
+  [98/287] math_497 (MATH-500) | sim=0.624 | van=Y(110s/6835t) atbs=Y(114s/6959t) | =
+  [99/287] math_498 (MATH-500) | sim=0.622 | van=Y(46s/2885t) atbs=Y(32s/1902t) | =
+  [100/287] math_499 (MATH-500) | sim=0.597 | van=Y(108s/5948t) atbs=Y(54s/2865t) | =
+  [101/287] 2018-I-7 (AIME) | sim=0.730 | van=N(578s/24576t) atbs=N(396s/18252t) | =
+  [102/287] 2018-I-8 (AIME) | sim=0.609 | van=Y(385s/18657t) atbs=Y(141s/7986t) | =
+  [103/287] 2018-I-9 (AIME) | sim=0.669 | van=N(277s/14211t) atbs=N(224s/11040t) | =
+  [104/287] 2018-I-10 (AIME) | sim=0.644 | van=N(581s/24576t) atbs=N(512s/21773t) | =
+  [105/287] 2018-I-11 (AIME) | sim=0.610 | van=Y(71s/4501t) atbs=Y(87s/5388t) | =
+  [106/287] 2018-I-12 (AIME) | sim=0.656 | van=Y(86s/5341t) atbs=N(70s/4384t) | v
+  [107/287] 2018-I-13 (AIME) | sim=0.696 | van=N(599s/24576t) atbs=Y(761s/33346t) R2 | ^
+  [108/287] 2018-I-14 (AIME) | sim=0.635 | van=N(245s/13248t) atbs=N(141s/7346t) | =
+  [109/287] 2018-I-15 (AIME) | sim=0.664 | van=N(512s/22511t) atbs=N(285s/14700t) | =
+  [110/287] 2018-II-1 (AIME) | sim=0.639 | van=N(178s/10240t) atbs=Y(61s/3882t) | ^
+  [111/287] 2018-II-2 (AIME) | sim=0.638 | van=Y(64s/4087t) atbs=N(130s/7284t) | v
+  [112/287] 2018-II-3 (AIME) | sim=0.672 | van=Y(70s/3757t) atbs=Y(82s/4440t) | =
+  [113/287] 2018-II-4 (AIME) | sim=0.612 | van=N(343s/17225t) atbs=N(166s/9720t) | =
+  [114/287] 2018-II-5 (AIME) | sim=0.726 <-MATH-500 | van=Y(78s/4871t) atbs=Y(115s/6240t) | =
+  [115/287] 2018-II-6 (AIME) | sim=0.620 | van=Y(79s/4251t) atbs=Y(54s/3176t) | =
+  [116/287] 2018-II-7 (AIME) | sim=0.720 | van=Y(322s/15867t) atbs=Y(244s/11601t) | =
+  [117/287] 2018-II-8 (AIME) | sim=0.702 | van=N(538s/23729t) atbs=Y(77s/4267t) | ^
+  [118/287] 2018-II-9 (AIME) | sim=0.655 | van=Y(224s/12216t) atbs=N(230s/12158t) | v
+  [119/287] 2018-II-10 (AIME) | sim=0.634 | van=N(76s/4660t) atbs=N(193s/10633t) | =
+  [120/287] 2018-II-11 (AIME) | sim=0.604 | van=N(179s/9240t) atbs=N(176s/9739t) | =
+  [121/287] 2018-II-12 (AIME) | sim=0.690 | van=N(257s/13376t) atbs=Y(242s/12399t) | ^
+  [122/287] 2018-II-13 (AIME) | sim=0.654 | van=N(395s/17736t) atbs=N(414s/18208t) | =
+  [123/287] 2018-II-14 (AIME) | sim=0.651 | van=N(413s/19174t) atbs=N(251s/13282t) | =
+  [124/287] 2018-II-15 (AIME) | sim=0.618 | van=N(195s/9902t) atbs=N(111s/6484t) | =
+  [125/287] 2019-I-1 (AIME) | sim=0.697 | van=N(568s/24576t) atbs=N(222s/12183t) | =
+  [126/287] 2019-I-2 (AIME) | sim=0.618 | van=Y(80s/4772t) atbs=Y(125s/7219t) | =
+  [127/287] 2019-I-3 (AIME) | sim=0.676 | van=Y(76s/4852t) atbs=Y(126s/7633t) | =
+  [128/287] 2019-I-4 (AIME) | sim=0.660 | van=N(134s/7667t) atbs=Y(188s/9816t) | ^
+  [129/287] 2019-I-5 (AIME) | sim=0.630 | van=Y(87s/4645t) atbs=N(62s/3690t) | v
+  [130/287] 2019-I-6 (AIME) | sim=0.627 | van=Y(81s/4933t) atbs=Y(156s/8824t) | =
+  [131/287] 2019-I-7 (AIME) | sim=0.656 | van=N(399s/18078t) atbs=Y(177s/9841t) | ^
+  [132/287] 2019-I-8 (AIME) | sim=0.600 | van=Y(72s/3941t) atbs=N(459s/20585t) | v
+  [133/287] 2019-I-9 (AIME) | sim=0.602 | van=Y(156s/9098t) atbs=Y(117s/6302t) | =
+  [134/287] 2019-I-10 (AIME) | sim=0.603 | van=N(446s/20000t) atbs=N(234s/12344t) | =
+  [135/287] 2019-I-11 (AIME) | sim=0.709 | van=N(369s/17504t) atbs=N(455s/20096t) | =
+  [136/287] 2019-I-12 (AIME) | sim=0.625 | van=N(597s/24576t) atbs=N(449s/20582t) | =
+=0.676 | van=Y(85s/4852t) atbs=Y(137s/7633t) | =
+  [128/287] 2019-I-4 (AIME) | sim=0.660 | van=N(139s/7667t) atbs=Y(172s/9816t) | ^
+  [129/287] 2019-I-5 (AIME) | sim=0.630 | van=Y(78s/4645t) atbs=N(58s/3690t) | v
+  [130/287] 2019-I-6 (AIME) | sim=0.627 | van=Y(79s/4933t) atbs=Y(153s/8824t) | =
+  [131/287] 2019-I-7 (AIME) | sim=0.656 | van=N(366s/18078t) atbs=Y(167s/9841t) | ^
+  [132/287] 2019-I-8 (AIME) | sim=0.600 | van=Y(68s/3941t) atbs=N(899s/40960t) R2 | v
+  [133/287] 2019-I-9 (AIME) | sim=0.602 | van=Y(177s/9098t) atbs=Y(107s/6302t) | =
+  [134/287] 2019-I-10 (AIME) | sim=0.603 | van=N(424s/20000t) atbs=N(254s/12344t) | =
+  [135/287] 2019-I-11 (AIME) | sim=0.709 | van=N(361s/17504t) atbs=N(453s/20096t) | =
+  [136/287] 2019-I-12 (AIME) | sim=0.625 | van=N(460s/20480t) atbs=N(961s/40960t) R2 | =

@@ -1,0 +1,38 @@
+Log: /home/students/PatternDistill/phase-2d/logs/generate_patterns_20260719_010235.log
+Backend      : transformers
+MAX_NEW_TOKENS: 16384  (with /no_think: avg ~300-600 tokens)
+Dataset      : HuggingFaceH4/MATH-500 train[0:400]
+Total problems: 400 | Remaining: 400
+GPUs available: 2 but cuda:1 not usable — teacher on cuda:0
+GPU name : NVIDIA GeForce RTX 5070 Ti
+VRAM     : 16.6 GB
+Loading teacher: Qwen/Qwen3-8B
+  Free VRAM 13.4GB — 4-bit quant
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:00<01:38,  4.03it/s]Loading weights:   1%|          | 2/399 [00:00<01:32,  4.27it/s]Loading weights:   3%|▎         | 13/399 [00:00<00:11, 32.18it/s]Loading weights:   7%|▋         | 27/399 [00:00<00:06, 59.47it/s]Loading weights:  11%|█         | 43/399 [00:00<00:04, 85.56it/s]Loading weights:  15%|█▌        | 60/399 [00:00<00:03, 105.04it/s]Loading weights:  19%|█▉        | 76/399 [00:01<00:02, 118.74it/s]Loading weights:  23%|██▎       | 90/399 [00:01<00:03, 91.83it/s] Loading weights:  25%|██▌       | 101/399 [00:01<00:04, 69.50it/s]Loading weights:  28%|██▊       | 110/399 [00:01<00:04, 58.53it/s]Loading weights:  30%|██▉       | 118/399 [00:01<00:05, 48.85it/s]Loading weights:  31%|███▏      | 125/399 [00:02<00:05, 47.70it/s]Loading weights:  33%|███▎      | 131/399 [00:02<00:06, 39.73it/s]Loading weights:  34%|███▍      | 136/399 [00:02<00:06, 38.91it/s]Loading weights:  35%|███▌      | 141/399 [00:02<00:07, 34.82it/s]Loading weights:  37%|███▋      | 147/399 [00:02<00:06, 36.44it/s]Loading weights:  38%|███▊      | 151/399 [00:03<00:08, 30.63it/s]Loading weights:  40%|███▉      | 158/399 [00:03<00:07, 33.75it/s]Loading weights:  41%|████      | 162/399 [00:03<00:07, 30.73it/s]Loading weights:  42%|████▏     | 169/399 [00:03<00:07, 32.76it/s]Loading weights:  43%|████▎     | 173/399 [00:03<00:07, 28.31it/s]Loading weights:  45%|████▌     | 180/399 [00:04<00:07, 29.85it/s]Loading weights:  46%|████▌     | 184/399 [00:04<00:09, 21.57it/s]Loading weights:  47%|████▋     | 188/399 [00:04<00:09, 23.17it/s]Loading weights:  48%|████▊     | 191/399 [00:04<00:12, 17.02it/s]Loading weights:  49%|████▊     | 194/399 [00:05<00:12, 16.13it/s]Loading weights:  51%|█████     | 202/399 [00:05<00:08, 23.28it/s]Loading weights:  51%|█████▏    | 205/399 [00:05<00:09, 20.96it/s]Loading weights:  53%|█████▎    | 213/399 [00:05<00:07, 26.12it/s]Loading weights:  54%|█████▍    | 216/399 [00:05<00:08, 21.77it/s]Loading weights:  56%|█████▌    | 222/399 [00:06<00:06, 27.89it/s]Loading weights:  57%|█████▋    | 226/399 [00:06<00:08, 20.53it/s]Loading weights:  59%|█████▉    | 235/399 [00:06<00:06, 27.31it/s]Loading weights:  60%|█████▉    | 239/399 [00:06<00:06, 24.88it/s]Loading weights:  62%|██████▏   | 246/399 [00:06<00:05, 27.74it/s]Loading weights:  63%|██████▎   | 250/399 [00:07<00:06, 24.15it/s]Loading weights:  64%|██████▍   | 255/399 [00:07<00:05, 28.15it/s]Loading weights:  65%|██████▍   | 259/399 [00:07<00:07, 19.78it/s]Loading weights:  66%|██████▋   | 265/399 [00:07<00:05, 25.56it/s]Loading weights:  67%|██████▋   | 269/399 [00:08<00:05, 22.55it/s]Loading weights:  68%|██████▊   | 273/399 [00:08<00:04, 25.38it/s]Loading weights:  70%|██████▉   | 279/399 [00:08<00:04, 26.80it/s]Loading weights:  71%|███████   | 283/399 [00:08<00:05, 22.17it/s]Loading weights:  72%|███████▏  | 287/399 [00:08<00:04, 24.36it/s]Loading weights:  73%|███████▎  | 290/399 [00:08<00:04, 23.68it/s]Loading weights:  73%|███████▎  | 293/399 [00:09<00:05, 19.16it/s]Loading weights:  75%|███████▌  | 301/399 [00:09<00:03, 25.82it/s]Loading weights:  76%|███████▌  | 304/399 [00:09<00:04, 20.68it/s]Loading weights:  78%|███████▊  | 310/399 [00:09<00:03, 27.11it/s]Loading weights:  79%|███████▊  | 314/399 [00:10<00:04, 18.77it/s]Loading weights:  81%|████████  | 323/399 [00:10<00:02, 25.44it/s]Loading weights:  82%|████████▏ | 327/399 [00:10<00:03, 23.82it/s]Loading weights:  84%|████████▎ | 334/399 [00:10<00:02, 27.73it/s]Loading weights:  85%|████████▍ | 338/399 [00:10<00:02, 26.20it/s]Loading weights:  86%|████████▋ | 345/399 [00:11<00:01, 29.19it/s]Loading weights:  87%|████████▋ | 349/399 [00:11<00:01, 25.13it/s]Loading weights:  89%|████████▊ | 354/399 [00:11<00:01, 28.96it/s]Loading weights:  90%|████████▉ | 358/399 [00:11<00:01, 20.94it/s]Loading weights:  92%|█████████▏| 367/399 [00:11<00:01, 28.81it/s]Loading weights:  93%|█████████▎| 371/399 [00:12<00:01, 26.27it/s]Loading weights:  95%|█████████▍| 378/399 [00:12<00:00, 28.61it/s]Loading weights:  96%|█████████▌| 382/399 [00:12<00:00, 23.40it/s]Loading weights:  97%|█████████▋| 387/399 [00:12<00:00, 27.25it/s]Loading weights:  98%|█████████▊| 391/399 [00:13<00:00, 20.90it/s]Loading weights: 100%|██████████| 399/399 [00:13<00:00, 30.50it/s]
+Teacher loaded
+/home/students/miniforge3/envs/ms-atique/lib/python3.11/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+  [1/400] id=0 Precalculus L2 | pat=✓ step=✓ ex=✓ | lat=5.6s tok=319
+  [2/400] id=1 Intermediate Algebra L5 | pat=✓ step=✓ ex=✓ | lat=5.4s tok=373
+  [3/400] id=2 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=6.0s tok=415
+  [4/400] id=3 Number Theory L3 | pat=✓ step=✓ ex=✓ | lat=2.9s tok=197
+  [5/400] id=4 Algebra L2 | pat=✓ step=✓ ex=✓ | lat=5.4s tok=373
+  [6/400] id=5 Prealgebra L2 | pat=✓ step=✓ ex=✓ | lat=3.3s tok=226
+  [7/400] id=6 Number Theory L3 | pat=✓ step=✓ ex=✓ | lat=3.7s tok=252
+  [8/400] id=7 Precalculus L4 | pat=✓ step=✓ ex=✓ | lat=6.1s tok=420
+  [9/400] id=8 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=4.1s tok=282
+  [10/400] id=9 Prealgebra L5 | pat=✓ step=✓ ex=✓ | lat=3.7s tok=257
+  [11/400] id=10 Number Theory L3 | pat=✓ step=✓ ex=✓ | lat=3.4s tok=234
+  [12/400] id=11 Intermediate Algebra L5 | pat=✓ step=✓ ex=✓ | lat=5.3s tok=366
+  [13/400] id=12 Number Theory L5 | pat=✓ step=✓ ex=✓ | lat=6.2s tok=425
+  [14/400] id=13 Geometry L2 | pat=✓ step=✓ ex=✓ | lat=3.2s tok=220
+  [15/400] id=14 Precalculus L1 | pat=✓ step=✓ ex=✓ | lat=3.5s tok=237
+  [16/400] id=15 Precalculus L5 | pat=✓ step=✓ ex=✓ | lat=5.9s tok=409
+  [17/400] id=16 Intermediate Algebra L1 | pat=✓ step=✓ ex=✓ | lat=2.9s tok=198
+  [18/400] id=17 Precalculus L4 | pat=✓ step=✓ ex=✓ | lat=4.2s tok=282
+  [19/400] id=18 Geometry L1 | pat=✓ step=✓ ex=✓ | lat=4.5s tok=304
+  [20/400] id=19 Intermediate Algebra L3 | pat=✓ step=✓ ex=✓ | lat=4.7s tok=315
+  [21/400] id=20 Algebra L3 | pat=✓ step=✓ ex=✓ | lat=2.8s tok=190
+  [22/400] id=21 Intermediate Algebra L3 | pat=✓ step=✓ ex=✓ | lat=13.8s tok=949
+  [23/400] id=22 Algebra L5 | pat=✓ step=✓ ex=✓ | lat=8.1s tok=554

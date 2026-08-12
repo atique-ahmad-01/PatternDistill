@@ -1,0 +1,38 @@
+01:56:57 Log: /home/students/PatternDistill/phase-2d/logs/build_memory_bank_20260719_015657.log
+01:56:57 Loaded 400 records from /home/students/PatternDistill/phase-2d/data/patterns/patterns.json
+01:56:57 Embedding 400 records
+01:57:01 Loading embed model: nomic-ai/nomic-embed-text-v1 on cuda
+01:57:10 Embed model loaded
+01:57:10   Batch 1 (1–32/400) 0.3s
+01:57:11   Batch 2 (33–64/400) 0.1s
+01:57:11   Batch 3 (65–96/400) 0.2s
+01:57:11   Batch 4 (97–128/400) 0.2s
+01:57:11   Batch 5 (129–160/400) 0.1s
+01:57:11   Batch 6 (161–192/400) 0.4s
+01:57:12   Batch 7 (193–224/400) 0.5s
+01:57:12   Batch 8 (225–256/400) 0.1s
+01:57:12   Batch 9 (257–288/400) 0.2s
+01:57:13   Batch 10 (289–320/400) 0.5s
+01:57:13   Batch 11 (321–352/400) 0.2s
+01:57:13   Batch 12 (353–384/400) 0.1s
+01:57:13   Batch 13 (385–400/400) 0.1s
+01:57:13 FAISS index: 400 vectors, dim=768
+01:57:13 Saved metadata → /home/students/PatternDistill/phase-2d/memory/bank.json  (400 entries)
+01:57:13 Saved FAISS index → /home/students/PatternDistill/phase-2d/memory/bank.index
+01:57:13 
+Memory Bank Summary:
+01:57:13   Total entries    : 400
+01:57:13   Step-level       : 400  (100%)
+01:57:13   Has worked ex.   : 397  (99%)
+01:57:13   Vector dim       : 768
+01:57:13 
+  By subject:
+01:57:13     Algebra                             101
+01:57:13     Counting & Probability              32
+01:57:13     Geometry                            36
+01:57:13     Intermediate Algebra                75
+01:57:13     Number Theory                       46
+01:57:13     Prealgebra                          67
+01:57:13     Precalculus                         43
+01:57:13 
+Next: run inject_and_eval.py to evaluate injection

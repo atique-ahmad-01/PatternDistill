@@ -1,0 +1,17 @@
+Log: /home/students/PatternDistill/phase-3d/logs/eval_combined_20260727_002400.log
+============================================================
+Phase 3D — Combined MATH-500 + AIME Evaluation
+============================================================
+Eval set: 100 MATH + 187 AIME = 287 total
+To do: 287
+Combined bank: 400 MATH + 746 AIME = 1146 total
+Graph: 4584 nodes, cross=2741
+<All keys matched successfully>
+Device: cuda:0
+GPU: NVIDIA GeForce RTX 5070 Ti
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:   0%|          | 1/311 [00:01<05:56,  1.15s/it]Loading weights:   5%|▌         | 16/311 [00:01<00:17, 16.96it/s]Loading weights:   9%|▉         | 28/311 [00:01<00:09, 29.87it/s]Loading weights:  13%|█▎        | 39/311 [00:01<00:06, 42.38it/s]Loading weights:  17%|█▋        | 54/311 [00:01<00:04, 61.39it/s]Loading weights:  21%|██        | 66/311 [00:01<00:03, 73.08it/s]Loading weights:  25%|██▌       | 78/311 [00:01<00:02, 83.42it/s]Loading weights:  29%|██▉       | 90/311 [00:01<00:02, 90.63it/s]Loading weights:  33%|███▎      | 103/311 [00:02<00:02, 97.60it/s]Loading weights:  37%|███▋      | 115/311 [00:02<00:01, 100.49it/s]Loading weights:  41%|████      | 127/311 [00:02<00:01, 105.66it/s]Loading weights:  47%|████▋     | 147/311 [00:02<00:01, 127.28it/s]Loading weights:  52%|█████▏    | 161/311 [00:02<00:01, 127.19it/s]Loading weights:  58%|█████▊    | 180/311 [00:02<00:00, 140.53it/s]Loading weights:  63%|██████▎   | 195/311 [00:02<00:00, 138.94it/s]Loading weights:  68%|██████▊   | 213/311 [00:02<00:00, 141.85it/s]Loading weights:  73%|███████▎  | 228/311 [00:02<00:00, 126.35it/s]Loading weights:  78%|███████▊  | 242/311 [00:03<00:00, 123.20it/s]Loading weights:  82%|████████▏ | 255/311 [00:03<00:00, 124.30it/s]Loading weights:  86%|████████▌ | 268/311 [00:03<00:00, 119.11it/s]Loading weights:  90%|█████████ | 281/311 [00:03<00:00, 109.76it/s]Loading weights:  95%|█████████▌| 297/311 [00:03<00:00, 120.58it/s]Loading weights: 100%|██████████| 311/311 [00:03<00:00, 85.55it/s] 
+Student loaded
+<All keys matched successfully>
+Embed on CPU, student on GPU
+[transformers] Detected the usage of `get_extended_attention_mask`: This function is deprecated and will be removed in v5.12.0. Please use the new API in `transformers.masking_utils`

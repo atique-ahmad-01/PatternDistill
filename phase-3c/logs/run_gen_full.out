@@ -1,0 +1,398 @@
+Log: /home/students/PatternDistill/phase-3c/logs/generate_patterns_20260726_131054.log
+============================================================
+Phase 3C — MBPP Pattern Generation
+============================================================
+Backend : transformers
+Loaded 374 MBPP training problems
+To do   : 374
+Device: cuda:0
+GPU: NVIDIA GeForce RTX 5070 Ti
+Free VRAM: 16.3 GB
+Loading teacher: Qwen/Qwen3-8B
+  VRAM limited — 4-bit quantization
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:00<01:09,  5.75it/s]Loading weights:   1%|          | 2/399 [00:00<01:09,  5.75it/s]Loading weights:   4%|▍         | 16/399 [00:00<00:07, 49.24it/s]Loading weights:   9%|▉         | 37/399 [00:00<00:03, 99.83it/s]Loading weights:  14%|█▍        | 57/399 [00:00<00:02, 130.61it/s]Loading weights:  18%|█▊        | 72/399 [00:00<00:02, 135.56it/s]Loading weights:  23%|██▎       | 93/399 [00:00<00:01, 157.67it/s]Loading weights:  29%|██▊       | 114/399 [00:00<00:01, 173.08it/s]Loading weights:  34%|███▎      | 134/399 [00:01<00:01, 180.74it/s]Loading weights:  38%|███▊      | 153/399 [00:01<00:01, 178.23it/s]Loading weights:  43%|████▎     | 172/399 [00:01<00:01, 177.09it/s]Loading weights:  48%|████▊     | 192/399 [00:01<00:01, 183.30it/s]Loading weights:  53%|█████▎    | 213/399 [00:01<00:00, 190.73it/s]Loading weights:  58%|█████▊    | 233/399 [00:01<00:00, 192.99it/s]Loading weights:  63%|██████▎   | 253/399 [00:01<00:00, 190.00it/s]Loading weights:  68%|██████▊   | 273/399 [00:01<00:00, 187.28it/s]Loading weights:  73%|███████▎  | 292/399 [00:01<00:00, 180.77it/s]Loading weights:  78%|███████▊  | 313/399 [00:02<00:00, 188.59it/s]Loading weights:  84%|████████▎ | 334/399 [00:02<00:00, 194.38it/s]Loading weights:  89%|████████▊ | 354/399 [00:02<00:00, 195.38it/s]Loading weights:  94%|█████████▎| 374/399 [00:02<00:00, 190.83it/s]Loading weights:  99%|█████████▊| 394/399 [00:02<00:00, 186.79it/s]Loading weights: 100%|██████████| 399/399 [00:02<00:00, 162.98it/s]
+Teacher loaded
+/home/students/.local/lib/python3.10/site-packages/bitsandbytes/backends/cuda/ops.py:468: FutureWarning: _check_is_size will be removed in a future PyTorch release along with guard_size_oblivious.     Use _check(i >= 0) instead.
+  torch._check_is_size(blocksize)
+  [1/374] task_id=601 | ✓step | pat=True ex=True | 5.0s 307tok
+  [2/374] task_id=602 | ✓step | pat=True ex=True | 3.9s 264tok
+  [3/374] task_id=603 | ✓step | pat=True ex=True | 4.7s 315tok
+  [4/374] task_id=604 | ✓step | pat=True ex=True | 2.4s 162tok
+  [5/374] task_id=605 | ✓step | pat=True ex=True | 3.9s 265tok
+  [6/374] task_id=606 | ✓step | pat=True ex=True | 2.7s 177tok
+  [7/374] task_id=607 | ✓step | pat=True ex=True | 3.9s 264tok
+  [8/374] task_id=608 | ✓step | pat=True ex=True | 5.6s 382tok
+  [9/374] task_id=609 | ✓step | pat=True ex=True | 3.1s 206tok
+  [10/374] task_id=610 | ✓step | pat=True ex=True | 3.1s 209tok
+  [11/374] task_id=611 | ✓step | pat=True ex=True | 3.0s 201tok
+  [12/374] task_id=612 | ✓step | pat=True ex=True | 3.1s 205tok
+  [13/374] task_id=613 | ✓step | pat=True ex=True | 2.5s 168tok
+  [14/374] task_id=614 | ✓step | pat=True ex=True | 2.7s 180tok
+  [15/374] task_id=615 | ✓step | pat=True ex=True | 3.6s 244tok
+  [16/374] task_id=616 | ✓step | pat=True ex=True | 3.3s 221tok
+  [17/374] task_id=617 | ✓step | pat=True ex=True | 3.9s 262tok
+  [18/374] task_id=618 | ✓step | pat=True ex=True | 3.4s 226tok
+  [19/374] task_id=619 | ✓step | pat=True ex=True | 3.5s 236tok
+  [20/374] task_id=620 | ✓step | pat=True ex=True | 4.7s 316tok
+  [21/374] task_id=621 | ✓step | pat=True ex=True | 3.5s 233tok
+  [22/374] task_id=622 | ✓step | pat=True ex=True | 11.6s 786tok
+  [23/374] task_id=623 | ✓step | pat=True ex=True | 2.9s 190tok
+  [24/374] task_id=624 | ✓step | pat=True ex=True | 2.3s 151tok
+  [25/374] task_id=625 | ✓step | pat=True ex=True | 3.0s 203tok
+  [26/374] task_id=626 | ✓step | pat=True ex=True | 3.5s 235tok
+  [27/374] task_id=627 | ✓step | pat=True ex=True | 3.6s 246tok
+  [28/374] task_id=628 | ✓step | pat=True ex=True | 3.3s 219tok
+  [29/374] task_id=629 | ✓step | pat=True ex=True | 3.1s 208tok
+  [30/374] task_id=630 | ✓step | pat=True ex=True | 5.1s 343tok
+  [31/374] task_id=631 | ✓step | pat=True ex=True | 3.6s 245tok
+  [32/374] task_id=632 | ✓step | pat=True ex=True | 3.7s 248tok
+  [33/374] task_id=633 | ✓step | pat=True ex=True | 5.6s 380tok
+  [34/374] task_id=634 | ✓step | pat=True ex=True | 4.1s 277tok
+  [35/374] task_id=635 | ✓step | pat=True ex=True | 3.4s 229tok
+  [36/374] task_id=636 | ✓step | pat=True ex=True | 3.2s 214tok
+  [37/374] task_id=637 | ✓step | pat=True ex=True | 2.1s 142tok
+  [38/374] task_id=638 | ✓step | pat=True ex=True | 3.9s 261tok
+  [39/374] task_id=639 | ✓step | pat=True ex=True | 3.0s 201tok
+  [40/374] task_id=640 | ✓step | pat=True ex=True | 4.1s 274tok
+  [41/374] task_id=641 | ✓step | pat=True ex=True | 2.6s 174tok
+  [42/374] task_id=642 | ✓step | pat=True ex=True | 3.6s 244tok
+  [43/374] task_id=643 | ✓step | pat=True ex=True | 3.2s 215tok
+  [44/374] task_id=644 | ✓step | pat=True ex=True | 2.7s 178tok
+  [45/374] task_id=645 | ✓step | pat=True ex=True | 3.2s 216tok
+  [46/374] task_id=646 | ✓step | pat=True ex=True | 3.8s 255tok
+  [47/374] task_id=647 | ✓step | pat=True ex=True | 2.9s 196tok
+  [48/374] task_id=648 | ✓step | pat=True ex=True | 3.3s 224tok
+  [49/374] task_id=649 | ✓step | pat=True ex=True | 2.5s 169tok
+  [50/374] task_id=650 | ✓step | pat=True ex=True | 3.1s 205tok
+  [51/374] task_id=651 | ✓step | pat=True ex=True | 3.0s 198tok
+  [52/374] task_id=652 | ✓step | pat=True ex=True | 4.0s 274tok
+  [53/374] task_id=653 | ✓step | pat=True ex=True | 3.6s 245tok
+  [54/374] task_id=654 | ✓step | pat=True ex=True | 2.5s 164tok
+  [55/374] task_id=655 | ✓step | pat=True ex=True | 2.8s 189tok
+  [56/374] task_id=656 | ✓step | pat=True ex=True | 4.0s 269tok
+  [57/374] task_id=657 | ✓step | pat=True ex=True | 4.5s 302tok
+  [58/374] task_id=658 | ✓step | pat=True ex=True | 3.4s 232tok
+  [59/374] task_id=659 | ✓step | pat=True ex=True | 3.1s 210tok
+  [60/374] task_id=660 | ✓step | pat=True ex=True | 4.3s 290tok
+  [61/374] task_id=661 | ✓step | pat=True ex=True | 6.2s 423tok
+  [62/374] task_id=662 | ✓step | pat=True ex=True | 3.5s 236tok
+  [63/374] task_id=663 | ✓step | pat=True ex=True | 3.6s 241tok
+  [64/374] task_id=664 | ✓step | pat=True ex=True | 3.4s 231tok
+  [65/374] task_id=665 | ✓step | pat=True ex=True | 2.7s 181tok
+  [66/374] task_id=666 | ✓step | pat=True ex=True | 2.5s 168tok
+  [67/374] task_id=667 | ✓step | pat=True ex=True | 3.4s 227tok
+  [68/374] task_id=668 | ✓step | pat=True ex=True | 3.9s 264tok
+  [69/374] task_id=669 | ✓step | pat=True ex=True | 5.4s 366tok
+  [70/374] task_id=670 | ✓step | pat=True ex=True | 3.6s 243tok
+  [71/374] task_id=671 | ✓step | pat=True ex=True | 2.8s 188tok
+  [72/374] task_id=672 | ✓step | pat=True ex=True | 2.3s 156tok
+  [73/374] task_id=673 | ✓step | pat=True ex=True | 2.4s 156tok
+  [74/374] task_id=674 | ✓step | pat=True ex=True | 3.7s 251tok
+  [75/374] task_id=675 | ✓step | pat=True ex=True | 3.4s 226tok
+  [76/374] task_id=676 | ✓step | pat=True ex=True | 3.4s 230tok
+  [77/374] task_id=677 | ✓step | pat=True ex=True | 3.7s 248tok
+  [78/374] task_id=678 | ✓step | pat=True ex=True | 2.6s 173tok
+  [79/374] task_id=679 | ✓step | pat=True ex=True | 2.5s 169tok
+  [80/374] task_id=680 | ✓step | pat=True ex=True | 3.4s 227tok
+  [81/374] task_id=681 | ✓step | pat=True ex=True | 4.2s 284tok
+  [82/374] task_id=682 | ✓step | pat=True ex=True | 3.1s 206tok
+  [83/374] task_id=683 | ✓step | pat=True ex=True | 5.0s 340tok
+  [84/374] task_id=684 | ✓step | pat=True ex=True | 2.5s 164tok
+  [85/374] task_id=685 | ✓step | pat=True ex=True | 5.6s 380tok
+  [86/374] task_id=686 | ✓step | pat=True ex=True | 3.0s 198tok
+  [87/374] task_id=687 | ✓step | pat=True ex=True | 3.6s 243tok
+  [88/374] task_id=688 | ✓step | pat=True ex=True | 3.0s 197tok
+  [89/374] task_id=689 | ✓step | pat=True ex=True | 5.9s 395tok
+  [90/374] task_id=690 | ✓step | pat=True ex=True | 3.6s 243tok
+  [91/374] task_id=691 | ✓step | pat=True ex=True | 4.2s 285tok
+  [92/374] task_id=692 | ✓step | pat=True ex=True | 5.2s 353tok
+  [93/374] task_id=693 | ✓step | pat=True ex=True | 3.0s 203tok
+  [94/374] task_id=694 | ✓step | pat=True ex=True | 2.4s 161tok
+  [95/374] task_id=695 | ✓step | pat=True ex=True | 3.3s 223tok
+  [96/374] task_id=696 | ✓step | pat=True ex=True | 2.9s 194tok
+  [97/374] task_id=697 | ✓step | pat=True ex=True | 2.9s 194tok
+  [98/374] task_id=698 | ✓step | pat=True ex=True | 3.0s 203tok
+  [99/374] task_id=699 | ✓step | pat=True ex=True | 3.8s 253tok
+  [100/374] task_id=700 | ✓step | pat=True ex=True | 3.4s 226tok
+  [101/374] task_id=701 | ✓step | pat=True ex=True | 4.3s 291tok
+  [102/374] task_id=702 | ✓step | pat=True ex=True | 5.3s 355tok
+  [103/374] task_id=703 | ✓step | pat=True ex=True | 2.3s 152tok
+  [104/374] task_id=704 | ✓step | pat=True ex=True | 3.8s 257tok
+  [105/374] task_id=705 | ✓step | pat=True ex=True | 3.2s 217tok
+  [106/374] task_id=706 | ✓step | pat=True ex=True | 3.2s 213tok
+  [107/374] task_id=707 | ✓step | pat=True ex=True | 3.8s 258tok
+  [108/374] task_id=708 | ✓step | pat=True ex=True | 2.5s 166tok
+  [109/374] task_id=709 | ✓step | pat=True ex=True | 3.4s 226tok
+  [110/374] task_id=710 | ✓step | pat=True ex=True | 2.5s 164tok
+  [111/374] task_id=711 | ✓step | pat=True ex=True | 5.4s 368tok
+  [112/374] task_id=712 | ✓step | pat=True ex=True | 4.1s 277tok
+  [113/374] task_id=713 | ✓step | pat=True ex=True | 2.9s 197tok
+  [114/374] task_id=714 | ✓step | pat=True ex=True | 4.7s 318tok
+  [115/374] task_id=715 | ✓step | pat=True ex=True | 2.5s 165tok
+  [116/374] task_id=716 | ✓step | pat=True ex=True | 3.1s 210tok
+  [117/374] task_id=717 | ✓step | pat=True ex=True | 4.3s 287tok
+  [118/374] task_id=718 | ✓step | pat=True ex=True | 2.5s 165tok
+  [119/374] task_id=719 | ✓step | pat=True ex=True | 3.4s 228tok
+  [120/374] task_id=720 | ✓step | pat=True ex=True | 2.7s 183tok
+  [121/374] task_id=721 | ✓step | pat=True ex=True | 9.3s 630tok
+  [122/374] task_id=722 | ✓step | pat=True ex=True | 3.7s 247tok
+  [123/374] task_id=723 | ✓step | pat=True ex=True | 3.0s 198tok
+  [124/374] task_id=724 | ✓step | pat=True ex=True | 3.4s 226tok
+  [125/374] task_id=725 | ✓step | pat=True ex=True | 2.6s 170tok
+  [126/374] task_id=726 | ✓step | pat=True ex=True | 3.5s 233tok
+  [127/374] task_id=727 | ✓step | pat=True ex=True | 2.9s 195tok
+  [128/374] task_id=728 | ✓step | pat=True ex=True | 2.9s 196tok
+  [129/374] task_id=729 | ✓step | pat=True ex=True | 2.6s 175tok
+  [130/374] task_id=730 | ✓step | pat=True ex=True | 3.6s 243tok
+  [131/374] task_id=731 | ✓step | pat=True ex=True | 3.0s 197tok
+  [132/374] task_id=732 | ✓step | pat=True ex=True | 2.6s 173tok
+  [133/374] task_id=733 | ✓step | pat=True ex=True | 5.5s 369tok
+  [134/374] task_id=734 | ✓step | pat=True ex=True | 3.9s 261tok
+  [135/374] task_id=735 | ✓step | pat=True ex=True | 3.9s 264tok
+  [136/374] task_id=736 | ✓step | pat=True ex=True | 3.2s 211tok
+  [137/374] task_id=737 | ✓step | pat=True ex=True | 3.2s 213tok
+  [138/374] task_id=738 | ✓step | pat=True ex=True | 4.8s 323tok
+  [139/374] task_id=739 | ✓step | pat=True ex=True | 4.1s 275tok
+  [140/374] task_id=740 | ✓step | pat=True ex=True | 3.0s 204tok
+  [141/374] task_id=741 | ✓step | pat=True ex=True | 2.4s 162tok
+  [142/374] task_id=742 | ✓step | pat=True ex=True | 5.7s 386tok
+  [143/374] task_id=743 | ✓step | pat=True ex=True | 3.2s 215tok
+  [144/374] task_id=744 | ✓step | pat=True ex=True | 2.6s 173tok
+  [145/374] task_id=745 | ✓step | pat=True ex=True | 4.8s 323tok
+  [146/374] task_id=746 | ✓step | pat=True ex=True | 3.7s 249tok
+  [147/374] task_id=747 | ✓step | pat=True ex=True | 9.0s 615tok
+  [148/374] task_id=748 | ✓step | pat=True ex=True | 3.2s 218tok
+  [149/374] task_id=749 | ✓step | pat=True ex=True | 3.0s 204tok
+  [150/374] task_id=750 | ✓step | pat=True ex=True | 3.0s 201tok
+  [151/374] task_id=751 | ✓step | pat=True ex=True | 4.9s 331tok
+  [152/374] task_id=752 | ✓step | pat=True ex=True | 4.4s 296tok
+  [153/374] task_id=753 | ✓step | pat=True ex=True | 2.9s 195tok
+  [154/374] task_id=754 | ✓step | pat=True ex=True | 2.9s 196tok
+  [155/374] task_id=755 | ✓step | pat=True ex=True | 3.2s 218tok
+  [156/374] task_id=756 | ✓step | pat=True ex=True | 3.3s 222tok
+  [157/374] task_id=757 | ✓step | pat=True ex=True | 3.9s 260tok
+  [158/374] task_id=758 | ✓step | pat=True ex=True | 3.2s 215tok
+  [159/374] task_id=759 | ✓step | pat=True ex=True | 3.2s 211tok
+  [160/374] task_id=760 | ✓step | pat=True ex=True | 2.9s 193tok
+  [161/374] task_id=761 | ✓step | pat=True ex=True | 3.4s 225tok
+  [162/374] task_id=762 | ✓step | pat=True ex=True | 3.7s 250tok
+  [163/374] task_id=763 | ✓step | pat=True ex=True | 3.8s 255tok
+  [164/374] task_id=764 | ✓step | pat=True ex=True | 3.0s 199tok
+  [165/374] task_id=765 | ✓step | pat=True ex=True | 4.5s 305tok
+  [166/374] task_id=766 | ✓step | pat=True ex=True | 3.2s 210tok
+  [167/374] task_id=767 | ✓step | pat=True ex=True | 4.1s 273tok
+  [168/374] task_id=768 | ✓step | pat=True ex=True | 2.5s 164tok
+  [169/374] task_id=769 | ✓step | pat=True ex=True | 2.7s 183tok
+  [170/374] task_id=770 | ✓step | pat=True ex=True | 3.6s 243tok
+  [171/374] task_id=771 | ✓step | pat=True ex=True | 5.1s 343tok
+  [172/374] task_id=772 | ✓step | pat=True ex=True | 3.0s 199tok
+  [173/374] task_id=773 | ✓step | pat=True ex=True | 4.2s 286tok
+  [174/374] task_id=774 | ✓step | pat=True ex=True | 4.5s 304tok
+  [175/374] task_id=775 | ✓step | pat=True ex=True | 3.3s 225tok
+  [176/374] task_id=776 | ✓step | pat=True ex=True | 4.3s 292tok
+  [177/374] task_id=777 | ✓step | pat=True ex=True | 2.9s 196tok
+  [178/374] task_id=778 | ✓step | pat=True ex=True | 4.3s 289tok
+  [179/374] task_id=779 | ✓step | pat=True ex=True | 3.3s 222tok
+  [180/374] task_id=780 | ✓step | pat=True ex=True | 5.6s 383tok
+  [181/374] task_id=781 | ✓step | pat=True ex=True | 4.7s 315tok
+  [182/374] task_id=782 | ✓step | pat=True ex=True | 4.0s 269tok
+  [183/374] task_id=783 | ✓step | pat=True ex=True | 5.9s 400tok
+  [184/374] task_id=784 | ✓step | pat=True ex=True | 4.8s 323tok
+  [185/374] task_id=785 | ✓step | pat=True ex=True | 2.6s 175tok
+  [186/374] task_id=786 | ✓step | pat=True ex=True | 3.1s 207tok
+  [187/374] task_id=787 | ✓step | pat=True ex=True | 3.4s 231tok
+  [188/374] task_id=788 | ✓step | pat=True ex=True | 2.4s 160tok
+  [189/374] task_id=789 | ✓step | pat=True ex=True | 3.2s 217tok
+  [190/374] task_id=790 | ✓step | pat=True ex=True | 3.3s 220tok
+  [191/374] task_id=791 | ✓step | pat=True ex=True | 3.0s 198tok
+  [192/374] task_id=792 | ✓step | pat=True ex=True | 3.6s 239tok
+  [193/374] task_id=793 | ✓step | pat=True ex=True | 5.0s 339tok
+  [194/374] task_id=794 | ✓step | pat=True ex=True | 3.3s 222tok
+  [195/374] task_id=795 | ✓step | pat=True ex=True | 3.4s 229tok
+  [196/374] task_id=796 | ✓step | pat=True ex=True | 2.5s 164tok
+  [197/374] task_id=797 | ✓step | pat=True ex=True | 3.9s 264tok
+  [198/374] task_id=798 | ✓step | pat=True ex=True | 2.8s 186tok
+  [199/374] task_id=799 | ✓step | pat=True ex=True | 3.8s 256tok
+  [200/374] task_id=800 | ✓step | pat=True ex=True | 2.7s 177tok
+  [201/374] task_id=801 | ✓step | pat=True ex=True | 3.0s 198tok
+  [202/374] task_id=802 | ✓step | pat=True ex=True | 5.1s 345tok
+  [203/374] task_id=803 | ✓step | pat=True ex=True | 3.4s 225tok
+  [204/374] task_id=804 | ✓step | pat=True ex=True | 3.3s 218tok
+  [205/374] task_id=805 | ✓step | pat=True ex=True | 4.0s 269tok
+  [206/374] task_id=806 | ✓step | pat=True ex=True | 4.0s 271tok
+  [207/374] task_id=807 | ✓step | pat=True ex=True | 2.7s 178tok
+  [208/374] task_id=808 | ✓step | pat=True ex=True | 3.2s 211tok
+  [209/374] task_id=809 | ✓step | pat=True ex=True | 3.2s 214tok
+  [210/374] task_id=810 | ✓step | pat=True ex=True | 3.3s 222tok
+  [211/374] task_id=811 | ✓step | pat=True ex=True | 3.8s 255tok
+  [212/374] task_id=812 | ✓step | pat=True ex=True | 2.6s 174tok
+  [213/374] task_id=813 | ✓step | pat=True ex=True | 2.2s 144tok
+  [214/374] task_id=814 | ✓step | pat=True ex=True | 3.3s 225tok
+  [215/374] task_id=815 | ✓step | pat=True ex=True | 4.7s 315tok
+  [216/374] task_id=816 | ✓step | pat=True ex=True | 2.4s 157tok
+  [217/374] task_id=817 | ✓step | pat=True ex=True | 3.2s 216tok
+  [218/374] task_id=818 | ✓step | pat=True ex=True | 2.7s 183tok
+  [219/374] task_id=819 | ✓step | pat=True ex=True | 4.8s 325tok
+  [220/374] task_id=820 | ✓step | pat=True ex=True | 3.3s 218tok
+  [221/374] task_id=821 | ✓step | pat=True ex=True | 2.6s 172tok
+  [222/374] task_id=822 | ✓step | pat=True ex=True | 5.1s 343tok
+  [223/374] task_id=823 | ✓step | pat=True ex=True | 3.0s 204tok
+  [224/374] task_id=824 | ✓step | pat=True ex=True | 2.5s 168tok
+  [225/374] task_id=825 | ✓step | pat=True ex=True | 2.6s 175tok
+  [226/374] task_id=826 | ✓step | pat=True ex=True | 5.2s 351tok
+  [227/374] task_id=827 | ✓step | pat=True ex=True | 2.5s 166tok
+  [228/374] task_id=828 | ✓step | pat=True ex=True | 4.4s 296tok
+  [229/374] task_id=829 | ✓step | pat=True ex=True | 3.7s 249tok
+  [230/374] task_id=830 | ✓step | pat=True ex=True | 3.3s 219tok
+  [231/374] task_id=831 | ✓step | pat=True ex=True | 3.2s 216tok
+  [232/374] task_id=832 | ✓step | pat=True ex=True | 3.1s 211tok
+  [233/374] task_id=833 | ✓step | pat=True ex=True | 2.5s 166tok
+  [234/374] task_id=834 | ✓step | pat=True ex=True | 8.2s 557tok
+  [235/374] task_id=835 | ✓step | pat=True ex=True | 3.9s 262tok
+  [236/374] task_id=836 | ✓step | pat=True ex=True | 5.6s 383tok
+  [237/374] task_id=837 | ✓step | pat=True ex=True | 4.6s 311tok
+  [238/374] task_id=838 | ✓step | pat=True ex=True | 3.8s 255tok
+  [239/374] task_id=839 | ✓step | pat=True ex=True | 2.6s 174tok
+  [240/374] task_id=840 | ✓step | pat=True ex=True | 3.4s 228tok
+  [241/374] task_id=841 | ✓step | pat=True ex=True | 8.8s 599tok
+  [242/374] task_id=842 | ✓step | pat=True ex=True | 4.2s 284tok
+  [243/374] task_id=843 | ✓step | pat=True ex=True | 5.2s 351tok
+  [244/374] task_id=844 | ✓step | pat=True ex=True | 4.7s 314tok
+  [245/374] task_id=845 | ✓step | pat=True ex=True | 5.0s 338tok
+  [246/374] task_id=846 | ✓step | pat=True ex=True | 4.7s 318tok
+  [247/374] task_id=847 | ✓step | pat=True ex=True | 2.5s 168tok
+  [248/374] task_id=848 | ✓step | pat=True ex=True | 4.0s 271tok
+  [249/374] task_id=849 | ✓step | pat=True ex=True | 5.3s 355tok
+  [250/374] task_id=850 | ✓step | pat=True ex=True | 4.1s 276tok
+  [251/374] task_id=851 | ✓step | pat=True ex=True | 3.7s 245tok
+  [252/374] task_id=852 | ✓step | pat=True ex=True | 2.5s 165tok
+  [253/374] task_id=853 | ✓step | pat=True ex=True | 5.4s 365tok
+  [254/374] task_id=854 | ✓step | pat=True ex=True | 3.0s 200tok
+  [255/374] task_id=855 | ✓step | pat=True ex=True | 2.6s 172tok
+  [256/374] task_id=856 | ✓step | pat=True ex=True | 6.4s 434tok
+  [257/374] task_id=857 | ✓step | pat=True ex=True | 2.9s 196tok
+  [258/374] task_id=858 | ✓step | pat=True ex=True | 3.2s 212tok
+  [259/374] task_id=859 | ✓step | pat=True ex=True | 3.7s 249tok
+  [260/374] task_id=860 | ✓step | pat=True ex=True | 3.2s 211tok
+  [261/374] task_id=861 | ✓step | pat=True ex=True | 3.2s 214tok
+  [262/374] task_id=862 | ✓step | pat=True ex=True | 3.0s 203tok
+  [263/374] task_id=863 | ✓step | pat=True ex=True | 5.1s 340tok
+  [264/374] task_id=864 | ✓step | pat=True ex=True | 3.5s 235tok
+  [265/374] task_id=865 | ✓step | pat=True ex=True | 3.2s 216tok
+  [266/374] task_id=866 | ✓step | pat=True ex=True | 6.4s 430tok
+  [267/374] task_id=867 | ✓step | pat=True ex=True | 3.0s 201tok
+  [268/374] task_id=868 | ✓step | pat=True ex=True | 2.9s 192tok
+  [269/374] task_id=869 | ✓step | pat=True ex=True | 3.0s 203tok
+  [270/374] task_id=870 | ✓step | pat=True ex=True | 2.7s 176tok
+  [271/374] task_id=871 | ✓step | pat=True ex=True | 3.5s 238tok
+  [272/374] task_id=872 | ✓step | pat=True ex=True | 5.8s 391tok
+  [273/374] task_id=873 | ✓step | pat=True ex=True | 3.8s 254tok
+  [274/374] task_id=874 | ✓step | pat=True ex=True | 4.1s 277tok
+  [275/374] task_id=875 | ✓step | pat=True ex=True | 4.1s 279tok
+  [276/374] task_id=876 | ✓step | pat=True ex=True | 3.1s 210tok
+  [277/374] task_id=877 | ✓step | pat=True ex=True | 2.5s 164tok
+  [278/374] task_id=878 | ✓step | pat=True ex=True | 2.5s 169tok
+  [279/374] task_id=879 | ✓step | pat=True ex=True | 3.7s 249tok
+  [280/374] task_id=880 | ✓step | pat=True ex=True | 4.2s 283tok
+  [281/374] task_id=881 | ✓step | pat=True ex=True | 4.6s 312tok
+  [282/374] task_id=882 | ✓step | pat=True ex=True | 2.7s 181tok
+  [283/374] task_id=883 | ✓step | pat=True ex=True | 3.1s 208tok
+  [284/374] task_id=884 | ✓step | pat=True ex=True | 2.8s 183tok
+  [285/374] task_id=885 | ✓step | pat=True ex=True | 5.2s 349tok
+  [286/374] task_id=886 | ✓step | pat=True ex=True | 3.1s 206tok
+  [287/374] task_id=887 | ✓step | pat=True ex=True | 2.8s 188tok
+  [288/374] task_id=888 | ✓step | pat=True ex=True | 3.8s 257tok
+  [289/374] task_id=889 | ✓step | pat=True ex=True | 2.9s 190tok
+  [290/374] task_id=890 | ✓step | pat=True ex=True | 5.2s 353tok
+  [291/374] task_id=891 | ✓step | pat=True ex=True | 2.6s 170tok
+  [292/374] task_id=892 | ✓step | pat=True ex=True | 2.8s 186tok
+  [293/374] task_id=893 | ✓step | pat=True ex=True | 2.5s 168tok
+  [294/374] task_id=894 | ✓step | pat=True ex=True | 2.6s 172tok
+  [295/374] task_id=895 | ✓step | pat=True ex=True | 6.1s 412tok
+  [296/374] task_id=896 | ✓step | pat=True ex=True | 3.0s 202tok
+  [297/374] task_id=897 | ✓step | pat=True ex=True | 2.6s 176tok
+  [298/374] task_id=898 | ✓step | pat=True ex=True | 2.6s 171tok
+  [299/374] task_id=899 | ✓step | pat=True ex=True | 4.9s 334tok
+  [300/374] task_id=900 | ✓step | pat=True ex=True | 2.9s 191tok
+  [301/374] task_id=901 | ✓step | pat=True ex=True | 4.4s 293tok
+  [302/374] task_id=902 | ✓step | pat=True ex=True | 4.3s 291tok
+  [303/374] task_id=903 | ✓step | pat=True ex=True | 4.0s 267tok
+  [304/374] task_id=904 | ✓step | pat=True ex=True | 2.4s 158tok
+  [305/374] task_id=905 | ✓step | pat=True ex=True | 3.3s 221tok
+  [306/374] task_id=906 | ✓step | pat=True ex=True | 4.1s 278tok
+  [307/374] task_id=907 | ✓step | pat=True ex=True | 4.2s 286tok
+  [308/374] task_id=908 | ✓step | pat=True ex=True | 5.0s 337tok
+  [309/374] task_id=909 | ✓step | pat=True ex=True | 3.4s 225tok
+  [310/374] task_id=910 | ✓step | pat=True ex=True | 6.0s 404tok
+  [311/374] task_id=911 | ✓step | pat=True ex=True | 6.1s 414tok
+  [312/374] task_id=912 | ✓step | pat=True ex=True | 3.2s 214tok
+  [313/374] task_id=913 | ✓step | pat=True ex=True | 2.8s 186tok
+  [314/374] task_id=914 | ✓step | pat=True ex=True | 4.4s 297tok
+  [315/374] task_id=915 | ✓step | pat=True ex=True | 2.8s 186tok
+  [316/374] task_id=916 | ✓step | pat=True ex=True | 5.4s 363tok
+  [317/374] task_id=917 | ✓step | pat=True ex=True | 2.9s 195tok
+  [318/374] task_id=918 | ✓step | pat=True ex=True | 5.0s 341tok
+  [319/374] task_id=919 | ✓step | pat=True ex=True | 2.5s 169tok
+  [320/374] task_id=920 | ✓step | pat=True ex=True | 3.0s 202tok
+  [321/374] task_id=921 | ✓step | pat=True ex=True | 3.1s 207tok
+  [322/374] task_id=922 | ✓step | pat=True ex=True | 3.7s 251tok
+  [323/374] task_id=923 | ✓step | pat=True ex=True | 7.0s 473tok
+  [324/374] task_id=924 | ✓step | pat=True ex=True | 2.3s 155tok
+  [325/374] task_id=925 | ✓step | pat=True ex=True | 3.0s 198tok
+  [326/374] task_id=926 | ✓step | pat=True ex=True | 4.3s 289tok
+  [327/374] task_id=927 | ✓step | pat=True ex=True | 3.5s 234tok
+  [328/374] task_id=928 | ✓step | pat=True ex=True | 3.2s 210tok
+  [329/374] task_id=929 | ✓step | pat=True ex=True | 2.5s 168tok
+  [330/374] task_id=930 | ✓step | pat=True ex=True | 3.5s 230tok
+  [331/374] task_id=931 | ✓step | pat=True ex=True | 3.3s 219tok
+  [332/374] task_id=932 | ✓step | pat=True ex=True | 3.3s 222tok
+  [333/374] task_id=933 | ✓step | pat=True ex=True | 3.5s 231tok
+  [334/374] task_id=934 | ✓step | pat=True ex=True | 6.7s 451tok
+  [335/374] task_id=935 | ✓step | pat=True ex=True | 3.4s 225tok
+  [336/374] task_id=936 | ✓step | pat=True ex=True | 4.1s 271tok
+  [337/374] task_id=937 | ✓step | pat=True ex=True | 2.8s 187tok
+  [338/374] task_id=938 | ✓step | pat=True ex=True | 10.9s 740tok
+  [339/374] task_id=939 | ✓step | pat=True ex=True | 2.6s 174tok
+  [340/374] task_id=940 | ✓step | pat=True ex=True | 6.7s 453tok
+  [341/374] task_id=941 | ✓step | pat=True ex=True | 3.5s 234tok
+  [342/374] task_id=942 | ✓step | pat=True ex=True | 2.5s 169tok
+  [343/374] task_id=943 | ✓step | pat=True ex=True | 2.8s 189tok
+  [344/374] task_id=944 | ✓step | pat=True ex=True | 3.4s 225tok
+  [345/374] task_id=945 | ✓step | pat=True ex=True | 2.7s 180tok
+  [346/374] task_id=946 | ✓step | pat=True ex=True | 2.9s 197tok
+  [347/374] task_id=947 | ✓step | pat=True ex=True | 2.3s 151tok
+  [348/374] task_id=948 | ✓step | pat=True ex=True | 2.5s 164tok
+  [349/374] task_id=949 | ✓step | pat=True ex=True | 3.2s 213tok
+  [350/374] task_id=950 | ✓step | pat=True ex=True | 4.6s 311tok
+  [351/374] task_id=951 | ✓step | pat=True ex=True | 3.2s 216tok
+  [352/374] task_id=952 | ✓step | pat=True ex=True | 6.6s 450tok
+  [353/374] task_id=953 | ✓step | pat=True ex=True | 3.0s 201tok
+  [354/374] task_id=954 | ✓step | pat=True ex=True | 2.4s 162tok
+  [355/374] task_id=955 | ✓step | pat=True ex=True | 3.6s 240tok
+  [356/374] task_id=956 | ✓step | pat=True ex=True | 2.9s 193tok
+  [357/374] task_id=957 | ✓step | pat=True ex=True | 2.8s 188tok
+  [358/374] task_id=958 | ✓step | pat=True ex=True | 6.5s 436tok
+  [359/374] task_id=959 | ✓step | pat=True ex=True | 2.7s 179tok
+  [360/374] task_id=960 | ✓step | pat=True ex=True | 5.9s 399tok
+  [361/374] task_id=961 | ✓step | pat=True ex=True | 4.9s 331tok
+  [362/374] task_id=962 | ✓step | pat=True ex=True | 3.7s 245tok
+  [363/374] task_id=963 | ✓step | pat=True ex=True | 3.4s 224tok
+  [364/374] task_id=964 | ✓step | pat=True ex=True | 2.5s 168tok
+  [365/374] task_id=965 | ✓step | pat=True ex=True | 3.2s 212tok
+  [366/374] task_id=966 | ✓step | pat=True ex=True | 2.6s 173tok
+  [367/374] task_id=967 | ✓step | pat=True ex=True | 3.2s 213tok
+  [368/374] task_id=968 | ✓step | pat=True ex=True | 4.7s 312tok
+  [369/374] task_id=969 | ✓step | pat=True ex=True | 4.1s 274tok
+  [370/374] task_id=970 | ✓step | pat=True ex=True | 2.3s 154tok
+  [371/374] task_id=971 | ✓step | pat=True ex=True | 4.4s 294tok
+  [372/374] task_id=972 | ✓step | pat=True ex=True | 2.3s 153tok
+  [373/374] task_id=973 | ✓step | pat=True ex=True | 2.6s 170tok
+  [374/374] task_id=974 | ✓step | pat=True ex=True | 4.2s 281tok
+
+Compiled 374 records → /home/students/PatternDistill/phase-3c/data/patterns/patterns.json
+  Has pattern      : 374/374
+  Step-level       : 374/374
+  Has worked example: 374/374
+
+Next: run build_memory_bank.py to build MBPP memory bank

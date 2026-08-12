@@ -1,0 +1,19 @@
+{
+  "n": 100,
+  "n_injected": 100,
+  "n_low_sim_skipped": 0,
+  "n_with_bonus": 0,
+  "n_cross_domain": 0,
+  "method": "ATGI v2 on MBPP (anchor-first + cross-domain graph)",
+  "vanilla": {
+    "accuracy": 0.49,
+    "avg_latency_s": 0.521
+  },
+  "injection": {
+    "accuracy": 0.33,
+    "avg_latency_s": 0.614
+  },
+  "delta": {
+    "accuracy": -0.16
+  }
+}

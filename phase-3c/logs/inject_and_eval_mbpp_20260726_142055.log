@@ -1,0 +1,127 @@
+14:20:55 Log: /home/students/PatternDistill/phase-3c/logs/inject_and_eval_mbpp_20260726_142055.log
+14:20:55 ============================================================
+14:20:55 Phase 3C — MBPP ATGI v2 Evaluation
+14:20:55 ============================================================
+14:20:59 Eval set: 100 MBPP test problems (of 500 total)
+14:20:59 To do: 100
+14:20:59 MBPP bank: 374 entries, dim=768
+14:20:59 Combined graph: 3096 nodes (1600 math + 1496 code), cross-domain=22 pairs
+14:21:01 Loading embed model: nomic-ai/nomic-embed-text-v1 on cuda
+14:21:13 Embed model loaded
+14:21:13 Device: cuda:0
+14:21:13 GPU: NVIDIA GeForce RTX 5070 Ti
+14:21:13 Loading student: Qwen/Qwen3-1.7B
+14:21:17 Student loaded
+14:21:29 Embed model reloaded on CPU
+14:21:32   [1/100] task=11 | sim=0.716 | van=✓(1s) atgi=✗(1s) | ↓
+14:21:33   [2/100] task=12 | sim=0.681 | van=✓(1s) atgi=✓(1s) | =
+14:21:34   [3/100] task=13 | sim=0.738 | van=✗(0s) atgi=✗(1s) | =
+14:21:35   [4/100] task=14 | sim=0.631 | van=✓(0s) atgi=✓(1s) | =
+14:21:38   [5/100] task=15 | sim=0.776 | van=✗(2s) atgi=✗(0s) | =
+14:21:39   [6/100] task=16 | sim=0.718 | van=✗(0s) atgi=✗(0s) | =
+14:21:39   [7/100] task=17 | sim=0.773 | van=✓(0s) atgi=✓(0s) | =
+14:21:40   [8/100] task=18 | sim=0.700 | van=✓(0s) atgi=✓(0s) | =
+14:21:41   [9/100] task=19 | sim=0.720 | van=✓(0s) atgi=✗(0s) | ↓
+14:21:42   [10/100] task=20 | sim=0.678 | van=✗(1s) atgi=✓(0s) | ↑
+14:21:43   [11/100] task=21 | sim=0.720 | van=✗(0s) atgi=✗(1s) | =
+14:21:45   [12/100] task=22 | sim=0.698 | van=✓(0s) atgi=✗(1s) | ↓
+14:21:46   [13/100] task=23 | sim=0.751 | van=✓(0s) atgi=✓(0s) | =
+14:21:48   [14/100] task=24 | sim=0.688 | van=✗(0s) atgi=✗(2s) | =
+14:21:49   [15/100] task=25 | sim=0.785 | van=✓(1s) atgi=✓(1s) | =
+14:21:50   [16/100] task=26 | sim=0.754 | van=✗(0s) atgi=✗(0s) | =
+14:21:50   [17/100] task=27 | sim=0.690 | van=✗(0s) atgi=✗(0s) | =
+14:21:51   [18/100] task=28 | sim=0.792 | van=✗(1s) atgi=✓(0s) | ↑
+14:21:53   [19/100] task=29 | sim=0.747 | van=✗(1s) atgi=✗(1s) | =
+14:21:54   [20/100] task=30 | sim=0.673 | van=✗(1s) atgi=✓(1s) | ↑
+14:21:57   [21/100] task=31 | sim=0.689 | van=✗(1s) atgi=✗(2s) | =
+14:22:00   [22/100] task=32 | sim=0.738 | van=✓(1s) atgi=✓(2s) | =
+14:22:02   [23/100] task=33 | sim=0.695 | van=✗(0s) atgi=✗(1s) | =
+14:22:03   [24/100] task=34 | sim=0.733 | van=✗(1s) atgi=✗(1s) | =
+14:22:05   [25/100] task=35 | sim=0.675 | van=✗(0s) atgi=✗(1s) | =
+14:22:07   [26/100] task=36 | sim=0.694 | van=✗(1s) atgi=✗(2s) | =
+14:22:08   [27/100] task=37 | sim=0.697 | van=✗(0s) atgi=✗(0s) | =
+14:22:09   [28/100] task=38 | sim=0.790 | van=✗(1s) atgi=✗(1s) | =
+14:22:12   [29/100] task=39 | sim=0.688 | van=✗(2s) atgi=✗(1s) | =
+14:22:13   [30/100] task=40 | sim=0.683 | van=✓(0s) atgi=✓(0s) | =
+14:22:14   [31/100] task=41 | sim=0.737 | van=✓(0s) atgi=✓(0s) | =
+14:22:15   [32/100] task=42 | sim=0.817 | van=✗(1s) atgi=✗(1s) | =
+14:22:16   [33/100] task=43 | sim=0.701 | van=✓(0s) atgi=✗(1s) | ↓
+14:22:17   [34/100] task=44 | sim=0.769 | van=✓(0s) atgi=✗(0s) | ↓
+14:22:18   [35/100] task=45 | sim=0.759 | van=✓(0s) atgi=✓(0s) | =
+14:22:19   [36/100] task=46 | sim=0.712 | van=✓(0s) atgi=✗(1s) | ↓
+14:22:20   [37/100] task=47 | sim=0.759 | van=✗(0s) atgi=✗(1s) | =
+14:22:21   [38/100] task=48 | sim=0.723 | van=✗(0s) atgi=✗(1s) | =
+14:22:22   [39/100] task=49 | sim=0.673 | van=✓(0s) atgi=✓(0s) | =
+14:22:23   [40/100] task=50 | sim=0.704 | van=✗(0s) atgi=✗(0s) | =
+14:22:24   [41/100] task=51 | sim=0.684 | van=✓(0s) atgi=✓(1s) | =
+14:22:24   [42/100] task=52 | sim=0.763 | van=✓(0s) atgi=✓(0s) | =
+14:22:25   [43/100] task=53 | sim=0.729 | van=✓(0s) atgi=✓(0s) | =
+14:22:27   [44/100] task=54 | sim=0.733 | van=✓(1s) atgi=✗(1s) | ↓
+14:22:28   [45/100] task=55 | sim=0.641 | van=✗(0s) atgi=✗(0s) | =
+14:22:28   [46/100] task=56 | sim=0.677 | van=✗(0s) atgi=✓(0s) | ↑
+14:22:29   [47/100] task=57 | sim=0.692 | van=✗(0s) atgi=✗(0s) | =
+14:22:30   [48/100] task=58 | sim=0.739 | van=✓(0s) atgi=✓(0s) | =
+14:22:30   [49/100] task=59 | sim=0.683 | van=✓(0s) atgi=✗(0s) | ↓
+14:22:33   [50/100] task=60 | sim=0.745 | van=✗(1s) atgi=✗(1s) | =
+14:22:34   [51/100] task=61 | sim=0.734 | van=✗(1s) atgi=✗(1s) | =
+14:22:35   [52/100] task=62 | sim=0.751 | van=✓(0s) atgi=✓(0s) | =
+14:22:36   [53/100] task=63 | sim=0.693 | van=✗(1s) atgi=✗(0s) | =
+14:22:36   [54/100] task=64 | sim=0.746 | van=✓(0s) atgi=✓(0s) | =
+14:22:37   [55/100] task=65 | sim=0.688 | van=✓(1s) atgi=✗(0s) | ↓
+14:22:38   [56/100] task=66 | sim=0.702 | van=✓(0s) atgi=✓(0s) | =
+14:22:40   [57/100] task=67 | sim=0.655 | van=✗(1s) atgi=✓(1s) | ↑
+14:22:41   [58/100] task=68 | sim=0.687 | van=✓(1s) atgi=✗(1s) | ↓
+14:22:42   [59/100] task=69 | sim=0.693 | van=✗(0s) atgi=✗(0s) | =
+14:22:43   [60/100] task=70 | sim=0.701 | van=✓(0s) atgi=✓(0s) | =
+14:22:55   [61/100] task=71 | sim=0.707 | van=✗(1s) atgi=✗(0s) | =
+14:22:56   [62/100] task=72 | sim=0.800 | van=✓(0s) atgi=✗(1s) | ↓
+14:22:57   [63/100] task=73 | sim=0.730 | van=✗(0s) atgi=✗(1s) | =
+14:22:58   [64/100] task=74 | sim=0.656 | van=✗(0s) atgi=✗(1s) | =
+14:22:59   [65/100] task=75 | sim=0.691 | van=✓(1s) atgi=✓(1s) | =
+14:23:00   [66/100] task=76 | sim=0.680 | van=✗(0s) atgi=✗(0s) | =
+14:23:02   [67/100] task=77 | sim=0.755 | van=✗(1s) atgi=✗(1s) | =
+14:23:03   [68/100] task=78 | sim=0.719 | van=✓(1s) atgi=✓(1s) | =
+14:23:03   [69/100] task=79 | sim=0.785 | van=✓(0s) atgi=✓(0s) | =
+14:23:04   [70/100] task=80 | sim=0.681 | van=✓(0s) atgi=✗(0s) | ↓
+14:23:05   [71/100] task=81 | sim=0.725 | van=✗(0s) atgi=✗(1s) | =
+14:23:06   [72/100] task=82 | sim=0.626 | van=✓(1s) atgi=✓(0s) | =
+14:23:07   [73/100] task=83 | sim=0.718 | van=✗(0s) atgi=✗(1s) | =
+14:23:09   [74/100] task=84 | sim=0.641 | van=✗(1s) atgi=✗(1s) | =
+14:23:09   [75/100] task=85 | sim=0.710 | van=✓(0s) atgi=✓(0s) | =
+14:23:10   [76/100] task=86 | sim=0.661 | van=✓(0s) atgi=✗(0s) | ↓
+14:23:11   [77/100] task=87 | sim=0.778 | van=✗(0s) atgi=✗(0s) | =
+14:23:11   [78/100] task=88 | sim=0.785 | van=✗(0s) atgi=✓(0s) | ↑
+14:23:12   [79/100] task=89 | sim=0.693 | van=✓(0s) atgi=✓(0s) | =
+14:23:13   [80/100] task=90 | sim=0.759 | van=✓(0s) atgi=✗(0s) | ↓
+14:23:13   [81/100] task=91 | sim=0.699 | van=✗(0s) atgi=✗(0s) | =
+14:23:15   [82/100] task=92 | sim=0.678 | van=✓(1s) atgi=✗(1s) | ↓
+14:23:16   [83/100] task=93 | sim=0.698 | van=✓(0s) atgi=✓(1s) | =
+14:23:17   [84/100] task=94 | sim=0.734 | van=✗(0s) atgi=✓(1s) | ↑
+14:23:18   [85/100] task=95 | sim=0.686 | van=✓(0s) atgi=✗(1s) | ↓
+14:23:20   [86/100] task=96 | sim=0.739 | van=✓(1s) atgi=✗(1s) | ↓
+14:23:21   [87/100] task=97 | sim=0.745 | van=✓(1s) atgi=✗(1s) | ↓
+14:23:22   [88/100] task=98 | sim=0.816 | van=✓(0s) atgi=✗(0s) | ↓
+14:23:23   [89/100] task=99 | sim=0.691 | van=✓(0s) atgi=✗(1s) | ↓
+14:23:26   [90/100] task=100 | sim=0.765 | van=✗(2s) atgi=✗(2s) | =
+14:23:28   [91/100] task=101 | sim=0.764 | van=✗(0s) atgi=✗(1s) | =
+14:23:29   [92/100] task=102 | sim=0.811 | van=✗(0s) atgi=✗(0s) | =
+14:23:31   [93/100] task=103 | sim=0.685 | van=✗(2s) atgi=✗(1s) | =
+14:23:32   [94/100] task=104 | sim=0.724 | van=✓(0s) atgi=✗(0s) | ↓
+14:23:33   [95/100] task=105 | sim=0.694 | van=✓(0s) atgi=✗(1s) | ↓
+14:23:33   [96/100] task=106 | sim=0.812 | van=✗(0s) atgi=✗(0s) | =
+14:23:35   [97/100] task=107 | sim=0.698 | van=✗(1s) atgi=✗(1s) | =
+14:23:36   [98/100] task=108 | sim=0.671 | van=✓(1s) atgi=✗(1s) | ↓
+14:23:37   [99/100] task=109 | sim=0.686 | van=✗(1s) atgi=✗(1s) | =
+14:23:40   [100/100] task=110 | sim=0.656 | van=✗(2s) atgi=✗(1s) | =
+14:23:40 
+Wrote 100 records → /home/students/PatternDistill/phase-3c/results/results.json
+14:23:40 Wrote summary → /home/students/PatternDistill/phase-3c/results/summary.json
+14:23:40 
+============================================================
+14:23:40 Phase 3C — MBPP ATGI Results
+14:23:40 ============================================================
+14:23:40   n=100  injected=100  skipped=0  bonus=0  cross-domain=0
+14:23:40 
+  Vanilla   pass rate : 0.490
+14:23:40   ATGI      pass rate : 0.330
+14:23:40   Delta               : -0.160

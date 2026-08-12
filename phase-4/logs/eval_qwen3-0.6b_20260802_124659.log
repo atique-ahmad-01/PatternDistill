@@ -1,0 +1,37 @@
+12:46:59 Log: /home/students/PatternDistill/phase-4/logs/eval_qwen3-0.6b_20260802_124659.log
+12:46:59 ============================================================
+12:46:59 Phase 4 — Multi-Model Eval: Qwen3-0.6B
+12:46:59   HF ID: Qwen/Qwen3-0.6B
+12:46:59   Max context: 32768
+12:46:59 ============================================================
+12:47:07 Eval set: 100 MATH + 187 AIME = 287
+12:47:07 Capped at: 2
+12:47:07 To do: 2
+12:47:07 Combined bank: 400 MATH + 746 AIME = 1146
+12:47:08 Graph: 4584 nodes, cross=2741
+12:47:20 Device: cuda:0
+12:47:20 GPU: NVIDIA GeForce RTX 5070 Ti
+12:47:20 Loading model: Qwen/Qwen3-0.6B
+13:05:54 Student loaded: Qwen/Qwen3-0.6B
+13:05:54 Embed on CPU, student on GPU
+13:09:19   [1/2] math_400 (MATH-500) | sim=0.721 | van=N(138s/16384t) inj=N(68s/8531t) | =
+13:10:35   [2/2] math_401 (MATH-500) | sim=0.699 | van=N(31s/3922t) inj=N(44s/5558t) | =
+13:10:35 
+============================================================
+13:10:35 Phase 4 — Qwen3-0.6B Results
+13:10:35 ============================================================
+13:10:35   Total: n=2 (MATH=2, AIME=0)
+13:10:35 
+  OVERALL:
+13:10:35     Vanilla:   0.000 (0/2)
+13:10:35     Injection: 0.000 (0/2)
+13:10:35     Delta:     +0.000
+13:10:35     Regressions: 0  Improvements: 0
+13:10:35 
+  MATH-500 (n=2):
+13:10:35     Vanilla: 0.000  Injection: 0.000  Delta: +0.000
+13:10:35 
+  AIME (n=0):
+13:10:35     Vanilla: 0.000  Injection: 0.000  Delta: +0.000
+13:10:35 
+Wrote 2 results -> /home/students/PatternDistill/phase-4/results/results_qwen3-0.6b.json

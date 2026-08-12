@@ -1,0 +1,97 @@
+18:13:55 Log     : /home/students/PatternDistill/phase-2/logs/generate_patterns_20260717_181355.log
+18:13:55 Backend : transformers
+18:13:55 Dataset : HuggingFaceH4/MATH-500
+18:14:01 Problems: 400
+18:14:01 Resuming — 297 already done
+18:14:01 To do   : 103
+18:14:05 Device  : cuda
+18:14:05 GPU     : NVIDIA GeForce RTX 5070 Ti
+18:14:05 VRAM    : 16.6 GB
+18:14:05 Loading teacher: Qwen/Qwen3-8B
+18:14:07   Free VRAM 16.4GB — loading in 4-bit quant
+18:14:24 Teacher loaded
+18:14:49   [1/103] id=297 Number Theory L4 | pattern=✓ | lat=25.1s tps=70 | tok=1747
+18:15:16   [2/103] id=298 Precalculus L4 | pattern=✓ | lat=27.4s tps=72 | tok=1985
+18:15:41   [3/103] id=299 Geometry L4 | pattern=✓ | lat=24.7s tps=72 | tok=1784
+18:15:47   [4/103] id=300 Counting & Probability L4 | pattern=✓ | lat=6.0s tps=72 | tok=430
+18:16:49   [5/103] id=301 Prealgebra L5 | pattern=✓ | lat=62.5s tps=72 | tok=4493
+18:17:27   [6/103] id=302 Prealgebra L4 | pattern=✓ | lat=37.1s tps=72 | tok=2658
+18:19:21   [WARN] No <pattern> tag for problem 303
+18:19:21   [7/103] id=303 Geometry L5 | pattern=✗ | lat=114.1s tps=72 | tok=8192
+18:19:48   [8/103] id=304 Intermediate Algebra L3 | pattern=✓ | lat=27.4s tps=72 | tok=1969
+18:20:00   [9/103] id=305 Algebra L4 | pattern=✓ | lat=11.7s tps=71 | tok=838
+18:21:05   [10/103] id=306 Intermediate Algebra L5 | pattern=✓ | lat=64.8s tps=72 | tok=4675
+18:21:32   [11/103] id=307 Precalculus L2 | pattern=✓ | lat=27.2s tps=72 | tok=1952
+18:23:26   [WARN] No <pattern> tag for problem 308
+18:23:26   [12/103] id=308 Geometry L5 | pattern=✗ | lat=114.0s tps=72 | tok=8192
+18:25:20   [WARN] No <pattern> tag for problem 309
+18:25:20   [13/103] id=309 Number Theory L3 | pattern=✗ | lat=114.1s tps=72 | tok=8192
+18:25:39   [14/103] id=310 Algebra L2 | pattern=✓ | lat=18.9s tps=72 | tok=1364
+18:26:26   [15/103] id=311 Number Theory L4 | pattern=✓ | lat=46.8s tps=72 | tok=3357
+18:26:33   [16/103] id=312 Intermediate Algebra L1 | pattern=✓ | lat=7.7s tps=71 | tok=545
+18:26:44   [17/103] id=313 Prealgebra L5 | pattern=✓ | lat=10.1s tps=71 | tok=719
+18:26:58   [18/103] id=314 Geometry L2 | pattern=✓ | lat=14.0s tps=71 | tok=1002
+18:27:46   [19/103] id=315 Algebra L4 | pattern=✓ | lat=48.7s tps=71 | tok=3480
+18:28:03   [20/103] id=316 Algebra L2 | pattern=✓ | lat=16.7s tps=71 | tok=1194
+18:29:03   [21/103] id=317 Intermediate Algebra L5 | pattern=✓ | lat=59.7s tps=71 | tok=4271
+18:29:13   [22/103] id=318 Algebra L2 | pattern=✓ | lat=10.3s tps=71 | tok=735
+18:29:27   [23/103] id=319 Algebra L3 | pattern=✓ | lat=13.5s tps=72 | tok=973
+18:29:52   [24/103] id=320 Geometry L5 | pattern=✓ | lat=25.0s tps=72 | tok=1790
+18:30:03   [25/103] id=321 Prealgebra L5 | pattern=✓ | lat=11.8s tps=71 | tok=842
+18:30:14   [26/103] id=322 Algebra L3 | pattern=✓ | lat=11.0s tps=71 | tok=784
+18:32:05   [27/103] id=323 Counting & Probability L5 | pattern=✓ | lat=110.6s tps=72 | tok=7912
+18:33:09   [28/103] id=324 Geometry L4 | pattern=✓ | lat=63.9s tps=71 | tok=4559
+18:33:20   [29/103] id=325 Geometry L2 | pattern=✓ | lat=11.2s tps=71 | tok=796
+18:34:00   [30/103] id=326 Precalculus L2 | pattern=✓ | lat=39.7s tps=72 | tok=2841
+18:35:07   [31/103] id=327 Intermediate Algebra L5 | pattern=✓ | lat=67.4s tps=72 | tok=4850
+18:35:59   [32/103] id=328 Algebra L5 | pattern=✓ | lat=52.4s tps=71 | tok=3739
+18:36:09   [33/103] id=329 Prealgebra L4 | pattern=✓ | lat=9.1s tps=71 | tok=650
+18:36:24   [34/103] id=330 Counting & Probability L5 | pattern=✓ | lat=15.3s tps=71 | tok=1092
+18:36:39   [35/103] id=331 Algebra L5 | pattern=✓ | lat=14.8s tps=71 | tok=1054
+18:38:34   [WARN] No <pattern> tag for problem 332
+18:38:34   [36/103] id=332 Intermediate Algebra L4 | pattern=✗ | lat=114.9s tps=71 | tok=8192
+18:39:55   [37/103] id=333 Intermediate Algebra L4 | pattern=✓ | lat=81.5s tps=72 | tok=5890
+18:40:08   [38/103] id=334 Algebra L3 | pattern=✓ | lat=12.5s tps=72 | tok=900
+18:40:28   [39/103] id=335 Number Theory L4 | pattern=✓ | lat=20.2s tps=72 | tok=1459
+18:40:40   [40/103] id=336 Algebra L1 | pattern=✓ | lat=12.7s tps=72 | tok=921
+18:40:58   [41/103] id=337 Prealgebra L3 | pattern=✓ | lat=17.2s tps=72 | tok=1238
+18:41:21   [42/103] id=338 Number Theory L3 | pattern=✓ | lat=23.5s tps=45 | tok=1046
+18:43:15   [WARN] No <pattern> tag for problem 339
+18:43:15   [43/103] id=339 Intermediate Algebra L3 | pattern=✗ | lat=113.5s tps=72 | tok=8192
+18:45:08   [WARN] No <pattern> tag for problem 340
+18:45:08   [44/103] id=340 Precalculus L3 | pattern=✗ | lat=113.5s tps=72 | tok=8192
+18:45:21   [45/103] id=341 Algebra L4 | pattern=✓ | lat=13.3s tps=72 | tok=951
+18:45:31   [46/103] id=342 Prealgebra L3 | pattern=✓ | lat=9.7s tps=72 | tok=698
+18:45:43   [47/103] id=343 Counting & Probability L2 | pattern=✓ | lat=11.5s tps=72 | tok=826
+18:45:55   [48/103] id=344 Intermediate Algebra L2 | pattern=✓ | lat=12.0s tps=71 | tok=860
+18:46:12   [49/103] id=345 Algebra L3 | pattern=✓ | lat=17.6s tps=72 | tok=1265
+18:46:33   [50/103] id=346 Algebra L4 | pattern=✓ | lat=20.4s tps=72 | tok=1465
+18:46:51   [51/103] id=347 Algebra L3 | pattern=✓ | lat=18.7s tps=72 | tok=1339
+18:47:06   [52/103] id=348 Counting & Probability L2 | pattern=✓ | lat=14.3s tps=72 | tok=1028
+18:47:30   [53/103] id=349 Counting & Probability L4 | pattern=✓ | lat=24.3s tps=72 | tok=1745
+18:47:47   [54/103] id=350 Number Theory L2 | pattern=✓ | lat=17.0s tps=61 | tok=1032
+18:48:33   [55/103] id=351 Precalculus L3 | pattern=✓ | lat=45.7s tps=61 | tok=2791
+18:50:26   [WARN] No <pattern> tag for problem 352
+18:50:26   [56/103] id=352 Precalculus L4 | pattern=✗ | lat=113.2s tps=72 | tok=8192
+18:50:40   [57/103] id=353 Counting & Probability L4 | pattern=✓ | lat=13.8s tps=72 | tok=1002
+18:50:55   [58/103] id=354 Algebra L4 | pattern=✓ | lat=15.1s tps=72 | tok=1094
+18:52:59   [WARN] No <pattern> tag for problem 355
+18:52:59   [59/103] id=355 Intermediate Algebra L5 | pattern=✗ | lat=124.1s tps=66 | tok=8192
+18:53:30   [60/103] id=356 Algebra L5 | pattern=✓ | lat=31.1s tps=72 | tok=2236
+18:53:53   [61/103] id=357 Prealgebra L5 | pattern=✓ | lat=23.3s tps=72 | tok=1675
+18:54:11   [62/103] id=358 Intermediate Algebra L2 | pattern=✓ | lat=18.0s tps=72 | tok=1289
+18:54:46   [63/103] id=359 Intermediate Algebra L4 | pattern=✓ | lat=34.5s tps=72 | tok=2472
+18:55:03   [64/103] id=360 Precalculus L3 | pattern=✓ | lat=17.6s tps=71 | tok=1253
+18:56:00   [65/103] id=361 Intermediate Algebra L4 | pattern=✓ | lat=56.6s tps=72 | tok=4065
+18:56:09   [66/103] id=362 Counting & Probability L1 | pattern=✓ | lat=9.4s tps=72 | tok=675
+18:56:19   [67/103] id=363 Algebra L2 | pattern=✓ | lat=9.6s tps=72 | tok=690
+18:57:10   [68/103] id=364 Intermediate Algebra L4 | pattern=✓ | lat=51.4s tps=72 | tok=3685
+18:59:05   [WARN] No <pattern> tag for problem 365
+18:59:05   [69/103] id=365 Number Theory L5 | pattern=✗ | lat=114.2s tps=72 | tok=8192
+18:59:40   [70/103] id=366 Number Theory L4 | pattern=✓ | lat=35.5s tps=72 | tok=2549
+18:59:53   [71/103] id=367 Algebra L4 | pattern=✓ | lat=12.5s tps=42 | tok=523
+19:00:05   [72/103] id=368 Geometry L2 | pattern=✓ | lat=12.4s tps=48 | tok=591
+19:00:46   [73/103] id=369 Prealgebra L2 | pattern=✓ | lat=41.2s tps=71 | tok=2924
+19:00:54   [74/103] id=370 Precalculus L1 | pattern=✓ | lat=7.5s tps=71 | tok=531
+19:02:49   [WARN] No <pattern> tag for problem 371
+19:02:49   [75/103] id=371 Intermediate Algebra L5 | pattern=✗ | lat=115.3s tps=71 | tok=8192

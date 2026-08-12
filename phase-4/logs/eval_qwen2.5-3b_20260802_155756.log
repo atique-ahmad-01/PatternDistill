@@ -1,0 +1,148 @@
+15:57:56 Log: /home/students/PatternDistill/phase-4/logs/eval_qwen2.5-3b_20260802_155756.log
+15:57:56 ============================================================
+15:57:56 Phase 4 — Multi-Model Eval: Qwen2.5-3B
+15:57:56   HF ID: Qwen/Qwen2.5-3B-Instruct
+15:57:56   Max context: 32768
+15:57:56 ============================================================
+15:58:06 Eval set: 100 MATH + 187 AIME = 287
+15:58:06 To do: 287
+15:58:06 Combined bank: 400 MATH + 746 AIME = 1146
+15:58:06 Graph: 4584 nodes, cross=2741
+15:58:22 Device: cuda:0
+15:58:22 GPU: NVIDIA GeForce RTX 5070 Ti
+15:58:22 Loading model: Qwen/Qwen2.5-3B-Instruct
+17:16:02 Student loaded: Qwen/Qwen2.5-3B-Instruct
+17:16:02 Embed on CPU, student on GPU
+17:16:39   [1/287] math_400 (MATH-500) | sim=0.721 | van=N(21s/1144t) inj=N(16s/915t) | =
+17:17:10   [2/287] math_401 (MATH-500) | sim=0.699 | van=N(20s/1152t) inj=N(10s/589t) | =
+17:17:28   [3/287] math_402 (MATH-500) | sim=0.716 | van=N(7s/394t) inj=N(11s/638t) | =
+17:17:28   [4/287] math_403 (MATH-500) | sim=0.647 < 0.65 -> skip
+17:18:12   [4/287] math_403 (MATH-500) | sim=0.647 | van=N(22s/1256t) inj=N(22s/1256t) | =
+17:18:25   [5/287] math_404 (MATH-500) | sim=0.565 | van=Y(6s/347t) inj=Y(7s/383t) | =
+17:18:39   [6/287] math_405 (MATH-500) | sim=0.553 | van=Y(8s/461t) inj=Y(6s/320t) | =
+17:18:39   [7/287] math_406 (MATH-500) | sim=0.564 < 0.65 -> skip
+17:18:50   [7/287] math_406 (MATH-500) | sim=0.564 | van=Y(6s/324t) inj=Y(6s/324t) | =
+17:19:01   [8/287] math_407 (MATH-500) | sim=0.644 | van=Y(4s/207t) inj=N(8s/436t) | v
+17:19:51   [9/287] math_408 (MATH-500) | sim=0.735 | van=N(25s/1424t) inj=N(24s/1386t) | =
+17:20:25   [10/287] math_409 (MATH-500) | sim=0.664 | van=Y(15s/875t) inj=N(18s/1049t) | v
+17:20:41   [11/287] math_410 (MATH-500) | sim=0.544 | van=Y(8s/434t) inj=Y(9s/519t) | =
+17:20:52   [12/287] math_411 (MATH-500) | sim=0.652 | van=Y(5s/315t) inj=Y(6s/317t) | =
+17:21:36   [13/287] math_412 (MATH-500) | sim=0.912 | van=N(24s/1373t) inj=Y(19s/1103t) | ^
+17:21:46   [14/287] math_413 (MATH-500) | sim=0.661 | van=Y(4s/248t) inj=Y(6s/328t) | =
+17:22:08   [15/287] math_414 (MATH-500) | sim=0.639 | van=Y(9s/496t) inj=Y(13s/756t) | =
+17:22:38   [16/287] math_415 (MATH-500) | sim=0.671 | van=Y(14s/811t) inj=N(15s/878t) | v
+17:23:05   [17/287] math_416 (MATH-500) | sim=0.704 | van=Y(16s/903t) inj=Y(12s/669t) | =
+17:23:26   [18/287] math_417 (MATH-500) | sim=0.647 | van=N(12s/676t) inj=Y(9s/505t) | ^
+17:23:48   [19/287] math_418 (MATH-500) | sim=0.661 | van=N(10s/572t) inj=Y(12s/702t) | ^
+17:24:36   [20/287] math_419 (MATH-500) | sim=0.791 | van=Y(25s/1444t) inj=Y(22s/1267t) | =
+17:24:56   [21/287] math_420 (MATH-500) | sim=0.722 | van=Y(11s/609t) inj=Y(10s/546t) | =
+17:25:31   [22/287] math_421 (MATH-500) | sim=0.699 | van=N(16s/923t) inj=N(19s/1065t) | =
+17:26:04   [23/287] math_422 (MATH-500) | sim=0.739 | van=N(18s/1193t) inj=N(14s/1373t) | =
+17:26:04   [24/287] math_423 (MATH-500) | sim=0.590 < 0.65 -> skip
+17:26:22   [24/287] math_423 (MATH-500) | sim=0.590 | van=N(9s/877t) inj=N(9s/877t) | =
+17:26:30   [25/287] math_424 (MATH-500) | sim=0.598 | van=Y(4s/395t) inj=Y(4s/386t) | =
+17:26:40   [26/287] math_425 (MATH-500) | sim=0.681 | van=N(6s/597t) inj=N(5s/475t) | =
+17:26:51   [27/287] math_426 (MATH-500) | sim=0.728 | van=Y(6s/562t) inj=Y(5s/502t) | =
+17:26:58   [28/287] math_427 (MATH-500) | sim=0.535 | van=Y(3s/303t) inj=Y(4s/362t) | =
+17:27:18   [29/287] math_428 (MATH-500) | sim=0.795 | van=N(11s/1073t) inj=N(9s/884t) | =
+17:27:32   [30/287] math_429 (MATH-500) | sim=0.651 | van=Y(6s/574t) inj=Y(8s/754t) | =
+17:27:35   [31/287] math_430 (MATH-500) | sim=0.642 | van=Y(2s/198t) inj=Y(2s/147t) | =
+17:27:35   [32/287] math_431 (MATH-500) | sim=0.638 < 0.65 -> skip
+17:27:57   [32/287] math_431 (MATH-500) | sim=0.638 | van=Y(11s/1066t) inj=Y(11s/1066t) | =
+17:27:57   [33/287] math_432 (MATH-500) | sim=0.588 < 0.6 -> skip
+17:28:32   [33/287] math_432 (MATH-500) | sim=0.588 | van=N(18s/1713t) inj=N(18s/1713t) | =
+17:28:45   [34/287] math_433 (MATH-500) | sim=0.735 | van=Y(6s/541t) inj=Y(7s/676t) | =
+17:28:56   [35/287] math_434 (MATH-500) | sim=0.709 | van=Y(5s/524t) inj=Y(6s/562t) | =
+17:29:08   [36/287] math_435 (MATH-500) | sim=0.622 | van=Y(7s/729t) inj=N(4s/424t) | v
+17:29:25   [37/287] math_436 (MATH-500) | sim=0.718 | van=N(9s/895t) inj=Y(9s/845t) | ^
+17:29:37   [38/287] math_437 (MATH-500) | sim=0.630 | van=Y(5s/468t) inj=Y(7s/654t) | =
+17:29:37   [39/287] math_438 (MATH-500) | sim=0.591 < 0.65 -> skip
+17:29:47   [39/287] math_438 (MATH-500) | sim=0.591 | van=N(5s/483t) inj=N(5s/483t) | =
+17:30:19   [40/287] math_439 (MATH-500) | sim=0.678 | van=Y(20s/1614t) inj=N(12s/1165t) | v
+17:30:28   [41/287] math_440 (MATH-500) | sim=0.738 | van=Y(5s/426t) inj=Y(4s/367t) | =
+17:30:28   [42/287] math_441 (MATH-500) | sim=0.455 < 0.5 -> skip
+17:30:36   [42/287] math_441 (MATH-500) | sim=0.455 | van=Y(4s/370t) inj=Y(4s/370t) | =
+17:30:42   [43/287] math_442 (MATH-500) | sim=0.602 | van=Y(3s/295t) inj=Y(3s/264t) | =
+17:30:49   [44/287] math_443 (MATH-500) | sim=0.630 | van=Y(3s/296t) inj=Y(4s/397t) | =
+17:31:12   [45/287] math_444 (MATH-500) | sim=0.652 | van=Y(14s/1252t) inj=N(9s/809t) | v
+17:34:43   [46/287] math_445 (MATH-500) | sim=0.693 | van=N(15s/1375t) inj=N(196s/16384t) | =
+17:35:01   [47/287] math_446 (MATH-500) | sim=0.667 | van=Y(9s/819t) inj=Y(9s/803t) | =
+17:35:10   [48/287] math_447 (MATH-500) | sim=0.653 | van=Y(4s/374t) inj=Y(5s/478t) | =
+17:35:10   [49/287] math_448 (MATH-500) | sim=0.643 < 0.65 -> skip
+17:35:26   [49/287] math_448 (MATH-500) | sim=0.643 | van=Y(8s/732t) inj=Y(8s/732t) | =
+17:35:33   [50/287] math_449 (MATH-500) | sim=0.554 | van=Y(4s/334t) inj=Y(3s/302t) | =
+17:35:33   [51/287] math_450 (MATH-500) | sim=0.584 < 0.65 -> skip
+17:35:50   [51/287] math_450 (MATH-500) | sim=0.584 | van=N(8s/771t) inj=N(8s/771t) | =
+17:35:50   [52/287] math_451 (MATH-500) | sim=0.553 < 0.65 -> skip
+17:36:02   [52/287] math_451 (MATH-500) | sim=0.553 | van=Y(6s/559t) inj=Y(6s/559t) | =
+17:36:12   [53/287] math_452 (MATH-500) | sim=0.624 | van=Y(5s/464t) inj=Y(5s/468t) | =
+17:36:24   [54/287] math_453 (MATH-500) | sim=0.590 | van=Y(5s/441t) inj=N(7s/650t) | v
+17:36:51   [55/287] math_454 (MATH-500) | sim=0.753 | van=Y(15s/1384t) inj=N(12s/1048t) | v
+17:37:00   [56/287] math_455 (MATH-500) | sim=0.663 | van=Y(4s/394t) inj=Y(5s/450t) | =
+17:37:23   [57/287] math_456 (MATH-500) | sim=0.694 | van=Y(11s/1025t) inj=Y(11s/989t) | =
+17:37:29   [58/287] math_457 (MATH-500) | sim=0.668 | van=N(2s/171t) inj=Y(5s/414t) | ^
+17:37:41   [59/287] math_458 (MATH-500) | sim=0.601 | van=N(6s/550t) inj=N(6s/552t) | =
+17:38:00   [60/287] math_459 (MATH-500) | sim=0.578 | van=Y(10s/907t) inj=Y(9s/830t) | =
+17:38:10   [61/287] math_460 (MATH-500) | sim=0.831 | van=N(5s/502t) inj=N(4s/398t) | =
+17:38:24   [62/287] math_461 (MATH-500) | sim=0.623 | van=Y(7s/681t) inj=Y(6s/562t) | =
+17:38:24   [63/287] math_462 (MATH-500) | sim=0.625 < 0.65 -> skip
+17:38:36   [63/287] math_462 (MATH-500) | sim=0.625 | van=Y(6s/577t) inj=Y(6s/577t) | =
+17:38:43   [64/287] math_463 (MATH-500) | sim=0.635 | van=Y(4s/341t) inj=Y(3s/273t) | =
+17:39:03   [65/287] math_464 (MATH-500) | sim=0.660 | van=Y(12s/1064t) inj=Y(8s/785t) | =
+17:39:03   [66/287] math_465 (MATH-500) | sim=0.599 < 0.65 -> skip
+17:39:14   [66/287] math_465 (MATH-500) | sim=0.599 | van=Y(5s/462t) inj=Y(5s/462t) | =
+17:39:14   [67/287] math_466 (MATH-500) | sim=0.707 < 0.75 -> skip
+17:39:41   [67/287] math_466 (MATH-500) | sim=0.707 | van=N(14s/1237t) inj=N(14s/1237t) | =
+17:39:50   [68/287] math_467 (MATH-500) | sim=0.734 | van=N(6s/566t) inj=N(3s/276t) | =
+17:40:00   [69/287] math_468 (MATH-500) | sim=0.633 | van=N(3s/232t) inj=N(7s/660t) | =
+17:40:06   [70/287] math_469 (MATH-500) | sim=0.642 | van=Y(3s/294t) inj=N(3s/269t) | v
+17:40:39   [71/287] math_470 (MATH-500) | sim=0.666 | van=N(16s/1437t) inj=N(17s/1581t) | =
+17:40:47   [72/287] math_471 (MATH-500) | sim=0.559 | van=N(4s/353t) inj=Y(4s/352t) | ^
+17:40:58   [73/287] math_472 (MATH-500) | sim=0.568 | van=Y(6s/535t) inj=Y(5s/454t) | =
+17:41:20   [74/287] math_473 (MATH-500) | sim=0.660 | van=Y(10s/947t) inj=N(11s/990t) | v
+17:41:31   [75/287] math_474 (MATH-500) | sim=0.665 | van=Y(8s/698t) inj=Y(4s/345t) | =
+17:42:03   [76/287] math_475 (MATH-500) | sim=0.948 | van=N(19s/1694t) inj=N(13s/1219t) | =
+17:42:13   [77/287] math_476 (MATH-500) | sim=0.583 | van=Y(5s/456t) inj=Y(4s/397t) | =
+17:42:13   [78/287] math_477 (MATH-500) | sim=0.608 < 0.65 -> skip
+17:42:32   [78/287] math_477 (MATH-500) | sim=0.608 | van=Y(10s/898t) inj=Y(10s/898t) | =
+17:42:48   [79/287] math_478 (MATH-500) | sim=0.673 | van=N(9s/816t) inj=N(7s/624t) | =
+17:42:48   [80/287] math_479 (MATH-500) | sim=0.616 < 0.65 -> skip
+17:43:02   [80/287] math_479 (MATH-500) | sim=0.616 | van=Y(7s/616t) inj=Y(7s/616t) | =
+17:43:16   [81/287] math_480 (MATH-500) | sim=0.671 | van=Y(9s/810t) inj=Y(5s/485t) | =
+17:43:38   [82/287] math_481 (MATH-500) | sim=0.634 | van=N(12s/1059t) inj=N(10s/935t) | =
+17:43:38   [83/287] math_482 (MATH-500) | sim=0.575 < 0.65 -> skip
+17:43:54   [83/287] math_482 (MATH-500) | sim=0.575 | van=N(8s/736t) inj=N(8s/736t) | =
+17:44:13   [84/287] math_483 (MATH-500) | sim=0.728 | van=N(9s/819t) inj=N(10s/878t) | =
+17:44:38   [85/287] math_484 (MATH-500) | sim=0.703 | van=Y(9s/836t) inj=N(15s/1391t) | v
+17:45:09   [86/287] math_485 (MATH-500) | sim=0.657 | van=N(23s/2027t) inj=N(8s/765t) | =
+17:45:18   [87/287] math_486 (MATH-500) | sim=0.591 | van=N(3s/233t) inj=N(6s/564t) | =
+17:45:27   [88/287] math_487 (MATH-500) | sim=0.776 | van=Y(3s/301t) inj=Y(6s/551t) | =
+17:45:27   [89/287] math_488 (MATH-500) | sim=0.478 < 0.5 -> skip
+17:45:32   [89/287] math_488 (MATH-500) | sim=0.478 | van=Y(2s/223t) inj=Y(2s/223t) | =
+17:45:50   [90/287] math_489 (MATH-500) | sim=0.918 | van=N(11s/992t) inj=Y(7s/615t) | ^
+17:46:09   [91/287] math_490 (MATH-500) | sim=0.615 | van=Y(9s/857t) inj=N(10s/927t) | v
+17:46:19   [92/287] math_491 (MATH-500) | sim=0.572 | van=Y(5s/463t) inj=Y(4s/385t) | =
+17:46:33   [93/287] math_492 (MATH-500) | sim=0.753 | van=Y(8s/706t) inj=Y(7s/632t) | =
+17:46:49   [94/287] math_493 (MATH-500) | sim=0.770 | van=Y(7s/636t) inj=Y(8s/756t) | =
+17:46:49   [95/287] math_494 (MATH-500) | sim=0.699 < 0.7 -> skip
+17:47:10   [95/287] math_494 (MATH-500) | sim=0.699 | van=N(11s/971t) inj=N(11s/971t) | =
+17:47:10   [96/287] math_495 (MATH-500) | sim=0.690 < 0.7 -> skip
+17:47:22   [96/287] math_495 (MATH-500) | sim=0.690 | van=Y(6s/539t) inj=Y(6s/539t) | =
+17:47:22   [97/287] math_496 (MATH-500) | sim=0.587 < 0.6 -> skip
+17:47:35   [97/287] math_496 (MATH-500) | sim=0.587 | van=Y(6s/593t) inj=Y(6s/593t) | =
+17:47:52   [98/287] math_497 (MATH-500) | sim=0.654 | van=N(9s/825t) inj=N(7s/666t) | =
+17:48:28   [99/287] math_498 (MATH-500) | sim=0.762 | van=N(22s/1957t) inj=N(15s/1352t) | =
+17:48:37   [100/287] math_499 (MATH-500) | sim=0.694 | van=Y(4s/371t) inj=Y(5s/410t) | =
+17:48:51   [101/287] 2018-I-7 (AIME) | sim=0.793 | van=N(6s/505t) inj=N(8s/746t) | =
+17:49:07   [102/287] 2018-I-8 (AIME) | sim=0.692 | van=N(6s/589t) inj=N(10s/898t) | =
+17:49:23   [103/287] 2018-I-9 (AIME) | sim=0.759 | van=N(7s/660t) inj=N(9s/827t) | =
+17:49:40   [104/287] 2018-I-10 (AIME) | sim=0.681 | van=N(6s/503t) inj=N(11s/994t) | =
+17:50:06   [105/287] 2018-I-11 (AIME) | sim=0.646 | van=N(11s/958t) inj=N(15s/1322t) | =
+17:50:27   [106/287] 2018-I-12 (AIME) | sim=0.718 | van=N(10s/952t) inj=N(11s/987t) | =
+17:50:48   [107/287] 2018-I-13 (AIME) | sim=0.801 | van=N(11s/971t) inj=N(10s/939t) | =
+17:51:04   [108/287] 2018-I-14 (AIME) | sim=0.746 | van=N(7s/683t) inj=N(8s/737t) | =
+17:51:34   [109/287] 2018-I-15 (AIME) | sim=0.732 | van=N(13s/1150t) inj=N(18s/1581t) | =
+17:51:51   [110/287] 2018-II-1 (AIME) | sim=0.640 | van=N(7s/639t) inj=N(9s/846t) | =
+17:58:26   [111/287] 2018-II-2 (AIME) | sim=0.633 | van=N(197s/16384t) inj=N(198s/16384t) | =
+17:58:57   [112/287] 2018-II-3 (AIME) | sim=0.674 | van=N(16s/1443t) inj=N(15s/1352t) | =
+17:59:14   [113/287] 2018-II-4 (AIME) | sim=0.673 | van=N(10s/918t) inj=N(7s/657t) | =

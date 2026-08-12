@@ -1,0 +1,16 @@
+02:58:51 Log: /home/students/PatternDistill/phase-3e/logs/build_buffer_20260801_025851.log
+02:58:51 ============================================================
+02:58:51 Phase 3E — Build Meta-Buffer (no graph)
+02:58:51 ============================================================
+02:58:51 MATH-500 patterns: 400
+02:58:51 AIME patterns: 746
+02:58:51 Total patterns: 1146
+02:58:56 Loading embed model: nomic-ai/nomic-embed-text-v1 on cuda
+02:59:06 Embed model loaded
+02:59:08   templates: (1146, 768) in 2.3s
+02:59:09 
+Buffer: 1146 templates (400 MATH + 746 AIME)
+02:59:09 Saved -> /home/students/PatternDistill/phase-3e/buffer/buffer.json
+02:59:09 Saved -> /home/students/PatternDistill/phase-3e/buffer/buffer.index
+02:59:09 
+Next: python inject_and_eval_atbs.py

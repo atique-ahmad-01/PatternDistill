@@ -1,0 +1,11 @@
+13:03:02 Log: /home/students/PatternDistill/phase-3c/logs/generate_patterns_20260726_130302.log
+13:03:02 ============================================================
+13:03:02 Phase 3C — MBPP Pattern Generation
+13:03:02 ============================================================
+13:03:02 Backend : transformers
+13:03:18 Loaded 374 MBPP training problems
+13:03:18 Capped at: 5
+13:03:18 To do   : 5
+13:03:19 Device: cuda:0
+13:03:19 GPU: NVIDIA GeForce RTX 5070 Ti
+13:03:19 Loading teacher: Qwen/Qwen3-8B

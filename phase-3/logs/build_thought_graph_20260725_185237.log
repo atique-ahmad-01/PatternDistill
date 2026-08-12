@@ -1,0 +1,93 @@
+18:52:37 Log: /home/students/PatternDistill/phase-3/logs/build_thought_graph_20260725_185237.log
+18:52:37 ============================================================
+18:52:37 Phase 3 — Build Thought Graph (ATGI)
+18:52:37 ============================================================
+18:52:37 Bank:         /home/students/PatternDistill/phase-2d/memory/bank.json
+18:52:37 τ_semantic:   0.85
+18:52:37 max_patterns: all
+18:52:37 Loaded 400 entries from memory bank
+18:52:37 
+── Step 1.1: Parsing patterns into steps ──
+18:52:37 Parsed 400 patterns → 1600 step nodes
+18:52:37   Steps/pattern: min=4, max=4, avg=4.0, median=4
+18:52:37   By subject:
+18:52:37     Algebra                        404 nodes
+18:52:37     Counting & Probability         128 nodes
+18:52:37     Geometry                       144 nodes
+18:52:37     Intermediate Algebra           300 nodes
+18:52:37     Number Theory                  184 nodes
+18:52:37     Prealgebra                     268 nodes
+18:52:37     Precalculus                    172 nodes
+18:52:37 
+── Step 1.2: Embedding steps ──
+18:52:38 Loading embed model: nomic-ai/nomic-embed-text-v1 on cuda
+18:52:52 Embed model loaded
+18:52:52   Embedded batch 1 (1–64/1600) 0.1s
+18:52:52   Embedded batch 2 (65–128/1600) 0.0s
+18:52:52   Embedded batch 3 (129–192/1600) 0.0s
+18:52:52   Embedded batch 4 (193–256/1600) 0.0s
+18:52:52   Embedded batch 5 (257–320/1600) 0.0s
+18:52:52   Embedded batch 6 (321–384/1600) 0.0s
+18:52:52   Embedded batch 7 (385–448/1600) 0.0s
+18:52:52   Embedded batch 8 (449–512/1600) 0.0s
+18:52:52   Embedded batch 9 (513–576/1600) 0.0s
+18:52:52   Embedded batch 10 (577–640/1600) 0.0s
+18:52:52   Embedded batch 11 (641–704/1600) 0.0s
+18:52:52   Embedded batch 12 (705–768/1600) 0.0s
+18:52:52   Embedded batch 13 (769–832/1600) 0.1s
+18:52:52   Embedded batch 14 (833–896/1600) 0.0s
+18:52:52   Embedded batch 15 (897–960/1600) 0.0s
+18:52:52   Embedded batch 16 (961–1024/1600) 0.0s
+18:52:52   Embedded batch 17 (1025–1088/1600) 0.0s
+18:52:52   Embedded batch 18 (1089–1152/1600) 0.0s
+18:52:52   Embedded batch 19 (1153–1216/1600) 0.0s
+18:52:52   Embedded batch 20 (1217–1280/1600) 0.0s
+18:52:52   Embedded batch 21 (1281–1344/1600) 0.0s
+18:52:52   Embedded batch 22 (1345–1408/1600) 0.0s
+18:52:52   Embedded batch 23 (1409–1472/1600) 0.0s
+18:52:52   Embedded batch 24 (1473–1536/1600) 0.0s
+18:52:52   Embedded batch 25 (1537–1600/1600) 0.0s
+18:52:52 Embedding complete: (1600, 768) in 1.0s
+18:52:52 
+── Step 1.3: Building sequential edges ──
+18:52:52 Sequential edges: 1200
+18:52:52 
+── Step 1.4: Building semantic edges ──
+18:52:52 Computing semantic edges (τ=0.85, 1600 nodes, 1279200 pairs to check)...
+18:52:53 Semantic edges: 733030 (from 366515 unique pairs) in 0.2s
+18:52:53   Similarity range: [0.850, 1.000]
+18:52:53   Mean: 0.867, Median: 0.863
+18:52:53   Same-subject pairs: 79097, Cross-subject pairs: 287418
+18:52:53 
+── Step 1.5: Saving graph ──
+18:52:55 Saved graph → /home/students/PatternDistill/phase-3/graph/thought_graph.json (1600 nodes, 734230 edges)
+18:52:55 Saved embeddings → /home/students/PatternDistill/phase-3/graph/step_embeddings.npy (1600, 768)
+18:52:55 Saved FAISS index → /home/students/PatternDistill/phase-3/graph/step_faiss.index (1600 vectors)
+18:52:55 
+============================================================
+18:52:55 THOUGHT GRAPH SUMMARY
+18:52:55 ============================================================
+18:52:55   Nodes:            1600
+18:52:55   Sequential edges: 1200
+18:52:55   Semantic edges:   733030 (366515 unique pairs)
+18:52:55   Total edges:      734230
+18:52:55   τ_semantic:       0.85
+18:52:55   Avg degree:       458.9
+18:52:55   Max degree:       1212
+18:52:55   Isolated nodes:   1
+18:52:55 
+  Steps by subject:
+18:52:55     Algebra                         404 steps (101 patterns)
+18:52:55     Counting & Probability          128 steps ( 32 patterns)
+18:52:55     Geometry                        144 steps ( 36 patterns)
+18:52:55     Intermediate Algebra            300 steps ( 75 patterns)
+18:52:55     Number Theory                   184 steps ( 46 patterns)
+18:52:55     Prealgebra                      268 steps ( 67 patterns)
+18:52:55     Precalculus                     172 steps ( 43 patterns)
+18:52:55 
+Outputs:
+18:52:55   /home/students/PatternDistill/phase-3/graph/thought_graph.json
+18:52:55   /home/students/PatternDistill/phase-3/graph/step_embeddings.npy
+18:52:55   /home/students/PatternDistill/phase-3/graph/step_faiss.index
+18:52:55 
+Next: run inject_and_eval_atgi.py

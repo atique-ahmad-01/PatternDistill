@@ -1,0 +1,347 @@
+Log: /home/students/PatternDistill/phase-3d/logs/eval_combined_20260727_005123.log
+============================================================
+Phase 3D — Combined MATH-500 + AIME Evaluation
+============================================================
+Eval set: 100 MATH + 187 AIME = 287 total
+To do: 287
+Combined bank: 400 MATH + 746 AIME = 1146 total
+Graph: 4584 nodes, cross=2741
+<All keys matched successfully>
+Device: cuda:0
+GPU: NVIDIA GeForce RTX 5070 Ti
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:   0%|          | 1/311 [00:00<00:54,  5.71it/s]Loading weights:  26%|██▋       | 82/311 [00:00<00:00, 364.14it/s]Loading weights:  51%|█████▏    | 160/311 [00:00<00:00, 521.88it/s]Loading weights:  77%|███████▋  | 241/311 [00:00<00:00, 623.87it/s]Loading weights: 100%|██████████| 311/311 [00:00<00:00, 547.90it/s]
+Student loaded
+<All keys matched successfully>
+Embed on CPU, student on GPU
+[transformers] Detected the usage of `get_extended_attention_mask`: This function is deprecated and will be removed in v5.12.0. Please use the new API in `transformers.masking_utils`
+  [1/287] math_400 (MATH-500) | sim=0.721 ←AIME| van=✗(166s) atgi=✗(139s) | =
+  [2/287] math_401 (MATH-500) | sim=0.699 | van=✓(113s) atgi=✓(50s) | =
+  [3/287] math_402 (MATH-500) | sim=0.716 | van=✓(22s) atgi=✓(13s) | =
+  [4/287] math_403 (MATH-500) | sim=0.647 < 0.65 → skip
+  [4/287] math_403 (MATH-500) | sim=0.647 | van=✓(30s) atgi=✓(30s) | =
+  [5/287] math_404 (MATH-500) | sim=0.565 | van=✓(7s) atgi=✓(7s) | =
+  [6/287] math_405 (MATH-500) | sim=0.553 | van=✓(7s) atgi=✓(8s) | =
+  [7/287] math_406 (MATH-500) | sim=0.564 < 0.65 → skip
+  [7/287] math_406 (MATH-500) | sim=0.564 | van=✓(16s) atgi=✓(16s) | =
+  [8/287] math_407 (MATH-500) | sim=0.644 | van=✓(12s) atgi=✓(8s) | =
+  [9/287] math_408 (MATH-500) | sim=0.735 | van=✗(27s) atgi=✗(31s) | =
+  [10/287] math_409 (MATH-500) | sim=0.664 | van=✓(20s) atgi=✓(38s) | =
+  [11/287] math_410 (MATH-500) | sim=0.544 | van=✓(11s) atgi=✓(10s) | =
+  [12/287] math_411 (MATH-500) | sim=0.652 ←AIME| van=✓(11s) atgi=✓(10s) | =
+  [13/287] math_412 (MATH-500) | sim=0.912 ←AIME| van=✓(56s) atgi=✓(21s) | =
+  [14/287] math_413 (MATH-500) | sim=0.661 | van=✓(6s) atgi=✓(6s) | =
+  [15/287] math_414 (MATH-500) | sim=0.639 | van=✓(15s) atgi=✓(11s) | =
+  [16/287] math_415 (MATH-500) | sim=0.671 | van=✓(22s) atgi=✓(17s) | =
+  [17/287] math_416 (MATH-500) | sim=0.704 | van=✓(34s) atgi=✓(37s) | =
+  [18/287] math_417 (MATH-500) | sim=0.647 | van=✓(22s) atgi=✓(8s) | =
+  [19/287] math_418 (MATH-500) | sim=0.661 | van=✓(12s) atgi=✓(9s) | =
+  [20/287] math_419 (MATH-500) | sim=0.791 | van=✓(30s) atgi=✓(39s) | =
+  [21/287] math_420 (MATH-500) | sim=0.722 | van=✗(20s) atgi=✗(24s) | =
+  [22/287] math_421 (MATH-500) | sim=0.699 | van=✓(77s) atgi=✓(66s) | =
+  [23/287] math_422 (MATH-500) | sim=0.739 ←AIME| van=✗(167s) atgi=✗(167s) | =
+  [24/287] math_423 (MATH-500) | sim=0.590 < 0.65 → skip
+  [24/287] math_423 (MATH-500) | sim=0.590 | van=✓(33s) atgi=✓(33s) | =
+  [25/287] math_424 (MATH-500) | sim=0.598 | van=✓(13s) atgi=✓(10s) | =
+  [26/287] math_425 (MATH-500) | sim=0.681 | van=✗(166s) atgi=✓(45s) | ↑
+  [27/287] math_426 (MATH-500) | sim=0.728 | van=✓(12s) atgi=✓(10s) | =
+  [28/287] math_427 (MATH-500) | sim=0.535 | van=✓(9s) atgi=✓(7s) | =
+  [29/287] math_428 (MATH-500) | sim=0.795 | van=✓(43s) atgi=✓(63s) | =
+  [30/287] math_429 (MATH-500) | sim=0.651 | van=✓(29s) atgi=✓(22s) | =
+  [31/287] math_430 (MATH-500) | sim=0.642 | van=✓(5s) atgi=✓(3s) | =
+  [32/287] math_431 (MATH-500) | sim=0.638 < 0.65 → skip
+  [32/287] math_431 (MATH-500) | sim=0.638 | van=✓(43s) atgi=✓(43s) | =
+  [33/287] math_432 (MATH-500) | sim=0.588 < 0.6 → skip
+  [33/287] math_432 (MATH-500) | sim=0.588 | van=✓(97s) atgi=✓(97s) | =
+  [34/287] math_433 (MATH-500) | sim=0.735 | van=✓(22s) atgi=✓(33s) | =
+  [35/287] math_434 (MATH-500) | sim=0.709 ←AIME| van=✓(12s) atgi=✓(17s) | =
+  [36/287] math_435 (MATH-500) | sim=0.622 | van=✓(24s) atgi=✓(16s) | =
+  [37/287] math_436 (MATH-500) | sim=0.718 | van=✓(22s) atgi=✓(17s) | =
+  [38/287] math_437 (MATH-500) | sim=0.630 | van=✓(22s) atgi=✓(22s) | =
+  [39/287] math_438 (MATH-500) | sim=0.591 < 0.65 → skip
+  [39/287] math_438 (MATH-500) | sim=0.591 | van=✓(21s) atgi=✓(21s) | =
+  [40/287] math_439 (MATH-500) | sim=0.678 | van=✓(114s) atgi=✓(26s) | =
+  [41/287] math_440 (MATH-500) | sim=0.738 | van=✓(10s) atgi=✓(14s) | =
+  [42/287] math_441 (MATH-500) | sim=0.455 < 0.5 → skip
+  [42/287] math_441 (MATH-500) | sim=0.455 | van=✓(6s) atgi=✓(6s) | =
+  [43/287] math_442 (MATH-500) | sim=0.602 | van=✓(8s) atgi=✓(12s) | =
+  [44/287] math_443 (MATH-500) | sim=0.630 | van=✓(9s) atgi=✓(6s) | =
+  [45/287] math_444 (MATH-500) | sim=0.652 | van=✗(167s) atgi=✗(147s) | =
+  [46/287] math_445 (MATH-500) | sim=0.693 | van=✓(75s) atgi=✓(80s) | =
+  [47/287] math_446 (MATH-500) | sim=0.667 | van=✓(16s) atgi=✓(14s) | =
+  [48/287] math_447 (MATH-500) | sim=0.653 | van=✓(9s) atgi=✓(7s) | =
+  [49/287] math_448 (MATH-500) | sim=0.643 < 0.65 → skip
+  [49/287] math_448 (MATH-500) | sim=0.643 | van=✓(33s) atgi=✓(33s) | =
+  [50/287] math_449 (MATH-500) | sim=0.554 | van=✓(18s) atgi=✓(7s) | =
+  [51/287] math_450 (MATH-500) | sim=0.584 < 0.65 → skip
+  [51/287] math_450 (MATH-500) | sim=0.584 | van=✓(24s) atgi=✓(24s) | =
+  [52/287] math_451 (MATH-500) | sim=0.553 < 0.65 → skip
+  [52/287] math_451 (MATH-500) | sim=0.553 | van=✓(19s) atgi=✓(19s) | =
+  [53/287] math_452 (MATH-500) | sim=0.624 | van=✓(13s) atgi=✓(10s) | =
+  [54/287] math_453 (MATH-500) | sim=0.590 | van=✓(13s) atgi=✓(11s) | =
+  [55/287] math_454 (MATH-500) | sim=0.753 | van=✗(24s) atgi=✓(36s) | ↑
+  [56/287] math_455 (MATH-500) | sim=0.663 | van=✓(7s) atgi=✓(10s) | =
+  [57/287] math_456 (MATH-500) | sim=0.694 | van=✓(30s) atgi=✓(22s) | =
+  [58/287] math_457 (MATH-500) | sim=0.668 | van=✓(6s) atgi=✓(8s) | =
+  [59/287] math_458 (MATH-500) | sim=0.601 | van=✗(166s) atgi=✓(24s) | ↑
+  [60/287] math_459 (MATH-500) | sim=0.578 | van=✓(25s) atgi=✓(33s) | =
+  [61/287] math_460 (MATH-500) | sim=0.831 | van=✗(113s) atgi=✗(55s) | =
+  [62/287] math_461 (MATH-500) | sim=0.623 | van=✓(14s) atgi=✓(8s) | =
+  [63/287] math_462 (MATH-500) | sim=0.625 < 0.65 → skip
+  [63/287] math_462 (MATH-500) | sim=0.625 | van=✗(54s) atgi=✗(53s) | =
+  [64/287] math_463 (MATH-500) | sim=0.635 | van=✓(5s) atgi=✓(6s) | =
+  [65/287] math_464 (MATH-500) | sim=0.660 | van=✓(20s) atgi=✓(19s) | =
+  [66/287] math_465 (MATH-500) | sim=0.599 < 0.65 → skip
+  [66/287] math_465 (MATH-500) | sim=0.599 | van=✓(12s) atgi=✓(12s) | =
+  [67/287] math_466 (MATH-500) | sim=0.707 < 0.75 → skip
+  [67/287] math_466 (MATH-500) | sim=0.707 ←AIME| van=✓(68s) atgi=✓(68s) | =
+  [68/287] math_467 (MATH-500) | sim=0.734 | van=✗(18s) atgi=✗(13s) | =
+  [69/287] math_468 (MATH-500) | sim=0.633 | van=✓(12s) atgi=✓(8s) | =
+  [70/287] math_469 (MATH-500) | sim=0.642 | van=✓(8s) atgi=✓(12s) | =
+  [71/287] math_470 (MATH-500) | sim=0.666 | van=✓(56s) atgi=✓(39s) | =
+  [72/287] math_471 (MATH-500) | sim=0.559 | van=✓(8s) atgi=✓(8s) | =
+  [73/287] math_472 (MATH-500) | sim=0.568 | van=✓(9s) atgi=✗(5s) | ↓
+  [74/287] math_473 (MATH-500) | sim=0.660 | van=✗(167s) atgi=✓(68s) | ↑
+  [75/287] math_474 (MATH-500) | sim=0.665 | van=✓(19s) atgi=✓(16s) | =
+  [76/287] math_475 (MATH-500) | sim=0.948 ←AIME| van=✓(46s) atgi=✓(39s) | =
+  [77/287] math_476 (MATH-500) | sim=0.583 | van=✓(10s) atgi=✗(8s) | ↓
+  [78/287] math_477 (MATH-500) | sim=0.608 < 0.65 → skip
+  [78/287] math_477 (MATH-500) | sim=0.608 | van=✓(27s) atgi=✓(27s) | =
+  [79/287] math_478 (MATH-500) | sim=0.673 | van=✓(144s) atgi=✓(99s) | =
+  [80/287] math_479 (MATH-500) | sim=0.616 < 0.65 → skip
+  [80/287] math_479 (MATH-500) | sim=0.616 | van=✓(16s) atgi=✓(16s) | =
+  [81/287] math_480 (MATH-500) | sim=0.671 | van=✓(32s) atgi=✓(29s) | =
+  [82/287] math_481 (MATH-500) | sim=0.634 | van=✗(167s) atgi=✗(167s) | =
+  [83/287] math_482 (MATH-500) | sim=0.575 < 0.65 → skip
+  [83/287] math_482 (MATH-500) | sim=0.575 | van=✓(32s) atgi=✓(32s) | =
+  [84/287] math_483 (MATH-500) | sim=0.728 | van=✓(29s) atgi=✓(43s) | =
+  [85/287] math_484 (MATH-500) | sim=0.703 ←AIME| van=✓(35s) atgi=✓(27s) | =
+  [86/287] math_485 (MATH-500) | sim=0.657 | van=✓(26s) atgi=✓(40s) | =
+  [87/287] math_486 (MATH-500) | sim=0.591 | van=✓(39s) atgi=✓(18s) | =
+  [88/287] math_487 (MATH-500) | sim=0.776 | van=✓(17s) atgi=✓(13s) | =
+  [89/287] math_488 (MATH-500) | sim=0.478 < 0.5 → skip
+  [89/287] math_488 (MATH-500) | sim=0.478 | van=✓(14s) atgi=✓(14s) | =
+  [90/287] math_489 (MATH-500) | sim=0.918 ←AIME| van=✓(35s) atgi=✓(19s) | =
+  [91/287] math_490 (MATH-500) | sim=0.615 | van=✓(166s) atgi=✗(49s) | ↓
+  [92/287] math_491 (MATH-500) | sim=0.572 | van=✗(55s) atgi=✓(28s) | ↑
+  [93/287] math_492 (MATH-500) | sim=0.753 | van=✓(11s) atgi=✓(10s) | =
+  [94/287] math_493 (MATH-500) | sim=0.770 | van=✓(37s) atgi=✓(32s) | =
+  [95/287] math_494 (MATH-500) | sim=0.699 < 0.7 → skip
+  [95/287] math_494 (MATH-500) | sim=0.699 ←AIME| van=✗(166s) atgi=✗(166s) | =
+  [96/287] math_495 (MATH-500) | sim=0.690 < 0.7 → skip
+  [96/287] math_495 (MATH-500) | sim=0.690 ←AIME| van=✓(23s) atgi=✓(23s) | =
+  [97/287] math_496 (MATH-500) | sim=0.587 < 0.6 → skip
+  [97/287] math_496 (MATH-500) | sim=0.587 | van=✓(16s) atgi=✓(16s) | =
+  [98/287] math_497 (MATH-500) | sim=0.654 | van=✓(78s) atgi=✗(49s) | ↓
+  [99/287] math_498 (MATH-500) | sim=0.762 ←AIME| van=✓(30s) atgi=✓(31s) | =
+  [100/287] math_499 (MATH-500) | sim=0.694 | van=✗(53s) atgi=✗(32s) | =
+  [101/287] 2018-I-7 (AIME) | sim=0.793 | van=✗(166s) atgi=✗(120s) | =
+  [102/287] 2018-I-8 (AIME) | sim=0.692 | van=✗(166s) atgi=✓(73s) | ↑
+  [103/287] 2018-I-9 (AIME) | sim=0.759 | van=✗(150s) atgi=✗(167s) | =
+  [104/287] 2018-I-10 (AIME) | sim=0.681 | van=✗(169s) atgi=✗(169s) | =
+  [105/287] 2018-I-11 (AIME) | sim=0.646 | van=✓(45s) atgi=✓(55s) | =
+  [106/287] 2018-I-12 (AIME) | sim=0.718 | van=✓(56s) atgi=✓(107s) | =
+  [107/287] 2018-I-13 (AIME) | sim=0.801 | van=✗(167s) atgi=✓(156s) | ↑
+  [108/287] 2018-I-14 (AIME) | sim=0.746 | van=✗(136s) atgi=✗(167s) | =
+  [109/287] 2018-I-15 (AIME) | sim=0.732 | van=✗(167s) atgi=✗(168s) | =
+  [110/287] 2018-II-1 (AIME) | sim=0.640 | van=✗(104s) atgi=✗(140s) | =
+  [111/287] 2018-II-2 (AIME) | sim=0.633 | van=✓(41s) atgi=✓(52s) | =
+  [112/287] 2018-II-3 (AIME) | sim=0.674 | van=✓(39s) atgi=✓(98s) | =
+  [113/287] 2018-II-4 (AIME) | sim=0.673 | van=✗(167s) atgi=✓(129s) | ↑
+  [114/287] 2018-II-5 (AIME) | sim=0.731 | van=✓(54s) atgi=✓(53s) | =
+  [115/287] 2018-II-6 (AIME) | sim=0.743 | van=✓(43s) atgi=✓(39s) | =
+  [116/287] 2018-II-7 (AIME) | sim=0.816 | van=✗(168s) atgi=✗(168s) | =
+  [117/287] 2018-II-8 (AIME) | sim=0.840 | van=✗(167s) atgi=✓(74s) | ↑
+  [118/287] 2018-II-9 (AIME) | sim=0.727 | van=✓(128s) atgi=✗(138s) | ↓
+  [119/287] 2018-II-10 (AIME) | sim=0.716 | van=✗(46s) atgi=✗(81s) | =
+  [120/287] 2018-II-11 (AIME) | sim=0.667 | van=✗(103s) atgi=✗(113s) | =
+  [121/287] 2018-II-12 (AIME) | sim=0.784 | van=✗(136s) atgi=✗(167s) | =
+  [122/287] 2018-II-13 (AIME) | sim=0.816 | van=✗(166s) atgi=✗(167s) | =
+  [123/287] 2018-II-14 (AIME) | sim=0.800 | van=✗(166s) atgi=✗(168s) | =
+  [124/287] 2018-II-15 (AIME) | sim=0.642 | van=✗(103s) atgi=✗(139s) | =
+  [125/287] 2019-I-1 (AIME) | sim=0.721 | van=✗(166s) atgi=✗(92s) | =
+  [126/287] 2019-I-2 (AIME) | sim=0.722 | van=✓(46s) atgi=✓(136s) | =
+  [127/287] 2019-I-3 (AIME) | sim=0.799 | van=✓(49s) atgi=✓(101s) | =
+  [128/287] 2019-I-4 (AIME) | sim=0.707 | van=✗(71s) atgi=✗(59s) | =
+  [129/287] 2019-I-5 (AIME) | sim=0.736 | van=✓(45s) atgi=✗(69s) | ↓
+  [130/287] 2019-I-6 (AIME) | sim=0.659 | van=✓(49s) atgi=✓(44s) | =
+  [131/287] 2019-I-7 (AIME) | sim=0.657 | van=✗(167s) atgi=✗(151s) | =
+  [132/287] 2019-I-8 (AIME) | sim=0.733 | van=✓(43s) atgi=✓(54s) | =
+  [133/287] 2019-I-9 (AIME) | sim=0.671 | van=✓(91s) atgi=✓(92s) | =
+  [134/287] 2019-I-10 (AIME) | sim=0.697 | van=✗(167s) atgi=✗(124s) | =
+  [135/287] 2019-I-11 (AIME) | sim=0.783 | van=✗(167s) atgi=✗(161s) | =
+  [136/287] 2019-I-12 (AIME) | sim=0.690 | van=✗(167s) atgi=✗(167s) | =
+  [137/287] 2019-I-13 (AIME) | sim=0.859 | van=✗(167s) atgi=✗(168s) | =
+  [138/287] 2019-I-14 (AIME) | sim=0.586 | van=✓(109s) atgi=✓(64s) | =
+  [139/287] 2019-I-15 (AIME) | sim=0.785 | van=✗(167s) atgi=✗(128s) | =
+  [140/287] 2019-II-1 (AIME) | sim=0.796 | van=✓(68s) atgi=✗(167s) | ↓
+  [141/287] 2019-II-2 (AIME) | sim=0.722 | van=✓(68s) atgi=✓(51s) | =
+  [142/287] 2019-II-3 (AIME) | sim=0.644 | van=✓(43s) atgi=✓(28s) | =
+  [143/287] 2019-II-4 (AIME) | sim=0.810 | van=✗(166s) atgi=✗(167s) | =
+  [144/287] 2019-II-5 (AIME) | sim=0.748 | van=✗(166s) atgi=✗(147s) | =
+  [145/287] 2019-II-6 (AIME) | sim=0.647 | van=✓(52s) atgi=✓(34s) | =
+  [146/287] 2019-II-7 (AIME) | sim=0.809 | van=✗(144s) atgi=✗(137s) | =
+  [147/287] 2019-II-8 (AIME) | sim=0.664 | van=✗(166s) atgi=✓(47s) | ↑
+  [148/287] 2019-II-9 (AIME) | sim=0.716 | van=✗(50s) atgi=✓(60s) | ↑
+  [149/287] 2019-II-10 (AIME) | sim=0.711 | van=✗(167s) atgi=✗(168s) | =
+  [150/287] 2019-II-11 (AIME) | sim=0.837 | van=✗(166s) atgi=✓(137s) | ↑
+  [151/287] 2019-II-12 (AIME) | sim=0.695 | van=✗(167s) atgi=✗(167s) | =
+  [152/287] 2019-II-13 (AIME) | sim=0.741 | van=✗(167s) atgi=✗(141s) | =
+  [153/287] 2019-II-14 (AIME) | sim=0.604 | van=✗(166s) atgi=✗(167s) | =
+  [154/287] 2019-II-15 (AIME) | sim=0.837 | van=✓(119s) atgi=✗(168s) | ↓
+  [155/287] 2020-I-1 (AIME) | sim=0.836 | van=✗(166s) atgi=✗(146s) | =
+  [156/287] 2020-I-2 (AIME) | sim=0.709 | van=✓(29s) atgi=✓(29s) | =
+  [157/287] 2020-I-3 (AIME) | sim=0.767 | van=✓(65s) atgi=✓(56s) | =
+  [158/287] 2020-I-4 (AIME) | sim=0.691 | van=✓(54s) atgi=✓(52s) | =
+  [159/287] 2020-I-5 (AIME) | sim=0.692 | van=✗(166s) atgi=✗(167s) | =
+  [160/287] 2020-I-6 (AIME) | sim=0.729 | van=✗(167s) atgi=✗(167s) | =
+  [161/287] 2020-I-7 (AIME) | sim=0.635 | van=✗(166s) atgi=✓(163s) | ↑
+  [162/287] 2020-I-8 (AIME) | sim=0.714 | van=✓(66s) atgi=✓(52s) | =
+  [163/287] 2020-I-9 (AIME) | sim=0.761 | van=✓(146s) atgi=✓(53s) | =
+  [164/287] 2020-I-10 (AIME) | sim=0.665 | van=✗(166s) atgi=✗(167s) | =
+  [165/287] 2020-I-11 (AIME) | sim=0.692 | van=✗(137s) atgi=✗(167s) | =
+  [166/287] 2020-I-12 (AIME) | sim=0.633 | van=✗(132s) atgi=✗(66s) | =
+  [167/287] 2020-I-13 (AIME) | sim=0.830 | van=✓(68s) atgi=✓(84s) | =
+  [168/287] 2020-I-14 (AIME) | sim=0.700 | van=✓(75s) atgi=✗(46s) | ↓
+  [169/287] 2020-I-15 (AIME) | sim=0.762 | van=✗(167s) atgi=✗(168s) | =
+  [170/287] 2020-II-1 (AIME) | sim=0.710 | van=✓(21s) atgi=✓(21s) | =
+  [171/287] 2020-II-2 (AIME) | sim=0.751 | van=✓(70s) atgi=✓(87s) | =
+  [172/287] 2020-II-3 (AIME) | sim=0.680 | van=✓(34s) atgi=✓(20s) | =
+  [173/287] 2020-II-4 (AIME) | sim=0.737 | van=✗(167s) atgi=✓(39s) | ↑
+  [174/287] 2020-II-5 (AIME) | sim=0.726 | van=✗(166s) atgi=✓(77s) | ↑
+  [175/287] 2020-II-6 (AIME) | sim=0.696 | van=✓(149s) atgi=✓(55s) | =
+  [176/287] 2020-II-7 (AIME) | sim=0.722 | van=✗(93s) atgi=✗(162s) | =
+  [177/287] 2020-II-8 (AIME) | sim=0.687 | van=✗(166s) atgi=✗(167s) | =
+  [178/287] 2020-II-9 (AIME) | sim=0.612 | van=✗(167s) atgi=✗(167s) | =
+  [179/287] 2020-II-10 (AIME) | sim=0.674 | van=✗(36s) atgi=✗(31s) | =
+  [180/287] 2020-II-11 (AIME) | sim=0.754 | van=✗(167s) atgi=✗(111s) | =
+  [181/287] 2020-II-12 (AIME) | sim=0.642 | van=✗(167s) atgi=✗(168s) | =
+  [182/287] 2020-II-13 (AIME) | sim=0.806 | van=✗(166s) atgi=✗(93s) | =
+  [183/287] 2020-II-14 (AIME) | sim=0.760 | van=✗(167s) atgi=✗(91s) | =
+  [184/287] 2020-II-15 (AIME) | sim=0.663 | van=✗(166s) atgi=✗(167s) | =
+  [185/287] 2021-I-1 (AIME) | sim=0.700 | van=✗(166s) atgi=✗(168s) | =
+  [186/287] 2021-I-2 (AIME) | sim=0.730 | van=✓(128s) atgi=✓(162s) | =
+  [187/287] 2021-I-3 (AIME) | sim=0.735 | van=✓(93s) atgi=✓(73s) | =
+  [188/287] 2021-I-4 (AIME) | sim=0.693 | van=✓(56s) atgi=✓(151s) | =
+  [189/287] 2021-I-5 (AIME) | sim=0.770 | van=✓(83s) atgi=✓(67s) | =
+  [190/287] 2021-I-6 (AIME) | sim=0.758 | van=✗(166s) atgi=✗(167s) | =
+  [191/287] 2021-I-7 (AIME) | sim=0.634 | van=✗(166s) atgi=✗(167s) | =
+  [192/287] 2021-I-8 (AIME) | sim=0.649 | van=✗(166s) atgi=✓(147s) | ↑
+  [193/287] 2021-I-9 (AIME) | sim=0.771 | van=✗(64s) atgi=✓(57s) | ↑
+  [194/287] 2021-I-10 (AIME) | sim=0.704 | van=✗(167s) atgi=✗(57s) | =
+  [195/287] 2021-I-11 (AIME) | sim=0.729 | van=✗(167s) atgi=✗(168s) | =
+  [196/287] 2021-I-12 (AIME) | sim=0.693 | van=✗(166s) atgi=✗(125s) | =
+  [197/287] 2021-I-13 (AIME) | sim=0.754 | van=✗(166s) atgi=✓(51s) | ↑
+  [198/287] 2021-I-14 (AIME) | sim=0.657 | van=✗(166s) atgi=✗(155s) | =
+  [199/287] 2021-I-15 (AIME) | sim=0.626 | van=✗(167s) atgi=✗(168s) | =
+  [200/287] 2021-II-1 (AIME) | sim=0.805 ←MATH-500| van=✓(29s) atgi=✓(42s) | =
+  [201/287] 2021-II-2 (AIME) | sim=0.809 | van=✗(168s) atgi=✗(169s) | =
+  [202/287] 2021-II-3 (AIME) | sim=0.658 | van=✗(124s) atgi=✗(168s) | =
+  [203/287] 2021-II-4 (AIME) | sim=0.721 | van=✓(74s) atgi=✓(88s) | =
+  [204/287] 2021-II-5 (AIME) | sim=0.631 | van=✗(166s) atgi=✗(135s) | =
+  [205/287] 2021-II-6 (AIME) | sim=0.686 | van=✓(74s) atgi=✓(141s) | =
+  [206/287] 2021-II-7 (AIME) | sim=0.733 | van=✗(166s) atgi=✓(115s) | ↑
+  [207/287] 2021-II-8 (AIME) | sim=0.742 | van=✗(167s) atgi=✗(142s) | =
+  [208/287] 2021-II-9 (AIME) | sim=0.656 | van=✗(166s) atgi=✗(66s) | =
+  [209/287] 2021-II-10 (AIME) | sim=0.724 | van=✗(145s) atgi=✗(91s) | =
+  [210/287] 2021-II-11 (AIME) | sim=0.689 | van=✗(167s) atgi=✗(168s) | =
+  [211/287] 2021-II-12 (AIME) | sim=0.741 | van=✗(166s) atgi=✓(163s) | ↑
+  [212/287] 2021-II-13 (AIME) | sim=0.677 | van=✗(166s) atgi=✗(167s) | =
+  [213/287] 2021-II-14 (AIME) | sim=0.781 | van=✗(167s) atgi=✗(127s) | =
+  [214/287] 2021-II-15 (AIME) | sim=0.645 | van=✗(167s) atgi=✗(167s) | =
+  [215/287] 2022-I-1 (AIME) | sim=0.763 | van=✓(31s) atgi=✓(30s) | =
+  [216/287] 2022-I-2 (AIME) | sim=0.727 | van=✗(93s) atgi=✓(39s) | ↑
+  [217/287] 2022-I-3 (AIME) | sim=0.790 | van=✗(84s) atgi=✓(76s) | ↑
+  [218/287] 2022-I-4 (AIME) | sim=0.676 | van=✗(89s) atgi=✗(114s) | =
+  [219/287] 2022-I-5 (AIME) | sim=0.622 | van=✓(69s) atgi=✗(167s) | ↓
+  [220/287] 2022-I-6 (AIME) | sim=0.672 | van=✗(166s) atgi=✗(166s) | =
+  [221/287] 2022-I-7 (AIME) | sim=0.730 | van=✗(140s) atgi=✗(143s) | =
+  [222/287] 2022-I-8 (AIME) | sim=0.819 | van=✗(166s) atgi=✗(168s) | =
+  [223/287] 2022-I-9 (AIME) | sim=0.718 | van=✗(112s) atgi=✗(167s) | =
+  [224/287] 2022-I-10 (AIME) | sim=0.726 | van=✓(45s) atgi=✓(66s) | =
+  [225/287] 2022-I-11 (AIME) | sim=0.759 | van=✗(167s) atgi=✗(169s) | =
+  [226/287] 2022-I-12 (AIME) | sim=0.703 | van=✗(167s) atgi=✗(88s) | =
+  [227/287] 2022-I-13 (AIME) | sim=0.775 | van=✗(166s) atgi=✗(167s) | =
+  [228/287] 2022-I-14 (AIME) | sim=0.746 | van=✗(166s) atgi=✗(168s) | =
+  [229/287] 2022-I-15 (AIME) | sim=0.774 | van=✗(166s) atgi=✗(167s) | =
+  [230/287] 2022-II-1 (AIME) | sim=0.620 | van=✓(33s) atgi=✓(42s) | =
+  [231/287] 2022-II-2 (AIME) | sim=0.769 | van=✗(106s) atgi=✗(99s) | =
+  [232/287] 2022-II-3 (AIME) | sim=0.784 | van=✓(49s) atgi=✓(25s) | =
+  [233/287] 2022-II-4 (AIME) | sim=0.684 | van=✓(44s) atgi=✓(58s) | =
+  [234/287] 2022-II-5 (AIME) | sim=0.728 | van=✗(152s) atgi=✗(127s) | =
+  [235/287] 2022-II-6 (AIME) | sim=0.728 | van=✗(82s) atgi=✗(75s) | =
+  [236/287] 2022-II-7 (AIME) | sim=0.793 | van=✓(159s) atgi=✗(55s) | ↓
+  [237/287] 2022-II-8 (AIME) | sim=0.783 | van=✗(166s) atgi=✗(128s) | =
+  [238/287] 2022-II-9 (AIME) | sim=0.664 | van=✗(168s) atgi=✗(142s) | =
+  [239/287] 2022-II-10 (AIME) | sim=0.702 | van=✓(93s) atgi=✓(148s) | =
+  [240/287] 2022-II-11 (AIME) | sim=0.763 | van=✓(121s) atgi=✗(167s) | ↓
+  [241/287] 2022-II-12 (AIME) | sim=0.642 | van=✗(166s) atgi=✗(168s) | =
+  [242/287] 2022-II-13 (AIME) | sim=0.665 | van=✓(122s) atgi=✗(167s) | ↓
+  [243/287] 2022-II-14 (AIME) | sim=0.652 | van=✗(167s) atgi=✗(167s) | =
+  [244/287] 2022-II-15 (AIME) | sim=0.746 | van=✗(168s) atgi=✗(153s) | =
+  [245/287] 2023-I-1 (AIME) | sim=0.741 | van=✓(91s) atgi=✓(120s) | =
+  [246/287] 2023-I-2 (AIME) | sim=0.722 | van=✓(23s) atgi=✓(19s) | =
+  [247/287] 2023-I-3 (AIME) | sim=0.666 | van=✓(55s) atgi=✓(36s) | =
+  [248/287] 2023-I-4 (AIME) | sim=0.669 | van=✓(63s) atgi=✗(167s) | ↓
+  [249/287] 2023-I-5 (AIME) | sim=0.708 | van=✓(52s) atgi=✓(123s) | =
+  [250/287] 2023-I-6 (AIME) | sim=0.738 | van=✓(71s) atgi=✗(93s) | ↓
+  [251/287] 2023-I-7 (AIME) | sim=0.722 | van=✗(146s) atgi=✗(167s) | =
+  [252/287] 2023-I-8 (AIME) | sim=0.752 | van=✗(166s) atgi=✗(167s) | =
+  [253/287] 2023-I-9 (AIME) | sim=0.680 | van=✗(166s) atgi=✗(164s) | =
+  [254/287] 2023-I-10 (AIME) | sim=0.719 | van=✓(149s) atgi=✗(120s) | ↓
+  [255/287] 2023-I-11 (AIME) | sim=0.732 | van=✗(141s) atgi=✗(146s) | =
+  [256/287] 2023-I-12 (AIME) | sim=0.776 | van=✗(166s) atgi=✗(167s) | =
+  [257/287] 2023-I-13 (AIME) | sim=0.733 | van=✗(166s) atgi=✗(168s) | =
+  [258/287] 2023-I-14 (AIME) | sim=0.605 | van=✗(168s) atgi=✗(139s) | =
+  [259/287] 2023-II-1 (AIME) | sim=0.629 | van=✓(17s) atgi=✓(9s) | =
+  [260/287] 2023-II-2 (AIME) | sim=0.762 ←MATH-500| van=✗(144s) atgi=✓(157s) | ↑
+  [261/287] 2023-II-3 (AIME) | sim=0.752 | van=✓(152s) atgi=✓(71s) | =
+  [262/287] 2023-II-4 (AIME) | sim=0.689 | van=✓(83s) atgi=✓(65s) | =
+  [263/287] 2023-II-5 (AIME) | sim=0.707 | van=✗(166s) atgi=✓(41s) | ↑
+  [264/287] 2023-II-6 (AIME) | sim=0.714 | van=✗(166s) atgi=✗(167s) | =
+  [265/287] 2023-II-7 (AIME) | sim=0.695 | van=✗(130s) atgi=✗(109s) | =
+  [266/287] 2023-II-8 (AIME) | sim=0.654 | van=✗(166s) atgi=✗(167s) | =
+  [267/287] 2023-II-9 (AIME) | sim=0.764 | van=✗(105s) atgi=✗(167s) | =
+  [268/287] 2023-II-10 (AIME) | sim=0.666 | van=✗(167s) atgi=✗(100s) | =
+  [269/287] 2023-II-11 (AIME) | sim=0.637 | van=✗(66s) atgi=✗(39s) | =
+  [270/287] 2023-II-12 (AIME) | sim=0.810 | van=✗(166s) atgi=✗(167s) | =
+  [271/287] 2023-II-13 (AIME) | sim=0.648 | van=✗(166s) atgi=✗(167s) | =
+  [272/287] 2023-II-14 (AIME) | sim=0.725 | van=✗(168s) atgi=✗(139s) | =
+  [273/287] 2023-II-15 (AIME) | sim=0.687 | van=✗(166s) atgi=✗(167s) | =
+  [274/287] 2024-II-1 (AIME) | sim=0.557 | van=✗(166s) atgi=✗(152s) | =
+  [275/287] 2024-II-2 (AIME) | sim=0.685 | van=✓(136s) atgi=✗(167s) | ↓
+  [276/287] 2024-II-3 (AIME) | sim=0.645 | van=✗(166s) atgi=✗(167s) | =
+  [277/287] 2024-II-4 (AIME) | sim=0.740 | van=✓(47s) atgi=✓(44s) | =
+  [278/287] 2024-II-5 (AIME) | sim=0.737 | van=✗(166s) atgi=✗(162s) | =
+  [279/287] 2024-II-6 (AIME) | sim=0.738 | van=✓(69s) atgi=✗(76s) | ↓
+  [280/287] 2024-II-7 (AIME) | sim=0.690 | van=✗(166s) atgi=✗(167s) | =
+  [281/287] 2024-II-8 (AIME) | sim=0.743 | van=✗(132s) atgi=✗(168s) | =
+  [282/287] 2024-II-10 (AIME) | sim=0.704 | van=✗(60s) atgi=✓(48s) | ↑
+  [283/287] 2024-II-11 (AIME) | sim=0.710 | van=✓(136s) atgi=✗(145s) | ↓
+  [284/287] 2024-II-12 (AIME) | sim=0.719 | van=✗(166s) atgi=✗(168s) | =
+  [285/287] 2024-II-13 (AIME) | sim=0.629 | van=✓(166s) atgi=✓(52s) | =
+  [286/287] 2024-II-14 (AIME) | sim=0.698 | van=✗(166s) atgi=✗(167s) | =
+  [287/287] 2024-II-15 (AIME) | sim=0.689 | van=✗(166s) atgi=✗(89s) | =
+
+Wrote 287 → /home/students/PatternDistill/phase-3d/results/results_combined.json
+
+============================================================
+Phase 3D — Combined MATH-500 + AIME Results
+============================================================
+  Total: n=287 (MATH=100, AIME=187)
+  Injected: 267  Skipped: 20  Bonus: 0  Cross-domain: 0
+
+  OVERALL:
+    Vanilla: 0.509
+    ATGI:    0.530
+    Delta:   +0.021
+
+  MATH-500 (n=100):
+    Vanilla: 0.840
+    ATGI:    0.850
+    Delta:   +0.010
+
+  AIME (n=187):
+    Vanilla: 0.332
+    ATGI:    0.358
+    Delta:   +0.027

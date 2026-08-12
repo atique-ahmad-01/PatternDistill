@@ -1,0 +1,56 @@
+10:14:39 Log: /home/students/PatternDistill/phase-3b/logs/inject_and_eval_ti_20260726_101439.log
+10:14:39 ============================================================
+10:14:39 Phase 3B — Thinking Intervention (TI)
+10:14:39 ============================================================
+10:14:39 Backend : transformers
+10:14:39 Method  : template injected inside <think> tags
+10:14:43 Capped at: 5 problems
+10:14:43 To do   : 5
+10:14:43 Thought graph: 1600 nodes, 1200 seq + 2830 sem edges
+10:14:43 Phase-2d bank: 400 entries, dim=768
+10:14:44 Loading embed model: nomic-ai/nomic-embed-text-v1 on cuda
+10:14:54 Embed model loaded
+10:14:54 Device  : cuda:0
+10:14:54 GPU     : NVIDIA GeForce RTX 5070 Ti
+10:14:54 VRAM    : 16.6 GB
+10:14:54 Loading student: Qwen/Qwen3-1.7B
+10:14:57 Student loaded
+10:15:06 Embed model reloaded on CPU (student on GPU)
+10:16:56   [1/5] id=400 Geometry L5 | sim=0.664 thr=0.55 | TI 4steps | van=✗(71s) ti=✓(39s) | ↑
+10:18:53   [2/5] id=401 Intermediate Algebra L5 | sim=0.699 thr=0.6 | TI 4steps | van=✗(64s) ti=✓(52s) | ↑
+10:19:09   [3/5] id=402 Precalculus L3 | sim=0.716 thr=0.65 | TI 4steps | van=✓(13s) ti=✓(3s) | =
+10:19:09   [4/5] id=403 Number Theory L4 | sim=0.647 < thr=0.65 → skip injection
+10:19:53   [4/5] id=403 Number Theory L4 | sim=0.647 thr=0.65 | skip 0steps | van=✓(22s) ti=✓(22s) | =
+10:20:03   [5/5] id=404 Counting & Probability L1 | sim=0.565 thr=0.5 | TI 4steps | van=✓(8s) ti=✓(2s) | =
+10:20:03 VRAM free: 16.0 GB
+10:20:03 
+Wrote 5 records → /home/students/PatternDistill/phase-3b/results/results.json
+10:20:03 Wrote summary → /home/students/PatternDistill/phase-3b/results/summary.json
+10:20:03 
+============================================================
+10:20:03 Phase 3B — Thinking Intervention (TI) Results
+10:20:03 ============================================================
+10:20:03   n=5  injected=4  skipped=1
+10:20:03 
+  Vanilla   accuracy : 0.600
+10:20:03   TI        accuracy : 1.000
+10:20:03   Delta              : +0.400
+10:20:03   Gap closed         : 190.5% of the 21pp Phase 1 gap
+10:20:03 
+  vs Phase 2D (prompt injection): +0.060
+10:20:03   vs Phase 3 v2 (prompt inject): +0.060
+10:20:03   TI improvement over 2D:        +0.340
+10:20:03   TI improvement over v2:        +0.340
+10:20:03 
+  By subject:
+10:20:03     Counting & Probability              ti=1.000  van=1.000  delta=+0.000  (n=1  thr=0.5)
+10:20:03     Geometry                            ti=1.000  van=0.000  delta=+1.000  (n=1  thr=0.55)
+10:20:03     Intermediate Algebra                ti=1.000  van=0.000  delta=+1.000  (n=1  thr=0.6)
+10:20:03     Number Theory                       ti=1.000  van=1.000  delta=+0.000  (n=1  thr=0.65)
+10:20:03     Precalculus                         ti=1.000  van=1.000  delta=+0.000  (n=1  thr=0.65)
+10:20:03 
+  By difficulty:
+10:20:03     Level 1: ti=1.000  van=1.000  delta=+0.000  (n=1)
+10:20:03     Level 3: ti=1.000  van=1.000  delta=+0.000  (n=1)
+10:20:03     Level 4: ti=1.000  van=1.000  delta=+0.000  (n=1)
+10:20:03     Level 5: ti=1.000  van=0.000  delta=+1.000  (n=2)

@@ -1,0 +1,151 @@
+{
+  "n": 100,
+  "n_injected": 81,
+  "n_low_sim_skipped": 19,
+  "n_rich_injection": 81,
+  "retrieval_mode": "global + subject_aware_thresholds + worked_examples_all_subjects",
+  "sim_thresholds": {
+    "Intermediate Algebra": 0.6,
+    "Number Theory": 0.65,
+    "Precalculus": 0.65,
+    "Geometry": 0.55,
+    "default": 0.5
+  },
+  "vanilla": {
+    "accuracy": 0.7,
+    "avg_latency_s": 30.176,
+    "avg_output_tokens": 3407.2,
+    "by_subject": {
+      "Algebra": {
+        "accuracy": 0.8696,
+        "n": 23
+      },
+      "Counting & Probability": {
+        "accuracy": 0.6667,
+        "n": 6
+      },
+      "Geometry": {
+        "accuracy": 0.4,
+        "n": 5
+      },
+      "Intermediate Algebra": {
+        "accuracy": 0.6364,
+        "n": 22
+      },
+      "Number Theory": {
+        "accuracy": 0.875,
+        "n": 16
+      },
+      "Prealgebra": {
+        "accuracy": 0.5333,
+        "n": 15
+      },
+      "Precalculus": {
+        "accuracy": 0.6154,
+        "n": 13
+      }
+    },
+    "by_level": {
+      "1": {
+        "accuracy": 0.8889,
+        "n": 9
+      },
+      "2": {
+        "accuracy": 0.7333,
+        "n": 15
+      },
+      "3": {
+        "accuracy": 0.8571,
+        "n": 21
+      },
+      "4": {
+        "accuracy": 0.7143,
+        "n": 21
+      },
+      "5": {
+        "accuracy": 0.5294,
+        "n": 34
+      }
+    }
+  },
+  "injection": {
+    "accuracy": 0.76,
+    "avg_latency_s": 29.422,
+    "avg_output_tokens": 3338.5,
+    "by_subject": {
+      "Algebra": {
+        "accuracy": 0.913,
+        "n": 23
+      },
+      "Counting & Probability": {
+        "accuracy": 0.8333,
+        "n": 6
+      },
+      "Geometry": {
+        "accuracy": 0.4,
+        "n": 5
+      },
+      "Intermediate Algebra": {
+        "accuracy": 0.6818,
+        "n": 22
+      },
+      "Number Theory": {
+        "accuracy": 0.875,
+        "n": 16
+      },
+      "Prealgebra": {
+        "accuracy": 0.6667,
+        "n": 15
+      },
+      "Precalculus": {
+        "accuracy": 0.6923,
+        "n": 13
+      }
+    },
+    "by_level": {
+      "1": {
+        "accuracy": 0.7778,
+        "n": 9
+      },
+      "2": {
+        "accuracy": 0.8,
+        "n": 15
+      },
+      "3": {
+        "accuracy": 0.8571,
+        "n": 21
+      },
+      "4": {
+        "accuracy": 0.8571,
+        "n": 21
+      },
+      "5": {
+        "accuracy": 0.6176,
+        "n": 34
+      }
+    }
+  },
+  "delta": {
+    "accuracy": 0.06
+  },
+  "phase_1_baseline": {
+    "student_1_7b": 0.508,
+    "teacher_8b": 0.718,
+    "gap": 0.21
+  },
+  "phase_2_baseline": {
+    "vanilla": 0.7,
+    "injection": 0.69,
+    "delta": -0.01
+  },
+  "phase_2b_baseline": {
+    "vanilla": 0.7,
+    "injection": 0.68,
+    "delta": -0.02
+  },
+  "phase_2c_baseline": {
+    "vanilla": 0.7,
+    "injection": 0.72,
+    "delta": 0.02
+  }
+}

@@ -1,0 +1,16 @@
+19:08:23 Log: /home/students/PatternDistill/phase-3/logs/inject_and_eval_atgi_20260725_190823.log
+19:08:23 ============================================================
+19:08:23 Phase 3 — Adaptive Thought Graph Injection (ATGI)
+19:08:23 ============================================================
+19:08:23 Backend : transformers
+19:08:23 Hyperparameters: α=0.8, β=0.6, τ_stop=0.4, max_steps=6
+19:08:28 Capped at: 3 problems
+19:08:28 To do   : 3
+19:08:28 Thought graph: 1600 nodes, 1200 seq + 28312 sem edges, τ_semantic=0.9
+19:08:28 Phase-2d bank: 400 entries (for worked example retrieval)
+19:08:30 Loading embed model: nomic-ai/nomic-embed-text-v1 on cuda
+19:08:43 Embed model loaded
+19:08:43 Device  : cuda:0
+19:08:43 GPU     : NVIDIA GeForce RTX 5070 Ti
+19:08:43 VRAM    : 16.6 GB
+19:08:43 Loading student: Qwen/Qwen3-1.7B

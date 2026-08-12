@@ -1,0 +1,53 @@
+16:33:32 Log: /home/students/PatternDistill/phase-3d/logs/generate_patterns_20260726_163332.log
+16:33:32 ============================================================
+16:33:32 Phase 3D — AIME Pattern Generation
+16:33:32 ============================================================
+16:33:41 AIME pre-2021: 830 total, using first 400
+16:33:41 To do: 400
+16:33:43 Device: cuda:0
+16:33:43 GPU: NVIDIA GeForce RTX 5070 Ti
+16:33:43 Free VRAM: 16.3 GB
+16:33:43 Loading teacher: Qwen/Qwen3-8B
+16:33:45   VRAM limited — 4-bit quantization
+16:33:49 Teacher loaded
+16:34:00   [1/400] 1983-1 (1983) | ✓step | pat=True ex=True | 10.5s 700tok
+16:34:07   [2/400] 1983-2 (1983) | ✓step | pat=True ex=True | 7.2s 497tok
+16:34:15   [3/400] 1983-3 (1983) | ✓step | pat=True ex=True | 7.6s 520tok
+16:34:21   [4/400] 1983-4 (1983) | ✓step | pat=True ex=True | 6.5s 447tok
+16:34:26   [5/400] 1983-5 (1983) | ✓step | pat=True ex=True | 4.4s 302tok
+16:34:32   [6/400] 1983-6 (1983) | ✓step | pat=True ex=True | 6.2s 427tok
+16:34:36   [7/400] 1983-7 (1983) | ✓step | pat=True ex=True | 3.8s 261tok
+16:34:39   [8/400] 1983-8 (1983) | ✓step | pat=True ex=True | 3.1s 211tok
+16:34:43   [9/400] 1983-9 (1983) | ✓step | pat=True ex=True | 4.0s 272tok
+16:34:46   [10/400] 1983-10 (1983) | ✓step | pat=True ex=True | 3.3s 223tok
+16:34:51   [11/400] 1983-11 (1983) | ✓step | pat=True ex=True | 4.6s 314tok
+16:34:56   [12/400] 1983-12 (1983) | ✓step | pat=True ex=True | 5.7s 387tok
+16:35:00   [13/400] 1983-13 (1983) | ✓step | pat=True ex=True | 3.6s 243tok
+16:35:05   [14/400] 1983-14 (1983) | ✓step | pat=True ex=True | 5.0s 343tok
+16:35:10   [15/400] 1983-15 (1983) | ✓step | pat=True ex=True | 4.5s 306tok
+16:35:19   [16/400] 1984-1 (1984) | ✓step | pat=True ex=True | 9.9s 680tok
+16:35:24   [17/400] 1984-2 (1984) | ✓step | pat=True ex=True | 4.2s 286tok
+16:35:30   [18/400] 1984-3 (1984) | ✓step | pat=True ex=True | 6.2s 423tok
+16:35:35   [19/400] 1984-4 (1984) | ✓step | pat=True ex=True | 5.4s 371tok
+16:35:41   [20/400] 1984-5 (1984) | ✓step | pat=True ex=True | 5.7s 390tok
+16:35:47   [21/400] 1984-6 (1984) | ✓step | pat=True ex=True | 5.9s 405tok
+16:35:53   [22/400] 1984-7 (1984) | ✓step | pat=True ex=True | 5.8s 398tok
+16:35:59   [23/400] 1984-8 (1984) | ✓step | pat=True ex=True | 6.6s 454tok
+16:36:04   [24/400] 1984-9 (1984) | ✓step | pat=True ex=True | 4.6s 315tok
+16:36:09   [25/400] 1984-10 (1984) | ✓step | pat=True ex=True | 5.2s 357tok
+16:36:13   [26/400] 1984-11 (1984) | ✓step | pat=True ex=True | 4.1s 279tok
+16:36:17   [27/400] 1984-12 (1984) | ✓step | pat=True ex=True | 3.8s 254tok
+16:36:26   [28/400] 1984-13 (1984) | ✓step | pat=True ex=True | 8.7s 600tok
+16:36:29   [29/400] 1984-14 (1984) | ✓step | pat=True ex=True | 3.1s 209tok
+16:36:35   [30/400] 1985-1 (1985) | ✓step | pat=True ex=True | 5.5s 374tok
+16:36:40   [31/400] 1985-2 (1985) | ✓step | pat=True ex=True | 5.4s 369tok
+16:36:45   [32/400] 1985-3 (1985) | ✓step | pat=True ex=True | 5.4s 368tok
+16:36:52   [33/400] 1985-4 (1985) | ✓step | pat=True ex=True | 6.8s 468tok
+16:36:57   [34/400] 1985-5 (1985) | ✓step | pat=True ex=True | 4.4s 295tok
+16:37:01   [35/400] 1985-6 (1985) | ✓step | pat=True ex=True | 4.6s 310tok
+16:37:07   [36/400] 1985-7 (1985) | ✓step | pat=True ex=True | 5.4s 367tok
+16:37:12   [37/400] 1985-8 (1985) | ✓step | pat=True ex=True | 5.6s 384tok
+16:37:19   [38/400] 1985-9 (1985) | ✓step | pat=True ex=True | 7.0s 479tok
+16:37:25   [39/400] 1985-10 (1985) | ✓step | pat=True ex=True | 5.7s 388tok
+16:37:31   [40/400] 1985-11 (1985) | ✓step | pat=True ex=True | 5.9s 400tok
+16:37:45   [41/400] 1985-12 (1985) | ✓step | pat=True ex=True | 14.5s 991tok

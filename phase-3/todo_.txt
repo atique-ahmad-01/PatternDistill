@@ -1,0 +1,11 @@
+TODO: [23-July-2026]
+Memory Reuse – Reuse previously learned reasoning patterns.
+Full-Problem Matching – Retrieve and leverage multiple similar problems from the memory bank to guide reasoning.
+Step-Level Matching (Mix & Match) – Retrieve and combine relevant reasoning steps from multiple examples.
+BoT (Buffer of Thoughts) – Stores reusable reasoning templates and composes them at inference time (via API calls) before solving a new problem: https://arxiv.org/pdf/2506.18896
+RoT (Retrieval of Thoughts) – Organizes reasoning steps from all categories and benchmarks into a graph, then retrieves the most relevant step along with its top-k neighboring steps: https://arxiv.org/pdf/2509.21743
+ReasonFlux – Dynamically selects and adapts reasoning patterns based on the input problem: https://arxiv.org/pdf/2406.04271
+
+use this gpu:
+ssh students@100.118.158.78
+password: itu@234@
