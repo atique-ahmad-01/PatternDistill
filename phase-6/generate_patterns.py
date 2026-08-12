@@ -154,19 +154,27 @@ def parse_response(raw):
 
 # ── IO ───────────────────────────────────────────────────────────────────────
 
-def load_done_ids(path):
-    if not path.exists():
-        return set()
+def load_done_ids(*paths):
+    """IDs already resolved — accepted OR permanently dropped.
+
+    Dropped ids count as done: decoding is greedy, so re-attempting a problem
+    that already failed all its retries reproduces the same output and the same
+    rejection. Without this, every resume re-burns 3 attempts per prior drop.
+    Delete rejected.jsonl to force a retry after changing the prompt or gates.
+    """
     done = set()
-    with open(path) as f:
-        for line in f:
-            line = line.strip()
-            if not line:
-                continue
-            try:
-                done.add(json.loads(line)["id"])
-            except (json.JSONDecodeError, KeyError):
-                pass
+    for path in paths:
+        if not path.exists():
+            continue
+        with open(path) as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    done.add(json.loads(line)["id"])
+                except (json.JSONDecodeError, KeyError):
+                    pass
     return done
 
 
@@ -262,7 +270,7 @@ def main():
         items = items[:args.max_problems]
         log.info(f"Capped at {len(items)}")
 
-    done = load_done_ids(jsonl_out)
+    done = load_done_ids(jsonl_out, DATA_DIR / "rejected.jsonl")
     todo = [it for it in items if it[0] not in done]
     if done:
         log.info(f"Resuming — {len(done)} already done")
@@ -308,8 +316,12 @@ def main():
                 stats["dropped"] += 1
                 for g in failures:
                     gate_fails[g] = gate_fails.get(g, 0) + 1
+                # Store the candidate itself, not just the verdict — without it
+                # a false-positive gate cannot be told from a genuinely bad
+                # pattern after the fact.
                 append_jsonl(DATA_DIR / "rejected.jsonl",
-                             {"id": uid, "problem": problem, "failures": failures})
+                             {"id": uid, "problem": problem, "gold_answer": gold,
+                              "failures": failures, "candidate": fields})
                 log.warning(f"  [{idx}/{len(todo)}] {uid} DROPPED after "
                             f"{MAX_RETRIES + 1} attempts: {list(failures)}")
 

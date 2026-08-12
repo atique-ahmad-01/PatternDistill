@@ -93,6 +93,25 @@ def contains_standalone(haystack, needle):
     return re.search(rf"(?<![\w\d]){re.escape(needle)}(?![\w\d])", str(haystack or "")) is not None
 
 
+def is_distinctive_answer(gold):
+    """Whether finding `gold` in a pattern is real evidence of answer leakage.
+
+    A single-digit answer is not. Measured on a partial run: 18 of 41
+    rejections were patterns whose gold answer happened to be 0-4, tripped by
+    entirely general text ("set the expression equal to 0", "add 1 to each
+    exponent"). Worse, the bias was systematic — it discarded patterns for
+    problems with small integer answers, skewing the bank rather than just
+    shrinking it.
+
+    Distinctive answers (multi-digit integers, fractions, expressions) remain
+    checked, which is where genuine leakage like "= 14/3" or "147" shows up.
+    """
+    g = normalize(gold)
+    if not g:
+        return False
+    return not re.fullmatch(r"-?\d", g)
+
+
 def content_ngrams(text, n=PHRASE_N):
     """Content-word n-grams, lowercased, LaTeX/punctuation/hyphens flattened.
 
@@ -202,7 +221,8 @@ def check(entry, require_new_schema=True):
 
     # 6. the anchor's own answer must not appear anywhere (incl. any example)
     gold = normalize(c["gold"])
-    if gold and (contains_standalone(blob, gold) or contains_standalone(c["example"], gold)):
+    if is_distinctive_answer(gold) and (contains_standalone(blob, gold)
+                                        or contains_standalone(c["example"], gold)):
         where = "pattern" if contains_standalone(blob, gold) else "worked_example"
         fail["no_answer_leak"] = f"gold answer {gold!r} appears in {where}"
 

@@ -18,7 +18,7 @@ Five problems, all verified:
 |---|---|---|
 | 1 | Token starvation | 74% of AIME vanilla runs hit the 8,192 cap; 111/117 AIME both-wrong cases had **both** arms truncated; 48 answers came back empty, all capped, none containing `\boxed{}` |
 | 2 | Graph expansion never ran | Novelty cutoff 0.85 < edge tau 0.90, so every neighbour is auto-rejected. Verified: 2,279 candidates across 400 anchors → 2,279 rejected → **0 survived**. `bonus_steps=0` for all 267 injected problems |
-| 3 | Pattern format broken | All 1,146 patterns are exactly 3 steps + 1 Note; `Identify` opens a step in 698/746 AIME patterns; 30–32% contain digits from the anchor problem; **45% of MATH-500 worked examples contain the anchor's own gold answer** |
+| 3 | Pattern format broken | All 1,146 patterns are exactly 3 steps + 1 Note; `Identify` opens a step in 698/746 AIME patterns; 30–32% contain digits from the anchor problem; **23% of MATH-500 worked examples contain the anchor's own distinctive gold answer** (see the correction in §9) |
 | 4 | No auditability | The assembled strategy and worked-example text are never saved, so no regression can be traced to its source pattern |
 | 5 | No significance testing | Every phase's headline delta is within noise: phase-4 +1.7pp (p=0.500), phase-3d +3.5pp (p=0.164), phase-3e +3.1pp (p=0.134), exact McNemar |
 
@@ -56,8 +56,8 @@ Step 1: Identify the structure of the number: a 4-digit number starting with 1.
 True only of the anchor. Injected into any other counting problem, it is
 actively wrong.
 
-**And it leaks answers.** 45% of MATH-500 worked examples end in the
-anchor's own gold answer:
+**And it leaks answers.** 23% of MATH-500 worked examples end in the
+anchor's own distinctive gold answer:
 
 ```
 Reference Example:
@@ -112,7 +112,7 @@ demonstrably lacks:
 | `verify` | Gives a self-check. Costs a few tokens, catches whole classes of arithmetic error |
 
 **Worked examples are dropped by default.** Phase-3e already found that
-removing them helped, and the 45% answer-leakage measurement explains why.
+removing them helped, and the 23% answer-leakage measurement explains why.
 An ablation arm keeps a symbolic-only, answer-redacted variant so the choice
 is tested rather than assumed.
 
@@ -138,11 +138,11 @@ rates get logged** so a silently-shrinking bank can't go unnoticed.
 | Gate | Rule |
 |---|---|
 | No anchor literals | No numeric token appearing in the anchor problem may appear in any pattern field |
-| No answer leakage | The anchor's gold answer must not appear anywhere in the pattern |
+| No answer leakage | The anchor's gold answer must not appear anywhere in the pattern — applied only to *distinctive* answers, since a single-digit answer coinciding with general text is not evidence (see §9) |
 | Variable length | 2 ≤ `len(steps)` ≤ 6; a bank where >90% share one length fails the build |
 | Non-vacuous steps | No step may consist solely of a generic verb phrase (`identify the`, `calculate the`, `solve the`) without a named object |
 | Required fields | `trigger`, `technique`, `pitfall` non-empty |
-| Token budget | Assembled strategy ≤ 200 tokens (small models degrade on long injected context) |
+| Token budget | Assembled strategy ≤ 260 tokens (small models degrade on long injected context) |
 
 The "no anchor literals" gate is the precise version of the abstraction
 requirement: general mathematical constants (`2`, `n`, `k`) are fine; the
@@ -380,8 +380,21 @@ Everything below was verified before the full run, not assumed.
 
 | Bank | Pass rate | Answer leak | Anchor numbers | Problem phrases | Uniformity |
 |---|---|---|---|---|---|
-| phase-2d (MATH-500, n=400) | 50.2% | 42.8% | 4.5% | 8.0% | 100% → **FAIL** |
-| phase-3d (AIME, n=746) | 76.0% | 5.4% | 13.3% | 13.0% | 100% → **FAIL** |
+| phase-2d (MATH-500, n=400) | 68.5% | **23.0%** | 4.5% | 8.0% | 100% → **FAIL** |
+| phase-3d (AIME, n=746) | 76.1% | **5.0%** | 13.3% | 13.0% | 100% → **FAIL** |
+
+> **Corrected figures.** An earlier draft of this document reported the answer
+> leak as 45% / 6.6% (MATH-500 / AIME). Those counts were inflated: they
+> included patterns whose gold answer was a single digit, where a coincidental
+> "0" or "1" in general text ("set the expression equal to 0", "add 1 to each
+> exponent") was counted as leakage. A partial distillation run made the bias
+> obvious — 20 of 50 rejections were single-digit false positives, and they
+> fell disproportionately on problems with small integer answers, skewing the
+> bank rather than merely shrinking it. The gate now only fires on
+> *distinctive* answers (multi-digit integers, fractions, expressions), which
+> reduced `no_answer_leak` rejections from 20 to 0 on the retried segment while
+> still catching the canonical `= 14/3` case. The 23% / 5.0% figures above are
+> the genuine rates.
 
 The phrase gate was added after a specific miss: `"Identify the structure of
 the number: a 4-digit number starting with 1"` passed every other gate because
