@@ -1,0 +1,7 @@
+# Regenerable artifacts — patterns are re-distilled, graph/bank are rebuilt
+data/patterns/*.jsonl
+data/patterns/*.json
+memory/
+graph/
+logs/
+results/*.jsonl
