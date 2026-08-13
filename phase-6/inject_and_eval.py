@@ -31,6 +31,7 @@ Usage:
 import argparse
 import json
 import logging
+import random
 import re
 import time
 from collections import defaultdict
@@ -46,6 +47,8 @@ import scoring as S
 ROOT        = Path(__file__).parent
 RESULTS_DIR = ROOT / "results"
 LOGS_DIR    = ROOT / "logs"
+
+EVAL_ORDER_SEED = 20260813  # fixed: prefix of a partial run stays a fair sample
 
 NEW_BANK_JSON  = ROOT / "memory" / "bank.json"
 NEW_BANK_INDEX = ROOT / "memory" / "bank.index"
@@ -347,6 +350,11 @@ def build_eval_set(log):
                       "problem": r["Question"], "gold": str(r["Answer"]),
                       "subject": "", "level": "", "year": r.get("Year")})
     log.info(f"Eval set: {len(items)} ({len(math)} MATH-500 + {len(items)-len(math)} AIME)")
+    # Shuffle so MATH-500 and AIME interleave: build_eval_set emits all MATH
+    # first, so an unshuffled --max-problems (or a partial run) would be pure
+    # MATH-500 and miss the hard half entirely. Fixed seed keeps the order
+    # identical across resumes and across arms.
+    random.Random(EVAL_ORDER_SEED).shuffle(items)
     return items
 
 
