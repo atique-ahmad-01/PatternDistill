@@ -8,6 +8,12 @@ cannot silently recur:
   * 45% of MATH-500 worked examples contained the anchor's own gold answer
   * All 1,146 patterns were rigidly 3 steps + 1 Note
 
+and two more measured on the phase-6 bank itself, which passed every gate
+above and still shipped them (audit_quality.py, 965 patterns):
+
+  * 9.4% echoed the anchor's object labels ("triangle ABC", "circle P")
+  * 12.3% restated one instruction as two steps
+
 The teacher prompt already *asked* for abstraction and was ignored, so
 phase-6 enforces it here instead of trusting the instruction.
 
@@ -24,6 +30,7 @@ import argparse
 import json
 import re
 from collections import Counter
+from difflib import SequenceMatcher
 from pathlib import Path
 
 # ── Gate configuration ───────────────────────────────────────────────────────
@@ -48,11 +55,58 @@ VACUOUS_RE = re.compile(
     re.IGNORECASE,
 )
 
+# Two steps that restate one instruction waste the injection budget and read
+# as padding to a 1.7B model. Ratio is over content words, so "Place triangle
+# ABC on coordinate plane with BC on x-axis" and "Set up coordinate system
+# with BC as x-axis" register as the duplicate they are.
+STEP_DUP_RATIO = 0.75
+
+# Bare capital tokens are how problems name their objects: triangle ABC,
+# circle P, point D. No existing gate sees them — a label carries no digits,
+# so the number gate misses it, and forms no shared content 3-gram, so the
+# phrase gate misses it too. A pattern can therefore pass everything above
+# while still being welded to the one problem it was distilled from, and the
+# label is actively wrong once injected into a problem that calls its
+# triangle PQR. Anchored on both sides to skip 4+ letter acronyms (AIME).
+LABEL_RE = re.compile(r"(?<!\w)([A-Z][A-Z']{0,2})(?!\w)")
+
+# All-caps tokens that are general mathematical vocabulary rather than object
+# labels. These legitimately appear in both a problem and its pattern, so
+# blocking them would discard good patterns — the same false-positive trap
+# that is_distinctive_answer() documents for single-digit gold answers.
+# NE/NW/SE/SW are Asymptote label-placement directions, present in nearly
+# every MATH-500 geometry problem's diagram source. Left in, they would also
+# seed N, E, S and W as single-letter "point names" via the multi-letter rule
+# below, reopening the variable false-positive from the other side.
+GENERIC_LABELS = frozenset("""
+A I II III
+GCD LCM HCF AM GM HM QM RMS LHS RHS
+MOD ABS SUM MIN MAX AVG DEG RAD
+IFF QED WLOG PDF CDF
+NE NW SE SW
+""".split())
+
+# A lone capital is ambiguous: "triangle ABC" names an object, but "the first
+# $N$ odd numbers" is a general variable and blocking it would discard a good
+# pattern. Measured on the bank: 96 rejections, of which the single-letter
+# variable cases (N, C, S) were false. So a single letter counts as a label
+# only on evidence from the problem itself — it appears inside a multi-letter
+# label (DE implies D and E name points), or a geometry noun introduces it.
+GEOMETRY_NOUNS = (
+    "point|points|vertex|vertices|circle|circles|triangle|triangles|line|lines|"
+    "segment|segments|square|squares|rectangle|polygon|quadrilateral|angle|angles|"
+    "arc|sphere|plane|region|midpoint|center|centre|origin|foot"
+)
+NAMED_LABEL_RE = re.compile(
+    rf"(?:{GEOMETRY_NOUNS})\s+\$?\\?[a-z]*\s*([A-Z][A-Z']{{0,2}})(?!\w)", re.IGNORECASE)
+
 GATES = (
     "required_fields",
     "step_count",
     "non_vacuous_steps",
+    "no_duplicate_steps",
     "no_anchor_numbers",
+    "no_anchor_labels",
     "no_problem_phrases",
     "no_answer_leak",
     "token_budget",
@@ -112,15 +166,49 @@ def is_distinctive_answer(gold):
     return not re.fullmatch(r"-?\d", g)
 
 
-def content_ngrams(text, n=PHRASE_N):
-    """Content-word n-grams, lowercased, LaTeX/punctuation/hyphens flattened.
+def content_words(text):
+    """Lowercased content words, LaTeX/punctuation/hyphens flattened.
 
     Hyphens become spaces so "$4$ -digit" and "4-digit" tokenize alike —
     without this the phrase gate misses the very case it exists to catch.
     """
     t = re.sub(r"[$\\{}(),.;:\-]", " ", str(text or "").lower())
-    words = [w for w in re.findall(r"[a-z0-9]+", t) if w not in STOPWORDS]
+    return [w for w in re.findall(r"[a-z0-9]+", t) if w not in STOPWORDS]
+
+
+def content_ngrams(text, n=PHRASE_N):
+    """Content-word n-grams."""
+    words = content_words(text)
     return {" ".join(words[i:i + n]) for i in range(len(words) - n + 1)}
+
+
+def step_similarity(a, b):
+    """How much two steps say the same thing, ignoring stopwords and phrasing."""
+    wa, wb = " ".join(content_words(a)), " ".join(content_words(b))
+    if not wa or not wb:
+        return 0.0
+    return SequenceMatcher(None, wa, wb).ratio()
+
+
+def candidate_labels(text):
+    """Every bare capital token, minus general mathematical vocabulary."""
+    return set(LABEL_RE.findall(str(text or ""))) - GENERIC_LABELS
+
+
+def problem_labels(text):
+    """Capitals the anchor problem uses to *name objects*.
+
+    Multi-letter tokens (BC, ABC) are labels on their face. A single letter
+    qualifies only on evidence — it occurs inside a multi-letter label, or a
+    geometry noun introduces it — which is what keeps general variables like
+    the N in "the first N odd numbers" out of the gate.
+    """
+    text = str(text or "")
+    found = candidate_labels(text)
+    multi = {l for l in found if len(l.replace("'", "")) >= 2}
+    from_multi = {ch for l in multi for ch in l if ch.isupper()}
+    named = {l for l in NAMED_LABEL_RE.findall(text)} - GENERIC_LABELS
+    return multi | ((from_multi | named) & found)
 
 
 def numeric_shared_phrases(problem, blob):
@@ -209,24 +297,40 @@ def check(entry, require_new_schema=True):
     if vac:
         fail["non_vacuous_steps"] = f"{len(vac)} vacuous: {vac[0][:60]!r}"
 
-    # 4. no multi-digit numbers carried over from the anchor problem
+    # 4. no step that restates another in different words
+    dups = [(i + 1, j + 1)
+            for i in range(n) for j in range(i + 1, n)
+            if step_similarity(c["steps"][i], c["steps"][j]) >= STEP_DUP_RATIO]
+    if dups:
+        i, j = dups[0]
+        fail["no_duplicate_steps"] = (
+            f"steps {i} and {j} restate one instruction"
+            + (f" (+{len(dups) - 1} more pair)" if len(dups) > 1 else "")
+        )
+
+    # 5. no multi-digit numbers carried over from the anchor problem
     leaked = sorted(numbers_in(c["problem"]) & numbers_in(blob))
     if leaked:
         fail["no_anchor_numbers"] = f"anchor numbers in pattern: {leaked[:5]}"
 
-    # 5. no distinctive phrasing carried over from the anchor problem
+    # 6. no object labels carried over from the anchor problem
+    echoed = sorted(problem_labels(c["problem"]) & candidate_labels(blob))
+    if echoed:
+        fail["no_anchor_labels"] = f"anchor labels in pattern: {echoed[:5]}"
+
+    # 7. no distinctive phrasing carried over from the anchor problem
     shared = numeric_shared_phrases(c["problem"], blob)
     if shared:
         fail["no_problem_phrases"] = f"shared phrase: {sorted(shared)[0][:50]!r}"
 
-    # 6. the anchor's own answer must not appear anywhere (incl. any example)
+    # 8. the anchor's own answer must not appear anywhere (incl. any example)
     gold = normalize(c["gold"])
     if is_distinctive_answer(gold) and (contains_standalone(blob, gold)
                                         or contains_standalone(c["example"], gold)):
         where = "pattern" if contains_standalone(blob, gold) else "worked_example"
         fail["no_answer_leak"] = f"gold answer {gold!r} appears in {where}"
 
-    # 7. injected strategy must stay small (~4 chars/token approximation)
+    # 9. injected strategy must stay small (~4 chars/token approximation)
     approx = max(1, len(strategy_text(c)) // 4)
     if approx > MAX_STRATEGY_TOKENS:
         fail["token_budget"] = f"~{approx} tokens (limit {MAX_STRATEGY_TOKENS})"
