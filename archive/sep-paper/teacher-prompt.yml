@@ -1,0 +1,122 @@
+# RB-DERIV teacher pipeline — Qwen3-8B.
+#
+# Stage 1 (solve):   train problems -> N independent solutions, gold-verified.
+# Stage 2 (distill): verified solutions for a family -> ONE memory object.
+#
+# The student (Qwen3-1.7B) never sees these prompts; it sees only the distilled
+# object, via solver-prompt.yml.
+
+meta:
+  teacher: Qwen/Qwen3-8B
+  student: Qwen/Qwen3-1.7B
+  split: per-family 9 train / 3 test   # NOT a global 75/25 shuffle
+  distill_unit: family                 # 16 objects, one per family
+
+# ----------------------------------------------------------------------------
+# STAGE 1 — SOLVE
+#
+# Sample N independent completions per problem at temperature, rather than
+# asking for N solutions in one reply. One reply containing five solutions
+# degrades after the second into reworded copies (which is why the old prompt
+# had to forbid it), and a single malformed reply loses all five. Independent
+# samples also let you discard failures one at a time.
+#
+# Suggested N=5, temperature 0.8. Cost: 9 problems x 16 families x 5 = 720 calls.
+# ----------------------------------------------------------------------------
+solve:
+  system: |
+    You are an expert mathematician. Solve the problem and show the reasoning
+    that gets there.
+
+    The quantities are far too large to reach by step-by-step computation. The
+    problem is solvable only through a closed form, a cycle, a period, or an
+    equivalent structural shortcut. Find that shortcut.
+
+    Write your solution as:
+
+    STRATEGY: <the mathematical move, under 12 words>
+    <numbered reasoning steps — as many as the method genuinely needs>
+    ANSWER: <integer>
+
+    Name the actual technique in STRATEGY, not a generic action like "compute
+    the value". Give the answer in plain decimal digits.
+
+  user: |
+    {question}
+
+  verification:
+    rule: "keep the sample only if parsed ANSWER == gold_answer"
+    note: |
+      Golds are exact integers, so this filter is exact — no grading model, no
+      partial credit. Do NOT put the gold in the prompt. A gold-conditioned
+      teacher rationalizes backwards from the answer and produces a method that
+      cannot be reapplied to an unseen instance, which is precisely what the
+      student needs it for.
+
+  gate:
+    min_verified_per_family: 3
+    on_failure: |
+      A family with fewer than 3 verified solutions means the 8B teacher cannot
+      derive that technique. Do not distill it from unverified text — the object
+      will encode the teacher's error and the student will inherit it. Record
+      the family as teacher-limited and report it.
+
+# ----------------------------------------------------------------------------
+# STAGE 2 — DISTILL
+#
+# Input: every verified solution across the family's 9 train problems.
+# Output: one object in the schema the student consumes.
+#
+# Distilling per family, not per problem, is what forces abstraction: the
+# solutions come from 9 different instances, so anything instance-specific
+# cannot be common to them.
+# ----------------------------------------------------------------------------
+distill:
+  system: |
+    You are building a reusable technique library. Below are correct solutions
+    to several DIFFERENT problems that all share one underlying method.
+
+    Write the single technique they have in common. A different model will be
+    shown your technique alongside a NEW problem of this type, and must solve
+    it without ever seeing these problems.
+
+    Produce exactly these four fields:
+
+    NAME: <the technique, under 12 words>
+
+    USE_WHEN: <the structural condition that tells you this method applies.
+    Begin with "A" or "When". Describe the shape of the problem, never its
+    values.>
+
+    METHOD: <how to execute it, on any instance. State the general formula or
+    procedure with symbols, not the arithmetic of any one problem. As many
+    sentences as the method needs; no padding.>
+
+    CHECK: <one cheap, decisive verification of this method's own failure mode.
+    It must use a case small enough to confirm by hand, and it must be capable
+    of failing — a check that passes for any plausible variant of the method is
+    useless. Prefer a tiny concrete case with its expected result.>
+
+    Rules:
+    - No numbers from the problems above. No specific moduli, exponents, list
+      lengths, or answers.
+    - Do not describe what the problems were. Describe what to do.
+    - If the solutions disagree on method, write the one that appears most
+      often and is correct; ignore the rest.
+
+  user: |
+    Family: {family}
+
+    {numbered_verified_solutions}
+
+  gates:
+    abstraction:  "no digit-string from any source problem appears in USE_WHEN or METHOD"
+    no_leak:      "no gold_answer from the family appears anywhere in the object"
+    use_when:     "starts with 'A' or 'When'"
+    check_present: "CHECK contains a concrete case and an expected result"
+    check_decisive: |
+      Machine test: apply METHOD and a plausible corruption of it to CHECK's
+      case. If both pass, the check cannot separate them — regenerate. This is
+      the audit RB-DERIV applied to its own shipped objects.
+    max_retries: 2
+    on_failure: "regenerate; if still failing, record as ungated and exclude from the main arm"

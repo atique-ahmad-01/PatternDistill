@@ -18,7 +18,7 @@ short version:
 | **Dead graph** | The novelty cutoff (0.85) was *below* the edge threshold (0.90), so every graph suggestion was auto-rejected. The graph had contributed nothing for three phases and nobody noticed. |
 | **Contaminated patterns** | Patterns copied the original problem's numbers, labels, and — in 23% of MATH-500 cases — its actual answer. The student was being shown a finished solution to a *different* question. |
 
-All three are fixed here, and the six evaluation arms are designed so you can
+All three are fixed here, and the evaluation arms are designed so you can
 tell which fix (if any) actually mattered.
 
 ---
@@ -125,11 +125,14 @@ Be direct and do not restate the problem. Put your final answer in \boxed{}.
 
 ---
 
-## The six arms
+## The arms
 
 Every arm answers **one** question, by differing from its neighbour in
 exactly one respect. That's what makes the result attributable — if the
 number moves, you know which change moved it.
+
+Six were specified; **five actually run.** Arm E was withdrawn mid-sweep — it
+turned out to be inert (see below).
 
 | Arm | Inject? | Bank | Graph | Example | Escape hatch |
 |---|---|---|---|---|---|
@@ -137,7 +140,6 @@ number moves, you know which change moved it.
 | `B_old_patterns` | yes | **old** | no | no | yes |
 | `C_new_patterns` | yes | new | no | no | yes |
 | `D_new_plus_graph` | yes | new | **yes** | no | yes |
-| `E_new_plus_ex` | yes | new | no | **yes** | yes |
 | `F_no_escape` | yes | new | no | no | **no** |
 
 ### A — Vanilla
@@ -172,15 +174,22 @@ similar to what the spine already says.
 in phases 3 through 5. Currently 61% of anchors have at least one eligible
 neighbour.
 
-### E — New patterns + worked example
+### E — Withdrawn (was: new patterns + worked example)
 
-C, plus a symbolic, answer-redacted worked example.
+Arm E was meant to test whether a de-contaminated example helps: examples
+were dropped from the default because they were the main leak vector — 23%
+of MATH-500 examples ended in the anchor's own answer — but "examples leaked
+answers" and "examples don't help" are different claims.
 
-Examples were dropped from the default because they were the main leak
-vector — 23% of MATH-500 examples ended in the anchor's own answer. But
-"examples leaked answers" and "examples don't help" are different claims.
-**C → E tests whether a de-contaminated example is worth having**, rather
-than assuming it isn't.
+**It never ran as designed.** The phase-6 schema has no `worked_example`
+field and the distiller never emits one, so `assemble_new()`'s
+`if include_example and anchor.get("worked_example")` could not fire and E
+produced a prompt byte-identical to C — confirmed on 41/41 problems before
+it was withdrawn. Same failure mode as the dead graph: a flag whose enabling
+data doesn't exist, with nothing checking.
+
+Testing the question needs a re-distillation pass that emits redacted
+examples, then a separate two-arm run. **No C → E result exists.**
 
 ### F — New patterns, no escape hatch
 
@@ -199,7 +208,6 @@ sentence of prompt was doing real work.
 | A → B | the token budget fix |
 | B → C | the pattern redesign |
 | C → D | graph augmentation |
-| C → E | de-contaminated worked examples |
 | C → F | the escape hatch |
 
 Losses matter more than wins here. Significance is gated by the regression
@@ -281,7 +289,7 @@ phase-6/
 ├── generate_patterns.py       distillation + gates
 ├── validate_patterns.py       stand-alone gate checker
 ├── build_memory_and_graph.py  bank + graph
-├── inject_and_eval.py         six arms, retrieval, injection, generation
+├── inject_and_eval.py         arms, retrieval, injection, generation
 ├── analyze.py                 McNemar + bootstrap CI
 ├── scoring.py                 answer extraction (verbatim from phase-4)
 ├── audit_quality.py           residual contamination measurement
@@ -306,9 +314,9 @@ nothing checked.
 
 ## Status
 
-Pattern regeneration and the graph build are done. The six-arm sweep on
-Qwen3-1.7B is running over all 287 problems (100 MATH-500 + 187 AIME) —
-1,722 problem-arm runs.
+Pattern regeneration and the graph build are done. The sweep on Qwen3-1.7B is
+running over all 287 problems (100 MATH-500 + 187 AIME) — 1,435 problem-arm
+runs across five arms, about 34 hours on the RTX 5070 Ti.
 
 Success is **not** defined as a bigger headline number. Phase 4's +1.7pp came
 with p=0.500. Phase 6 succeeds if AIME truncation lands under 10%, the graph

@@ -113,8 +113,13 @@ demonstrably lacks:
 
 **Worked examples are dropped by default.** Phase-3e already found that
 removing them helped, and the 23% answer-leakage measurement explains why.
-An ablation arm keeps a symbolic-only, answer-redacted variant so the choice
-is tested rather than assumed.
+An ablation arm was specified to keep a symbolic-only, answer-redacted
+variant so the choice would be tested rather than assumed.
+
+> **Not implemented — see §6.** The schema above has no `worked_example`
+> field and `generate_patterns.py` never emits one, so the redacted variant
+> does not exist in the bank. Arm E was therefore inert; the choice to drop
+> worked examples remains assumed, not tested.
 
 ### Before / after on a real entry
 
@@ -124,7 +129,7 @@ is tested rather than assumed.
 | Step 1 | "Identify the prime factorization of the number." | "Factor the input into prime powers" |
 | Information | Restates the task | Names the technique + when it applies |
 | Anchor literals | `196`, `4-digit`, `starting with 1` | None — validator rejects them |
-| Example | `2^2 x 7^2 -> (2+1)(2+1) = 3 x 3 = 9` (leaks answer) | Dropped (or redacted, as an ablation) |
+| Example | `2^2 x 7^2 -> (2+1)(2+1) = 3 x 3 = 9` (leaks answer) | Dropped (the redacted ablation was never built — §6) |
 | Applicability | Not stated | `trigger` field, checkable by the model |
 
 ---
@@ -143,6 +148,18 @@ rates get logged** so a silently-shrinking bank can't go unnoticed.
 | Non-vacuous steps | No step may consist solely of a generic verb phrase (`identify the`, `calculate the`, `solve the`) without a named object |
 | Required fields | `trigger`, `technique`, `pitfall` non-empty |
 | Token budget | Assembled strategy ≤ 260 tokens (small models degrade on long injected context) |
+| No shared phrases | No number-bearing content 3-gram may be shared with the anchor problem (added after the miss recorded in §9) |
+| **No anchor labels** | No object name from the anchor problem (`triangle ABC`, `circle P`) may appear in any field |
+| **No duplicate steps** | No two steps may restate one instruction, compared over content words at ratio ≥ 0.75 |
+
+The last two were added after the first phase-6 bank passed the other seven
+and still shipped contamination: on its 965 patterns, 9.4% echoed anchor
+object labels and 12.3% contained a duplicated step. Neither was visible to
+the existing gates — a label carries no digits, so the literals gate misses
+it, and forms no shared content 3-gram, so the phrase gate misses it too.
+
+Regenerating under all nine: 869 of 1,146 accepted, all 869 passing every
+gate. Residual near-duplicate steps 2.5%, label echo 2.3% (`audit_quality.py`).
 
 The "no anchor literals" gate is the precise version of the abstraction
 requirement: general mathematical constants (`2`, `n`, `k`) are fine; the
@@ -257,17 +274,38 @@ assumed:
 | B. Old patterns, new budget | Isolates the budget fix from everything else |
 | C. New patterns, no graph | Tests the pattern redesign alone |
 | D. New patterns + graph augmentation | Tests the graph for the **first time ever** |
-| E. C + answer-redacted worked example | Tests whether examples help once de-contaminated |
+| ~~E. C + answer-redacted worked example~~ | **Withdrawn — never functional, see below** |
 | F. C without the escape hatch | Measures what the escape hatch is worth |
 
 Arm B is the important control: it separates "we gave the model room to
 think" from "our pattern redesign worked." Without it, the budget fix would
 mask everything else.
 
+> **Arm E was inert and has been withdrawn from the run.** Its `example: True`
+> flag is read in `assemble_new()` as
+> `if include_example and anchor.get("worked_example")`, but the phase-6
+> schema (§2) has no `worked_example` field and `generate_patterns.py` never
+> emits one — 0 of 869 patterns carry it. The condition could not fire, so E
+> assembled a prompt byte-identical to C. Confirmed on the first 41 problems
+> of the 1.7B sweep: identical `injected_strategy` on 41/41, and identical
+> token counts run for run.
+>
+> This is the same failure mode as the dead graph in §0 — a flag whose
+> enabling data does not exist, with nothing asserting otherwise. The graph
+> bug got a startup assertion after the fact; this one had no equivalent
+> check. Any future arm gated on an optional pattern field needs one.
+>
+> The sweep was restarted without E at problem 42, saving ~6.8 GPU-hours of
+> duplicated arm C. The 41 collected E rows are retained as an incidental
+> determinism check on C, not as an ablation result. **No C→E contrast is
+> available from this run**, and the claim that de-contaminated examples were
+> tested must not be made on its basis. Testing it needs a re-distillation
+> pass that emits redacted examples, then a separate two-arm run.
+
 ### Model order: 1.7B first, then 4B
 
-**Qwen3-1.7B runs the full 6-arm sweep. Qwen3-4B runs only the winning arm
-plus vanilla.** The headroom measurement decides this:
+**Qwen3-1.7B runs the full sweep (six arms as specified, five as actually
+run — E withdrawn). Qwen3-4B runs only the winning arm plus vanilla.** The headroom measurement decides this:
 
 | Model | Subset | Vanilla | Headroom | Current delta |
 |---|---|---|---|---|
@@ -289,8 +327,8 @@ Three reasons the 1.7B is the right starting point:
    move that number positive. If it doesn't, the diagnosis is wrong and we
    learn so cheaply.
 3. **Cost.** 14.7 GPU-hours per arm-pair vs 18.6, before the 24K budget
-   slows both down. The full six-arm sweep is affordable on 1.7B and roughly
-   75+ hours on 4B.
+   slows both down. The sweep is affordable on 1.7B (~34h over five
+   arms, measured) and roughly 75+ hours on 4B.
 
 The 4B then runs the winning configuration only — enough to establish the
 scaling trend (the effect fading as the student grows), which is likely the
@@ -309,7 +347,9 @@ the cost of a second full sweep.
 - **Regressions should fall.** Removing answer leakage and adding the escape
   hatch both target losses directly, and losses are what gate significance.
 - **Auditability.** Every regression traceable to its source pattern.
-- **Attribution.** Six arms mean each design choice is separately measurable.
+- **Attribution.** Five working arms mean the budget fix, the pattern
+  redesign, the graph, and the escape hatch are each separately measurable.
+  Worked examples are not — see the arm E note in §6.
 
 **A real risk, stated plainly:** phase-3e found **69% of injection wins were
 "vanilla hit the limit, injection didn't."** Give both arms a fair 24K budget

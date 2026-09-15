@@ -1,0 +1,153 @@
+# RB-DERIV solver prompt — arm-conditioned.
+#
+# One system prompt, shared byte-for-byte by every arm. One user template per arm.
+# The ONLY thing that varies between arms is the injected block; everything else
+# is identical, so a token difference between arms is attributable to the
+# injection and not to prompt formatting.
+#
+# Arms: base | plain | schema | schema_wrong | schema_random
+# (schema_random is the placebo the README's reporting section requires.)
+
+meta:
+  dataset: RB_DERIV
+  objects: RB_DERIV/RB_DERIV_objects.json
+  questions: RB_DERIV/RB_DERIV_questions.json
+  answer_type: single_integer
+  no_few_shot: true   # worked examples leak golds; see phase-6 audit
+
+# ----------------------------------------------------------------------------
+# SYSTEM — identical in all five arms. Never edit per-arm.
+# ----------------------------------------------------------------------------
+system: |
+  You are solving one mathematics problem. The answer is a single integer.
+
+  The quantities involved are far too large to reach by step-by-step
+  computation. The problem is solvable only through a closed form, a cycle, a
+  period, or an equivalent structural shortcut.
+
+  Show only the reasoning you need. Do not restate the problem. Do not present
+  alternative solutions or compare approaches.
+
+  End your reply with exactly one line, and nothing after it:
+
+  ANSWER: <integer>
+
+  Write the integer in plain decimal digits: no commas, no spaces, no units,
+  no LaTeX, no words.
+
+# ----------------------------------------------------------------------------
+# USER templates. Substitutions: {question}, {method}, {name}, {use_when},
+# {check}. Render with str.format or equivalent; leave no placeholder unfilled.
+# ----------------------------------------------------------------------------
+arms:
+
+  # No help. The solver must derive the technique itself.
+  base: |
+    {question}
+
+  # Correct METHOD, unstructured. No applicability gate, no verification.
+  plain: |
+    Known result that applies here: {method}
+
+    {question}
+
+  # Correct object, full structure. Adds the two contract lines.
+  schema: |
+    TECHNIQUE: {name}
+    USE_WHEN: {use_when}
+    METHOD: {method}
+    CHECK: {check}
+
+    Before using the technique, confirm the problem satisfies USE_WHEN. If it
+    does not, ignore the technique and solve the problem directly.
+
+    After applying METHOD, perform CHECK and report the outcome. If CHECK
+    fails, METHOD is wrong: discard it, solve the problem yourself, and give
+    your own answer.
+
+    {question}
+
+    End your reply with exactly these two lines:
+
+    CHECK: PASS or FAIL
+    ANSWER: <integer>
+
+  # Corrupted METHOD + honest CHECK. Template is byte-identical to `schema`;
+  # only {method} and {check} carry false_friend content. Do not reword this
+  # block — any divergence from `schema` confounds the rescue measurement.
+  schema_wrong: |
+    TECHNIQUE: {name}
+    USE_WHEN: {use_when}
+    METHOD: {method}
+    CHECK: {check}
+
+    Before using the technique, confirm the problem satisfies USE_WHEN. If it
+    does not, ignore the technique and solve the problem directly.
+
+    After applying METHOD, perform CHECK and report the outcome. If CHECK
+    fails, METHOD is wrong: discard it, solve the problem yourself, and give
+    your own answer.
+
+    {question}
+
+    End your reply with exactly these two lines:
+
+    CHECK: PASS or FAIL
+    ANSWER: <integer>
+
+  # Placebo. Correct, well-formed object drawn from a DIFFERENT family.
+  # Template identical to `schema`. USE_WHEN should not match the problem.
+  schema_random: |
+    TECHNIQUE: {name}
+    USE_WHEN: {use_when}
+    METHOD: {method}
+    CHECK: {check}
+
+    Before using the technique, confirm the problem satisfies USE_WHEN. If it
+    does not, ignore the technique and solve the problem directly.
+
+    After applying METHOD, perform CHECK and report the outcome. If CHECK
+    fails, METHOD is wrong: discard it, solve the problem yourself, and give
+    your own answer.
+
+    {question}
+
+    End your reply with exactly these two lines:
+
+    CHECK: PASS or FAIL
+    ANSWER: <integer>
+
+# ----------------------------------------------------------------------------
+parsing:
+  answer: 'ANSWER:\s*(-?\d+)\s*$'          # last match in the reply, MULTILINE
+  check:  '^CHECK:\s*(PASS|FAIL)\b'        # last match; absent in base/plain
+  on_missing_answer: score_incorrect       # do not retry — retries break token accounting
+  notes: |
+    Match the LAST occurrence of each. Models sometimes emit the contract lines
+    once mid-reasoning and again at the end. Strip thousands separators before
+    int() only if you also log that it happened; a model that ignores the
+    format instruction is a datapoint.
+
+scoring:
+  correct:       "parsed_answer == gold_answer"
+  followed_ff:   "parsed_answer == false_friend_answer"            # schema_wrong only
+  rescued:       "check == FAIL and parsed_answer == gold_answer"  # schema_wrong only
+  ff_denominator: "false_friend_changes_answer == true"            # 175/192, NOT 192
+
+confounds:
+  contract_overhead: |
+    The schema arms carry ~35 extra prompt tokens and ~5 extra output tokens
+    (the CHECK line) that base and plain do not. Subtract this fixed cost, or
+    report saving on reasoning tokens only. It is fixed per call, so it does
+    not interact with difficulty.
+  report_together: |
+    Never report saving without the accuracy delta from the same cell. A prior
+    run showed +66.6% saving while accuracy fell 8/8 to 1/8 — that is the
+    solver quitting, not saving.
+  no_base_stratification: |
+    Do not stratify saving on measured base decode. Sorting (base - memory)/base
+    by base produces a monotone gradient at zero true effect. Stratify on a
+    generator-side difficulty measure and show the same table for schema_random.
+  low_diversity_families: |
+    digital_root and zeckendorf have 6/12 distinct golds; xor_range and
+    fib_huge have 8/12. Guessing scores above chance there. Report per-family.

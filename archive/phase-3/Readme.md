@@ -47,6 +47,8 @@
 3. **Phase-3b TI failed (+0.0pp)** — `<think>` injection too rigid for 1.7B; the model needs freedom to reason around the strategy
 4. **TI's one win: Geometry L5** — problem 400 solved for the first time ever (never solved in 2d, 3v1, or 3v2)
 5. **L1 regression persists across ALL methods** — injection distracts on easy problems regardless of approach
+6. **The graph contributed nothing to v2's +6.0pp** — the novelty gate (0.85) sits below the semantic-edge threshold (τ=0.90), so every expansion candidate is rejected by construction and `bonus_steps == 0` on all 100 problems. v2 is effectively phase-2d with extra machinery. See [Readme_v2.md](Readme_v2.md#the-novelty-gate-never-fired)
+7. **Injection is cheaper, not just better** — v2 cut mean tokens 5.4% and latency 5.8% while gaining accuracy; v1 gained half as much for no cost saving (+0.1% latency)
 
 ### By Subject (v2)
 
@@ -104,63 +106,36 @@ Inspired by:
 
 ---
 
-## v1 vs v2: What We Learned
+## v1 vs v2
 
-### v1: Pure Graph Traversal (+3.0pp)
+Phase 3 was built twice. Both versions ran in this directory and **v2 overwrote v1 in place**
+— see [Data provenance](#data-provenance) before citing either.
 
-```
-  Test Problem Q
-       │
-       ▼
-  ┌─────────────┐
-  │ Step-Level   │     Thought Graph (1600 nodes)
-  │ Embedding    │──────────────────────────────┐
-  └──────────────┘                              │
-                                                ▼
-                              ┌──────────────────────────┐
-                              │ Subject-Filtered         │
-                              │ Initial Node Retrieval   │
-                              │ R = 0.8·sim + 0.2·is_s0  │
-                              └──────────┬───────────────┘
-                                         │
-                                         ▼
-                              ┌──────────────────────────┐
-                              │ Greedy Reward-Guided     │
-                              │ Traversal (max 6 steps)  │
-                              │ R = 0.6·sim + 0.4·flow   │
-                              │ sequential + semantic     │
-                              └──────────┬───────────────┘
-                                         │
-                                         ▼
-                              ┌──────────────────────────┐
-                              │ Assembled Template       │
-                              │ 5-6 steps from           │
-                              │ multiple patterns        │
-                              └──────────┬───────────────┘
-                                         │
-                    ┌────────────────────┘
-                    │     + Worked Example (top-1 from phase-2d bank)
-                    ▼
-            ┌──────────────┐
-            │  Qwen3-1.7B  │
-            └──────────────┘
-```
+Each version has its own document:
 
-**Why it underperformed:**
-1. Step embeddings too generic — "Identify the equation" matches hundreds of problems
-2. Greedy traversal created Frankenstein templates — mixing irrelevant steps from different patterns
-3. Always filled to 6 steps — extra steps = noise for the 1.7B student
-4. All 3 losses came from cross-pattern assemblies
+| | [**v1** — Pure Graph Traversal](Readme_v1.md) | [**v2** — Anchor-First + Novelty Gate](Readme_v2.md) |
+|---|---|---|
+| Retrieval | step-level entry, greedy multi-hop traversal | top-1 problem-level anchor |
+| Step embedding | `step_text` alone | `"{problem_summary} \| {step_text}"` |
+| Semantic edges (τ=0.90) | 28,312 (avg degree 18.4) | 2,830 (avg degree 2.5) |
+| Template | 5–6 steps, 2.1 patterns on average | 4 steps, always 1 pattern |
+| Accuracy | 70.0% → 73.0% (**+3.0pp**) | 70.0% → 76.0% (**+6.0pp**) |
+| Mean tokens | *not logged* | 3,407 → 3,223 (−5.4%) |
+| Mean latency | 28.7s → 28.8s (+0.1%) | 28.7s → 27.0s (−5.8%) |
+| Gains / losses | 6 / 3 | 10 / 4 |
 
-### v2: Anchor-First + Novelty Gate (+6.0pp)
+**What changed the outcome:** only the embedding text. Same 1,600 nodes, same 1,200 sequential
+edges — embedding `problem_summary | step_text` instead of bare `step_text` cut semantic edges
+10× and made anchor-first retrieval viable (mean anchor sim 0.65 vs ~0.55).
 
-Full-problem FAISS → top-1 anchor (phase-2d style) → enter graph at anchor's nodes → novelty-gated bonus steps.
+**What did not change:** neither version's graph traversal actually contributed. v2's novelty
+gate is dead by construction (0.85 < τ = 0.90), so `bonus_steps == 0` on all 100 problems —
+v2's +6.0pp is top-1 anchor + worked example alone. Details in
+[Readme_v2.md](Readme_v2.md#the-novelty-gate-never-fired).
 
-**Why it works:**
-1. Full-problem embeddings give high discriminative power (avg sim ~0.66 vs v1's ~0.55)
-2. Anchor pattern provides all 4 steps as a coherent unit
-3. Bonus steps only added if genuinely novel (sim < 0.85 to all anchor steps)
-4. Context-enriched graph embeddings ("problem_summary | step_text") make semantic edges 10x more selective
+Two caveats carried in the per-version docs: v1's "Frankenstein template" explanation is
+**unestablished** (multi-pattern injections were net positive), and v1 has **two runs that
+disagree** on injection rate (32/100 vs 79/100, both netting +3.0pp).
 
 ---
 
@@ -218,6 +193,96 @@ Full-problem FAISS → top-1 anchor (phase-2d style) → enter graph at anchor's
 
 ---
 
+## Pattern anatomy
+
+Every pattern in every bank has **exactly 4 nodes**, in this fixed shape:
+
+```
+Step 1  →  Step 2  →  Step 3  →  Note
+```
+
+The distillation prompt always produced three numbered steps plus one note, and `parse_steps`
+splits on those labels, so there is no variation to observe:
+
+| Bank | Patterns | Nodes | Nodes per pattern |
+|---|---|---|---|
+| MATH-500 (phase-2d) | 400 | 1,600 | 4.0 |
+| AIME (phase-3d) | 746 | 2,984 | 4.0 |
+| Combined graph (phase-3d, phase-4) | 1,146 | 4,584 | 4.0 |
+
+Label counts in the phase-3 graph confirm it: `{'Step 1': 400, 'Step 2': 400, 'Step 3': 400,
+'Note': 400}`, and `total_steps == 4` on all 1,600 nodes.
+
+A real pattern (`math_0`, nodes 0–3), stored in `step_index` order and chained by `sequential`
+edges:
+
+```
+idx=0  [Step 1]  Identify the formulas to convert rectangular coordinates (x, y) to polar…
+idx=1  [Step 2]  Use the formulas r = √(x² + y²) and θ = tan⁻¹(…)
+idx=2  [Step 3]  Calculate r and θ using the given values of x and y…
+idx=3  [Note]    Ensure θ is within the range [0, 2π)
+```
+
+### What "Note" is
+
+The Note is **not a fourth action** — it is the insight or trap the teacher flagged, and it
+applies while the other three steps are being carried out. Two kinds appear:
+
+| Kind | Examples from the bank |
+|---|---|
+| **Key insight** — the trick that makes the problem tractable | *"Recognize that 4 can be written as 2², which allows the bases to be matched."* · *"The key insight is that the minimum angle of rotation is determined by the order of rotational symmetry"* |
+| **Caution** — the mistake that is easy to make | *"Remember that the cross product is anti-commutative, so a × b = −b × a"* · *"Be careful with the total number of coins and their individual values"* |
+
+Because it is not an action, `assemble_strategy` renders it without a number:
+
+```python
+if label.lower().startswith("note"):
+    lines.append(f"Note: {node['text']}")          # unnumbered
+else:
+    lines.append(f"Step {step_num}: {node['text']}")
+    step_num += 1
+```
+
+So the student sees `Step 1 / Step 2 / Step 3 / Note`. Notes average 92 characters against 76
+for Step 1 — consistent with a caveat needing its "why" where a step only needs its "what".
+
+> **Open question.** The Note plausibly carries the highest-value content in the injection: it
+> names a *specific* failure mode, which is the thing a 1.7B student is least likely to produce
+> unaided, whereas the general procedure it often already knows. **No phase isolates this** —
+> an ablation dropping the Note (or keeping only the Note) would settle it.
+
+### Only training problems have nodes
+
+| | Count | In the graph? |
+|---|---|---|
+| Bank / training problems | 1,146 | ✅ 4 nodes each — they *are* the graph |
+| Test problems | 287 | ❌ none |
+
+A test problem is embedded to a single 768-d vector, matched against the bank, and the
+winner's 4 nodes are copied into the prompt. The graph is built once from training data and
+stays frozen; test problems only query it.
+
+### Two consequences of the fixed size
+
+1. **Several reported metrics are constants, not distributions** — `anchor_steps == 4`,
+   `template_length == 4`, `n_unique_patterns == 1` on every injected problem in v2, 3d and
+   phase 4. There was nothing to vary.
+2. **It is what forced v1's cross-pattern mixing.** With `max_steps = 6` and every pattern
+   exactly 4 nodes long, v1's traversal *had* to jump to another problem's pattern to reach
+   steps 5 and 6 — there is no step 5 inside one pattern. See
+   [Readme_v1.md](Readme_v1.md#what-the-weights-actually-imply).
+
+### Glossary
+
+| Term | Plain meaning |
+|---|---|
+| **Anchor** | The single most similar bank problem to the test problem. Its 4 nodes become the injected strategy. |
+| **Bonus step** | One extra step borrowed from a *different* problem's pattern and appended, to cover something the anchor missed. Max 1. |
+| **Novelty gate** | The check deciding whether a bonus step is allowed in — it must say something genuinely new, not reword a step already present. **Rejected everything it ever saw**; see [Readme_v2.md](Readme_v2.md#the-novelty-gate-never-fired). |
+| **Skip** | Anchor similarity below the per-subject threshold → no injection, vanilla prompt sent instead. |
+
+---
+
 ## Thought Graph v2
 
 ### Context-Enriched Embeddings
@@ -253,6 +318,10 @@ Check semantic neighbors of anchor nodes. A bonus step is added only if:
 - Most relevant to query (sorted by query similarity)
 - Max 1 bonus step
 
+⚠️ **As shipped, this step is a no-op** — the novelty bound (0.85) is tighter than the edge
+threshold that produced the candidate (τ=0.90), so nothing survives. Measured: 0 bonus steps
+across all 100 problems. See [Readme_v2.md](Readme_v2.md#the-novelty-gate-never-fired).
+
 ### Step 4: Prompt Construction
 Anchor's 4 steps + 0-1 bonus + worked example from anchor → injection prompt.
 
@@ -265,6 +334,10 @@ Anchor's 4 steps + 0-1 bonus + worked example from anchor → injection prompt.
 | MAX_BONUS_STEPS | 1 | Max cross-pattern steps to add |
 | NOVELTY_THRESHOLD | 0.85 | Bonus step must be < this sim to anchor steps |
 | τ_semantic | 0.90 | Semantic edge threshold in graph |
+
+> ⚠️ **`NOVELTY_THRESHOLD` must exceed `τ_semantic`.** At 0.85 < 0.90 the expansion is dead
+> code — see [Readme_v2.md](Readme_v2.md#the-novelty-gate-never-fired). Fixed in `phase-6/config.py`, which
+> asserts the invariant at import so it cannot recur silently.
 
 ---
 
@@ -289,23 +362,56 @@ python3 inject_and_eval_atgi.py --max-problems 5  # smoke test
 
 ```
 phase-3/
-├── build_thought_graph.py         # Build context-enriched thought graph
-├── inject_and_eval_atgi.py        # Anchor-first eval with graph expansion
+├── build_thought_graph.py         # Build context-enriched thought graph (v2)
+├── inject_and_eval_atgi.py        # Anchor-first eval with graph expansion (v2)
 ├── analyze_results.py             # Analysis & diagnostics (TBD)
 ├── graph/
-│   ├── thought_graph.json         # 1600 nodes + adjacency lists
+│   ├── thought_graph.json         # 1600 nodes + adjacency lists (v2 graph)
 │   ├── step_embeddings.npy        # (1600, 768) context-enriched
 │   └── step_faiss.index           # FAISS IndexFlatIP
 ├── results/
-│   ├── results.json               # per-problem evaluation data
+│   ├── results.json               # per-problem evaluation data (v2 run)
 │   ├── results.jsonl              # incremental output
-│   └── summary.json               # aggregate stats
+│   ├── summary.json               # aggregate stats
+│   ├── plot_v1_architecture.py    # → phase3_v1_architecture.png
+│   ├── plot_v1_results_table.py   # → phase3_v1_results_table.png (parses the v1 log)
+│   ├── plot_v2_architecture.py    # → phase3_v2_architecture.png
+│   ├── plot_v2_results_table.py   # → phase3_v2_results_table.png
+│   └── plot_results_table.py      # → results_table_tok_lat_acc.png (all phases)
 ├── logs/
-│   └── *.log / *.out              # timestamped run logs
+│   ├── inject_and_eval_atgi_20260725_223938.log   # the v1 run the README cites
+│   ├── inject_and_eval_atgi_20260726_005100.log   # the v2 run
+│   └── *.log / *.out              # other timestamped run logs
 ├── paper_notes_and_plan.txt       # BoT/RoT paper notes
 ├── todo_phase3_atgi.txt           # implementation checklist
 └── Readme.md                      # this file
 ```
+
+---
+
+## Data provenance
+
+v1 and v2 were developed and run in the same directory, and **v2 overwrote v1's artifacts**.
+What survives of each:
+
+| Artifact | v1 | v2 |
+|---|---|---|
+| Eval script | overwritten — no code on disk, no separate commit | `inject_and_eval_atgi.py` |
+| Graph | overwritten (28,312 semantic edges) | `graph/thought_graph.json` (2,830, `v2-context-enriched`) |
+| Per-problem results | overwritten — recovered by parsing the run log | `results/results.json` |
+| Tokens per problem | never logged by the v1 script | in `results.json` |
+
+`results/plot_v1_results_table.py` parses `logs/inject_and_eval_atgi_20260725_223938.log` and
+reproduces the 70.0% → 73.0% / 6 gains / 3 losses figures cited above, which is what confirms
+it is the run this README describes.
+
+Two v1 full runs exist at the same config. The 19:20 run injected on only **32/100**
+(4 gains / 1 loss); the 22:39 run injected on **79/100** (6 gains / 3 losses). Both net
++3.0pp. The gap in injection rate is unexplained and should be resolved before v1 is cited as
+a baseline.
+
+All phase-3 numbers predate the **gate-v2 pattern bank** (phase-6), so they are not directly
+comparable to phase-6 results.
 
 ---
 
@@ -372,7 +478,11 @@ GSM8K patterns ─────┼── Thought Graph ── semantic edges ─�
 MBPP patterns ──────┘
 ```
 
-On MATH-500 alone, anchor-first with 0 bonus steps was sufficient. The graph's semantic edges will add value when reasoning steps from different domains can complement each other (e.g., "set up equation" reused across math word problems and code generation).
+On MATH-500 alone, anchor-first reached +6.0pp with 0 bonus steps — but that was **not a
+finding about MATH-500**, it was the dead novelty gate (`0.85 < τ = 0.90`, see
+[Readme_v2.md](Readme_v2.md#the-novelty-gate-never-fired)). Phase-3c and phase-3d inherited the same
+inverted thresholds, so they also ran with 0 bonus steps; their cross-domain transfer claims
+were never actually tested. Phase-6 fixes the gate and re-measures.
 
 ---
 
