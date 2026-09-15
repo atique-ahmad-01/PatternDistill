@@ -1,0 +1,7 @@
+# Generated artifacts only. data/RB_DERIV/ is the dataset and MUST be tracked —
+# it is what makes this project self-contained, so do not widen this to `data/`.
+data/artifacts/
+results/
+logs/
+__pycache__/
+*.pyc
