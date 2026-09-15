@@ -1,0 +1,1734 @@
+{
+  "description": "Questions for the derivation-deep reuse benchmark. Every question is answerable by a single integer; golds are computed exactly in Python. Each family scales the DERIVATION the solver must perform (a principle that cannot be brute-forced) while post-technique execution is 1-3 operations.",
+  "n_questions": 192,
+  "questions": [
+    {
+      "query_id": "q0001",
+      "family": "lcg_closed",
+      "question": "Let x(0)=1 and x(k+1) = (5*x(k) + 3) mod 1000. What is x(1000000000000001)?",
+      "gold_answer": 968,
+      "uses_object": "lcg_closed",
+      "false_friend_answer": 500,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0002",
+      "family": "lcg_closed",
+      "question": "Let x(0)=2 and x(k+1) = (7*x(k) + 11) mod 1000. What is x(1000000000000001)?",
+      "gold_answer": 25,
+      "uses_object": "lcg_closed",
+      "false_friend_answer": 91,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0003",
+      "family": "lcg_closed",
+      "question": "Let x(0)=5 and x(k+1) = (3*x(k) + 7) mod 997. What is x(1000000000000001)?",
+      "gold_answer": 240,
+      "uses_object": "lcg_closed",
+      "false_friend_answer": 637,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0004",
+      "family": "lcg_closed",
+      "question": "Let x(0)=3 and x(k+1) = (11*x(k) + 5) mod 1000. What is x(1000000000000001)?",
+      "gold_answer": 38,
+      "uses_object": "lcg_closed",
+      "false_friend_answer": 88,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0005",
+      "family": "lcg_closed",
+      "question": "Let x(0)=7 and x(k+1) = (9*x(k) + 13) mod 1000. What is x(1000000000000001)?",
+      "gold_answer": 76,
+      "uses_object": "lcg_closed",
+      "false_friend_answer": 180,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0006",
+      "family": "lcg_closed",
+      "question": "Let x(0)=4 and x(k+1) = (6*x(k) + 7) mod 1000. What is x(1000000000000001)?",
+      "gold_answer": 781,
+      "uses_object": "lcg_closed",
+      "false_friend_answer": 816,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0007",
+      "family": "lcg_closed",
+      "question": "Let x(0)=2 and x(k+1) = (13*x(k) + 9) mod 1000. What is x(1000000000000001)?",
+      "gold_answer": 35,
+      "uses_object": "lcg_closed",
+      "false_friend_answer": 143,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0008",
+      "family": "lcg_closed",
+      "question": "Let x(0)=6 and x(k+1) = (21*x(k) + 17) mod 1000. What is x(1000000000000001)?",
+      "gold_answer": 143,
+      "uses_object": "lcg_closed",
+      "false_friend_answer": 483,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0009",
+      "family": "lcg_closed",
+      "question": "Let x(0)=3 and x(k+1) = (4*x(k) + 9) mod 997. What is x(1000000000000001)?",
+      "gold_answer": 866,
+      "uses_object": "lcg_closed",
+      "false_friend_answer": 741,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0010",
+      "family": "lcg_closed",
+      "question": "Let x(0)=5 and x(k+1) = (17*x(k) + 3) mod 1000. What is x(1000000000000001)?",
+      "gold_answer": 88,
+      "uses_object": "lcg_closed",
+      "false_friend_answer": 136,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0011",
+      "family": "lcg_closed",
+      "question": "Let x(0)=9 and x(k+1) = (8*x(k) + 15) mod 1000. What is x(1000000000000001)?",
+      "gold_answer": 87,
+      "uses_object": "lcg_closed",
+      "false_friend_answer": 192,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0012",
+      "family": "lcg_closed",
+      "question": "Let x(0)=4 and x(k+1) = (23*x(k) + 11) mod 997. What is x(1000000000000001)?",
+      "gold_answer": 205,
+      "uses_object": "lcg_closed",
+      "false_friend_answer": 685,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0013",
+      "family": "perm_power",
+      "question": "Let P be the permutation with P = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 15, 14] (P sends position i to P[i], 1-indexed). Applying P exactly 1000000000000000001 times to element 1, which element results?",
+      "gold_answer": 3,
+      "uses_object": "perm_power",
+      "false_friend_answer": 12,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0014",
+      "family": "perm_power",
+      "question": "Let P be the permutation with P = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 15, 14] (P sends position i to P[i], 1-indexed). Applying P exactly 1000000000000000001 times to element 2, which element results?",
+      "gold_answer": 4,
+      "uses_object": "perm_power",
+      "false_friend_answer": 13,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0015",
+      "family": "perm_power",
+      "question": "Let P be the permutation with P = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 15, 14] (P sends position i to P[i], 1-indexed). Applying P exactly 1000000000000000001 times to element 3, which element results?",
+      "gold_answer": 5,
+      "uses_object": "perm_power",
+      "false_friend_answer": 1,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0016",
+      "family": "perm_power",
+      "question": "Let P be the permutation with P = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 15, 14] (P sends position i to P[i], 1-indexed). Applying P exactly 1000000000000000001 times to element 4, which element results?",
+      "gold_answer": 6,
+      "uses_object": "perm_power",
+      "false_friend_answer": 2,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0017",
+      "family": "perm_power",
+      "question": "Let P be the permutation with P = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 15, 14] (P sends position i to P[i], 1-indexed). Applying P exactly 1000000000000000001 times to element 5, which element results?",
+      "gold_answer": 7,
+      "uses_object": "perm_power",
+      "false_friend_answer": 3,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0018",
+      "family": "perm_power",
+      "question": "Let P be the permutation with P = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 15, 14] (P sends position i to P[i], 1-indexed). Applying P exactly 1000000000000000001 times to element 6, which element results?",
+      "gold_answer": 8,
+      "uses_object": "perm_power",
+      "false_friend_answer": 4,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0019",
+      "family": "perm_power",
+      "question": "Let P be the permutation with P = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 15, 14] (P sends position i to P[i], 1-indexed). Applying P exactly 1000000000000000001 times to element 7, which element results?",
+      "gold_answer": 9,
+      "uses_object": "perm_power",
+      "false_friend_answer": 5,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0020",
+      "family": "perm_power",
+      "question": "Let P be the permutation with P = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 15, 14] (P sends position i to P[i], 1-indexed). Applying P exactly 1000000000000000001 times to element 8, which element results?",
+      "gold_answer": 10,
+      "uses_object": "perm_power",
+      "false_friend_answer": 6,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0021",
+      "family": "perm_power",
+      "question": "Let P be the permutation with P = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 15, 14] (P sends position i to P[i], 1-indexed). Applying P exactly 1000000000000000001 times to element 9, which element results?",
+      "gold_answer": 11,
+      "uses_object": "perm_power",
+      "false_friend_answer": 7,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0022",
+      "family": "perm_power",
+      "question": "Let P be the permutation with P = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 15, 14] (P sends position i to P[i], 1-indexed). Applying P exactly 1000000000000000001 times to element 10, which element results?",
+      "gold_answer": 12,
+      "uses_object": "perm_power",
+      "false_friend_answer": 8,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0023",
+      "family": "perm_power",
+      "question": "Let P be the permutation with P = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 15, 14] (P sends position i to P[i], 1-indexed). Applying P exactly 1000000000000000001 times to element 11, which element results?",
+      "gold_answer": 13,
+      "uses_object": "perm_power",
+      "false_friend_answer": 9,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0024",
+      "family": "perm_power",
+      "question": "Let P be the permutation with P = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 15, 14] (P sends position i to P[i], 1-indexed). Applying P exactly 1000000000000000001 times to element 12, which element results?",
+      "gold_answer": 1,
+      "uses_object": "perm_power",
+      "false_friend_answer": 10,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0025",
+      "family": "grundy_134",
+      "question": "Two players alternate removing 1 , 3 , 4 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 1000000?",
+      "gold_answer": 1000001,
+      "uses_object": "grundy_134",
+      "false_friend_answer": 1000008,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0026",
+      "family": "grundy_134",
+      "question": "Two players alternate removing 1 , 3 , 4 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 10000000?",
+      "gold_answer": 10000004,
+      "uses_object": "grundy_134",
+      "false_friend_answer": 10000008,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0027",
+      "family": "grundy_134",
+      "question": "Two players alternate removing 1 , 3 , 4 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 123456?",
+      "gold_answer": 123459,
+      "uses_object": "grundy_134",
+      "false_friend_answer": 123464,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0028",
+      "family": "grundy_134",
+      "question": "Two players alternate removing 1 , 3 , 4 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 999999?",
+      "gold_answer": 1000001,
+      "uses_object": "grundy_134",
+      "false_friend_answer": 1000000,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0029",
+      "family": "grundy_134",
+      "question": "Two players alternate removing 1 , 3 , 4 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 5000000?",
+      "gold_answer": 5000002,
+      "uses_object": "grundy_134",
+      "false_friend_answer": 5000008,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0030",
+      "family": "grundy_134",
+      "question": "Two players alternate removing 1 , 3 , 4 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 777777?",
+      "gold_answer": 777779,
+      "uses_object": "grundy_134",
+      "false_friend_answer": 777784,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0031",
+      "family": "grundy_134",
+      "question": "Two players alternate removing 1 , 3 , 4 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 100000000?",
+      "gold_answer": 100000005,
+      "uses_object": "grundy_134",
+      "false_friend_answer": 100000008,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0032",
+      "family": "grundy_134",
+      "question": "Two players alternate removing 1 , 3 , 4 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 2000000?",
+      "gold_answer": 2000005,
+      "uses_object": "grundy_134",
+      "false_friend_answer": 2000008,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0033",
+      "family": "grundy_134",
+      "question": "Two players alternate removing 1 , 3 , 4 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 314159?",
+      "gold_answer": 314160,
+      "uses_object": "grundy_134",
+      "false_friend_answer": 314160,
+      "false_friend_changes_answer": false
+    },
+    {
+      "query_id": "q0034",
+      "family": "grundy_134",
+      "question": "Two players alternate removing 1 , 3 , 4 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 86420?",
+      "gold_answer": 86422,
+      "uses_object": "grundy_134",
+      "false_friend_answer": 86424,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0035",
+      "family": "grundy_134",
+      "question": "Two players alternate removing 1 , 3 , 4 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 100000?",
+      "gold_answer": 100002,
+      "uses_object": "grundy_134",
+      "false_friend_answer": 100008,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0036",
+      "family": "grundy_134",
+      "question": "Two players alternate removing 1 , 3 , 4 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 42424242?",
+      "gold_answer": 42424244,
+      "uses_object": "grundy_134",
+      "false_friend_answer": 42424248,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0037",
+      "family": "grundy_124",
+      "question": "Two players alternate removing 1 , 2 , 4 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 1000000?",
+      "gold_answer": 1000002,
+      "uses_object": "grundy_124",
+      "false_friend_answer": 1000004,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0038",
+      "family": "grundy_124",
+      "question": "Two players alternate removing 1 , 2 , 4 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 10000000?",
+      "gold_answer": 10000002,
+      "uses_object": "grundy_124",
+      "false_friend_answer": 10000004,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0039",
+      "family": "grundy_124",
+      "question": "Two players alternate removing 1 , 2 , 4 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 123456?",
+      "gold_answer": 123459,
+      "uses_object": "grundy_124",
+      "false_friend_answer": 123460,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0040",
+      "family": "grundy_124",
+      "question": "Two players alternate removing 1 , 2 , 4 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 999999?",
+      "gold_answer": 1000002,
+      "uses_object": "grundy_124",
+      "false_friend_answer": 1000000,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0041",
+      "family": "grundy_124",
+      "question": "Two players alternate removing 1 , 2 , 4 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 5000000?",
+      "gold_answer": 5000001,
+      "uses_object": "grundy_124",
+      "false_friend_answer": 5000004,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0042",
+      "family": "grundy_124",
+      "question": "Two players alternate removing 1 , 2 , 4 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 777777?",
+      "gold_answer": 777780,
+      "uses_object": "grundy_124",
+      "false_friend_answer": 777780,
+      "false_friend_changes_answer": false
+    },
+    {
+      "query_id": "q0043",
+      "family": "grundy_124",
+      "question": "Two players alternate removing 1 , 2 , 4 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 100000000?",
+      "gold_answer": 100000002,
+      "uses_object": "grundy_124",
+      "false_friend_answer": 100000004,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0044",
+      "family": "grundy_124",
+      "question": "Two players alternate removing 1 , 2 , 4 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 2000000?",
+      "gold_answer": 2000001,
+      "uses_object": "grundy_124",
+      "false_friend_answer": 2000004,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0045",
+      "family": "grundy_124",
+      "question": "Two players alternate removing 1 , 2 , 4 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 314159?",
+      "gold_answer": 314160,
+      "uses_object": "grundy_124",
+      "false_friend_answer": 314160,
+      "false_friend_changes_answer": false
+    },
+    {
+      "query_id": "q0046",
+      "family": "grundy_124",
+      "question": "Two players alternate removing 1 , 2 , 4 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 86420?",
+      "gold_answer": 86421,
+      "uses_object": "grundy_124",
+      "false_friend_answer": 86424,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0047",
+      "family": "grundy_124",
+      "question": "Two players alternate removing 1 , 2 , 4 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 100000?",
+      "gold_answer": 100002,
+      "uses_object": "grundy_124",
+      "false_friend_answer": 100004,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0048",
+      "family": "grundy_124",
+      "question": "Two players alternate removing 1 , 2 , 4 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 42424242?",
+      "gold_answer": 42424245,
+      "uses_object": "grundy_124",
+      "false_friend_answer": 42424244,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0049",
+      "family": "grundy_23",
+      "question": "Two players alternate removing 2 , 3 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 1000000?",
+      "gold_answer": 1000001,
+      "uses_object": "grundy_23",
+      "false_friend_answer": 1000002,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0050",
+      "family": "grundy_23",
+      "question": "Two players alternate removing 2 , 3 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 10000000?",
+      "gold_answer": 10000001,
+      "uses_object": "grundy_23",
+      "false_friend_answer": 10000002,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0051",
+      "family": "grundy_23",
+      "question": "Two players alternate removing 2 , 3 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 123456?",
+      "gold_answer": 123460,
+      "uses_object": "grundy_23",
+      "false_friend_answer": 123462,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0052",
+      "family": "grundy_23",
+      "question": "Two players alternate removing 2 , 3 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 999999?",
+      "gold_answer": 1000000,
+      "uses_object": "grundy_23",
+      "false_friend_answer": 1000002,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0053",
+      "family": "grundy_23",
+      "question": "Two players alternate removing 2 , 3 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 5000000?",
+      "gold_answer": 5000001,
+      "uses_object": "grundy_23",
+      "false_friend_answer": 5000004,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0054",
+      "family": "grundy_23",
+      "question": "Two players alternate removing 2 , 3 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 777777?",
+      "gold_answer": 777780,
+      "uses_object": "grundy_23",
+      "false_friend_answer": 777780,
+      "false_friend_changes_answer": false
+    },
+    {
+      "query_id": "q0055",
+      "family": "grundy_23",
+      "question": "Two players alternate removing 2 , 3 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 100000000?",
+      "gold_answer": 100000001,
+      "uses_object": "grundy_23",
+      "false_friend_answer": 100000002,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0056",
+      "family": "grundy_23",
+      "question": "Two players alternate removing 2 , 3 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 2000000?",
+      "gold_answer": 2000001,
+      "uses_object": "grundy_23",
+      "false_friend_answer": 2000004,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0057",
+      "family": "grundy_23",
+      "question": "Two players alternate removing 2 , 3 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 314159?",
+      "gold_answer": 314160,
+      "uses_object": "grundy_23",
+      "false_friend_answer": 314160,
+      "false_friend_changes_answer": false
+    },
+    {
+      "query_id": "q0058",
+      "family": "grundy_23",
+      "question": "Two players alternate removing 2 , 3 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 86420?",
+      "gold_answer": 86421,
+      "uses_object": "grundy_23",
+      "false_friend_answer": 86424,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0059",
+      "family": "grundy_23",
+      "question": "Two players alternate removing 2 , 3 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 100000?",
+      "gold_answer": 100001,
+      "uses_object": "grundy_23",
+      "false_friend_answer": 100002,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0060",
+      "family": "grundy_23",
+      "question": "Two players alternate removing 2 , 3 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 42424242?",
+      "gold_answer": 42424245,
+      "uses_object": "grundy_23",
+      "false_friend_answer": 42424248,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0061",
+      "family": "wythoff",
+      "question": "In Wythoff's game the cold (losing) positions are indexed k=1,2,3,.... What is the SMALLER pile size of the 50-th cold position?",
+      "gold_answer": 80,
+      "uses_object": "wythoff",
+      "false_friend_answer": 130,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0062",
+      "family": "wythoff",
+      "question": "In Wythoff's game the cold (losing) positions are indexed k=1,2,3,.... What is the SMALLER pile size of the 100-th cold position?",
+      "gold_answer": 161,
+      "uses_object": "wythoff",
+      "false_friend_answer": 261,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0063",
+      "family": "wythoff",
+      "question": "In Wythoff's game the cold (losing) positions are indexed k=1,2,3,.... What is the SMALLER pile size of the 77-th cold position?",
+      "gold_answer": 124,
+      "uses_object": "wythoff",
+      "false_friend_answer": 201,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0064",
+      "family": "wythoff",
+      "question": "In Wythoff's game the cold (losing) positions are indexed k=1,2,3,.... What is the SMALLER pile size of the 150-th cold position?",
+      "gold_answer": 242,
+      "uses_object": "wythoff",
+      "false_friend_answer": 392,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0065",
+      "family": "wythoff",
+      "question": "In Wythoff's game the cold (losing) positions are indexed k=1,2,3,.... What is the SMALLER pile size of the 33-th cold position?",
+      "gold_answer": 53,
+      "uses_object": "wythoff",
+      "false_friend_answer": 86,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0066",
+      "family": "wythoff",
+      "question": "In Wythoff's game the cold (losing) positions are indexed k=1,2,3,.... What is the SMALLER pile size of the 220-th cold position?",
+      "gold_answer": 355,
+      "uses_object": "wythoff",
+      "false_friend_answer": 575,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0067",
+      "family": "wythoff",
+      "question": "In Wythoff's game the cold (losing) positions are indexed k=1,2,3,.... What is the SMALLER pile size of the 64-th cold position?",
+      "gold_answer": 103,
+      "uses_object": "wythoff",
+      "false_friend_answer": 167,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0068",
+      "family": "wythoff",
+      "question": "In Wythoff's game the cold (losing) positions are indexed k=1,2,3,.... What is the SMALLER pile size of the 111-th cold position?",
+      "gold_answer": 179,
+      "uses_object": "wythoff",
+      "false_friend_answer": 290,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0069",
+      "family": "wythoff",
+      "question": "In Wythoff's game the cold (losing) positions are indexed k=1,2,3,.... What is the SMALLER pile size of the 300-th cold position?",
+      "gold_answer": 485,
+      "uses_object": "wythoff",
+      "false_friend_answer": 785,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0070",
+      "family": "wythoff",
+      "question": "In Wythoff's game the cold (losing) positions are indexed k=1,2,3,.... What is the SMALLER pile size of the 17-th cold position?",
+      "gold_answer": 27,
+      "uses_object": "wythoff",
+      "false_friend_answer": 44,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0071",
+      "family": "wythoff",
+      "question": "In Wythoff's game the cold (losing) positions are indexed k=1,2,3,.... What is the SMALLER pile size of the 255-th cold position?",
+      "gold_answer": 412,
+      "uses_object": "wythoff",
+      "false_friend_answer": 667,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0072",
+      "family": "wythoff",
+      "question": "In Wythoff's game the cold (losing) positions are indexed k=1,2,3,.... What is the SMALLER pile size of the 88-th cold position?",
+      "gold_answer": 142,
+      "uses_object": "wythoff",
+      "false_friend_answer": 230,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0073",
+      "family": "power_tower",
+      "question": "Compute 3^(7^5) mod 1000.",
+      "gold_answer": 187,
+      "uses_object": "power_tower",
+      "false_friend_answer": 827,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0074",
+      "family": "power_tower",
+      "question": "Compute 7^(7^5) mod 1000.",
+      "gold_answer": 543,
+      "uses_object": "power_tower",
+      "false_friend_answer": 343,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0075",
+      "family": "power_tower",
+      "question": "Compute 9^(7^5) mod 1000.",
+      "gold_answer": 969,
+      "uses_object": "power_tower",
+      "false_friend_answer": 929,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0076",
+      "family": "power_tower",
+      "question": "Compute 11^(7^5) mod 1000.",
+      "gold_answer": 171,
+      "uses_object": "power_tower",
+      "false_friend_answer": 531,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0077",
+      "family": "power_tower",
+      "question": "Compute 13^(7^5) mod 1000.",
+      "gold_answer": 517,
+      "uses_object": "power_tower",
+      "false_friend_answer": 797,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0078",
+      "family": "power_tower",
+      "question": "Compute 17^(7^5) mod 1000.",
+      "gold_answer": 673,
+      "uses_object": "power_tower",
+      "false_friend_answer": 713,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0079",
+      "family": "power_tower",
+      "question": "Compute 19^(7^5) mod 1000.",
+      "gold_answer": 739,
+      "uses_object": "power_tower",
+      "false_friend_answer": 259,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0080",
+      "family": "power_tower",
+      "question": "Compute 21^(7^5) mod 1000.",
+      "gold_answer": 541,
+      "uses_object": "power_tower",
+      "false_friend_answer": 661,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0081",
+      "family": "power_tower",
+      "question": "Compute 23^(7^5) mod 1000.",
+      "gold_answer": 447,
+      "uses_object": "power_tower",
+      "false_friend_answer": 567,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0082",
+      "family": "power_tower",
+      "question": "Compute 27^(7^5) mod 1000.",
+      "gold_answer": 203,
+      "uses_object": "power_tower",
+      "false_friend_answer": 283,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0083",
+      "family": "power_tower",
+      "question": "Compute 29^(7^5) mod 1000.",
+      "gold_answer": 309,
+      "uses_object": "power_tower",
+      "false_friend_answer": 989,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0084",
+      "family": "power_tower",
+      "question": "Compute 31^(7^5) mod 1000.",
+      "gold_answer": 111,
+      "uses_object": "power_tower",
+      "false_friend_answer": 391,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0085",
+      "family": "xor_range",
+      "question": "Compute 1 XOR 2 XOR 3 XOR ... XOR 1000 (bitwise XOR of every integer from 1 to 1000).",
+      "gold_answer": 1000,
+      "uses_object": "xor_range",
+      "false_friend_answer": 0,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0086",
+      "family": "xor_range",
+      "question": "Compute 1 XOR 2 XOR 3 XOR ... XOR 777 (bitwise XOR of every integer from 1 to 777).",
+      "gold_answer": 1,
+      "uses_object": "xor_range",
+      "false_friend_answer": 1,
+      "false_friend_changes_answer": false
+    },
+    {
+      "query_id": "q0087",
+      "family": "xor_range",
+      "question": "Compute 1 XOR 2 XOR 3 XOR ... XOR 1002 (bitwise XOR of every integer from 1 to 1002).",
+      "gold_answer": 1003,
+      "uses_object": "xor_range",
+      "false_friend_answer": 1002,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0088",
+      "family": "xor_range",
+      "question": "Compute 1 XOR 2 XOR 3 XOR ... XOR 999 (bitwise XOR of every integer from 1 to 999).",
+      "gold_answer": 0,
+      "uses_object": "xor_range",
+      "false_friend_answer": 1000,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0089",
+      "family": "xor_range",
+      "question": "Compute 1 XOR 2 XOR 3 XOR ... XOR 123456 (bitwise XOR of every integer from 1 to 123456).",
+      "gold_answer": 123456,
+      "uses_object": "xor_range",
+      "false_friend_answer": 0,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0090",
+      "family": "xor_range",
+      "question": "Compute 1 XOR 2 XOR 3 XOR ... XOR 54321 (bitwise XOR of every integer from 1 to 54321).",
+      "gold_answer": 1,
+      "uses_object": "xor_range",
+      "false_friend_answer": 1,
+      "false_friend_changes_answer": false
+    },
+    {
+      "query_id": "q0091",
+      "family": "xor_range",
+      "question": "Compute 1 XOR 2 XOR 3 XOR ... XOR 88888 (bitwise XOR of every integer from 1 to 88888).",
+      "gold_answer": 88888,
+      "uses_object": "xor_range",
+      "false_friend_answer": 0,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0092",
+      "family": "xor_range",
+      "question": "Compute 1 XOR 2 XOR 3 XOR ... XOR 100001 (bitwise XOR of every integer from 1 to 100001).",
+      "gold_answer": 1,
+      "uses_object": "xor_range",
+      "false_friend_answer": 1,
+      "false_friend_changes_answer": false
+    },
+    {
+      "query_id": "q0093",
+      "family": "xor_range",
+      "question": "Compute 1 XOR 2 XOR 3 XOR ... XOR 246810 (bitwise XOR of every integer from 1 to 246810).",
+      "gold_answer": 246811,
+      "uses_object": "xor_range",
+      "false_friend_answer": 246810,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0094",
+      "family": "xor_range",
+      "question": "Compute 1 XOR 2 XOR 3 XOR ... XOR 333333 (bitwise XOR of every integer from 1 to 333333).",
+      "gold_answer": 1,
+      "uses_object": "xor_range",
+      "false_friend_answer": 1,
+      "false_friend_changes_answer": false
+    },
+    {
+      "query_id": "q0095",
+      "family": "xor_range",
+      "question": "Compute 1 XOR 2 XOR 3 XOR ... XOR 777778 (bitwise XOR of every integer from 1 to 777778).",
+      "gold_answer": 777779,
+      "uses_object": "xor_range",
+      "false_friend_answer": 777778,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0096",
+      "family": "xor_range",
+      "question": "Compute 1 XOR 2 XOR 3 XOR ... XOR 1000003 (bitwise XOR of every integer from 1 to 1000003).",
+      "gold_answer": 0,
+      "uses_object": "xor_range",
+      "false_friend_answer": 1000004,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0097",
+      "family": "josephus",
+      "question": "1000 people stand in a circle and every 2nd person is eliminated until one remains. Which original position survives?",
+      "gold_answer": 977,
+      "uses_object": "josephus",
+      "false_friend_answer": 975,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0098",
+      "family": "josephus",
+      "question": "777 people stand in a circle and every 2nd person is eliminated until one remains. Which original position survives?",
+      "gold_answer": 531,
+      "uses_object": "josephus",
+      "false_friend_answer": 529,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0099",
+      "family": "josephus",
+      "question": "1234 people stand in a circle and every 2nd person is eliminated until one remains. Which original position survives?",
+      "gold_answer": 421,
+      "uses_object": "josephus",
+      "false_friend_answer": 419,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0100",
+      "family": "josephus",
+      "question": "5000 people stand in a circle and every 2nd person is eliminated until one remains. Which original position survives?",
+      "gold_answer": 1809,
+      "uses_object": "josephus",
+      "false_friend_answer": 1807,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0101",
+      "family": "josephus",
+      "question": "9999 people stand in a circle and every 2nd person is eliminated until one remains. Which original position survives?",
+      "gold_answer": 3615,
+      "uses_object": "josephus",
+      "false_friend_answer": 3613,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0102",
+      "family": "josephus",
+      "question": "4321 people stand in a circle and every 2nd person is eliminated until one remains. Which original position survives?",
+      "gold_answer": 451,
+      "uses_object": "josephus",
+      "false_friend_answer": 449,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0103",
+      "family": "josephus",
+      "question": "65535 people stand in a circle and every 2nd person is eliminated until one remains. Which original position survives?",
+      "gold_answer": 65535,
+      "uses_object": "josephus",
+      "false_friend_answer": 65533,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0104",
+      "family": "josephus",
+      "question": "2048 people stand in a circle and every 2nd person is eliminated until one remains. Which original position survives?",
+      "gold_answer": 1,
+      "uses_object": "josephus",
+      "false_friend_answer": -1,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0105",
+      "family": "josephus",
+      "question": "3000 people stand in a circle and every 2nd person is eliminated until one remains. Which original position survives?",
+      "gold_answer": 1905,
+      "uses_object": "josephus",
+      "false_friend_answer": 1903,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0106",
+      "family": "josephus",
+      "question": "12345 people stand in a circle and every 2nd person is eliminated until one remains. Which original position survives?",
+      "gold_answer": 8307,
+      "uses_object": "josephus",
+      "false_friend_answer": 8305,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0107",
+      "family": "josephus",
+      "question": "700 people stand in a circle and every 2nd person is eliminated until one remains. Which original position survives?",
+      "gold_answer": 377,
+      "uses_object": "josephus",
+      "false_friend_answer": 375,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0108",
+      "family": "josephus",
+      "question": "8191 people stand in a circle and every 2nd person is eliminated until one remains. Which original position survives?",
+      "gold_answer": 8191,
+      "uses_object": "josephus",
+      "false_friend_answer": 8189,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0109",
+      "family": "frobenius",
+      "question": "What is the largest integer that cannot be written as 13x + 17y with x,y nonnegative integers?",
+      "gold_answer": 191,
+      "uses_object": "frobenius",
+      "false_friend_answer": 192,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0110",
+      "family": "frobenius",
+      "question": "What is the largest integer that cannot be written as 11x + 19y with x,y nonnegative integers?",
+      "gold_answer": 179,
+      "uses_object": "frobenius",
+      "false_friend_answer": 180,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0111",
+      "family": "frobenius",
+      "question": "What is the largest integer that cannot be written as 17x + 23y with x,y nonnegative integers?",
+      "gold_answer": 351,
+      "uses_object": "frobenius",
+      "false_friend_answer": 352,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0112",
+      "family": "frobenius",
+      "question": "What is the largest integer that cannot be written as 19x + 29y with x,y nonnegative integers?",
+      "gold_answer": 503,
+      "uses_object": "frobenius",
+      "false_friend_answer": 504,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0113",
+      "family": "frobenius",
+      "question": "What is the largest integer that cannot be written as 23x + 31y with x,y nonnegative integers?",
+      "gold_answer": 659,
+      "uses_object": "frobenius",
+      "false_friend_answer": 660,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0114",
+      "family": "frobenius",
+      "question": "What is the largest integer that cannot be written as 7x + 20y with x,y nonnegative integers?",
+      "gold_answer": 113,
+      "uses_object": "frobenius",
+      "false_friend_answer": 114,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0115",
+      "family": "frobenius",
+      "question": "What is the largest integer that cannot be written as 29x + 37y with x,y nonnegative integers?",
+      "gold_answer": 1007,
+      "uses_object": "frobenius",
+      "false_friend_answer": 1008,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0116",
+      "family": "frobenius",
+      "question": "What is the largest integer that cannot be written as 31x + 41y with x,y nonnegative integers?",
+      "gold_answer": 1199,
+      "uses_object": "frobenius",
+      "false_friend_answer": 1200,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0117",
+      "family": "frobenius",
+      "question": "What is the largest integer that cannot be written as 43x + 47y with x,y nonnegative integers?",
+      "gold_answer": 1931,
+      "uses_object": "frobenius",
+      "false_friend_answer": 1932,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0118",
+      "family": "frobenius",
+      "question": "What is the largest integer that cannot be written as 53x + 59y with x,y nonnegative integers?",
+      "gold_answer": 3015,
+      "uses_object": "frobenius",
+      "false_friend_answer": 3016,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0119",
+      "family": "frobenius",
+      "question": "What is the largest integer that cannot be written as 11x + 37y with x,y nonnegative integers?",
+      "gold_answer": 359,
+      "uses_object": "frobenius",
+      "false_friend_answer": 360,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0120",
+      "family": "frobenius",
+      "question": "What is the largest integer that cannot be written as 13x + 41y with x,y nonnegative integers?",
+      "gold_answer": 479,
+      "uses_object": "frobenius",
+      "false_friend_answer": 480,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0121",
+      "family": "fib_huge",
+      "question": "Compute F(1000000000000000) mod 1000, where F(0)=0 and F(1)=1.",
+      "gold_answer": 875,
+      "uses_object": "fib_huge",
+      "false_friend_answer": 0,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0122",
+      "family": "fib_huge",
+      "question": "Compute F(1000000000000) mod 1000, where F(0)=0 and F(1)=1.",
+      "gold_answer": 875,
+      "uses_object": "fib_huge",
+      "false_friend_answer": 0,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0123",
+      "family": "fib_huge",
+      "question": "Compute F(1000000000000000000) mod 1000, where F(0)=0 and F(1)=1.",
+      "gold_answer": 875,
+      "uses_object": "fib_huge",
+      "false_friend_answer": 0,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0124",
+      "family": "fib_huge",
+      "question": "Compute F(123456789) mod 1000, where F(0)=0 and F(1)=1.",
+      "gold_answer": 514,
+      "uses_object": "fib_huge",
+      "false_friend_answer": 514,
+      "false_friend_changes_answer": false
+    },
+    {
+      "query_id": "q0125",
+      "family": "fib_huge",
+      "question": "Compute F(1000000000000000) mod 10000, where F(0)=0 and F(1)=1.",
+      "gold_answer": 6875,
+      "uses_object": "fib_huge",
+      "false_friend_answer": 0,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0126",
+      "family": "fib_huge",
+      "question": "Compute F(777777777) mod 1000, where F(0)=0 and F(1)=1.",
+      "gold_answer": 82,
+      "uses_object": "fib_huge",
+      "false_friend_answer": 82,
+      "false_friend_changes_answer": false
+    },
+    {
+      "query_id": "q0127",
+      "family": "fib_huge",
+      "question": "Compute F(10000000000000000) mod 997, where F(0)=0 and F(1)=1.",
+      "gold_answer": 963,
+      "uses_object": "fib_huge",
+      "false_friend_answer": 363,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0128",
+      "family": "fib_huge",
+      "question": "Compute F(555555555) mod 1000, where F(0)=0 and F(1)=1.",
+      "gold_answer": 570,
+      "uses_object": "fib_huge",
+      "false_friend_answer": 570,
+      "false_friend_changes_answer": false
+    },
+    {
+      "query_id": "q0129",
+      "family": "fib_huge",
+      "question": "Compute F(100000000000000) mod 10000, where F(0)=0 and F(1)=1.",
+      "gold_answer": 6875,
+      "uses_object": "fib_huge",
+      "false_friend_answer": 0,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0130",
+      "family": "fib_huge",
+      "question": "Compute F(888888888) mod 997, where F(0)=0 and F(1)=1.",
+      "gold_answer": 643,
+      "uses_object": "fib_huge",
+      "false_friend_answer": 886,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0131",
+      "family": "fib_huge",
+      "question": "Compute F(100000000000000000) mod 1000, where F(0)=0 and F(1)=1.",
+      "gold_answer": 875,
+      "uses_object": "fib_huge",
+      "false_friend_answer": 0,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0132",
+      "family": "fib_huge",
+      "question": "Compute F(246813579) mod 1000, where F(0)=0 and F(1)=1.",
+      "gold_answer": 346,
+      "uses_object": "fib_huge",
+      "false_friend_answer": 346,
+      "false_friend_changes_answer": false
+    },
+    {
+      "query_id": "q0133",
+      "family": "digital_root",
+      "question": "What is the repeated digit sum (digital root) of 7^100? (Sum the digits repeatedly until one digit remains.)",
+      "gold_answer": 7,
+      "uses_object": "digital_root",
+      "false_friend_answer": 7,
+      "false_friend_changes_answer": false
+    },
+    {
+      "query_id": "q0134",
+      "family": "digital_root",
+      "question": "What is the repeated digit sum (digital root) of 3^222? (Sum the digits repeatedly until one digit remains.)",
+      "gold_answer": 9,
+      "uses_object": "digital_root",
+      "false_friend_answer": 9,
+      "false_friend_changes_answer": false
+    },
+    {
+      "query_id": "q0135",
+      "family": "digital_root",
+      "question": "What is the repeated digit sum (digital root) of 13^55? (Sum the digits repeatedly until one digit remains.)",
+      "gold_answer": 4,
+      "uses_object": "digital_root",
+      "false_friend_answer": 4,
+      "false_friend_changes_answer": false
+    },
+    {
+      "query_id": "q0136",
+      "family": "digital_root",
+      "question": "What is the repeated digit sum (digital root) of 29^101? (Sum the digits repeatedly until one digit remains.)",
+      "gold_answer": 5,
+      "uses_object": "digital_root",
+      "false_friend_answer": 4,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0137",
+      "family": "digital_root",
+      "question": "What is the repeated digit sum (digital root) of 47^63? (Sum the digits repeatedly until one digit remains.)",
+      "gold_answer": 8,
+      "uses_object": "digital_root",
+      "false_friend_answer": 9,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0138",
+      "family": "digital_root",
+      "question": "What is the repeated digit sum (digital root) of 8^77? (Sum the digits repeatedly until one digit remains.)",
+      "gold_answer": 8,
+      "uses_object": "digital_root",
+      "false_friend_answer": 4,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0139",
+      "family": "digital_root",
+      "question": "What is the repeated digit sum (digital root) of 19^199? (Sum the digits repeatedly until one digit remains.)",
+      "gold_answer": 1,
+      "uses_object": "digital_root",
+      "false_friend_answer": 1,
+      "false_friend_changes_answer": false
+    },
+    {
+      "query_id": "q0140",
+      "family": "digital_root",
+      "question": "What is the repeated digit sum (digital root) of 23^44? (Sum the digits repeatedly until one digit remains.)",
+      "gold_answer": 7,
+      "uses_object": "digital_root",
+      "false_friend_answer": 4,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0141",
+      "family": "digital_root",
+      "question": "What is the repeated digit sum (digital root) of 31^88? (Sum the digits repeatedly until one digit remains.)",
+      "gold_answer": 4,
+      "uses_object": "digital_root",
+      "false_friend_answer": 1,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0142",
+      "family": "digital_root",
+      "question": "What is the repeated digit sum (digital root) of 5^333? (Sum the digits repeatedly until one digit remains.)",
+      "gold_answer": 8,
+      "uses_object": "digital_root",
+      "false_friend_answer": 9,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0143",
+      "family": "digital_root",
+      "question": "What is the repeated digit sum (digital root) of 11^123? (Sum the digits repeatedly until one digit remains.)",
+      "gold_answer": 8,
+      "uses_object": "digital_root",
+      "false_friend_answer": 3,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0144",
+      "family": "digital_root",
+      "question": "What is the repeated digit sum (digital root) of 17^256? (Sum the digits repeatedly until one digit remains.)",
+      "gold_answer": 1,
+      "uses_object": "digital_root",
+      "false_friend_answer": 5,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0145",
+      "family": "bitcount_range",
+      "question": "Compute the total number of 1 bits in the binary representations of all integers from 0 to 1000 inclusive.",
+      "gold_answer": 4938,
+      "uses_object": "bitcount_range",
+      "false_friend_answer": 5999,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0146",
+      "family": "bitcount_range",
+      "question": "Compute the total number of 1 bits in the binary representations of all integers from 0 to 777 inclusive.",
+      "gold_answer": 3619,
+      "uses_object": "bitcount_range",
+      "false_friend_answer": 4661,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0147",
+      "family": "bitcount_range",
+      "question": "Compute the total number of 1 bits in the binary representations of all integers from 0 to 2047 inclusive.",
+      "gold_answer": 11264,
+      "uses_object": "bitcount_range",
+      "false_friend_answer": 13304,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0148",
+      "family": "bitcount_range",
+      "question": "Compute the total number of 1 bits in the binary representations of all integers from 0 to 4095 inclusive.",
+      "gold_answer": 24576,
+      "uses_object": "bitcount_range",
+      "false_friend_answer": 28664,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0149",
+      "family": "bitcount_range",
+      "question": "Compute the total number of 1 bits in the binary representations of all integers from 0 to 5000 inclusive.",
+      "gold_answer": 29809,
+      "uses_object": "bitcount_range",
+      "false_friend_answer": 37499,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0150",
+      "family": "bitcount_range",
+      "question": "Compute the total number of 1 bits in the binary representations of all integers from 0 to 1234 inclusive.",
+      "gold_answer": 6110,
+      "uses_object": "bitcount_range",
+      "false_friend_answer": 8020,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0151",
+      "family": "bitcount_range",
+      "question": "Compute the total number of 1 bits in the binary representations of all integers from 0 to 8191 inclusive.",
+      "gold_answer": 53248,
+      "uses_object": "bitcount_range",
+      "false_friend_answer": 61431,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0152",
+      "family": "bitcount_range",
+      "question": "Compute the total number of 1 bits in the binary representations of all integers from 0 to 3000 inclusive.",
+      "gold_answer": 16835,
+      "uses_object": "bitcount_range",
+      "false_friend_answer": 20999,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0153",
+      "family": "bitcount_range",
+      "question": "Compute the total number of 1 bits in the binary representations of all integers from 0 to 10000 inclusive.",
+      "gold_answer": 64613,
+      "uses_object": "bitcount_range",
+      "false_friend_answer": 79999,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0154",
+      "family": "bitcount_range",
+      "question": "Compute the total number of 1 bits in the binary representations of all integers from 0 to 6666 inclusive.",
+      "gold_answer": 41266,
+      "uses_object": "bitcount_range",
+      "false_friend_answer": 49994,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0155",
+      "family": "bitcount_range",
+      "question": "Compute the total number of 1 bits in the binary representations of all integers from 0 to 999 inclusive.",
+      "gold_answer": 4932,
+      "uses_object": "bitcount_range",
+      "false_friend_answer": 5993,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0156",
+      "family": "bitcount_range",
+      "question": "Compute the total number of 1 bits in the binary representations of all integers from 0 to 7777 inclusive.",
+      "gold_answer": 49597,
+      "uses_object": "bitcount_range",
+      "false_friend_answer": 58326,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0157",
+      "family": "necklace_burnside",
+      "question": "How many distinct necklaces of 12 beads using 3 colours are there, counting two necklaces as the same if one is a rotation of the other?",
+      "gold_answer": 44368,
+      "uses_object": "necklace_burnside",
+      "false_friend_answer": 44286,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0158",
+      "family": "necklace_burnside",
+      "question": "How many distinct necklaces of 10 beads using 3 colours are there, counting two necklaces as the same if one is a rotation of the other?",
+      "gold_answer": 5934,
+      "uses_object": "necklace_burnside",
+      "false_friend_answer": 5904,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0159",
+      "family": "necklace_burnside",
+      "question": "How many distinct necklaces of 9 beads using 4 colours are there, counting two necklaces as the same if one is a rotation of the other?",
+      "gold_answer": 29144,
+      "uses_object": "necklace_burnside",
+      "false_friend_answer": 29127,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0160",
+      "family": "necklace_burnside",
+      "question": "How many distinct necklaces of 8 beads using 5 colours are there, counting two necklaces as the same if one is a rotation of the other?",
+      "gold_answer": 48915,
+      "uses_object": "necklace_burnside",
+      "false_friend_answer": 48828,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0161",
+      "family": "necklace_burnside",
+      "question": "How many distinct necklaces of 15 beads using 2 colours are there, counting two necklaces as the same if one is a rotation of the other?",
+      "gold_answer": 2192,
+      "uses_object": "necklace_burnside",
+      "false_friend_answer": 2184,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0162",
+      "family": "necklace_burnside",
+      "question": "How many distinct necklaces of 14 beads using 3 colours are there, counting two necklaces as the same if one is a rotation of the other?",
+      "gold_answer": 341802,
+      "uses_object": "necklace_burnside",
+      "false_friend_answer": 341640,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0163",
+      "family": "necklace_burnside",
+      "question": "How many distinct necklaces of 6 beads using 6 colours are there, counting two necklaces as the same if one is a rotation of the other?",
+      "gold_answer": 7826,
+      "uses_object": "necklace_burnside",
+      "false_friend_answer": 7776,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0164",
+      "family": "necklace_burnside",
+      "question": "How many distinct necklaces of 20 beads using 2 colours are there, counting two necklaces as the same if one is a rotation of the other?",
+      "gold_answer": 52488,
+      "uses_object": "necklace_burnside",
+      "false_friend_answer": 52428,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0165",
+      "family": "necklace_burnside",
+      "question": "How many distinct necklaces of 11 beads using 3 colours are there, counting two necklaces as the same if one is a rotation of the other?",
+      "gold_answer": 16107,
+      "uses_object": "necklace_burnside",
+      "false_friend_answer": 16104,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0166",
+      "family": "necklace_burnside",
+      "question": "How many distinct necklaces of 16 beads using 2 colours are there, counting two necklaces as the same if one is a rotation of the other?",
+      "gold_answer": 4116,
+      "uses_object": "necklace_burnside",
+      "false_friend_answer": 4096,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0167",
+      "family": "necklace_burnside",
+      "question": "How many distinct necklaces of 18 beads using 2 colours are there, counting two necklaces as the same if one is a rotation of the other?",
+      "gold_answer": 14602,
+      "uses_object": "necklace_burnside",
+      "false_friend_answer": 14563,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0168",
+      "family": "necklace_burnside",
+      "question": "How many distinct necklaces of 7 beads using 4 colours are there, counting two necklaces as the same if one is a rotation of the other?",
+      "gold_answer": 2344,
+      "uses_object": "necklace_burnside",
+      "false_friend_answer": 2340,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0169",
+      "family": "zeckendorf",
+      "question": "Write 100 as a sum of distinct non-consecutive Fibonacci numbers (Zeckendorf representation). How many Fibonacci numbers does it use?",
+      "gold_answer": 3,
+      "uses_object": "zeckendorf",
+      "false_friend_answer": 8,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0170",
+      "family": "zeckendorf",
+      "question": "Write 1000 as a sum of distinct non-consecutive Fibonacci numbers (Zeckendorf representation). How many Fibonacci numbers does it use?",
+      "gold_answer": 2,
+      "uses_object": "zeckendorf",
+      "false_friend_answer": 13,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0171",
+      "family": "zeckendorf",
+      "question": "Write 777 as a sum of distinct non-consecutive Fibonacci numbers (Zeckendorf representation). How many Fibonacci numbers does it use?",
+      "gold_answer": 4,
+      "uses_object": "zeckendorf",
+      "false_friend_answer": 12,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0172",
+      "family": "zeckendorf",
+      "question": "Write 12345 as a sum of distinct non-consecutive Fibonacci numbers (Zeckendorf representation). How many Fibonacci numbers does it use?",
+      "gold_answer": 5,
+      "uses_object": "zeckendorf",
+      "false_friend_answer": 18,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0173",
+      "family": "zeckendorf",
+      "question": "Write 5000 as a sum of distinct non-consecutive Fibonacci numbers (Zeckendorf representation). How many Fibonacci numbers does it use?",
+      "gold_answer": 6,
+      "uses_object": "zeckendorf",
+      "false_friend_answer": 16,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0174",
+      "family": "zeckendorf",
+      "question": "Write 99999 as a sum of distinct non-consecutive Fibonacci numbers (Zeckendorf representation). How many Fibonacci numbers does it use?",
+      "gold_answer": 8,
+      "uses_object": "zeckendorf",
+      "false_friend_answer": 22,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0175",
+      "family": "zeckendorf",
+      "question": "Write 2024 as a sum of distinct non-consecutive Fibonacci numbers (Zeckendorf representation). How many Fibonacci numbers does it use?",
+      "gold_answer": 5,
+      "uses_object": "zeckendorf",
+      "false_friend_answer": 14,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0176",
+      "family": "zeckendorf",
+      "question": "Write 314159 as a sum of distinct non-consecutive Fibonacci numbers (Zeckendorf representation). How many Fibonacci numbers does it use?",
+      "gold_answer": 8,
+      "uses_object": "zeckendorf",
+      "false_friend_answer": 24,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0177",
+      "family": "zeckendorf",
+      "question": "Write 8888 as a sum of distinct non-consecutive Fibonacci numbers (Zeckendorf representation). How many Fibonacci numbers does it use?",
+      "gold_answer": 5,
+      "uses_object": "zeckendorf",
+      "false_friend_answer": 17,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0178",
+      "family": "zeckendorf",
+      "question": "Write 54321 as a sum of distinct non-consecutive Fibonacci numbers (Zeckendorf representation). How many Fibonacci numbers does it use?",
+      "gold_answer": 6,
+      "uses_object": "zeckendorf",
+      "false_friend_answer": 21,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0179",
+      "family": "zeckendorf",
+      "question": "Write 123456 as a sum of distinct non-consecutive Fibonacci numbers (Zeckendorf representation). How many Fibonacci numbers does it use?",
+      "gold_answer": 4,
+      "uses_object": "zeckendorf",
+      "false_friend_answer": 23,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0180",
+      "family": "zeckendorf",
+      "question": "Write 777777 as a sum of distinct non-consecutive Fibonacci numbers (Zeckendorf representation). How many Fibonacci numbers does it use?",
+      "gold_answer": 8,
+      "uses_object": "zeckendorf",
+      "false_friend_answer": 26,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0181",
+      "family": "crt_three",
+      "question": "Find the smallest non-negative integer x with x = 2 (mod 3), x = 3 (mod 5), and x = 2 (mod 7).",
+      "gold_answer": 23,
+      "uses_object": "crt_three",
+      "false_friend_answer": 58,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0182",
+      "family": "crt_three",
+      "question": "Find the smallest non-negative integer x with x = 1 (mod 5), x = 4 (mod 7), and x = 6 (mod 11).",
+      "gold_answer": 116,
+      "uses_object": "crt_three",
+      "false_friend_answer": 122,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0183",
+      "family": "crt_three",
+      "question": "Find the smallest non-negative integer x with x = 3 (mod 7), x = 2 (mod 11), and x = 5 (mod 13).",
+      "gold_answer": 486,
+      "uses_object": "crt_three",
+      "false_friend_answer": 996,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0184",
+      "family": "crt_three",
+      "question": "Find the smallest non-negative integer x with x = 4 (mod 9), x = 1 (mod 11), and x = 9 (mod 13).",
+      "gold_answer": 958,
+      "uses_object": "crt_three",
+      "false_friend_answer": 293,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0185",
+      "family": "crt_three",
+      "question": "Find the smallest non-negative integer x with x = 5 (mod 11), x = 6 (mod 13), and x = 2 (mod 17).",
+      "gold_answer": 1787,
+      "uses_object": "crt_three",
+      "false_friend_answer": 82,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0186",
+      "family": "crt_three",
+      "question": "Find the smallest non-negative integer x with x = 2 (mod 13), x = 8 (mod 17), and x = 3 (mod 19).",
+      "gold_answer": 535,
+      "uses_object": "crt_three",
+      "false_friend_answer": 3285,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0187",
+      "family": "crt_three",
+      "question": "Find the smallest non-negative integer x with x = 7 (mod 17), x = 3 (mod 19), and x = 10 (mod 23).",
+      "gold_answer": 4886,
+      "uses_object": "crt_three",
+      "false_friend_answer": 33,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0188",
+      "family": "crt_three",
+      "question": "Find the smallest non-negative integer x with x = 1 (mod 19), x = 5 (mod 23), and x = 12 (mod 29).",
+      "gold_answer": 6537,
+      "uses_object": "crt_three",
+      "false_friend_answer": 8666,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0189",
+      "family": "crt_three",
+      "question": "Find the smallest non-negative integer x with x = 6 (mod 23), x = 2 (mod 29), and x = 7 (mod 31).",
+      "gold_answer": 8470,
+      "uses_object": "crt_three",
+      "false_friend_answer": 11489,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0190",
+      "family": "crt_three",
+      "question": "Find the smallest non-negative integer x with x = 3 (mod 29), x = 9 (mod 31), and x = 4 (mod 37).",
+      "gold_answer": 7108,
+      "uses_object": "crt_three",
+      "false_friend_answer": 16694,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0191",
+      "family": "crt_three",
+      "question": "Find the smallest non-negative integer x with x = 8 (mod 31), x = 1 (mod 37), and x = 11 (mod 41).",
+      "gold_answer": 6735,
+      "uses_object": "crt_three",
+      "false_friend_answer": 26024,
+      "false_friend_changes_answer": true
+    },
+    {
+      "query_id": "q0192",
+      "family": "crt_three",
+      "question": "Find the smallest non-negative integer x with x = 4 (mod 37), x = 7 (mod 41), and x = 2 (mod 43).",
+      "gold_answer": 34488,
+      "uses_object": "crt_three",
+      "false_friend_answer": 21223,
+      "false_friend_changes_answer": true
+    }
+  ]
+}

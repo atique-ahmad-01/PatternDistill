@@ -1,0 +1,17 @@
+# Retrieval-of-Thought pipeline.
+#
+# The teacher and student run in vLLM containers and are reached over HTTP, so
+# vllm itself is NOT required here — only an OpenAI-compatible client.
+
+openai>=1.30.0
+pyyaml>=6.0
+numpy>=1.24
+
+# Embeddings.
+# Similarity is a plain numpy matmul over L2-normalised vectors -- at this
+# scale (a few thousand nodes) that is faster than building a faiss index and
+# one less dependency to pin.
+sentence-transformers>=2.7.0
+torch>=2.1
+einops>=0.7.0           # nomic-embed's trust_remote_code needs it at runtime,
+                        # even though nothing here imports it directly

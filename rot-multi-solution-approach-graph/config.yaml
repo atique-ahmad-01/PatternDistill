@@ -1,0 +1,166 @@
+# Retrieval-of-Thought (RoT) — experiment configuration.
+#
+# Every value the pipeline reads lives here. A copy of this file is written
+# next to every result set (results/<run>/config.snapshot.yaml), so a result
+# can always be traced back to the settings that produced it.
+
+seed: 42
+run_name: default
+
+# ── Dataset ──────────────────────────────────────────────────────────────────
+# Read-only. The pipeline never writes to this path.
+#
+# The dataset ships inside this project. `main.py verify` checks it against
+# the digest below, so a silent edit or a truncated copy is caught before a
+# run rather than after.
+#
+# RB-DERIV: 192 derivation-deep questions, 16 families x 12 instances,
+# every gold an exact integer computed in Python. Each family scales the
+# DERIVATION the solver must find (a closed form, a cycle, a period) while
+# post-technique execution is short -- which is precisely what makes retrieved
+# approaches worth measuring.
+dataset:
+  path: data/RB_DERIV/RB_DERIV_questions.json
+  sha256: 7e043b6a26502438526a4c52c00bfb931fe0f033378c3fbb5d8b03b33e37a1e0
+  records_key: questions        # the file is {description, n_questions, questions:[...]}
+  fields:
+    id: query_id
+    problem: question
+    answer: gold_answer
+    group: family               # the stratum: 16 technique families
+  # Extra fields carried through untouched, for per-family reporting and for
+  # any later false-friend arm.
+  keep_fields: [uses_object, false_friend_answer, false_friend_changes_answer]
+
+  # Every RB-DERIV gold is a single exact integer, so nothing is ungradable.
+  # The check stays on as a cheap guard against a malformed record.
+  gradable_only: true
+
+  split:
+    # per_family  -- hold out N per family. RB-DERIV's README and
+    #                teacher-prompt.yml both require this: a global shuffle can
+    #                leave a technique entirely absent from test, and the whole
+    #                experiment is about technique reuse.
+    # stratified  -- proportional by family
+    mode: per_family
+    test_per_family: 3          # 16 x 3 = 48 test, 16 x 9 = 144 train
+    test_size: 48               # stratified mode only
+    seed: 42
+
+  limits:
+    max_train: null             # null = all; set an int for a cheap trial run
+    max_test: null
+
+# ── Teacher (Qwen3-8B via vLLM) ──────────────────────────────────────────────
+teacher:
+  model: Qwen/Qwen3-8B
+  base_url: http://localhost:8000/v1
+  api_key: EMPTY
+  n_solutions: 5            # independent solutions per problem
+  # Qwen3 recommends 0.6/0.95/20 for thinking mode. Temperature is held a
+  # little above that on purpose: the five samples must reach the answer by
+  # DIFFERENT routes, and that diversity is the point of sampling five.
+  temperature: 0.8
+  top_p: 0.95
+  top_k: 20
+  # ON. The teacher's job is to DERIVE a technique it was not given -- find the
+  # closed form, spot the cycle. That is exactly what reasoning mode is for,
+  # and the gate is exact-match against gold, so a teacher that cannot derive
+  # simply produces no usable memory.
+  enable_thinking: true
+  # Reasoning traces on these problems run long. At 3072 they truncate, and a
+  # truncated reply has an unclosed <think> with no parseable answer -- it
+  # scores as wrong and is indistinguishable from a genuine failure. Raise this
+  # before suspecting the teacher.
+  max_tokens: 8192
+  timeout: 900
+  max_retries: 3
+  concurrency: 8
+
+# ── Student (Qwen3-1.7B via vLLM) ────────────────────────────────────────────
+student:
+  model: Qwen/Qwen3-1.7B
+  base_url: http://localhost:8001/v1
+  api_key: EMPTY
+  # NOT greedy. Qwen3's own guidance is explicit that greedy decoding in
+  # thinking mode degrades quality and can produce endless repetition. The
+  # seed is pinned instead, so arms stay comparable run to run.
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+  # ON, and this is the measurement. The claim is that a retrieved approach
+  # removes the need to SEARCH for the strategy -- which shows up as collapsed
+  # reasoning, not as a shorter final answer. With thinking off you measure
+  # answer verbosity, which is a far weaker signal for the same claim.
+  enable_thinking: true
+  max_tokens: 8192
+  timeout: 900
+  max_retries: 3
+  concurrency: 8
+
+# ── Embeddings ───────────────────────────────────────────────────────────────
+# nomic-embed requires the search_document:/search_query: prefixes; they must
+# match between indexing and querying or every similarity score is wrong.
+embedding:
+  model: nomic-ai/nomic-embed-text-v1
+  device: auto              # auto | cuda | cpu
+  batch_size: 64
+  doc_prefix: "search_document: "
+  query_prefix: "search_query: "
+
+# ── Memory bank ──────────────────────────────────────────────────────────────
+memory:
+  # correct_only — only gold-verified solutions enter the bank (default)
+  # all          — every parsed solution, correct or not
+  # Incorrect solutions are retained in the generation JSONL either way;
+  # this only controls what becomes retrievable.
+  include: correct_only
+  min_subtasks: 2           # a "solution" with one step is not a decomposition
+  max_subtasks: 12
+
+# ── Approach / thought graph ─────────────────────────────────────────────────
+graph:
+  tau_semantic: 0.82        # cosine (normalised) required for a semantic edge
+  max_neighbors: 8          # cap per node, keeps the graph readable
+  link_approaches: true
+  link_subtasks: true
+  cross_problem_only: true  # never link two nodes from the same problem
+
+# ── Retrieval ────────────────────────────────────────────────────────────────
+retrieval:
+  top_k: 3
+  # full_solution | approach | subtasks | approach_subtasks
+  mode: approach_subtasks
+  index_on: problem         # embed bank problems; query with the test problem
+  max_subtasks_shown: 8
+  # Diagnostic only, never a filter: RB-DERIV families share one technique, so
+  # "did retrieval land in the right family?" explains most of any effect.
+  # Recorded per hit as retrieved_same_group.
+  # Leakage guards. Both are enforced in code and cannot be disabled here.
+  #   - the bank only ever contains TRAIN problems
+  #   - a retrieved entry whose problem_id or normalised problem text matches
+  #     the query is dropped before top-k is taken
+
+# ── Evaluation ───────────────────────────────────────────────────────────────
+evaluation:
+  arms:
+    - A_baseline
+    - B_random_memory
+    - C_full_solution
+    - D_approach_subtasks
+  baseline_arm: A_baseline
+
+  # RB-DERIV's README requires per-family reporting: digital_root and
+  # zeckendorf have only 6/12 distinct golds, so guessing scores above chance
+  # there and an aggregate number can hide it.
+  report_by_group: true
+  low_diversity_groups: [digital_root, zeckendorf, xor_range, fib_huge]
+
+# ── Output ───────────────────────────────────────────────────────────────────
+paths:
+  # One data directory. `data/RB_DERIV/` is the read-only source dataset;
+  # everything the pipeline generates lands in `data/artifacts/`. Nothing is
+  # written outside these two.
+  data_dir: data/artifacts
+  results_dir: results
+  logs_dir: logs

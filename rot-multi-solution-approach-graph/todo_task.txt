@@ -1,0 +1,173 @@
+You are working inside the current project directory.
+
+I already have the dataset and do NOT want to create a new dataset.
+
+Build the complete end-to-end Retrieval-of-Thought (RoT) experiment in this directory.
+
+Goal:
+Use Qwen3-8B as the teacher to generate multiple solutions for each existing problem. Each solution should include an approach and a breakdown into logical mini-subtasks. Use these generated traces to build a memory bank / approach graph. Then retrieve relevant approaches or subtasks and provide them to Qwen3-1.7B as the student model. Finally, benchmark Qwen3-1.7B with and without the retrieved memory.
+
+Requirements:
+
+1. First inspect the current directory and existing dataset.
+
+   * Understand the dataset format.
+   * Do not modify or duplicate the original dataset.
+   * Reuse the existing problems and ground-truth answers if available.
+
+2. Set up Qwen3-8B inference using vLLM.
+
+   * Support Docker/vLLM deployment.
+   * Use an OpenAI-compatible API or vLLM inference API.
+   * Make model name, GPU settings, temperature, max tokens, and other parameters configurable.
+
+3. Teacher generation:
+
+   * For every problem, generate multiple independent solutions using Qwen3-8B.
+   * Default to 5 solutions per problem.
+   * Encourage different reasoning approaches.
+   * For every solution extract/store:
+
+     * problem_id
+     * problem
+     * solution_id
+     * approach
+     * mini-subtasks
+     * reasoning/trace
+     * final answer
+     * teacher model
+   * Save the generated data as JSONL.
+   * Make the number of solutions configurable.
+
+4. Validate/filter the generated solutions.
+
+   * Compare generated answers with the dataset ground truth when possible.
+   * Mark solutions as correct/incorrect.
+   * Do not silently delete generated solutions.
+   * Keep correctness metadata so different filtering strategies can be tested.
+
+5. Build the RoT memory bank.
+
+   * Store high-quality solutions and their mini-subtasks.
+   * Organize the memory around:
+     problem → solution → approach → mini-subtasks/reasoning steps.
+   * Preserve the relationship between all nodes.
+
+6. Build an approach/thought graph.
+
+   * Create nodes for approaches and reasoning steps/subtasks.
+   * Connect semantically similar approaches/subtasks across different problems.
+   * Use embeddings/vector similarity for retrieval.
+   * Keep the graph implementation simple and modular so the retrieval strategy can be changed later.
+   * Do not over-engineer the graph.
+
+7. Implement retrieval.
+
+   * Given a new test problem, retrieve relevant memory from the graph.
+   * Support configurable Top-K retrieval.
+   * Support retrieval of:
+     a. full solutions
+     b. approaches only
+     c. mini-subtasks/reasoning steps
+     d. approach + mini-subtasks
+   * Do not retrieve the exact test problem's solution.
+
+8. Student evaluation using Qwen3-1.7B:
+   Implement at least these conditions:
+
+   A. Baseline:
+   Problem → Qwen3-1.7B → Answer
+
+   B. Random Memory:
+   Problem + randomly selected memory → Qwen3-1.7B → Answer
+
+   C. Retrieved Full Solution:
+   Problem + retrieved solution → Qwen3-1.7B → Answer
+
+   D. Retrieved Approach/Subtasks:
+   Problem + retrieved approach and mini-subtasks → Qwen3-1.7B → Answer
+
+   Keep all other evaluation settings as consistent as possible.
+
+9. Evaluation:
+
+   * Compare student answers with ground truth.
+   * Calculate:
+     accuracy
+     correct/incorrect counts
+     absolute improvement
+     relative improvement
+   * Also record:
+     input tokens
+     output tokens
+     latency
+     retrieved memory IDs
+     retrieval scores
+   * Save per-problem results as JSONL/CSV.
+   * Produce a final summary table.
+
+10. Prevent data leakage.
+
+* If the dataset already contains train/test splits, use them.
+* Otherwise provide a configurable split.
+* Memory-bank construction must not use the ground-truth solution of an evaluation problem.
+* Never retrieve the exact test problem from the memory bank.
+
+11. Make the entire pipeline reproducible.
+
+* Add configuration files for:
+  teacher model
+  student model
+  dataset path
+  number of solutions
+  temperature
+  Top-K
+  embedding model
+  output directories
+  GPU settings
+* Support random seeds.
+* Save all experiment configurations with the results.
+
+12. Create simple CLI commands such as:
+
+python generate_teacher.py
+python build_memory.py
+python build_graph.py
+python evaluate_baseline.py
+python evaluate_memory.py
+python evaluate.py
+
+Or create a single CLI with subcommands if that is cleaner:
+
+python main.py generate
+python main.py build-memory
+python main.py build-graph
+python main.py evaluate
+python main.py all
+
+13. The final directory should be clean and easy to understand. Use the existing project structure where appropriate instead of unnecessarily creating duplicate files.
+
+14. Add a README.md explaining:
+
+* overall architecture
+* dataset format
+* how to start Qwen3-8B with vLLM
+* how to generate the memory bank
+* how to build the approach graph
+* how retrieval works
+* how to run Qwen3-1.7B
+* how to run baseline and memory experiments
+* how to reproduce the benchmark
+* example CLI commands
+
+Important:
+
+* Do not ask me to manually create the dataset.
+* Do not invent data.
+* Inspect the existing files first.
+* Reuse my existing dataset.
+* Keep the implementation modular and simple.
+* If something about the existing dataset format is unclear, inspect the files and adapt the code to the actual format.
+* Before implementing, give me a short summary of the existing project structure and the implementation plan.
+* Then implement the complete pipeline in the current directory.
+* After implementation, run a small end-to-end test on a few existing examples to verify that the pipeline works before attempting the full 200-problem benchmark.

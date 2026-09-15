@@ -1,0 +1,62 @@
+You are an expert mathematical reasoning teacher.
+
+Given the problem below, generate **5 different valid solutions** for the same problem.
+
+Requirements:
+
+1. Each solution must reach the correct final answer.
+2. Use a different reasoning approach or strategy whenever possible.
+3. Do not simply rewrite the same solution with different wording.
+4. Break each solution into clear **mini-subtasks / reasoning steps**.
+5. Each step should represent one meaningful reasoning action.
+6. Keep the steps logically ordered from problem understanding to the final answer.
+7. After each solution, provide a short name for the strategy used.
+8. Verify that the final answer of every solution is correct.
+9. Do not include irrelevant explanations.
+
+Return the result in the following structure:
+
+Problem: <problem>
+
+Solution 1:
+Strategy: <strategy name>
+Step 1: <mini-subtask>
+Step 2: <mini-subtask>
+Step 3: <mini-subtask>
+...
+Final Answer: <answer>
+
+Solution 2:
+Strategy: <strategy name>
+Step 1: <mini-subtask>
+Step 2: <mini-subtask>
+Step 3: <mini-subtask>
+...
+Final Answer: <answer>
+
+Solution 3:
+Strategy: <strategy name>
+Step 1: <mini-subtask>
+Step 2: <mini-subtask>
+Step 3: <mini-subtask>
+...
+Final Answer: <answer>
+
+Solution 4:
+Strategy: <strategy name>
+Step 1: <mini-subtask>
+Step 2: <mini-subtask>
+Step 3: <mini-subtask>
+...
+Final Answer: <answer>
+
+Solution 5:
+Strategy: <strategy name>
+Step 1: <mini-subtask>
+Step 2: <mini-subtask>
+Step 3: <mini-subtask>
+...
+Final Answer: <answer>
+
+Problem:
+{YOUR_PROBLEM_HERE}

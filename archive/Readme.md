@@ -1,3 +1,15 @@
+> **Archived.** This is completed and superseded work, kept for provenance:
+> prior results, the patterns and graphs they were built from, and the figures
+> in the write-ups. Active work lives at the repo root.
+>
+> **Keep these directories together.** The phases reference each other
+> relatively (`ROOT.parent / "phase-2d"`, `parents[2] / "phase-4/results"`).
+> They still resolve because they all moved into `archive/` at once —
+> `ROOT.parent` is now `archive/`. Moving any single phase back out on its own
+> will break its siblings' paths.
+
+---
+
 # PatternDistill
 
 > Can we extract reasoning patterns from an 8B model and transfer them to a 1.7B model so it solves problems similarly?

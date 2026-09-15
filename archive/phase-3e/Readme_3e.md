@@ -78,7 +78,33 @@ phase-3e/
 
 ---
 
-## Results (in-progress: 255/287)
+## ⚠️ CORRECTION — the numbers below are from an incomplete run
+
+**The completed run does not support the conclusions in this document.** The
+tables below were written from a mid-run snapshot. Re-reading the finished
+`results/results.jsonl` (262 problems) gives:
+
+| Scope | n | Vanilla | ATBS | Delta | W | L | p (exact McNemar) |
+|---|---|---|---|---|---|---|---|
+| **ALL** | 262 | 56.1% | 56.5% | **+0.4pp** | 22 | 21 | **1.000** |
+| MATH-500 | 100 | 83.0% | 86.0% | +3.0pp | 3 | 0 | 0.250 |
+| **AIME** | 162 | 39.5% | 38.3% | **−1.2pp** | 19 | 21 | 0.875 |
+
+The snapshot showed 15 wins against 7 losses; the completed run shows **22
+wins against 21 losses** — the losses caught up as more AIME problems entered
+the run. The overall effect is +0.4pp, statistically indistinguishable from
+zero.
+
+Note also that `results/results_clean.jsonl` (140 problems, +2.9pp) is a
+favourable subset: the other 122 problems score **−2.5pp**. Reporting the
+clean subset alone overstates the result.
+
+Nothing below is corrected in place — it is kept as a record of what the
+snapshot appeared to show. Phase-6 exists partly because of this: it reports
+p-values, never draws conclusions from partial runs, and never pools
+truncated with finished problems.
+
+## Results (in-progress snapshot: 255/287 — superseded, see correction above)
 
 ### Overall
 
@@ -121,3 +147,15 @@ phase-3e/
 | **3E (ATBS)** | **Strategy-only + conciseness + retry** | **+3.0pp** | **+3.6pp** | **+3.1pp** |
 
 Phase 3E matches 3D's overall delta (+3.1pp) with a **much simpler pipeline** — no graph, no worked examples, just strategy templates + token discipline.
+
+> **Superseded.** On the completed 262-problem run this claim does not hold:
+> the overall delta is **+0.4pp (p=1.000)**, with AIME at **−1.2pp**. See the
+> correction at the top of this file. The "simpler pipeline matches the
+> complex one" conclusion was an artifact of stopping the comparison early.
+>
+> One further caveat that applies to phase 3D as well: the graph-augmentation
+> step both phases relied on was **inert**. Its novelty cutoff (0.85) sat below
+> the graph's edge threshold (0.90), so every candidate step was rejected by
+> construction — verified as 2,279 candidates considered, 2,279 rejected, 0
+> used. Phase 3E's decision to drop graph steps as "dead weight" was therefore
+> measuring a bug, not the graph.

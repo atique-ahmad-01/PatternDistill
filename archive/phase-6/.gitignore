@@ -1,0 +1,13 @@
+# Regenerable artifacts — patterns are re-distilled, graph/bank are rebuilt
+data/patterns/*.jsonl
+data/patterns/*.json
+memory/
+graph/
+logs/
+results/*.jsonl
+
+# Archived copies of the pre-gate-v2 run, kept on disk for baseline
+# comparison. Same regenerable data as above, just under another name —
+# the *.json rules above only match direct children, so name these too.
+data/patterns/archive_pre_gate_v2/
+archive_pre_gate_v2_build/
