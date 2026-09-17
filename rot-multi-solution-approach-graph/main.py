@@ -136,7 +136,7 @@ def cmd_build_graph(cfg, args, log):
 
 
 def cmd_evaluate(cfg, args, log):
-    from rot.student import run_arm
+    from rot.student import run_arm, run_gated_arm, GATED_ARMS
     train, test, rep = D.split(cfg, log, refresh=getattr(args, 'refresh_split', False))
     entries = M.load(cfg)
     if not entries:
@@ -157,7 +157,11 @@ def cmd_evaluate(cfg, args, log):
     log.info(f"student: {msg}")
 
     for arm in cfg["evaluation"]["arms"]:
-        run_arm(cfg, arm, client, test, retriever, log, resume=not args.no_resume)
+        # Gated arms are a second pass over an arm that must already be
+        # complete, so they run through a different path and depend on run
+        # order -- config lists them after their source arm.
+        runner = run_gated_arm if arm in GATED_ARMS else run_arm
+        runner(cfg, arm, client, test, retriever, log, resume=not args.no_resume)
     return {"split": rep}
 
 

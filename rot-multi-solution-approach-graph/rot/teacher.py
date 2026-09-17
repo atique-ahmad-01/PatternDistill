@@ -22,6 +22,7 @@ is produced so an interrupted run resumes instead of restarting.
 from __future__ import annotations
 
 import re
+import threading
 import time
 from pathlib import Path
 
@@ -124,6 +125,15 @@ def generate(cfg, client, problems, log, resume=True):
     n = cfg["teacher"]["n_solutions"]
     model = cfg["teacher"]["model"]
 
+    # Written from INSIDE the worker, the moment a problem's samples are all
+    # in hand -- not after client.map returns. client.map does not return until
+    # every problem is finished, so writing after it means a kill at minute 70
+    # of a 75-minute run loses the entire run, silently. This box is shared and
+    # jobs do get killed to free VRAM, so that is the expected case, not the
+    # unlucky one. One problem's records go down as a single locked append, so
+    # a resume keyed on problem_id never sees half a problem.
+    write_lock = threading.Lock()
+
     def _one(problem):
         # One request per sample index, so each sample gets its own diversity
         # hint. Samples within an index still share a prefill.
@@ -155,13 +165,11 @@ def generate(cfg, client, problems, log, resume=True):
                 "truncated": r.truncated,
                 "error": r.error,
             })
+        with write_lock:
+            write_jsonl(out_path, records, mode="a")
         return records
 
-    results = client.map(todo, _one, desc="teacher", log=log)
-
-    # Append per problem so a kill mid-run keeps everything already produced.
-    for recs in results:
-        write_jsonl(out_path, recs, mode="a")
+    client.map(todo, _one, desc="teacher", log=log)
 
     allrecs = read_jsonl(out_path)
     n_ok = sum(1 for r in allrecs if r["parse_ok"])

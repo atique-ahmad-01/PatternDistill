@@ -27,6 +27,7 @@ from collections import defaultdict
 from pathlib import Path
 
 from .config import read_jsonl, results_path
+from .llm import split_thinking_tokens
 
 
 def _mean(xs):
@@ -47,6 +48,16 @@ def summarize(cfg, log, extra=None):
     if not rows:
         raise FileNotFoundError(
             "no evaluation rows found -- run `main.py evaluate` first")
+
+    # Recompute the thinking/answer split from the stored raw_reply. Result
+    # files written before the fix in llm.split_thinking_tokens booked an
+    # unterminated <think> as pure ANSWER -- exactly backwards, and biased per
+    # arm because truncation rates differ per arm. raw_reply is stored on every
+    # row, so old runs are corrected on read and need no student re-run.
+    for r in rows:
+        if r.get("raw_reply") is not None and r.get("output_tokens") is not None:
+            t, a = split_thinking_tokens(r["raw_reply"], r["output_tokens"])
+            r["thinking_tokens"], r["answer_tokens"] = t, a
 
     by_arm = defaultdict(list)
     for r in rows:
@@ -76,6 +87,30 @@ def summarize(cfg, log, extra=None):
         b = [r for r in base_rows if r["problem_id"] in common]
         bacc = (sum(1 for r in b if r["correct"]) / len(b)) if b else 0.0
         same_grp = [x for r in rs for x in (r.get("retrieved_same_group") or [])]
+
+        # A truncated row's token count is CENSORED: the model hit max_tokens,
+        # so its true trace is >= that number by an unknown amount. Averaging
+        # the cap in drags every mean toward it, and because arms truncate at
+        # different rates the drag differs per arm -- which manufactures arm
+        # differences out of nothing. Token and latency means are therefore
+        # taken over FINISHED rows only, and truncation is reported as its own
+        # outcome rather than being folded into the token figures.
+        fin = [r for r in rs if not r.get("truncated")]
+        fin_by_id = {r["problem_id"]: r for r in fin}
+        bfin_by_id = {r["problem_id"]: r for r in b if not r.get("truncated")}
+
+        # Paired against the baseline on problems that FINISHED IN BOTH arms.
+        # Comparing each arm's own finished subset to the baseline's would
+        # compare different problem sets, and the subsets differ precisely by
+        # difficulty -- the hard ones are the ones that truncate.
+        pair_ids = [i for i in fin_by_id if i in bfin_by_id]
+        if pair_ids and arm != base_arm:
+            pb = sum(bfin_by_id[i]["output_tokens"] for i in pair_ids) / len(pair_ids)
+            pa = sum(fin_by_id[i]["output_tokens"] for i in pair_ids) / len(pair_ids)
+            paired_pct = round((pa - pb) / pb * 100, 2) if pb else None
+        else:
+            paired_pct = None
+
         summary.append({
             "arm": arm,
             "n": n,
@@ -87,11 +122,15 @@ def summarize(cfg, log, extra=None):
             "abs_improvement_pp": round((acc - bacc) * 100, 2),
             "rel_improvement_pct": (round((acc - bacc) / bacc * 100, 2)
                                     if bacc > 0 else None),
+            "n_finished": len(fin),
+            # input tokens are the prompt: never censored, so all rows count
             "mean_input_tokens": _mean([r.get("input_tokens") for r in rs]),
-            "mean_output_tokens": _mean([r.get("output_tokens") for r in rs]),
-            "mean_thinking_tokens": _mean([r.get("thinking_tokens") for r in rs]),
-            "mean_answer_tokens": _mean([r.get("answer_tokens") for r in rs]),
-            "mean_latency_s": _mean([r.get("latency_s") for r in rs]),
+            "mean_output_tokens": _mean([r.get("output_tokens") for r in fin]),
+            "mean_thinking_tokens": _mean([r.get("thinking_tokens") for r in fin]),
+            "mean_answer_tokens": _mean([r.get("answer_tokens") for r in fin]),
+            "mean_latency_s": _mean([r.get("latency_s") for r in fin]),
+            "n_paired_vs_base": len(pair_ids),
+            "paired_output_tokens_vs_base_pct": paired_pct,
             "mean_retrieval_score": _mean(
                 [s for r in rs for s in (r.get("retrieval_scores") or [])
                  if s is not None]),
@@ -152,8 +191,8 @@ def render_table(out, cfg) -> str:
         f"- student: `{out['student_model']}`",
         f"- retrieval: `{out['retrieval_mode']}`, top_k={out['top_k']}, seed={out['seed']}",
         f"- problems compared across all arms: **{out['n_problems_compared']}**", "",
-        "| arm | n | correct | acc | abs Δpp | rel Δ% | in tok | think tok | out tok | lat s | same-family |",
-        "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
+        "| arm | n | correct | acc | abs Δpp | rel Δ% | trunc | in tok | think tok | out tok | Δtok paired | lat s | same-family |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
     ]
 
     for s_row in out["summary"]:
@@ -170,12 +209,16 @@ def render_table(out, cfg) -> str:
         sf = ("—" if s_row["same_family_retrieval_rate"] is None
               else f"{s_row['same_family_retrieval_rate']:.0%}")
 
+        ptok = s_row.get("paired_output_tokens_vs_base_pct")
+        ptok = "—" if ptok is None else f"{ptok:+.1f}%"
+
         lines.append(
             f"| {name} | {s_row['n']} | {s_row['correct']} | "
             f"{s_row['accuracy']:.1%} | {absd} | {reld} | "
+            f"{s_row.get('truncated', 0)} | "
             f"{s_row['mean_input_tokens']:.0f} | "
             f"{s_row.get('mean_thinking_tokens', 0):.0f} | "
-            f"{s_row['mean_output_tokens']:.0f} | "
+            f"{s_row['mean_output_tokens']:.0f} | {ptok} | "
             f"{s_row['mean_latency_s']:.1f} | {sf} |"
         )
 
@@ -188,6 +231,18 @@ def render_table(out, cfg) -> str:
         "character share. This is the quantity the experiment is about: a "
         "retrieved approach should collapse the SEARCH for a strategy, which "
         "lives here rather than in the final answer.",
+        "",
+        "`trunc` = replies that hit `student.max_tokens` mid-trace. These never "
+        "reach an answer, so they score as WRONG and are indistinguishable from "
+        "a genuine failure in the accuracy column -- read the two together.",
+        "",
+        "**Token and latency means cover FINISHED replies only.** A truncated "
+        "reply is censored at the cap: its true trace is longer by an unknown "
+        "amount, so averaging the cap in drags the mean toward it, by an amount "
+        "that differs per arm because truncation rates differ per arm. "
+        "`Δtok paired` is the honest comparison -- mean output tokens against "
+        "the baseline over problems that finished in BOTH arms, so the same "
+        "problems are on both sides.",
         "",
         "## Per-family accuracy",
         "",

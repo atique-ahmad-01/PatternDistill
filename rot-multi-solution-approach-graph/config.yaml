@@ -53,7 +53,11 @@ dataset:
 
 # ── Teacher (Qwen3-8B via vLLM) ──────────────────────────────────────────────
 teacher:
-  model: Qwen/Qwen3-8B
+  # AWQ, not bf16. The bf16 8B is 16GB of weights on a 16.3GB card --
+  # it loads and then leaves no room at all for a KV cache. The 4-bit
+  # AWQ build is ~5.5GB and leaves the cache room that thinking mode
+  # at max_model_len 16384 actually needs.
+  model: Qwen/Qwen3-8B-AWQ
   base_url: http://localhost:8000/v1
   api_key: EMPTY
   n_solutions: 5            # independent solutions per problem
@@ -72,7 +76,15 @@ teacher:
   # truncated reply has an unclosed <think> with no parseable answer -- it
   # scores as wrong and is indistinguishable from a genuine failure. Raise this
   # before suspecting the teacher.
-  max_tokens: 8192
+  #
+  # MEASURED on the 8-problem smoke run against the real Qwen3-8B-AWQ:
+  # thinking mean 3402 / median 3231 / max 7002 tokens. At 8192 exactly 3 of 40
+  # samples truncated -- and those 3 were the ONLY parse failures in the run
+  # (37/40 parsed). All 3 were bitcount_range, the family that then scored 1/5.
+  # So truncation, not teacher ability, was what cost that family its memories.
+  # 12288 clears the observed max with room to spare and still fits inside
+  # max_model_len 16384 (prompts measured at 265-308 tokens).
+  max_tokens: 12288
   timeout: 900
   max_retries: 3
   concurrency: 8
@@ -148,6 +160,10 @@ evaluation:
     - B_random_memory
     - C_full_solution
     - D_approach_subtasks
+    # Second pass over A_baseline, run ONLY where A failed to produce an answer
+    # (truncated or unparseable). Must be listed after A_baseline: it reads that
+    # arm's result file. Its token cost is billed for BOTH passes.
+    - E_gated
   baseline_arm: A_baseline
 
   # RB-DERIV's README requires per-family reporting: digital_root and

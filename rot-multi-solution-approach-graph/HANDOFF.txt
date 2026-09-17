@@ -1,0 +1,249 @@
+================================================================================
+RoT EXPERIMENT — HANDOFF NOTES
+Written 2026-09-16 ~02:50. Give this file to Claude at the start of the next
+session; it contains everything needed to resume without re-discovering it.
+================================================================================
+
+--------------------------------------------------------------------------------
+1. WHAT THIS PROJECT IS
+--------------------------------------------------------------------------------
+Retrieval-of-Thought. A teacher (Qwen3-8B) solves each training problem five
+independent ways; each solution is parsed into an APPROACH plus ordered
+mini-subtasks. Those become a memory bank and an approach/subtask graph. At test
+time the nearest approaches are retrieved into a Qwen3-1.7B prompt, and the
+student is benchmarked with and without them.
+
+Question under test: does handing a small model someone else's reasoning
+strategy help it solve problems it cannot crack alone — and is it the RETRIEVAL
+that helps, or would any worked example do?
+
+Local path : ~/Desktop/PatternDistill/rot-multi-solution-approach-graph
+GPU path   : ~/rot-multi-solution-approach-graph   (rsync'd, NOT a git clone)
+Git        : branch phase-6-gate-v2, pushed to origin. Commits 7960627, d52b251.
+
+--------------------------------------------------------------------------------
+2. GPU BOX ACCESS
+--------------------------------------------------------------------------------
+Host: students@100.118.158.78  (Tailscale, hostname murtaza-MS-7E12)
+
+SSH KEY IS INSTALLED — plain `ssh students@100.118.158.78` works, no password.
+(sshpass + expect are on the Mac if ever needed again.)
+
+Tailscale `status` can report the box OFFLINE while it is actually reachable.
+Trust `nc -z 100.118.158.78 22`, not the status line.
+
+Hardware: ONE RTX 5070 Ti, 16303 MiB, driver 595.84, compute capability sm_120
+(Blackwell). Older notes mentioning a second GPU at cuda:1 are out of date.
+Disk: ~553 GB free.
+
+NETWORK IS WIFI (wlp13s0), roughly 3 MB/s. This is the binding constraint on
+everything. All large downloads are slow; plan sequentially, never in parallel.
+
+The box CANNOT clone from GitHub (no credentials). Ship code with rsync:
+  rsync -az --exclude '__pycache__' --exclude '*.pyc' --exclude 'results/' \
+    --exclude 'logs/' --exclude 'data/artifacts/' \
+    ~/Desktop/PatternDistill/rot-multi-solution-approach-graph/ \
+    students@100.118.158.78:~/rot-multi-solution-approach-graph/
+
+--------------------------------------------------------------------------------
+3. PYTHON ENVIRONMENT — READ THIS BEFORE RUNNING ANYTHING
+--------------------------------------------------------------------------------
+THREE different pythons resolve depending on how you connect. This wasted real
+time; do not rediscover it.
+
+  interactive shell (tmux window)  -> ~/miniforge3/bin/python3   (base, EMPTY)
+  ssh host 'cmd'  (non-interactive)-> /usr/bin/python3           (system 3.10)
+  WHAT WE WANT                     -> ~/miniforge3/envs/ms-atique/bin/python
+
+`ssh host 'which conda'` finds NOTHING because non-interactive shells skip
+.bashrc. Miniforge IS installed at ~/miniforge3. Do not conclude conda is absent.
+
+ALWAYS call the interpreter by absolute path. Never rely on `conda activate` or
+bare `python3`. A `pip install --user` done over ssh lands in the system python
+and is invisible inside tmux — it looks exactly like a silent install failure.
+
+Envs:
+  ms-atique       python 3.11, torch 2.13.0+cu130, transformers 5.13.1,
+                  sentence-transformers 5.6.0, faiss 1.14.3, einops, openai
+                  (openai was installed by us). THE WORKING ENV — keep intact.
+  ms-atique-vllm  clone of the above, created for vLLM so ms-atique is not
+                  mutated. torch/sm_120 verified working in the clone.
+
+bitsandbytes 0.49.2 is available in ms-atique (phases 2-6 used it) — this is the
+fallback if vLLM ever proves unworkable.
+
+--------------------------------------------------------------------------------
+4. CACHED MODELS (no download needed)
+--------------------------------------------------------------------------------
+~/.cache/huggingface is ~38 GB and already contains:
+  Qwen3-8B (16G, bf16 — TOO BIG for this card with a KV cache)
+  Qwen3-4B (7.6G), Qwen3-1.7B (3.8G), Qwen2.5-3B-Instruct
+  nomic-ai/nomic-embed-text-v1  (the embedder this project uses)
+  datasets: MATH-500, AIME, GSM8K, MBPP
+
+Qwen3-8B-AWQ is being downloaded because only bf16 8B was cached.
+
+--------------------------------------------------------------------------------
+5. STATE AS OF 2026-09-16 02:50
+--------------------------------------------------------------------------------
+DONE:
+  - SSH key auth installed
+  - code rsync'd to the box
+  - `python3 main.py verify --mock` PASSES on the box; split froze to the same
+    SHA (7e043b6a26502438) and the same 144/48 as locally → deterministic
+  - ms-atique-vllm cloned, torch 2.13.0+cu130 / sm_120 / CUDA verified
+  - docker pull of vllm/vllm-openai KILLED (21GB was too slow over WiFi)
+
+IN FLIGHT (both in tmux session `rot`, owned by systemd not sshd — verified
+detached, they survive laptop shutdown and SSH drops):
+  window `weights` : hf download Qwen/Qwen3-8B-AWQ
+                     was at 2592MB / ~5500MB
+                     writes DL_DONE to logs/awq_download.log when finished
+  window `vllm`    : scripts/install_vllm.sh — polls for DL_DONE, then runs
+                     `pip install vllm` into ms-atique-vllm, then asserts torch
+                     was NOT replaced. Writes INSTALL_DONE to
+                     logs/vllm_install.log.
+
+NOT DONE — nothing has run on the GPU yet. GPU was idle at 15 MiB.
+
+To check state on return:
+  ssh students@100.118.158.78
+  cd ~/rot-multi-solution-approach-graph
+  tail -3 logs/awq_download.log logs/vllm_install.log
+  tmux attach -t rot
+
+--------------------------------------------------------------------------------
+6. NEXT STEPS, IN ORDER
+--------------------------------------------------------------------------------
+(1) Confirm INSTALL_DONE and that torch is still 2.13.0+cu130 with cap (12,0).
+
+(2) scripts/serve_vllm.sh is currently DOCKER-based. It needs a small edit to
+    call the pip-installed `vllm serve` instead. Keep the docker path in the
+    file — the original spec (todo_task.txt requirement 2) asked for docker
+    support, so it should remain documented, just not the default.
+    Serve flags that matter:
+      --gpu-memory-utilization 0.62   (shared box; leaves ~6GB visibly free)
+      --max-model-len 16384           (thinking mode needs the room)
+      --kv-cache-dtype fp8
+
+(3) python3 main.py verify          <- first REAL health check
+
+(4) *** CHECKPOINT A *** python3 main.py generate --limit-train 8   (~40 calls)
+    Then READ the output, do not just check the exit code:
+      parse rate       — the APPROACH:/STEP n: regexes have only ever seen
+                         replies Claude wrote. A real Qwen3-8B in thinking mode
+                         will format differently. This is the single most likely
+                         thing to need fixing. Catch it at 40 calls, not 720.
+      truncation count — thinking mode at max_tokens 8192. A truncated reply has
+                         an unclosed <think>, no parseable answer, and scores as
+                         WRONG — indistinguishable from a genuine failure.
+      mean thinking tokens — tells you if 8192 is comfortable or marginal.
+
+(5) python3 main.py generate        (full 720 calls, resumes from the 8)
+    python3 main.py validate
+    *** CHECKPOINT B *** — validate names any family with ZERO correct
+    solutions. fib_huge is expected to struggle: F(10^15) mod 1000 is ~100
+    modular multiplications AFTER the technique is known. A long barren list
+    means the fix is executable verification, not a bigger teacher.
+
+(6) python3 main.py build-memory && python3 main.py build-graph
+    Watch for "no semantic edges at tau=0.82" — if that fires, lower
+    graph.tau_semantic or the graph contributes nothing.
+
+(7) Stop the teacher server FIRST — 0.62 + 0.62 utilisation will not fit on one
+    16.3GB card. Teacher and student MUST run sequentially (only one GPU).
+    Then serve Qwen3-1.7B and run:
+      python3 main.py evaluate && python3 main.py report
+
+--------------------------------------------------------------------------------
+7. MISTAKES ALREADY MADE — DO NOT REPEAT
+--------------------------------------------------------------------------------
+* `pkill -f <pattern>` KILLED MY OWN SSH SESSION TWICE, because the pattern
+  matched the ssh command line carrying it. Always kill by exact PID.
+
+* Xet (the HF downloader) takes 30-60s to negotiate and ramp up. Measuring
+  inside that window looks exactly like a stall. I concluded "stalled" and
+  killed a working download repeatedly — that, not the network, cost the most
+  time. LET DOWNLOADS RUN. Poll at multi-minute intervals, not seconds.
+
+* HF downloads do NOT resume cleanly: each restart writes a fresh
+  *.incomplete blob with a new random suffix. Restarting throws away progress.
+
+* HF_HUB_ENABLE_HF_TRANSFER is DEPRECATED in huggingface_hub 1.23 (Xet replaced
+  it). Setting it does nothing. HF_XET_HIGH_PERFORMANCE=1 is the replacement.
+
+* Summing /sys/class/net/*/statistics/rx_bytes includes lo and docker0 and
+  wildly overstates external throughput. Measure the real interface (wlp13s0).
+
+* `docker pull` keeps downloading even when the CLIENT process is SIGSTOPped —
+  dockerd owns the transfer. Kill the client to actually stop it.
+
+* SIGSTOP on the HF downloader breaks its worker threads; it stays alive but
+  transfers nothing. Don't suspend it, and don't trust "process alive" as proof
+  of progress — check /proc/<pid>/io write_bytes.
+
+--------------------------------------------------------------------------------
+8. DESIGN DECISIONS WORTH PRESERVING
+--------------------------------------------------------------------------------
+* THE SPLIT IS FROZEN to data/artifacts/split.json and reused by every stage.
+  Re-deriving it per command meant a seed edited between `generate` and
+  `evaluate` would silently move the train/test boundary, putting an
+  already-solved problem into the test set. The memory bank would then hold a
+  solution to a problem the student is scored on — invalidating the run while
+  every stage still reported success. Changing split settings after freezing is
+  now a loud error. --refresh-split re-splits deliberately.
+  Limits (--limit-train/--limit-test) are a VIEW on the frozen split and can
+  never move the boundary.
+
+* PER-FAMILY SPLIT (9 train / 3 test in every one of the 16 families). A global
+  shuffle can leave a technique absent from test, and technique reuse is the
+  entire experiment.
+
+* ARM B (random memory) is the control that makes the result interpretable.
+  Without it a gain in C/D could be "any worked example helps" rather than
+  "retrieval found the right memory" — completely different claims.
+
+* THINKING MODE IS ON for both models, and thinking tokens are reported
+  SEPARATELY from answer tokens. The claim is that a retrieved approach removes
+  the need to SEARCH for a strategy; that search lives in the reasoning trace.
+  Measuring only final-answer length would test a much weaker claim.
+  Student temperature is 0.6, NOT greedy — Qwen3's guidance is explicit that
+  greedy decoding in thinking mode degrades quality and can loop forever. Seed
+  is pinned instead so arms stay comparable.
+
+* SAME-FAMILY RETRIEVAL RATE is reported per arm. RB-DERIV families share one
+  technique, so landing in the right family explains most of any effect. Hiding
+  it would let family-matching read as semantic understanding.
+
+* The project is FULLY SELF-CONTAINED — no file outside its own directory is
+  read. data/RB_DERIV/ is the one canonical copy of the dataset in the whole
+  repo (duplicates in archive/phase-7 and archive/sep-paper were deleted).
+  .gitignore is scoped to data/artifacts/ — do NOT widen it to data/, that
+  would exclude the dataset from git and break self-containment.
+
+--------------------------------------------------------------------------------
+9. WHAT IS AND IS NOT VERIFIED
+--------------------------------------------------------------------------------
+VERIFIED (offline, with --mock, no GPU):
+  full pipeline end to end at 144/48; all 4 retrieval modes; --arms subsets;
+  standalone report; resume after partial kill (regenerated exactly the missing
+  problems); 5 leakage guards with 0 violations; split freeze rejects a changed
+  seed; limits cannot move the boundary; everything compiles.
+
+NOT VERIFIED — the entire live model path:
+  real HTTP to vLLM, retries/backoff, chat_template_kwargs for Qwen3 thinking,
+  real usage token counts, real nomic-embed embeddings, OOM/timeout behaviour,
+  and above all whether the teacher's real output format parses.
+
+--------------------------------------------------------------------------------
+10. OPEN OFFER NOT YET ACTED ON
+--------------------------------------------------------------------------------
+Chaining the whole pipeline behind an automatic parse-rate gate: run the
+8-problem smoke, measure parse rate, proceed to the full 720 only if it clears
+~70%, otherwise stop and leave sample replies for diagnosis. This would let the
+experiment finish unattended overnight instead of sitting idle after the
+install. Not built yet — was awaiting a decision.
+
+Also outstanding: the repo root has no README (the original moved to
+archive/Readme.md).
+================================================================================

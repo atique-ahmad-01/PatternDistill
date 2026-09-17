@@ -20,6 +20,40 @@ from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 
 
+def split_thinking_tokens(text, completion_tokens):
+    """(thinking_tokens, answer_tokens) estimated by character share.
+
+    The server reports one completion_tokens for the whole reply, so the two
+    parts are apportioned by character count. Approximate, and labelled as such
+    -- but it is the quantity the experiment is actually about: whether a
+    retrieved approach collapses the SEARCH for a strategy, which lives in the
+    reasoning trace, not in the final answer.
+
+    THE UNTERMINATED CASE IS NOT A FALLBACK, IT IS THE COMMON ONE. A reply that
+    hit max_tokens mid-trace has an opening <think> and no closing tag. It is
+    reasoning from end to end -- the model never got as far as an answer. An
+    earlier version returned (0, completion_tokens) for it, i.e. booked a pure
+    reasoning trace as pure answer, which inverted the headline measurement on
+    exactly the longest-reasoning rows. Worse, truncation rates differ by arm,
+    so the bias differed by arm too and the arm ordering it produced was an
+    artifact of truncation rather than of reasoning length.
+
+    Callers should still treat a truncated row's count as CENSORED (the true
+    trace is >= completion_tokens, length unknown) and report token means over
+    finished rows only.
+    """
+    import re
+    text = text or ""
+    m = re.search(r"<think>(.*?)</think>", text, re.DOTALL)
+    if m:
+        think_chars = len(m.group(1))
+        share = min(think_chars / max(len(text), 1), 1.0)
+        think_tok = int(round(completion_tokens * share))
+        return think_tok, completion_tokens - think_tok
+    if "<think>" in text:
+        return completion_tokens, 0      # unterminated: all reasoning
+    return 0, completion_tokens          # no trace at all: all answer
+
 @dataclass
 class Reply:
     """One completion plus everything the evaluation needs to account for it."""
@@ -36,23 +70,8 @@ class Reply:
         return self.finish_reason == "length"
 
     def split_thinking(self):
-        """(thinking_tokens, answer_tokens) estimated by character share.
-
-        The server reports one completion_tokens for the whole reply, so the
-        two parts are apportioned by character count. Approximate, and labelled
-        as such -- but it is the quantity the experiment is actually about:
-        whether a retrieved approach collapses the SEARCH for a strategy, which
-        lives in the reasoning trace, not in the final answer.
-        """
-        import re
-        m = re.search(r"<think>(.*?)</think>", self.text or "", re.DOTALL)
-        if not m:
-            return 0, self.completion_tokens
-        think_chars = len(m.group(1))
-        total_chars = max(len(self.text or ""), 1)
-        share = min(think_chars / total_chars, 1.0)
-        think_tok = int(round(self.completion_tokens * share))
-        return think_tok, self.completion_tokens - think_tok
+        """(thinking_tokens, answer_tokens) -- see split_thinking_tokens."""
+        return split_thinking_tokens(self.text, self.completion_tokens)
 
 
 @dataclass
