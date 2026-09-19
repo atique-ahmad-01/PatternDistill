@@ -23,11 +23,13 @@ import random
 import threading
 import time
 
+from pathlib import Path
+
 from .config import read_jsonl, results_path, write_jsonl
 from .llm import split_thinking_continued, split_thinking_tokens
 from .retrieval import format_memory, hit_metadata
 from .rot_retrieval import format_template as format_rot_template
-from .scoring import extract_answer, is_correct
+from .scoring import extract_answer, extract_answer_open_trace, is_correct
 
 SYSTEM = """You are solving one mathematics problem. The answer is a single integer.
 
@@ -107,6 +109,12 @@ def run_arm(cfg, arm, client, test_problems, retriever, log, resume=True):
     mode = ARM_MODES[arm]
     out_path = results_path(cfg, f"eval_{arm}.jsonl")
 
+    if not resume:
+        # --no-resume must START OVER, not add a second pass. Rows are appended
+        # as each problem finishes, so leaving the old file in place produced
+        # 2N rows for N problems -- silently, and the report then averaged a
+        # run against itself. Truncate first.
+        Path(out_path).unlink(missing_ok=True)
     existing = read_jsonl(out_path) if resume else []
     have = {r["problem_id"] for r in existing}
     todo = [p for p in test_problems if p["problem_id"] not in have]
@@ -210,6 +218,12 @@ def run_gated_arm(cfg, arm, client, test_problems, retriever, log, resume=True):
             f"gate silently skips the problems it cannot see.")
 
     out_path = results_path(cfg, f"eval_{arm}.jsonl")
+    if not resume:
+        # --no-resume must START OVER, not add a second pass. Rows are appended
+        # as each problem finishes, so leaving the old file in place produced
+        # 2N rows for N problems -- silently, and the report then averaged a
+        # run against itself. Truncate first.
+        Path(out_path).unlink(missing_ok=True)
     existing = read_jsonl(out_path) if resume else []
     have = {r["problem_id"] for r in existing}
     todo = [p for p in test_problems if p["problem_id"] not in have]
@@ -378,6 +392,12 @@ def run_rot_arm(cfg, arm, client, test_problems, rot_retriever, log, resume=True
     """
     rc = cfg["rot"]
     out_path = results_path(cfg, f"eval_{arm}.jsonl")
+    if not resume:
+        # --no-resume must START OVER, not add a second pass. Rows are appended
+        # as each problem finishes, so leaving the old file in place produced
+        # 2N rows for N problems -- silently, and the report then averaged a
+        # run against itself. Truncate first.
+        Path(out_path).unlink(missing_ok=True)
     existing = read_jsonl(out_path) if resume else []
     have = {r["problem_id"] for r in existing}
     todo = [p for p in test_problems if p["problem_id"] not in have]
@@ -428,7 +448,8 @@ def run_rot_arm(cfg, arm, client, test_problems, rot_retriever, log, resume=True
             full_text = reply.text
             think_tok, answer_tok = reply.split_thinking()
 
-        pred = extract_answer(full_text)
+        pred = (extract_answer_open_trace(reply.text, reply.truncated)
+                if prefill else extract_answer(full_text))
         row = {
             "arm": arm,
             "problem_id": p["problem_id"],

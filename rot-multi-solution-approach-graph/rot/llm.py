@@ -67,10 +67,19 @@ def split_thinking_continued(text, completion_tokens):
     server bills it as prompt_tokens -- which is the honest place for it, since
     the template is a cost the arm pays on the input side.
     """
+    import re
     text = text or ""
     i = text.find("</think>")
     if i < 0:
-        return completion_tokens, 0          # never closed: all reasoning
+        # Qwen3 often answers straight out of an open block without closing it.
+        # The contract line is the boundary: everything before it was the
+        # reasoning, and booking it all as reasoning would zero out
+        # answer_tokens on every such reply.
+        m = re.search(r"^\**\s*(?:FINAL\s+)?ANSWER\s*\**\s*[:=]",
+                      text, re.IGNORECASE | re.MULTILINE)
+        if not m:
+            return completion_tokens, 0      # genuinely never reached an answer
+        i = m.start()
     share = min(i / max(len(text), 1), 1.0)
     think_tok = int(round(completion_tokens * share))
     return think_tok, completion_tokens - think_tok
