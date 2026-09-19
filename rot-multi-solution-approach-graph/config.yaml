@@ -208,6 +208,12 @@ rot:
   # user_prompt -- same template as user-turn reference material (ablation;
   #                this project's phase-3B found TI did nothing on a 1.7B while
   #                prompt injection helped, which contradicts the paper)
+  # retrieved -- the template the walk assembled for THIS problem
+  # shuffled  -- the template assembled for a DIFFERENT test problem. The
+  #              control for this arm, matching what B_random_memory does for
+  #              C/D: same machinery, same length distribution, wrong problem.
+  template_source: retrieved
+
   injection: ti_prefill
   # project   -- this project's SYSTEM, identical to arms A-E (default; the
   #              controlled comparison depends on it being held constant)

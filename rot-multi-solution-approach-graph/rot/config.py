@@ -106,6 +106,9 @@ def _validate(cfg):
         if rc["tag_source"] not in ("gold", "predicted", "none"):
             raise ValueError("rot.tag_source must be gold|predicted|none, "
                              f"got {rc['tag_source']!r}")
+        if rc.get("template_source", "retrieved") not in ("retrieved", "shuffled"):
+            raise ValueError("rot.template_source must be retrieved|shuffled, "
+                             f"got {rc['template_source']!r}")
         if rc["injection"] not in ("ti_prefill", "user_prompt"):
             raise ValueError("rot.injection must be ti_prefill|user_prompt, "
                              f"got {rc['injection']!r}")

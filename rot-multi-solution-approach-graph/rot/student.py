@@ -428,13 +428,49 @@ def run_rot_arm(cfg, arm, client, test_problems, rot_retriever, log, resume=True
     preamble = ROT_REFERENCE_TEMPLATE_PROMPT if exact else ROT_TEMPLATE_PROMPT
     log.info(f"  [{arm}] injection={rc['injection']} tag_source={rc['tag_source']} "
              f"system={rc.get('system_prompt', 'project')} "
+             f"templates={rc.get('template_source', 'retrieved')} "
              f"max_tok={cfg['student']['max_tokens']} "
              f"thr={rc['sim_threshold']} l_max={rc['l_max']}")
+    # The control that makes a gain in this arm interpretable, and the exact
+    # analogue of arm B for arms C/D. `shuffled` assembles each problem's
+    # template from a DIFFERENT test problem's query, so the template is real,
+    # coherent, and drawn from the same length and source-count distribution --
+    # it is simply not the one retrieval chose for this problem. Without it,
+    # "+4.2pp" cannot be separated from "any eight-step plan helps", which is a
+    # much weaker claim.
+    #
+    # A derangement, so no problem can be handed its own template. The leakage
+    # guard still keys off the REAL problem_id, so a donor template can never
+    # contain the query's own solution.
+    donor = {}
+    if rc.get("template_source") == "shuffled":
+        ids = [q["problem_id"] for q in test_problems]
+        by_id = {q["problem_id"]: q for q in test_problems}
+        if len(ids) < 2:
+            raise SystemExit("rot.template_source=shuffled needs >= 2 test "
+                             "problems to form a derangement")
+        rng = random.Random(cfg["seed"])
+        perm = list(ids)
+        for _ in range(1000):
+            rng.shuffle(perm)
+            if all(a != b for a, b in zip(ids, perm)):
+                break
+        else:
+            raise SystemExit("could not derange the test set")
+        donor = {i: by_id[j] for i, j in zip(ids, perm)}
+        log.info(f"  [{arm}] SHUFFLED control: templates reassigned across "
+                 f"{len(donor)} problems")
+
     write_lock = threading.Lock()
 
     def _one(p):
-        steps, meta = rot_retriever.assemble(p["problem"], p["problem_id"],
-                                             query_group=p.get("group"))
+        # The query the template is built FOR; the problem_id stays this
+        # problem's so the leakage guard is unaffected.
+        src = donor.get(p["problem_id"], p)
+        steps, meta = rot_retriever.assemble(src["problem"], p["problem_id"],
+                                             query_group=src.get("group"))
+        meta["rot_donor_problem_id"] = (src["problem_id"]
+                                        if src is not p else None)
         template = format_rot_template(steps)
 
         prefill, user = None, p["problem"]

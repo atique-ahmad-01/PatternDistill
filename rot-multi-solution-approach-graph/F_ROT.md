@@ -196,16 +196,48 @@ scores `R ≥ 1 > τ`, so the walk can **never** stop early and always runs to `
 
 ## 4. Results — Qwen3-1.7B, frozen 48-problem test split
 
-| run | injection | tag | prompts | max_tok | acc | Δpp | think | Δtok paired | lat | trunc | unparse |
-|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| `A_baseline` | — | — | project | 8192 | 75.0% | — | 2755 | — | 19.0s | 9 | — |
-| **`f_exact`** | `ti_prefill` | gold | **reference** | 15360 | **16.7%** | **−58.3** | 524 | −79.7% | 3.0s | **0** | **0** |
-| `default` | `ti_prefill` | gold | project | 8192 | 8.3% | −66.7 | 305 | −88.1% | 1.9s | 6 | 13 |
-| `f_predicted` | `ti_prefill` | predicted | project | 8192 | 0.0% | −75.0 | 291 | −88.4% | 1.8s | 4 | 13 |
-| `f_userprompt` | `user_prompt` | gold | project | 8192 | **79.2%** | **+4.2** | 2725 | −15.5% | 17.8s | 2 | 2 |
+| run | injection | tag | templates | prompts | max_tok | acc | Δpp | think | lat | trunc |
+|---|---|---|---|---|---:|---:|---:|---:|---:|---:|
+| `A_baseline` | — | — | — | project | 8192 | 75.0% | — | 2754 | 19.0s | 9 |
+| **`f_up_exact`** | `user_prompt` | gold | retrieved | reference | 15360 | **81.2%** | **+6.2** | 3578 | 29.5s | 1 |
+| `f_shuf_exact` | `user_prompt` | gold | **shuffled** | reference | 15360 | 75.0% | +0.0 | 3934 | 33.8s | 1 |
+| `f_userprompt` | `user_prompt` | gold | retrieved | project | 8192 | 79.2% | +4.2 | 2725 | 17.8s | 2 |
+| `f_shuf` | `user_prompt` | gold | **shuffled** | project | 8192 | 68.8% | −6.2 | 2877 | 19.3s | 3 |
+| **`f_exact`** | `ti_prefill` | gold | retrieved | reference | 15360 | **16.7%** | **−58.3** | 524 | 3.0s | 0 |
+| `default` | `ti_prefill` | gold | retrieved | project | 8192 | 8.3% | −66.7 | 305 | 1.9s | 6 |
+| `f_predicted` | `ti_prefill` | predicted | retrieved | project | 8192 | 0.0% | −75.0 | 291 | 1.8s | 4 |
 
-`f_exact` is the reproduction claim. `f_userprompt` is **not RoT** — it keeps RoT's
-retrieval and drops RoT's injection.
+### The control — is it the *retrieved* template, or would any plan do?
+
+`shuffled` hands each problem the template the walk assembled for a **different**
+test problem: same machinery, same length (7.0) and crossing rate (42/48), wrong
+problem. This is what `B_random_memory` is for arms C/D.
+
+| prompts / cap | retrieved | shuffled | **Δ attributable to retrieval** |
+|---|---:|---:|---:|
+| reference / 15360 | 81.2% | 75.0% | **+6.2pp** |
+| project / 8192 | 79.2% | 68.8% | **+10.4pp** |
+
+Retrieval is doing real work under both settings. A *wrong* template is worth
+nothing over baseline at reference settings (75.0%, exactly A) and actively costs
+6.2pp at project settings — so the gain cannot be "any eight-step plan helps".
+
+### Decomposing the three variables
+
+| variable | holding the rest constant | effect |
+|---|---|---|
+| injection site (TI → user turn) | project, 8192, retrieved | **+70.9pp** (8.3% → 79.2%) |
+| injection site (TI → user turn) | reference, 15360, retrieved | **+64.5pp** (16.7% → 81.2%) |
+| prompts + cap (project → reference) | TI, retrieved | +8.4pp (8.3% → 16.7%) |
+| prompts + cap (project → reference) | user turn, retrieved | +2.0pp (79.2% → 81.2%) |
+| templates (shuffled → retrieved) | user turn, reference, 15360 | +6.2pp |
+| templates (shuffled → retrieved) | user turn, project, 8192 | +10.4pp |
+
+The injection site dominates every other term by an order of magnitude.
+
+`f_exact` is the reproduction claim — TI is the published method. Every
+`user_prompt` row is **not RoT**: it keeps RoT's retrieval and drops RoT's
+injection. Report them as an ablation, never as RoT.
 
 ### Mechanism — identical across all three `gold` runs
 
@@ -255,14 +287,15 @@ search, which is RoT's own stated claim.
 | Single-variable ablation isolating the failure | identical templates, 71pp swing on placement alone |
 | Reproducible graph build | CPU (mac) and GPU (box) produced identical edge counts |
 | Mechanism diagnostics in every report | length, sources, crossing, edge types, halt reasons, contamination |
+| **Matched random-template control** | `shuffled` derangement; retrieval worth +6.2pp (reference) / +10.4pp (project) over a wrong template |
+| **Best configuration found** | `f_up_exact` 81.2%, +6.2pp over baseline, with its own control |
 | 3 bugs fixed, 2 only visible live | §7 |
 
 ## 6. Missing
 
 | gap | why it matters | cost |
 |---|---|---|
-| **No random-template control for F** | `f_userprompt`'s +4.2pp could be "any 8-step plan helps" rather than "the *retrieved* plan helps". This is exactly the role arm B plays for C/D — without it the headline number is contestable. | 48 calls |
-| **`tag_source: gold` is an advantage** | F is handed the query's family; C/D had to find it by similarity. Hence F's 100% same-family. `predicted` recovers the tag correctly 33/48 (69%) but was only run under TI, so there is **no `user_prompt` + `predicted`** cell — the 79.2% still carries the advantage. | 48 calls |
+| **No `user_prompt` + `predicted` cell** | every `user_prompt` run uses `tag_source: gold`, so 81.2% still carries the family advantage C/D did not have. `predicted` recovers the tag 33/48 (69%) but was only run under TI. | 48 calls |
 | **Template source ≠ reference** | reference steps are generic skeletons (0.2% carry a 4+ digit literal); ours are instance-bound (36.6%). Untested whether generic templates change the TI result. | 1 teacher pass |
 | **Benchmark ≠ reference** | paper uses AIME/AMC where traces run ~10k tokens; RB-DERIV baseline is 2766, far less to compress. | dataset prep |
 | **No significance testing** | n = 48; one problem = 2.08pp. No CIs, no McNemar anywhere in the study. | free |
@@ -288,7 +321,7 @@ search, which is RoT's own stated claim.
 | RoT reduces output tokens | **reproduced** — −79.7% (exact), −88.1% (project prompts) |
 | RoT reduces latency | **reproduced** — 19.0s → 3.0s |
 | RoT maintains accuracy | **not reproduced** — 75.0% → 16.7% |
-| RoT's retrieval transfers to a 1.7B | **supported** — same templates, user turn: 79.2%, best non-gated arm |
+| RoT's retrieval transfers to a 1.7B | **supported, now controlled** — user turn: 81.2% vs 75.0% for a shuffled template of identical shape |
 | RoT's Thinking Intervention transfers to a 1.7B | **not supported** — 71pp swing on placement alone |
 
 Under TI the model stops solving. A typical full generation in `f_exact`:
@@ -326,3 +359,6 @@ python main.py report  --config config.f_exact.yaml
 | project prompts | `config.yaml` | `results/default/` |
 | user-turn ablation | `config.f_userprompt.yaml` | `results/f_userprompt/` |
 | predicted-tag ablation | `config.f_predicted.yaml` | `results/f_predicted/` |
+| best config (user turn, reference) | `config.f_up_exact.yaml` | `results/f_up_exact/` |
+| control for it | `config.f_shuf_exact.yaml` | `results/f_shuf_exact/` |
+| control for `f_userprompt` | `config.f_shuf.yaml` | `results/f_shuf/` |
