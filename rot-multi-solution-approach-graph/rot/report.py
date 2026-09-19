@@ -56,9 +56,12 @@ def _rot_diagnostics(by_arm):
       stop reasons  l_max means the walk was still finding good steps at the
                     cap; below_threshold means the query stopped matching.
       foreign const share of templates carrying a 4+ digit literal from another
-                    problem. The reference template library sits at 0.2%;
-                    anything high means the student is being handed another
-                    problem's arithmetic in its own reasoning voice.
+                    problem. The reference template library sits at 0.2%, ours
+                    73%. Measured on RB-DERIV this is NOT the dominant term:
+                    the same 73%-contaminated templates gave +4.2pp in the user
+                    turn and -66.7pp under Thinking Intervention, so placement
+                    dominates contamination. Report it, do not diagnose from it
+                    alone.
     """
     import re
     big = re.compile(r"\d{4,}")
@@ -342,10 +345,11 @@ def render_table(out, cfg) -> str:
                 "extra machinery, and a null result says nothing about RoT.")
         if d["foreign_constant_share"] > 0.2:
             lines.append(
-                "- ⚠ most templates name another problem's constants. Under "
-                "Thinking Intervention these are asserted in the student's own "
-                "reasoning voice, so a drop here is a property of the template "
-                "SOURCE, not of the retrieval method.")
+                "- most templates name another problem's constants. Measured "
+                "on RB-DERIV this turned out NOT to be what breaks the arm: "
+                "the identical templates scored 79.2% delivered in the user "
+                "turn and 8.3% under Thinking Intervention. Read a drop here "
+                "against `rot.injection` before blaming the template source.")
     return "\n".join(lines)
 
 
