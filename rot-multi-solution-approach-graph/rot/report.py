@@ -23,11 +23,11 @@ saving -- so the table always shows both in the same row.
 from __future__ import annotations
 
 import json
-from collections import defaultdict
+from collections import Counter, defaultdict
 from pathlib import Path
 
 from .config import read_jsonl, results_path
-from .llm import split_thinking_tokens
+from .llm import split_thinking_continued, split_thinking_tokens
 
 
 def _mean(xs):
@@ -43,6 +43,50 @@ def collect(cfg):
     return rows
 
 
+def _rot_diagnostics(by_arm):
+    """Mechanism diagnostics for any Retrieval-of-Thought arm.
+
+    Accuracy alone cannot distinguish "RoT ran and did not help" from "RoT
+    degenerated into replaying one retrieved solution", and those call for
+    opposite next steps. Three numbers separate them:
+
+      crossed       share of templates assembled from more than one source
+                    solution. At zero, traversal never left its starting
+                    template and the arm is arm D with extra machinery.
+      stop reasons  l_max means the walk was still finding good steps at the
+                    cap; below_threshold means the query stopped matching.
+      foreign const share of templates carrying a 4+ digit literal from another
+                    problem. The reference template library sits at 0.2%;
+                    anything high means the student is being handed another
+                    problem's arithmetic in its own reasoning voice.
+    """
+    import re
+    big = re.compile(r"\d{4,}")
+    out = {}
+    for arm, rs in by_arm.items():
+        rot = [r for r in rs if r.get("rot_template_len") is not None]
+        if not rot:
+            continue
+        n = len(rot)
+        steps = [r.get("rot_template") or "" for r in rot]
+        out[arm] = {
+            "n": n,
+            "mean_template_len": round(sum(r["rot_template_len"] for r in rot) / n, 2),
+            "mean_source_templates": round(
+                sum(r.get("rot_n_source_templates") or 0 for r in rot) / n, 2),
+            "crossed_share": round(
+                sum(1 for r in rot if r.get("rot_crossed_templates")) / n, 4),
+            "stop_reasons": dict(Counter(r.get("rot_stop_reason") for r in rot)),
+            "edge_types": dict(Counter(
+                t for r in rot for t in (r.get("rot_edge_types") or []))),
+            "foreign_constant_share": round(
+                sum(1 for t in steps if big.search(t)) / n, 4),
+            "empty_template_share": round(
+                sum(1 for r in rot if not r["rot_template_len"]) / n, 4),
+        }
+    return out
+
+
 def summarize(cfg, log, extra=None):
     rows = collect(cfg)
     if not rows:
@@ -56,12 +100,23 @@ def summarize(cfg, log, extra=None):
     # row, so old runs are corrected on read and need no student re-run.
     for r in rows:
         if r.get("raw_reply") is not None and r.get("output_tokens") is not None:
-            t, a = split_thinking_tokens(r["raw_reply"], r["output_tokens"])
+            # Thinking-Intervention arms store prefill + generation in
+            # raw_reply. Only the generation was billed as completion_tokens,
+            # so the prefill has to come off before apportioning by character
+            # share -- and what remains starts mid-trace, with no opening tag.
+            pc = r.get("prefill_chars") or 0
+            if pc:
+                t, a = split_thinking_continued(r["raw_reply"][pc:],
+                                                r["output_tokens"])
+            else:
+                t, a = split_thinking_tokens(r["raw_reply"], r["output_tokens"])
             r["thinking_tokens"], r["answer_tokens"] = t, a
 
     by_arm = defaultdict(list)
     for r in rows:
         by_arm[r["arm"]].append(r)
+
+    rot_diag = _rot_diagnostics(by_arm)
 
     base_arm = cfg["evaluation"]["baseline_arm"]
     base_rows = by_arm.get(base_arm, [])
@@ -171,6 +226,7 @@ def summarize(cfg, log, extra=None):
     _write_csv(results_path(cfg, "summary.csv"), summary)
     _write_csv(results_path(cfg, "by_group.csv"), by_group)
     _write_per_problem(cfg, rows, common)
+    out["rot"] = rot_diag
     Path(results_path(cfg, "summary.json")).write_text(
         json.dumps(out, indent=2, ensure_ascii=False))
     md = render_table(out, cfg)
@@ -262,6 +318,34 @@ def render_table(out, cfg) -> str:
     if low:
         lines += ["", "⚠ = few distinct golds in this family; guessing scores above "
                       "chance there, so read those cells with care."]
+
+    for arm, d in (out.get("rot") or {}).items():
+        lines += [
+            "",
+            f"## {arm} — retrieval mechanism",
+            "",
+            f"- templates assembled: **{d['n']}**, mean length "
+            f"**{d['mean_template_len']}** steps",
+            f"- drawn from **{d['mean_source_templates']}** source solutions on "
+            f"average; **{d['crossed_share']:.0%}** crossed more than one",
+            f"- edges taken: {d['edge_types']}",
+            f"- stopped because: {d['stop_reasons']}",
+            f"- carry a 4+ digit constant from another problem: "
+            f"**{d['foreign_constant_share']:.0%}** "
+            f"(reference template library: 0.2%)",
+        ]
+        if d["crossed_share"] == 0:
+            lines.append(
+                "- ⚠ **no template left its starting solution.** Traversal "
+                "followed only sequential edges, so this arm replayed one "
+                "retrieved solution rather than recombining — it is arm D with "
+                "extra machinery, and a null result says nothing about RoT.")
+        if d["foreign_constant_share"] > 0.2:
+            lines.append(
+                "- ⚠ most templates name another problem's constants. Under "
+                "Thinking Intervention these are asserted in the student's own "
+                "reasoning voice, so a drop here is a property of the template "
+                "SOURCE, not of the retrieval method.")
     return "\n".join(lines)
 
 

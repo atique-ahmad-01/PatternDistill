@@ -449,6 +449,13 @@ def run_rot_arm(cfg, arm, client, test_problems, rot_retriever, log, resume=True
             "truncated": reply.truncated,
             "error": reply.error,
             "raw_reply": full_text,
+            # raw_reply is prefill + generation. report.summarize recomputes the
+            # thinking split from raw_reply, and it MUST skip these characters:
+            # they are prompt, not completion, so counting them as reasoning
+            # inflates thinking_tokens toward output_tokens and drives
+            # answer_tokens to zero. A reply that closes </think> immediately
+            # inverts completely without this.
+            "prefill_chars": len(prefill) if prefill else 0,
             "rot_template": template,
         }
         row.update(meta)
