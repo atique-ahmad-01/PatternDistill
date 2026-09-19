@@ -333,13 +333,28 @@ def run_gated_arm(cfg, arm, client, test_problems, retriever, log, resume=True):
 
 ROT_ARMS = {"F_rot"}
 
-# Verbatim from the reference implementation's `build_prompt`
-# (vllm_experiments/src/llm_handler_qwen3.py), with ONE substitution: it ends
-# "conclude with: Therefore, the final answer is: $\boxed{answer}$", and every
-# other arm here ends with the ANSWER: contract from SYSTEM. Changing the answer
-# format for one arm would confound the comparison with a parsing difference, so
-# the contract sentence is replaced and the rest is left alone. rot.scoring
-# handles \boxed anyway, so nothing is lost.
+# Two variants of the reference's `build_prompt` preamble
+# (vllm_experiments/src/llm_handler_qwen3.py).
+#
+# REFERENCE is verbatim, including its \boxed answer contract. Selected by
+# rot.system_prompt=reference, together with the reference's own system message.
+# That pair reproduces the published setup exactly and is what to run when the
+# claim is "we reproduced arXiv:2509.21743".
+#
+# PROJECT drops only the contract sentence, so the arm ends with the ANSWER:
+# line that SYSTEM asks of arms A-E. Use it when the claim is "RoT compared
+# against our other arms" -- a different answer format across arms would put a
+# parsing difference inside the comparison. scoring handles \boxed either way.
+ROT_REFERENCE_TEMPLATE_PROMPT = (
+    "Solve the math problem and always conclude with:\n"
+    "Therefore, the final answer is: $\\boxed{answer}$. Where [answer] is just "
+    "the final numerical answer that solves the problem. Ensure the number is "
+    "clearly identifiable within the box.\n"
+    "You are given a template to solve the problem. Use the given steps if "
+    "applicable otherwise use them to guide your reasoning and present the "
+    "solution steps logically to solve this problem:\n"
+)
+
 ROT_TEMPLATE_PROMPT = (
     "You are given a template to solve the problem. Use the given steps if "
     "applicable otherwise use them to guide your reasoning and present the "
@@ -408,10 +423,12 @@ def run_rot_arm(cfg, arm, client, test_problems, rot_retriever, log, resume=True
         return existing
 
     use_ti = rc["injection"] == "ti_prefill"
-    system = (ROT_REFERENCE_SYSTEM
-              if rc.get("system_prompt") == "reference" else SYSTEM)
+    exact = rc.get("system_prompt") == "reference"
+    system = ROT_REFERENCE_SYSTEM if exact else SYSTEM
+    preamble = ROT_REFERENCE_TEMPLATE_PROMPT if exact else ROT_TEMPLATE_PROMPT
     log.info(f"  [{arm}] injection={rc['injection']} tag_source={rc['tag_source']} "
              f"system={rc.get('system_prompt', 'project')} "
+             f"max_tok={cfg['student']['max_tokens']} "
              f"thr={rc['sim_threshold']} l_max={rc['l_max']}")
     write_lock = threading.Lock()
 
@@ -424,14 +441,14 @@ def run_rot_arm(cfg, arm, client, test_problems, rot_retriever, log, resume=True
         if template and use_ti:
             # The template is flattened to one line, as the reference does:
             # `template_str.replace('\n', ' ')`.
-            user = f"{ROT_TEMPLATE_PROMPT}\nProblem: {p['problem']}."
+            user = f"{preamble}\nProblem: {p['problem']}."
             prefill = ROT_PREFILL.format(template=template.replace("\n", " ") + " ")
         elif template:
             # Ablation path: same template, delivered as user-turn reference
             # material -- the reference's own non-TI branch. Kept because this
             # project's phase-3B found <think> injection did nothing on a 1.7B
             # while prompt injection helped, which contradicts the paper.
-            user = (f"{ROT_TEMPLATE_PROMPT}{template}\n\n"
+            user = (f"{preamble}{template}\n\n"
                     f"Problem: {p['problem']}")
 
         t0 = time.perf_counter()
