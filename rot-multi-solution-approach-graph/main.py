@@ -33,6 +33,7 @@ from rot import dataset as D
 from rot import graph as G
 from rot import memory as M
 from rot import report as R
+from rot import rot_graph as RG
 from rot import teacher as T
 from rot import validate as V
 from rot.config import load_config, results_path, set_seeds, snapshot
@@ -135,15 +136,31 @@ def cmd_build_graph(cfg, args, log):
     return {"graph": grep}
 
 
+def cmd_build_rot_graph(cfg, args, log):
+    """The paper's thought graph: step nodes, sequential + semantic edges."""
+    entries = M.load(cfg)
+    if not entries:
+        raise SystemExit("memory bank is empty — run build-memory first")
+    _, _, grep = RG.build(cfg, entries, log)
+    return {"rot_graph": grep}
+
+
 def cmd_evaluate(cfg, args, log):
-    from rot.student import run_arm, run_gated_arm, GATED_ARMS
+    from rot.student import run_arm, run_gated_arm, run_rot_arm, GATED_ARMS, ROT_ARMS
     train, test, rep = D.split(cfg, log, refresh=getattr(args, 'refresh_split', False))
     entries = M.load(cfg)
     if not entries:
         raise SystemExit("memory bank is empty — run build-memory first")
-    _, _, entry_vecs = G.load(cfg)
-    embedder = G.load_embedder(cfg, log)
-    retriever = Retriever(cfg, entries, entry_vecs, embedder, log)
+
+    arms = cfg["evaluation"]["arms"]
+    # Each retriever is built only if an arm asks for it. The two are backed by
+    # different artifacts and different embedding models, so loading both to
+    # run one arm costs a model download and a GPU allocation for nothing --
+    # and on a single-card box that is the allocation the student needs.
+    retriever = None
+    if any(a not in ROT_ARMS for a in arms):
+        _, _, entry_vecs = G.load(cfg)
+        retriever = Retriever(cfg, entries, entry_vecs, G.load_embedder(cfg, log), log)
 
     client = build_client(cfg["student"], seed=cfg["seed"], mock=cfg.get("_mock"))
     if cfg.get("_mock"):
@@ -156,10 +173,37 @@ def cmd_evaluate(cfg, args, log):
                          f"Start it with scripts/serve_vllm.sh student, or pass --mock.")
     log.info(f"student: {msg}")
 
-    for arm in cfg["evaluation"]["arms"]:
+    # Built lazily: the RoT graph is a separate artifact and the other five
+    # arms must stay runnable without it.
+    rot_retriever = None
+    if any(a in ROT_ARMS for a in arms):
+        from rot.rot_retrieval import RoTRetriever
+        try:
+            rgraph, rvecs = RG.load(cfg)
+        except FileNotFoundError:
+            raise SystemExit(
+                "RoT arm requested but no RoT graph on disk — "
+                "run `python main.py build-rot-graph` first.")
+        rot_retriever = RoTRetriever(cfg, rgraph, rvecs,
+                                     RG.load_embedder(cfg, log), log)
+        m = rgraph["metadata"]
+        log.info(f"RoT graph: {m['n_nodes']} nodes, "
+                 f"{m['n_sequential_edges']} sequential, "
+                 f"{m['n_semantic_edges']} semantic "
+                 f"(tau={m['tau_semantic_raw_cosine']} raw cosine); "
+                 f"{m['rot_instance_constants']['share']:.0%} of step texts "
+                 f"carry a 4+ digit literal "
+                 f"(reference library: "
+                 f"{m['rot_instance_constants']['reference_library_share']:.1%})")
+
+    for arm in arms:
         # Gated arms are a second pass over an arm that must already be
         # complete, so they run through a different path and depend on run
         # order -- config lists them after their source arm.
+        if arm in ROT_ARMS:
+            run_rot_arm(cfg, arm, client, test, rot_retriever, log,
+                        resume=not args.no_resume)
+            continue
         runner = run_gated_arm if arm in GATED_ARMS else run_arm
         runner(cfg, arm, client, test, retriever, log, resume=not args.no_resume)
     return {"split": rep}
@@ -175,6 +219,7 @@ def cmd_all(cfg, args, log):
     meta.update(cmd_validate(cfg, args, log))
     meta.update(cmd_build_memory(cfg, args, log))
     meta.update(cmd_build_graph(cfg, args, log))
+    meta.update(cmd_build_rot_graph(cfg, args, log))
     meta.update(cmd_evaluate(cfg, args, log))
     R.summarize(cfg, log, extra=meta)
     return meta
@@ -186,6 +231,7 @@ COMMANDS = {
     "validate": cmd_validate,
     "build-memory": cmd_build_memory,
     "build-graph": cmd_build_graph,
+    "build-rot-graph": cmd_build_rot_graph,
     "evaluate": cmd_evaluate,
     "report": cmd_report,
     "all": cmd_all,

@@ -54,6 +54,28 @@ def split_thinking_tokens(text, completion_tokens):
         return completion_tokens, 0      # unterminated: all reasoning
     return 0, completion_tokens          # no trace at all: all answer
 
+def split_thinking_continued(text, completion_tokens):
+    """(thinking, answer) for a reply whose <think> was opened by a PREFILL.
+
+    Thinking Intervention hands the model an already-open reasoning block, so
+    the generated text carries no opening tag -- it starts mid-trace. Passing it
+    to split_thinking_tokens would find no <think>, conclude "no trace at all",
+    and book the entire reasoning trace as answer tokens. That is the same
+    inversion documented above, and it would hit every single RoT row.
+
+    The prefill itself is NOT counted here. It is part of the prompt, so the
+    server bills it as prompt_tokens -- which is the honest place for it, since
+    the template is a cost the arm pays on the input side.
+    """
+    text = text or ""
+    i = text.find("</think>")
+    if i < 0:
+        return completion_tokens, 0          # never closed: all reasoning
+    share = min(i / max(len(text), 1), 1.0)
+    think_tok = int(round(completion_tokens * share))
+    return think_tok, completion_tokens - think_tok
+
+
 @dataclass
 class Reply:
     """One completion plus everything the evaluation needs to account for it."""
@@ -128,16 +150,25 @@ class ChatClient:
                            f"not {self.model!r}")
         return True, f"{self.model} @ {self.base_url}"
 
-    def chat(self, system: str, user: str, n: int = 1, **overrides) -> list[Reply]:
+    def chat(self, system: str, user: str, n: int = 1, prefill: str | None = None,
+             **overrides) -> list[Reply]:
         """One request, `n` sampled completions. Returns one Reply per sample.
 
         vLLM shares the prefill across the n samples, so n=5 costs far less
         than five separate requests -- and the samples stay independent.
+
+        `prefill` opens the assistant turn with fixed text the model then
+        continues, which is how Thinking Intervention places a template INSIDE
+        the reasoning block. Without it the template can only be described to
+        the model in the user turn, which is a different intervention and not
+        the one arXiv:2509.21743 measures.
         """
         messages = []
         if system:
             messages.append({"role": "system", "content": system})
         messages.append({"role": "user", "content": user})
+        if prefill:
+            messages.append({"role": "assistant", "content": prefill})
 
         kwargs = dict(
             model=self.model,
@@ -154,6 +185,12 @@ class ChatClient:
         extra = {"chat_template_kwargs": {"enable_thinking": self.enable_thinking}}
         if self.top_k is not None:
             extra["top_k"] = self.top_k
+        if prefill:
+            # vLLM renders the final assistant message verbatim and generates
+            # from its end. Both flags are required together; setting only one
+            # is a 400 from the server.
+            extra["add_generation_prompt"] = False
+            extra["continue_final_message"] = True
         kwargs["extra_body"] = extra
 
         last_err = None
@@ -261,7 +298,8 @@ class MockChatClient(ChatClient):
     def health(self):
         return True, f"MOCK {self.model} (no server)"
 
-    def chat(self, system: str, user: str, n: int = 1, **overrides) -> list[Reply]:
+    def chat(self, system: str, user: str, n: int = 1, prefill: str | None = None,
+             **overrides) -> list[Reply]:
         import hashlib
         key = hashlib.sha256(user.encode()).hexdigest()
         pid = None
@@ -286,6 +324,17 @@ class MockChatClient(ChatClient):
                 val = base + 7 + i          # deterministically wrong
             else:
                 val = base
+            if prefill:
+                # Continue the caller's open block instead of opening a new one,
+                # so the RoT accounting path is what gets exercised offline.
+                text = ("The template above gives the structure; applying it.\n"
+                        "</think>\n"
+                        f"ANSWER: {val}\n")
+                out.append(Reply(text=text, prompt_tokens=(len(user) + len(prefill)) // 4,
+                                 completion_tokens=len(text) // 4,
+                                 latency_s=0.001, finish_reason="stop",
+                                 model=self.model + "(mock)"))
+                continue
             think = ("<think>\nLet me look for a structural shortcut here. "
                      "Brute force is impossible at this size, so I need a "
                      "closed form or a cycle. Trying the standard identity for "

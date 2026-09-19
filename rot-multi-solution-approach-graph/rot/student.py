@@ -24,8 +24,9 @@ import threading
 import time
 
 from .config import read_jsonl, results_path, write_jsonl
-from .llm import split_thinking_tokens
+from .llm import split_thinking_continued, split_thinking_tokens
 from .retrieval import format_memory, hit_metadata
+from .rot_retrieval import format_template as format_rot_template
 from .scoring import extract_answer, is_correct
 
 SYSTEM = """You are solving one mathematics problem. The answer is a single integer.
@@ -311,4 +312,170 @@ def run_gated_arm(cfg, arm, client, test_problems, retriever, log, resume=True):
     n_gated = sum(1 for r in allrows if r.get("gated"))
     log.info(f"  [{arm}] {n_ok}/{len(allrows)} correct "
              f"({n_ok / max(len(allrows), 1):.1%}); {n_gated} gated")
+    return allrows
+
+
+# ── RoT arm (arXiv:2509.21743) ───────────────────────────────────────────────
+
+ROT_ARMS = {"F_rot"}
+
+# Verbatim from the reference implementation's `build_prompt`
+# (vllm_experiments/src/llm_handler_qwen3.py), with ONE substitution: it ends
+# "conclude with: Therefore, the final answer is: $\boxed{answer}$", and every
+# other arm here ends with the ANSWER: contract from SYSTEM. Changing the answer
+# format for one arm would confound the comparison with a parsing difference, so
+# the contract sentence is replaced and the rest is left alone. rot.scoring
+# handles \boxed anyway, so nothing is lost.
+ROT_TEMPLATE_PROMPT = (
+    "You are given a template to solve the problem. Use the given steps if "
+    "applicable otherwise use them to guide your reasoning and present the "
+    "solution steps logically to solve this problem:\n"
+)
+
+# Verbatim from the same function's thinking-intervention branch. The reference
+# splices raw <|im_end|>/<|im_start|> markers into the user string and lets
+# continue_final_message resume from there; this sends a real assistant message
+# instead, which renders to the same tokens without hand-writing the chat
+# template.
+#
+# The wording matters and is not decoration. "modify the steps to make them
+# match the problem" is the only thing standing between the student and a
+# template that names another problem's constants -- which is 37% of our step
+# texts against the reference library's 0.2%.
+ROT_PREFILL = (
+    "<think>I need to follow the given steps to guide me in reasoning to solve "
+    "the problem. I will follow each step and modify the steps to make them "
+    "match the problem and then solve the problem accordingly. The template is. "
+    "{template} Strictly following the given steps for guidance, I will now "
+    "solve the problem starting from the step 1. Using step 1"
+)
+
+# The reference swaps the system prompt too. Ours is held constant across arms
+# by design -- see this module's docstring -- so `project` is the default and
+# `reference` exists for a strict reproduction.
+ROT_REFERENCE_SYSTEM = (
+    "You are asked to solve the mathematical problem using a step-by-step "
+    "template. Follow each step exactly and output your reasoning at each step. "
+    "Use only the steps given in the template for your reasoning"
+)
+
+
+def run_rot_arm(cfg, arm, client, test_problems, rot_retriever, log, resume=True):
+    """RoT: assemble a template by graph traversal, inject it via TI.
+
+    Differs from run_arm in two ways that matter for the comparison:
+
+      * the template is built by reward-guided traversal over step nodes, so it
+        can recombine steps from several source solutions into a path that
+        exists in no single one of them;
+
+      * it is injected as an already-open reasoning block that the model
+        CONTINUES, rather than as reference material in the user turn.
+
+    Everything else -- system prompt, decoding parameters, answer contract,
+    scoring -- is identical to the other arms, so a difference is attributable
+    to those two changes.
+    """
+    rc = cfg["rot"]
+    out_path = results_path(cfg, f"eval_{arm}.jsonl")
+    existing = read_jsonl(out_path) if resume else []
+    have = {r["problem_id"] for r in existing}
+    todo = [p for p in test_problems if p["problem_id"] not in have]
+    if existing:
+        log.info(f"  [{arm}] resuming: {len(have)} done, {len(todo)} to go")
+    if not todo:
+        log.info(f"  [{arm}] already complete ({len(existing)} rows)")
+        return existing
+
+    use_ti = rc["injection"] == "ti_prefill"
+    system = (ROT_REFERENCE_SYSTEM
+              if rc.get("system_prompt") == "reference" else SYSTEM)
+    log.info(f"  [{arm}] injection={rc['injection']} tag_source={rc['tag_source']} "
+             f"system={rc.get('system_prompt', 'project')} "
+             f"thr={rc['sim_threshold']} l_max={rc['l_max']}")
+    write_lock = threading.Lock()
+
+    def _one(p):
+        steps, meta = rot_retriever.assemble(p["problem"], p["problem_id"],
+                                             query_group=p.get("group"))
+        template = format_rot_template(steps)
+
+        prefill, user = None, p["problem"]
+        if template and use_ti:
+            # The template is flattened to one line, as the reference does:
+            # `template_str.replace('\n', ' ')`.
+            user = f"{ROT_TEMPLATE_PROMPT}\nProblem: {p['problem']}."
+            prefill = ROT_PREFILL.format(template=template.replace("\n", " ") + " ")
+        elif template:
+            # Ablation path: same template, delivered as user-turn reference
+            # material -- the reference's own non-TI branch. Kept because this
+            # project's phase-3B found <think> injection did nothing on a 1.7B
+            # while prompt injection helped, which contradicts the paper.
+            user = (f"{ROT_TEMPLATE_PROMPT}{template}\n\n"
+                    f"Problem: {p['problem']}")
+
+        t0 = time.perf_counter()
+        reply = client.chat(system, user, n=1, prefill=prefill)[0]
+        wall = time.perf_counter() - t0
+
+        # The prefill is not echoed back, so parsing and the thinking split
+        # both have to account for a trace that was already open.
+        if prefill:
+            full_text = prefill + reply.text
+            think_tok, answer_tok = split_thinking_continued(
+                reply.text, reply.completion_tokens)
+        else:
+            full_text = reply.text
+            think_tok, answer_tok = reply.split_thinking()
+
+        pred = extract_answer(full_text)
+        row = {
+            "arm": arm,
+            "problem_id": p["problem_id"],
+            "group": p.get("group"),
+            "problem": p["problem"],
+            "gold_answer": p["answer"],
+            "predicted_answer": pred,
+            "correct": is_correct(pred, p["answer"]),
+            "unparseable": pred is None,
+            "student_model": cfg["student"]["model"],
+            "retrieval_mode": f"rot_{rc['injection']}",
+            "input_tokens": reply.prompt_tokens,
+            "output_tokens": reply.completion_tokens,
+            "thinking_tokens": think_tok,
+            "answer_tokens": answer_tok,
+            "latency_s": round(wall, 3),
+            "finish_reason": reply.finish_reason,
+            "truncated": reply.truncated,
+            "error": reply.error,
+            "raw_reply": full_text,
+            "rot_template": template,
+        }
+        row.update(meta)
+        # Same-family accounting, so this arm lines up with the others in the
+        # report. Every template step carries its source template's tag.
+        tags = meta.get("rot_template_tags") or []
+        row["retrieved_same_group"] = [t == p.get("group") for t in tags]
+        row["n_retrieved"] = meta.get("rot_n_source_templates", 0)
+        row["retrieved_ids"] = meta.get("rot_template_templates") or []
+        with write_lock:
+            write_jsonl(out_path, [row], mode="a")
+        return row
+
+    client.map(todo, _one, desc=f"{arm}", log=log)
+
+    allrows = read_jsonl(out_path)
+    n_ok = sum(1 for r in allrows if r["correct"])
+    crossed = sum(1 for r in allrows if r.get("rot_crossed_templates"))
+    mean_len = (sum(r.get("rot_template_len", 0) for r in allrows)
+                / max(len(allrows), 1))
+    log.info(f"  [{arm}] {n_ok}/{len(allrows)} correct "
+             f"({n_ok / max(len(allrows), 1):.1%}); "
+             f"mean template {mean_len:.1f} steps; "
+             f"{crossed}/{len(allrows)} templates crossed >1 source solution")
+    if crossed == 0:
+        log.warning(f"  [{arm}] NO template ever left its starting solution. "
+                    f"Traversal followed only sequential edges, so this arm is "
+                    f"replaying one retrieved solution -- not recombining. "
+                    f"Check rot.tau_semantic and the semantic edge count.")
     return allrows

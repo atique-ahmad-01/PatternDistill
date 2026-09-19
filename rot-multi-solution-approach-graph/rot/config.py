@@ -82,6 +82,34 @@ def _validate(cfg):
     if cfg["retrieval"]["top_k"] < 1:
         raise ValueError("retrieval.top_k must be >= 1")
 
+    rc = cfg.get("rot")
+    if rc:
+        # Both thresholds are RAW cosine, matching the reference implementation
+        # (the paper's rescaled sim~ is not what its code uses). A value at or
+        # below 0.5 is almost always graph.tau_semantic pasted across, or the
+        # rescaled figure from the paper -- either makes nearly every pair an
+        # edge and the traversal never terminates on similarity.
+        for key in ("tau_semantic", "sim_threshold"):
+            if not 0.5 < rc[key] <= 1.0:
+                raise ValueError(
+                    f"rot.{key} is RAW cosine and must be in (0.5, 1.0]; got "
+                    f"{rc[key]}. The reference uses tau_semantic=0.85 and "
+                    f"sim_threshold=0.80. Do not copy graph.tau_semantic here, "
+                    f"and do not use the paper's rescaled 0.85 as a raw value.")
+        for key in ("w_first_query", "w_first_s0", "w_trav_query", "w_trav_flow"):
+            if not 0.0 <= rc[key] <= 1.0:
+                raise ValueError(f"rot.{key} must be in [0, 1]")
+        if rc["l_max"] < 1:
+            raise ValueError("rot.l_max must be >= 1")
+        if rc["max_neighbors"] < 0:
+            raise ValueError("rot.max_neighbors must be >= 0 (0 = uncapped)")
+        if rc["tag_source"] not in ("gold", "predicted", "none"):
+            raise ValueError("rot.tag_source must be gold|predicted|none, "
+                             f"got {rc['tag_source']!r}")
+        if rc["injection"] not in ("ti_prefill", "user_prompt"):
+            raise ValueError("rot.injection must be ti_prefill|user_prompt, "
+                             f"got {rc['injection']!r}")
+
 
 def set_seeds(seed: int):
     """Seed every source of randomness the pipeline touches."""
