@@ -1,0 +1,5 @@
+arm,n,correct,incorrect,unparseable,truncated,accuracy,abs_improvement_pp,rel_improvement_pct,mean_input_tokens,mean_output_tokens,mean_thinking_tokens,mean_answer_tokens,mean_latency_s,mean_retrieval_score,same_family_retrieval_rate
+A_baseline,48,48,0,0,0,1.0,0.0,0.0,30.31,87.88,41.85,46.02,0.0,0.0,
+B_random_memory,48,48,0,0,0,1.0,0.0,0.0,218.08,87.88,41.85,46.02,0.0,0.0,0.0347
+C_full_solution,48,48,0,0,0,1.0,0.0,0.0,312.04,87.88,41.85,46.02,0.0,0.89,0.9861
+D_approach_subtasks,48,48,0,0,0,1.0,0.0,0.0,218.08,87.88,41.85,46.02,0.0,0.89,0.9861

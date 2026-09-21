@@ -1,0 +1,453 @@
+<title>RoT Template Walk</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root {
+  --ground:#f6f7f9; --surface:#fff; --sunken:#eef1f5;
+  --ink:#151a21; --muted:#5b6575; --line:#dde2ea;
+  --seq:#a4560a; --seq-bg:#fdf3e7;
+  --sem:#0d6f85; --sem-bg:#e7f5f8;
+  --good:#146c38; --good-bg:#e8f4ec;
+  --bad:#a62121;  --bad-bg:#fbeaea;
+  --sans:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark) {
+  :root:not([data-theme="light"]) {
+    --ground:#0e1218; --surface:#161c24; --sunken:#111720;
+    --ink:#e4e9f0; --muted:#94a0b2; --line:#26303c;
+    --seq:#efab4d; --seq-bg:#2a1f10;
+    --sem:#4fd2e8; --sem-bg:#0d2930;
+    --good:#5fd08a; --good-bg:#10261a;
+    --bad:#f08b8b;  --bad-bg:#2a1414;
+  }
+}
+:root[data-theme="dark"] {
+  --ground:#0e1218; --surface:#161c24; --sunken:#111720;
+  --ink:#e4e9f0; --muted:#94a0b2; --line:#26303c;
+  --seq:#efab4d; --seq-bg:#2a1f10;
+  --sem:#4fd2e8; --sem-bg:#0d2930;
+  --good:#5fd08a; --good-bg:#10261a;
+  --bad:#f08b8b;  --bad-bg:#2a1414;
+}
+* { box-sizing:border-box; }
+body { background:var(--ground); color:var(--ink); font-family:var(--sans);
+  font-size:15px; line-height:1.6; margin:0; }
+.wrap { max-width:860px; margin:0 auto; padding-inline:20px; padding-block:40px 72px; }
+h1 { font-size:clamp(28px,5.2vw,40px); line-height:1.12; letter-spacing:-.022em;
+  margin:0 0 12px; font-weight:700; text-wrap:balance; }
+h2 { font-size:19px; letter-spacing:-.01em; margin:0 0 4px; font-weight:600; }
+p { margin:0 0 14px; max-width:66ch; }
+.lede { font-size:17px; color:var(--muted); max-width:62ch; margin-bottom:26px; }
+code, pre, .mono { font-family:var(--mono); font-variant-numeric:tabular-nums; }
+
+.stage { margin-top:34px; border-top:1px solid var(--line); padding-top:22px; }
+.stage-no { font-family:var(--mono); font-size:12px; font-weight:600; color:var(--muted);
+  letter-spacing:.09em; text-transform:uppercase; display:block; margin-bottom:6px; }
+.note { color:var(--muted); font-size:14px; }
+
+.facts { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1px;
+  background:var(--line); border:1px solid var(--line); border-radius:8px;
+  overflow:hidden; margin:18px 0 6px; }
+.fact { background:var(--surface); padding:13px 15px; }
+.fact .k { font-size:11.5px; color:var(--muted); text-transform:uppercase;
+  letter-spacing:.07em; display:block; margin-bottom:3px; }
+.fact .v { font-family:var(--mono); font-size:19px; font-weight:600; letter-spacing:-.01em; }
+.fact .v small { font-size:12px; font-weight:400; color:var(--muted); letter-spacing:0; }
+
+pre { background:var(--sunken); border:1px solid var(--line); border-radius:8px;
+  padding:15px 16px; overflow-x:auto; font-size:13px; line-height:1.62; margin:14px 0;
+  white-space:pre-wrap; word-break:break-word; }
+pre.verbatim { white-space:pre; }
+.lbl { font-family:var(--mono); font-size:11.5px; color:var(--muted); letter-spacing:.07em;
+  text-transform:uppercase; margin:20px 0 -4px; }
+
+ol.walk { list-style:none; margin:16px 0 0; padding:0; }
+.step { position:relative; padding:0 0 4px 22px; }
+.rail { position:absolute; left:5px; top:0; bottom:0; width:2px; background:var(--line); }
+.step.sequential .rail { background:var(--seq); }
+.step.semantic .rail { background:linear-gradient(var(--sem) 40%,transparent 0) repeat-y;
+  background-size:2px 8px; }
+.step:last-child .rail { bottom:50%; }
+.step-head { display:flex; flex-wrap:wrap; align-items:center; gap:7px; padding-top:13px; }
+.chip { font-family:var(--mono); font-size:10.5px; font-weight:600; letter-spacing:.05em;
+  text-transform:uppercase; padding:2px 7px; border-radius:4px; }
+.chip.sequential { background:var(--seq-bg); color:var(--seq); }
+.chip.semantic { background:var(--sem-bg); color:var(--sem); }
+.chip.initial { background:var(--sunken); color:var(--muted); }
+.src { font-size:12.5px; color:var(--ink); background:var(--sunken);
+  padding:2px 6px; border-radius:4px; }
+.src.changed { color:var(--sem); font-weight:600; outline:1px solid var(--sem); }
+.meta { font-family:var(--mono); font-size:11.5px; color:var(--muted); }
+.step-text { margin:5px 0 0; font-size:14px; max-width:none; }
+.step-text .n { font-family:var(--mono); color:var(--muted); font-size:12px;
+  margin-right:8px; }
+
+.tbl { width:100%; border-collapse:collapse; font-size:13.5px; margin:14px 0; }
+.tbl th, .tbl td { text-align:left; padding:9px 11px; border-bottom:1px solid var(--line);
+  vertical-align:top; }
+.tbl th { font-size:11.5px; text-transform:uppercase; letter-spacing:.06em;
+  color:var(--muted); font-weight:600; }
+.tbl td.num { font-family:var(--mono); text-align:right; font-variant-numeric:tabular-nums; }
+.tbl tr.hi td { background:var(--good-bg); }
+.scroll { overflow-x:auto; }
+.yes { color:var(--good); font-weight:600; }
+.no { color:var(--bad); font-weight:600; }
+.callout { border-left:3px solid var(--sem); background:var(--surface);
+  padding:13px 16px; border-radius:0 8px 8px 0; margin:18px 0; font-size:14px; }
+.callout p:last-child { margin-bottom:0; }
+.legend { display:flex; flex-wrap:wrap; gap:14px; font-size:12.5px; color:var(--muted);
+  margin:10px 0 0; }
+.legend span { display:flex; align-items:center; gap:6px; }
+.sw { width:14px; height:3px; border-radius:2px; }
+
+.fail { border:1px solid var(--bad); border-top:3px solid var(--bad);
+  background:var(--bad-bg); border-radius:8px; padding:20px 20px 4px; margin-top:34px; }
+.fail h2 { color:var(--bad); }
+.fail .stage-no { color:var(--bad); }
+.fail pre { background:var(--surface); border-color:var(--line); }
+.fail pre.recite { border-color:var(--bad); }
+mark { background:var(--bad); color:var(--surface); padding:0 4px;
+  border-radius:3px; font-weight:600; }
+.why { display:grid; grid-template-columns:auto 1fr; gap:6px 12px; margin:16px 0;
+  font-size:14px; align-items:baseline; }
+.why dt { font-family:var(--mono); font-size:11.5px; text-transform:uppercase;
+  letter-spacing:.06em; color:var(--bad); font-weight:600; white-space:nowrap; }
+.why dd { margin:0; }
+@media (max-width:520px) { .why { grid-template-columns:1fr; gap:2px 0; }
+  .why dd { margin-bottom:10px; } }
+</style>
+
+<div class="wrap">
+
+<h1>Walking a thought graph to build one reasoning template</h1>
+<p class="lede">Arm <code>F_rot</code> on RB-DERIV, traced end to end on a single problem —
+from 651 teacher solutions down to the eight steps that actually reach the model,
+and the prompt they arrive in.</p>
+
+<div class="facts">
+  <div class="fact"><span class="k">configuration</span><span class="v">f_up_exact</span></div>
+  <div class="fact"><span class="k">accuracy</span><span class="v">81.2<small>%</small></span></div>
+  <div class="fact"><span class="k">vs baseline</span><span class="v">+6.2<small> pp</small></span></div>
+  <div class="fact"><span class="k">vs shuffled control</span><span class="v">+6.2<small> pp</small></span></div>
+</div>
+<p class="note">Injection <code>user_prompt</code> · reference prompts · <code>max_tokens</code> 15360 ·
+Qwen3-1.7B · 48 held-out problems. This is <strong>not</strong> the published RoT method —
+it keeps RoT's retrieval and moves the template out of the model's own reasoning block.
+The published variant (<code>ti_prefill</code>) scores 16.7%.</p>
+
+<section class="stage">
+<span class="stage-no">Stage 0 · offline, once</span>
+<h2>Build the graph</h2>
+<p>Every validated teacher solution becomes a <em>template</em>; each of its reasoning
+steps becomes a node. Two edge types are laid over those nodes.</p>
+<div class="facts">
+  <div class="fact"><span class="k">step nodes</span><span class="v">2,450</span></div>
+  <div class="fact"><span class="k">templates</span><span class="v">651</span></div>
+  <div class="fact"><span class="k">sequential edges</span><span class="v">1,799</span></div>
+  <div class="fact"><span class="k">semantic edges</span><span class="v">598,636</span></div>
+</div>
+<p class="note">Sequential edges join step <em>i</em> to step <em>i+1</em> inside one solution —
+there are exactly 2,450 − 651 = 1,799 of them.
+Semantic edges join steps across <em>different</em> solutions whenever raw cosine ≥ 0.85,
+embedded with <code>jina-embeddings-v2-small-en</code>.
+281,226 of them cross technique families.</p>
+</section>
+
+<section class="stage">
+<span class="stage-no">Stage 1 · the query</span>
+<h2>A problem the baseline got wrong</h2>
+<pre>In Wythoff&#x27;s game the cold (losing) positions are indexed k=1,2,3,.... What is the SMALLER pile size of the 255-th cold position?</pre>
+<p class="note">Gold answer <code>412</code> · family <code>wythoff</code>.
+Unaided, the model answered <span class="no">255</span> after
+5,001 output tokens and 34.0s.</p>
+</section>
+
+<section class="stage">
+<span class="stage-no">Stage 2 · candidate filter</span>
+<h2>2,450 nodes → 155</h2>
+<p>Nodes are kept only if their knowledge tag matches the query's
+(<code>wythoff</code>), and dropped if they come from the query's own
+problem. That second rule is the leakage guard — it is enforced in code and cannot
+be switched off in config.</p>
+</section>
+
+<section class="stage">
+<span class="stage-no">Stage 3 · pick the entry point</span>
+<h2>First node: 0.75 × cosine + 0.25 × [is step 0]</h2>
+<p>The query is embedded once and scored against all 155 candidates.
+The bonus biases the walk toward starting where a real solution starts, without
+abandoning query alignment. Winner: <code>q0070_s2</code>
+at cosine 0.9033.</p>
+</section>
+
+<section class="stage">
+<span class="stage-no">Stage 4 · the walk</span>
+<h2>Eight steps, four source solutions</h2>
+<p>From each node the walk scores every successor as
+<span class="mono">0.3 × cosine + 0.7 × [is the sequential child]</span> and takes the
+best. Because a sequential child scores at least 0.7 and a semantic neighbour at most
+0.3, <strong>the walk always continues through its current solution until that solution
+runs out of steps</strong> — then it jumps.</p>
+<div class="legend">
+  <span><i class="sw" style="background:var(--seq)"></i> sequential — same solution, next step</span>
+  <span><i class="sw" style="background:var(--sem)"></i> semantic jump — new solution</span>
+</div>
+<ol class="walk">
+<li class="step initial">
+  <div class="rail" aria-hidden="true"></div>
+  <div class="step-head">
+    <span class="chip initial">start</span>
+    <code class="src">q0070_s2</code>
+    <span class="meta">step 1/3</span>
+    <span class="meta cos">cos 0.9033</span>
+  </div>
+  <p class="step-text"><span class="n">1</span>Recognize that the smaller pile of the k-th cold position is given by floor(k * φ), where φ is the golden ratio (1+√5)/2.</p>
+</li>
+<li class="step sequential">
+  <div class="rail" aria-hidden="true"></div>
+  <div class="step-head">
+    <span class="chip sequential">sequential</span>
+    <code class="src">q0070_s2</code>
+    <span class="meta">step 2/3</span>
+    <span class="meta cos">cos 0.8501</span>
+  </div>
+  <p class="step-text"><span class="n">2</span>Calculate 17 * φ using the exact expression (17*(√5 + 1))/2.</p>
+</li>
+<li class="step sequential">
+  <div class="rail" aria-hidden="true"></div>
+  <div class="step-head">
+    <span class="chip sequential">sequential</span>
+    <code class="src">q0070_s2</code>
+    <span class="meta">step 3/3</span>
+    <span class="meta cos">cos 0.8605</span>
+  </div>
+  <p class="step-text"><span class="n">3</span>Approximate √5 ≈ 2.23607 to compute 17*φ ≈ 27.50658, and take the floor to get 27.</p>
+</li>
+<li class="step semantic">
+  <div class="rail" aria-hidden="true"></div>
+  <div class="step-head">
+    <span class="chip semantic">semantic jump</span>
+    <code class="src changed">q0067_s3</code>
+    <span class="meta">step 2/3</span>
+    <span class="meta cos">cos 0.9083</span>
+  </div>
+  <p class="step-text"><span class="n">4</span>Determine that the smaller pile size is floor(kφ) for the k-th cold position.</p>
+</li>
+<li class="step sequential">
+  <div class="rail" aria-hidden="true"></div>
+  <div class="step-head">
+    <span class="chip sequential">sequential</span>
+    <code class="src">q0067_s3</code>
+    <span class="meta">step 3/3</span>
+    <span class="meta cos">cos 0.8588</span>
+  </div>
+  <p class="step-text"><span class="n">5</span>Calculate floor(64φ) by evaluating 64*(sqrt(5)+1)/2 and taking the integer part.</p>
+</li>
+<li class="step semantic">
+  <div class="rail" aria-hidden="true"></div>
+  <div class="step-head">
+    <span class="chip semantic">semantic jump</span>
+    <code class="src changed">q0072_s4</code>
+    <span class="meta">step 2/3</span>
+    <span class="meta cos">cos 0.9043</span>
+  </div>
+  <p class="step-text"><span class="n">6</span>Note that the smaller pile size for the k-th cold position is floor(k*phi)</p>
+</li>
+<li class="step sequential">
+  <div class="rail" aria-hidden="true"></div>
+  <div class="step-head">
+    <span class="chip sequential">sequential</span>
+    <code class="src">q0072_s4</code>
+    <span class="meta">step 3/3</span>
+    <span class="meta cos">cos 0.85</span>
+  </div>
+  <p class="step-text"><span class="n">7</span>Calculate floor(88*phi) using the exact value of phi = (1+√5)/2 ≈ 1.61803398875</p>
+</li>
+<li class="step semantic">
+  <div class="rail" aria-hidden="true"></div>
+  <div class="step-head">
+    <span class="chip semantic">semantic jump</span>
+    <code class="src changed">q0069_s0</code>
+    <span class="meta">step 1/3</span>
+    <span class="meta cos">cos 0.9022</span>
+  </div>
+  <p class="step-text"><span class="n">8</span>Recognize that the smaller pile of the k-th cold position is floor(k * (sqrt(5)+1)/2).</p>
+</li>
+</ol>
+<p class="note">Halted on <code>l_max</code> — it was still finding good steps at the
+cap of 8. Four different teacher solutions contributed, each one written for a
+<em>different</em> k (17, 64, 88). None of them is the answer to this problem; what
+survives the walk is the technique they share.</p>
+</section>
+
+<section class="stage">
+<span class="stage-no">Stage 5 · assembled template</span>
+<h2>What the walk produced</h2>
+<pre>Step 1: Recognize that the smaller pile of the k-th cold position is given by floor(k * φ), where φ is the golden ratio (1+√5)/2.
+Step 2: Calculate 17 * φ using the exact expression (17*(√5 + 1))/2.
+Step 3: Approximate √5 ≈ 2.23607 to compute 17*φ ≈ 27.50658, and take the floor to get 27.
+Step 4: Determine that the smaller pile size is floor(kφ) for the k-th cold position.
+Step 5: Calculate floor(64φ) by evaluating 64*(sqrt(5)+1)/2 and taking the integer part.
+Step 6: Note that the smaller pile size for the k-th cold position is floor(k*phi)
+Step 7: Calculate floor(88*phi) using the exact value of phi = (1+√5)/2 ≈ 1.61803398875
+Step 8: Recognize that the smaller pile of the k-th cold position is floor(k * (sqrt(5)+1)/2).</pre>
+</section>
+
+<section class="stage">
+<span class="stage-no">Stage 6 · the prompt</span>
+<h2>Exactly what the model received</h2>
+<p class="lbl">system message</p>
+<pre>You are asked to solve the mathematical problem using a step-by-step template. Follow each step exactly and output your reasoning at each step. Use only the steps given in the template for your reasoning</pre>
+<p class="lbl">user message — 1,290 characters, 433 tokens</p>
+<pre>Solve the math problem and always conclude with:
+Therefore, the final answer is: $\boxed{answer}$. Where [answer] is just the final numerical answer that solves the problem. Ensure the number is clearly identifiable within the box.
+You are given a template to solve the problem. Use the given steps if applicable otherwise use them to guide your reasoning and present the solution steps logically to solve this problem:
+Step 1: Recognize that the smaller pile of the k-th cold position is given by floor(k * φ), where φ is the golden ratio (1+√5)/2.
+Step 2: Calculate 17 * φ using the exact expression (17*(√5 + 1))/2.
+Step 3: Approximate √5 ≈ 2.23607 to compute 17*φ ≈ 27.50658, and take the floor to get 27.
+Step 4: Determine that the smaller pile size is floor(kφ) for the k-th cold position.
+Step 5: Calculate floor(64φ) by evaluating 64*(sqrt(5)+1)/2 and taking the integer part.
+Step 6: Note that the smaller pile size for the k-th cold position is floor(k*phi)
+Step 7: Calculate floor(88*phi) using the exact value of phi = (1+√5)/2 ≈ 1.61803398875
+Step 8: Recognize that the smaller pile of the k-th cold position is floor(k * (sqrt(5)+1)/2).
+
+Problem: In Wythoff&#x27;s game the cold (losing) positions are indexed k=1,2,3,.... What is the SMALLER pile size of the 255-th cold position?</pre>
+<div class="callout">
+<p><strong>This is the whole intervention.</strong> The template sits in the <em>user</em>
+turn as reference material — "use the given steps if applicable otherwise use them to
+guide your reasoning". The model then starts from an empty assistant turn and is free
+to reject it.</p>
+<p>The published RoT method instead prefills the template into the assistant's own
+<code>&lt;think&gt;</code> block, so the model resumes mid-sentence from reasoning it
+appears to have already committed to. Same template, same graph, same walk — 16.7%
+instead of 81.2%.</p>
+</div>
+</section>
+
+<section class="stage">
+<span class="stage-no">Stage 7 · the answer</span>
+<h2>The model does the work itself</h2>
+<pre>&lt;think&gt;
+Okay, let&#x27;s try to figure out this problem. So, the question is about Wythoff&#x27;s game and finding the smaller pile size of the 255th cold position. From what I remember, in Wythoff&#x27;s game, the cold positions are the losing positions for the player. The problem mentions that the smaller pile of the k-th cold position is given by floor(k * φ), where φ is the golden ratio. 
+
+First, I need to recall what the golden ratio is. The golden ratio φ is (1 + √5)/2, which is approximately 1.618. So, φ is about 1.618. Th…</pre>
+<p class="lbl">…and closes with</p>
+<pre> \sqrt{5}}{2} \approx 1.61803398875 $, and multiply by 255:
+
+$$
+255 \cdot 1.61803398875 \approx 412.59868
+$$
+
+Now take the floor of this value:
+
+$$
+\left\lfloor 412.59868 \right\rfloor = 412
+$$
+
+---
+
+### Final Answer
+
+Therefore, the smaller pile size of the 255th cold position is:
+
+$$
+\boxed{412}
+$$</pre>
+<p class="note">Predicted <span class="yes">412</span> against gold
+<code>412</code> — correct, in 3,256 output tokens
+(2,878 of them reasoning) and 22.4s.
+Note what the model did with the template: it took <em>floor(k·φ)</em> from it and
+applied it to k=255. It did not reuse 17, 64 or 88.</p>
+</section>
+
+
+<section class="stage fail">
+<span class="stage-no">Where the published method fails</span>
+<h2>Exact RoT on this same problem: 27, not 412</h2>
+<p>Identical graph, identical walk, <strong>byte-identical template</strong>. The only
+change is that the template is prefilled into the assistant's own
+<code>&lt;think&gt;</code> block instead of the user turn.</p>
+
+<p class="lbl">assistant turn, prefilled — the model resumes from the final word</p>
+<pre>&lt;think&gt;I need to follow the given steps to guide me in reasoning to solve the problem. I will follow each step and modify the steps to make them match the problem and then solve the problem accordingly. The template is. Step 1: Reco…
+  … Step 1 … Step 8 …
+… Strictly following the given steps for guidance, I will now solve the problem starting from the step 1. Using step 1</pre>
+
+<p class="lbl">everything the model then generated — all 750 characters of it</p>
+<pre class="recite">: The smaller pile of the k-th cold position is given by floor(k * φ), where φ is the golden ratio (1+√5)/2. Step 2: Calculate 17 * φ using the exact expression (17*(√5 + 1))/2. Step 3: Approximate √5 ≈ 2.23607 to compute 17*φ ≈ 27.50658, and take the floor to get <mark>27</mark>. Step 4: Determine that the smaller pile size is floor(kφ) for the k-th cold position. Step 5: Calculate floor(64φ) by evaluating 64*(sqrt(5)+1)/2 and taking the integer part. Step 6: Note that the smaller pile size for the k-th cold position is floor(k * phi). Step 7: Calculate floor(88*phi) using the exact value of phi = (1+√5)/2 ≈ 1.61803398875. Step 8: Recognize that the smaller pile of the k-th cold position is floor(k * phi).  Therefore, the final answer is: $\boxed{<mark>27</mark>}$.</pre>
+
+<dl class="why">
+<dt>What it did</dt>
+<dd>Recited the template back verbatim, Step 1 through Step 8, and stopped. No
+arithmetic on <em>k</em>=255 appears anywhere.</dd>
+<dt>Where 27 came from</dt>
+<dd>Step 3 of the template: <em>"compute 17·φ ≈ 27.50658, and take the floor to get
+27."</em> That is the answer to a <strong>different problem</strong> — the one this step
+was originally written for, where k=17. The model copied the constant out of someone
+else's worked example.</dd>
+<dt>Why the prefill causes it</dt>
+<dd>Thinking Intervention hands the template over as reasoning the model appears to have
+<em>already performed and committed to</em>. There is no turn at which it can evaluate
+whether the steps apply. It wakes mid-sentence after "Using step 1" and the only
+coherent continuation is to carry on reciting.</dd>
+<dt>Not a parsing artefact</dt>
+<dd>0/48 replies ever close <code>&lt;think&gt;</code>, yet format
+compliance is perfect — 48/48 used <code>\boxed</code>, 0 unparseable, 0 truncated.
+The answer extractor reads these correctly. The model genuinely answered 27.</dd>
+<dt>Cost of stopping early</dt>
+<dd>261 output tokens and 1.6s, against 3,256 tokens and
+22.4s for the user-turn run that got it right. The token saving is
+real; it is the saving of not doing the work.</dd>
+</dl>
+
+<p class="note" style="color:var(--bad)"><strong>Across all 48 problems:</strong>
+8/48 correct (16.7%) against the baseline's 75.0% — −58.3 points. Mean
+generation 1,276 characters, and thinking collapses from 2,754 tokens
+unaided to 524.</p>
+
+<p class="note">The instance-bound constants in the template are necessary for this
+failure but not sufficient. The user-turn run received <em>the same</em> template,
+containing <em>the same</em> "get 27", and answered 412 — because it was free to read
+the step as an example rather than as its own conclusion.</p>
+</section>
+
+<section class="stage">
+<span class="stage-no">Outcome</span>
+<h2>Three ways of answering the same problem</h2>
+<div class="scroll">
+<table class="tbl">
+<thead><tr><th>condition</th><th>template given</th><th>answer</th><th class="num">out tok</th><th class="num">latency</th></tr></thead>
+<tbody>
+<tr><td>no template</td><td class="note">—</td>
+    <td><span class="no">255</span></td>
+    <td class="num">5,001</td><td class="num">34.0s</td></tr>
+<tr class="hi"><td><strong>retrieved</strong></td><td class="note">the walk above</td>
+    <td><span class="yes">412</span></td>
+    <td class="num">3,256</td><td class="num">22.4s</td></tr>
+<tr><td>exact RoT <span class="no">(published)</span></td>
+    <td class="note">the walk above, prefilled into <code>&lt;think&gt;</code></td>
+    <td><span class="no">27</span></td>
+    <td class="num">261</td><td class="num">1.6s</td></tr>
+<tr><td>shuffled control</td>
+    <td class="note">a real template, built for <code>q0089</code></td>
+    <td><span class="no">255</span></td>
+    <td class="num">—</td><td class="num">—</td></tr>
+</tbody>
+</table>
+</div>
+<p class="lbl">what the shuffled control was handed instead</p>
+<pre>Step 1: Determine n mod 4 where n = 333333
+Step 2: Apply the rule that if n mod 4 == 1, the result is 1
+Step 3: Confirm 333333 mod 4 equals 1 through division
+Step 4: Compute 777778 + 1
+Step 5: Apply the formula: if remainder 0 → n, 1 → 1, 2 → n+1, 3 → 0
+Step 6: Apply the formula: if remainder 0 → n…</pre>
+<p class="note">Modular arithmetic on <em>n</em> mod 4 — a real assembled template, same
+machinery, same length distribution, wrong problem. The model answered
+<span class="no">255</span>, echoing the <em>k</em> from the question.
+Across all 48 problems the shuffled control scores exactly the baseline's 75.0%, so the
++6.2 points belong to retrieval finding the <em>right</em> template — not to being handed
+any eight-step plan.</p>
+</section>
+
+</div>

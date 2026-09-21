@@ -20,6 +20,71 @@ from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
 
 
+def split_thinking_tokens(text, completion_tokens):
+    """(thinking_tokens, answer_tokens) estimated by character share.
+
+    The server reports one completion_tokens for the whole reply, so the two
+    parts are apportioned by character count. Approximate, and labelled as such
+    -- but it is the quantity the experiment is actually about: whether a
+    retrieved approach collapses the SEARCH for a strategy, which lives in the
+    reasoning trace, not in the final answer.
+
+    THE UNTERMINATED CASE IS NOT A FALLBACK, IT IS THE COMMON ONE. A reply that
+    hit max_tokens mid-trace has an opening <think> and no closing tag. It is
+    reasoning from end to end -- the model never got as far as an answer. An
+    earlier version returned (0, completion_tokens) for it, i.e. booked a pure
+    reasoning trace as pure answer, which inverted the headline measurement on
+    exactly the longest-reasoning rows. Worse, truncation rates differ by arm,
+    so the bias differed by arm too and the arm ordering it produced was an
+    artifact of truncation rather than of reasoning length.
+
+    Callers should still treat a truncated row's count as CENSORED (the true
+    trace is >= completion_tokens, length unknown) and report token means over
+    finished rows only.
+    """
+    import re
+    text = text or ""
+    m = re.search(r"<think>(.*?)</think>", text, re.DOTALL)
+    if m:
+        think_chars = len(m.group(1))
+        share = min(think_chars / max(len(text), 1), 1.0)
+        think_tok = int(round(completion_tokens * share))
+        return think_tok, completion_tokens - think_tok
+    if "<think>" in text:
+        return completion_tokens, 0      # unterminated: all reasoning
+    return 0, completion_tokens          # no trace at all: all answer
+
+def split_thinking_continued(text, completion_tokens):
+    """(thinking, answer) for a reply whose <think> was opened by a PREFILL.
+
+    Thinking Intervention hands the model an already-open reasoning block, so
+    the generated text carries no opening tag -- it starts mid-trace. Passing it
+    to split_thinking_tokens would find no <think>, conclude "no trace at all",
+    and book the entire reasoning trace as answer tokens. That is the same
+    inversion documented above, and it would hit every single RoT row.
+
+    The prefill itself is NOT counted here. It is part of the prompt, so the
+    server bills it as prompt_tokens -- which is the honest place for it, since
+    the template is a cost the arm pays on the input side.
+    """
+    import re
+    text = text or ""
+    i = text.find("</think>")
+    if i < 0:
+        # Qwen3 often answers straight out of an open block without closing it.
+        # The contract line is the boundary: everything before it was the
+        # reasoning, and booking it all as reasoning would zero out
+        # answer_tokens on every such reply.
+        m = re.search(r"^\**\s*(?:FINAL\s+)?ANSWER\s*\**\s*[:=]",
+                      text, re.IGNORECASE | re.MULTILINE)
+        if not m:
+            return completion_tokens, 0      # genuinely never reached an answer
+        i = m.start()
+    share = min(i / max(len(text), 1), 1.0)
+    think_tok = int(round(completion_tokens * share))
+    return think_tok, completion_tokens - think_tok
+
+
 @dataclass
 class Reply:
     """One completion plus everything the evaluation needs to account for it."""
@@ -36,23 +101,8 @@ class Reply:
         return self.finish_reason == "length"
 
     def split_thinking(self):
-        """(thinking_tokens, answer_tokens) estimated by character share.
-
-        The server reports one completion_tokens for the whole reply, so the
-        two parts are apportioned by character count. Approximate, and labelled
-        as such -- but it is the quantity the experiment is actually about:
-        whether a retrieved approach collapses the SEARCH for a strategy, which
-        lives in the reasoning trace, not in the final answer.
-        """
-        import re
-        m = re.search(r"<think>(.*?)</think>", self.text or "", re.DOTALL)
-        if not m:
-            return 0, self.completion_tokens
-        think_chars = len(m.group(1))
-        total_chars = max(len(self.text or ""), 1)
-        share = min(think_chars / total_chars, 1.0)
-        think_tok = int(round(self.completion_tokens * share))
-        return think_tok, self.completion_tokens - think_tok
+        """(thinking_tokens, answer_tokens) -- see split_thinking_tokens."""
+        return split_thinking_tokens(self.text, self.completion_tokens)
 
 
 @dataclass
@@ -109,16 +159,25 @@ class ChatClient:
                            f"not {self.model!r}")
         return True, f"{self.model} @ {self.base_url}"
 
-    def chat(self, system: str, user: str, n: int = 1, **overrides) -> list[Reply]:
+    def chat(self, system: str, user: str, n: int = 1, prefill: str | None = None,
+             **overrides) -> list[Reply]:
         """One request, `n` sampled completions. Returns one Reply per sample.
 
         vLLM shares the prefill across the n samples, so n=5 costs far less
         than five separate requests -- and the samples stay independent.
+
+        `prefill` opens the assistant turn with fixed text the model then
+        continues, which is how Thinking Intervention places a template INSIDE
+        the reasoning block. Without it the template can only be described to
+        the model in the user turn, which is a different intervention and not
+        the one arXiv:2509.21743 measures.
         """
         messages = []
         if system:
             messages.append({"role": "system", "content": system})
         messages.append({"role": "user", "content": user})
+        if prefill:
+            messages.append({"role": "assistant", "content": prefill})
 
         kwargs = dict(
             model=self.model,
@@ -135,6 +194,12 @@ class ChatClient:
         extra = {"chat_template_kwargs": {"enable_thinking": self.enable_thinking}}
         if self.top_k is not None:
             extra["top_k"] = self.top_k
+        if prefill:
+            # vLLM renders the final assistant message verbatim and generates
+            # from its end. Both flags are required together; setting only one
+            # is a 400 from the server.
+            extra["add_generation_prompt"] = False
+            extra["continue_final_message"] = True
         kwargs["extra_body"] = extra
 
         last_err = None
@@ -242,7 +307,8 @@ class MockChatClient(ChatClient):
     def health(self):
         return True, f"MOCK {self.model} (no server)"
 
-    def chat(self, system: str, user: str, n: int = 1, **overrides) -> list[Reply]:
+    def chat(self, system: str, user: str, n: int = 1, prefill: str | None = None,
+             **overrides) -> list[Reply]:
         import hashlib
         key = hashlib.sha256(user.encode()).hexdigest()
         pid = None
@@ -267,6 +333,17 @@ class MockChatClient(ChatClient):
                 val = base + 7 + i          # deterministically wrong
             else:
                 val = base
+            if prefill:
+                # Continue the caller's open block instead of opening a new one,
+                # so the RoT accounting path is what gets exercised offline.
+                text = ("The template above gives the structure; applying it.\n"
+                        "</think>\n"
+                        f"ANSWER: {val}\n")
+                out.append(Reply(text=text, prompt_tokens=(len(user) + len(prefill)) // 4,
+                                 completion_tokens=len(text) // 4,
+                                 latency_s=0.001, finish_reason="stop",
+                                 model=self.model + "(mock)"))
+                continue
             think = ("<think>\nLet me look for a structural shortcut here. "
                      "Brute force is impossible at this size, so I need a "
                      "closed form or a cycle. Trying the standard identity for "

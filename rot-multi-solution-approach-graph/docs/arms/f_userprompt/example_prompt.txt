@@ -1,0 +1,130 @@
+EXACT prompt sent to the student in arm `f_userprompt`, for problem q0028.
+Reconstructed from rot/student.py and the stored results/f_userprompt/eval_F_rot.jsonl row.
+Nothing below is paraphrased.
+
+######################################################################################
+# PART 1 -- WHAT IS FIXED AND WHAT VARIES
+######################################################################################
+
+Only TWO things change from one test problem to the next:
+
+    {problem}   the RB-DERIV question text          <- varies, 48 distinct values
+    {template}  the steps the graph walk assembled  <- varies, 48 distinct values
+
+Everything else is a string constant in rot/student.py. It is byte-identical
+for all 48 problems of this arm, and which constants are used is what the
+`rot.system_prompt` and `rot.injection` config keys select.
+
+  segment                        fixed?  where it comes from
+  -----------------------------  ------  -----------------------------------------
+  system message                 FIXED   SYSTEM (student.py:34)
+  user preamble                  FIXED   ROT_TEMPLATE_PROMPT (student.py:358)
+  the template                   VARIES  rot_retrieval.assemble -> format_template
+  "Problem: " label              FIXED   the f-string at student.py:487-488
+  the problem text               VARIES  dataset field `question`
+
+The template varies in LENGTH too, not only wording: 3 to 8 steps across the 48
+problems (mean 6.98), because the walk stops on its own threshold.
+
+Skeleton, exactly as the code assembles it:
+
+    # rot/student.py:487-488   (rot.injection: user_prompt)
+    user = f"{preamble}{template}\n\nProblem: {p['problem']}"
+    client.chat(system, user)                       # 2 messages, no prefill
+
+(If the walk ever returned an EMPTY template the code falls back to `user =
+problem` with no preamble at all -- student.py:476. That did not happen here:
+all 48 problems got a template of at least 3 steps.)
+
+######################################################################################
+# PART 2 -- THE LITERAL PROMPT, SEGMENT BY SEGMENT
+######################################################################################
+
+>>> messages[0]  role=system
+
+===[ FIXED  ]== SYSTEM -- identical for all 48 problems ==============================
+You are solving one mathematics problem. The answer is a single integer.
+
+The quantities involved are far too large to reach by step-by-step computation.
+The problem is solvable only through a closed form, a cycle, a period, or an
+equivalent structural shortcut.
+
+Show only the reasoning you need. Do not restate the problem. Do not present
+alternative solutions.
+
+End your reply with exactly one line, and nothing after it:
+
+ANSWER: <integer>
+
+Write the integer in plain decimal digits: no commas, no spaces, no units, no
+LaTeX, no words.
+
+>>> messages[1]  role=user
+
+===[ FIXED  ]== ROT_TEMPLATE_PROMPT -- identical for all 48 ==========================
+You are given a template to solve the problem. Use the given steps if applicable otherwise use them to guide your reasoning and present the solution steps logically to solve this problem:
+~~~[ VARIES ]~~ the assembled template -- THIS problem only ~~~~~~~~~~~~~~~~~~~~~~~~~~
+Step 1: Compute Grundy numbers for small heap sizes to detect pattern
+Step 2: Observe losing positions form sequence 0, 2, 7, 9, 14, 16, 21, 23,...
+Step 3: Recognize losing positions are numbers congruent to 0 or 2 modulo 7
+Step 4: Find smallest number >86420 congruent to 0 or 2 mod7
+Step 5: Find the smallest n > 100,000 with n ≡ 0 or 2 mod 7 by adding 2 to 100,000
+
+===[ FIXED  ]== literal "Problem: " from the f-string ================================
+~~~[ VARIES ]~~ the problem text -- THIS problem only ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Two players alternate removing 1 , 3 , 4 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 999999?
+
+  (no assistant message: this arm does not use Thinking Intervention)
+
+######################################################################################
+# PART 3 -- PROOF: THE SAME PROMPT FOR A DIFFERENT PROBLEM
+######################################################################################
+
+Unified diff of the whole prompt for q0028 against q0018 -- a different family,
+and a template of a different length. Every `-`/`+` line is a VARYING segment;
+every unchanged line is FIXED.
+
+--- q0028
++++ q0018
+@@ -16,9 +16,12 @@
+ ---8<--- user ---8<---
+ You are given a template to solve the problem. Use the given steps if applicable otherwise use them to guide your reasoning and present the solution steps logically to solve this problem:
+-Step 1: Compute Grundy numbers for small heap sizes to detect pattern
+-Step 2: Observe losing positions form sequence 0, 2, 7, 9, 14, 16, 21, 23,...
+-Step 3: Recognize losing positions are numbers congruent to 0 or 2 modulo 7
+-Step 4: Find smallest number >86420 congruent to 0 or 2 mod7
+-Step 5: Find the smallest n > 100,000 with n ≡ 0 or 2 mod 7 by adding 2 to 100,000
++Step 1: Identify the cycle structure of permutation P. P has a 13-element cycle (1→2→...→13→1) and a 2-element cycle (14↔15).
++Step 2: Determine the cycle containing element 10, which is the 13-element cycle.
++Step 3: Compute N mod 13 where N = 10^18 + 1. Since 10^6 ≡ 1 mod 13, 10^18 = (10^6)^3 ≡ 1^3 = 1 mod 13, so N ≡ 1 + 1 = 2 mod 13.
++Step 4: Starting at element 10, apply the permutation 2 times within the cycle: 10 → 11 → 12.
++Step 5: Identify the cycle containing position 11 in the permutation
++Step 6: Calculate the number of applications modulo the cycle length
++Step 7: Apply the modular result to determine the final element position
++Step 8: Identify the permutation cycle containing position 7, which is a 13-cycle.
+ 
+-Problem: Two players alternate removing 1 , 3 , 4 stones from a single heap; a player who cannot move loses. What is the SMALLEST losing heap size (for the player about to move) strictly greater than 999999?
++Problem: Let P be the permutation with P = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1, 15, 14] (P sends position i to P[i], 1-indexed). Applying P exactly 1000000000000000001 times to element 6, which element results?
+
+######################################################################################
+# PART 4 -- WHAT CAME BACK (for the problem in PART 2)
+######################################################################################
+
+finish_reason  : stop
+prompt_tokens  : 364
+completion_tok : 3122  (thinking 3108 / answer 14)
+predicted      : 1000001     gold: 1000001     correct: True
+
+--- last 700 characters of the reply ---
+= 100,002 mod7 is 5 +2 =7 mod7 =0. Therefore, 100,002 is 0 mod7. So, the smallest n >100,000 with n ≡0 or 2 mod7 is 100,002. But in our problem, the question is about n >999,999. 
+
+So, the answer is 1,000,001. But let me check if 1,000,001 is indeed the correct answer. 
+
+Yes, because 1,000,001 is 2 mod7, and it's greater than 999,999. So the answer is 1,000,001. 
+
+But wait, the problem says "the smallest n > 100,000 with n ≡ 0 or 2 mod7 by adding 2 to 100,000". But in our case, the problem is about n >999,999. So, the steps given in the problem might be for a different problem, but our reasoning shows that the answer is 1,000,001. 
+
+Therefore, the answer is 1000001.
+</think>
+
+ANSWER: 1000001

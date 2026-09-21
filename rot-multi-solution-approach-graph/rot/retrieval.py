@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import random
 import re
+import threading
 
 import numpy as np
 
@@ -41,6 +42,18 @@ class Retriever:
         self.embedder = embedder
         self.log = log
         self._norm_problems = [_norm(e["problem"]) for e in entries]
+        # The embedder is NOT thread-safe and the arms are evaluated with
+        # `concurrency` worker threads. nomic-bert keeps a rotary cos/sin cache
+        # on the module and regrows it in-place as sequence length changes, so
+        # two threads encoding different-length problems at once corrupt it:
+        # one thread reads a buffer sized for the other's sequence and the
+        # forward dies with a shape mismatch. That is not hypothetical -- it
+        # killed arm C 23 problems in. Encoding is milliseconds, so serialising
+        # it costs nothing; the LLM calls stay fully concurrent.
+        self._embed_lock = threading.Lock()
+        # Arms C and D retrieve for the SAME test problems, so the second arm
+        # would otherwise re-encode all 48 identically.
+        self._qcache = {}
         if len(entries) != len(entry_vecs):
             raise ValueError(
                 f"bank/vector mismatch: {len(entries)} entries vs "
@@ -48,8 +61,13 @@ class Retriever:
 
     def _embed_query(self, problem: str):
         from .graph import embed
-        return embed(self.cfg, self.embedder, [problem],
-                     prefix=self.cfg["embedding"]["query_prefix"])[0]
+        key = _norm(problem)
+        with self._embed_lock:
+            if key not in self._qcache:
+                self._qcache[key] = embed(
+                    self.cfg, self.embedder, [problem],
+                    prefix=self.cfg["embedding"]["query_prefix"])[0]
+            return self._qcache[key]
 
     def retrieve(self, problem: str, problem_id: str, k=None):
         """Return up to k scored entries, leakage-filtered."""

@@ -124,3 +124,40 @@ def is_gradable(gold) -> bool:
     if isinstance(gold, int):
         return True
     return bool(re.fullmatch(r"\s*-?\d+\s*", str(gold)))
+
+
+def extract_answer_open_trace(text: str, truncated: bool):
+    """Answer from a reply whose <think> was opened by a PREFILL.
+
+    Thinking Intervention hands the model an already-open reasoning block, and
+    Qwen3-1.7B frequently answers out of it without ever emitting </think> --
+    measured on the first live smoke, where every reply ended
+    "... Therefore ... ANSWER: 12288" with the block still open.
+
+    `extract_answer` cannot read those. Its strip_thinking sees an unclosed
+    <think> and discards everything after it, which is correct for a TRUNCATED
+    reply -- a number mid-thought is not an answer -- but here the model
+    finished deliberately and the contract line is the last thing it wrote.
+    Without this, every RoT row scores unparseable and the arm measures nothing.
+
+    The truncation guard is kept, and is the reason this is a separate function
+    rather than a loosening of strip_thinking: arms A-E are scored by the
+    existing rules and must keep being scored by them, or the already-published
+    results stop being comparable.
+    """
+    if truncated:
+        return None
+    if "</think>" in (text or ""):
+        return extract_answer(text)
+    return extract_answer(_open_trace_tail(text))
+
+
+def _open_trace_tail(text: str) -> str:
+    """The part of an unclosed trace at or after the final answer contract."""
+    if not text:
+        return ""
+    for i, line in enumerate(text.splitlines()):
+        if re.match(r"^\**\s*(FINAL\s+)?ANSWER\s*\**\s*[:=]", line.strip(),
+                    re.IGNORECASE):
+            return "\n".join(text.splitlines()[i:])
+    return text if r"\boxed{" in text else ""

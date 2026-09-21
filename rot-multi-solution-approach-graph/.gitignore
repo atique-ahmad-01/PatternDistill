@@ -1,7 +1,30 @@
 # Generated artifacts only. data/RB_DERIV/ is the dataset and MUST be tracked —
 # it is what makes this project self-contained, so do not widen this to `data/`.
 data/artifacts/
-results/
+# Raw per-problem rows and the embeddings are regenerable and large (11M + 70M);
+# the summary tables are the findings and are 284K, so they are tracked. A run's
+# numbers should survive a laptop, and the GPU box is shared -- jobs there get
+# killed to free VRAM.
+#
+# NOTE the `results/**` form. Writing `results/` here instead would exclude the
+# DIRECTORY, and git never descends into an excluded directory -- every `!` line
+# below would then be silently dead. The `!results/*/` line is required for the
+# same reason: the run subdirectories have to be re-included before anything
+# inside them can be.
+results/**
+!results/*/
+!results/*/summary.md
+!results/*/summary.csv
+!results/*/summary.json
+!results/*/by_group.csv
+!results/*/run_manifest.json
+!results/*/config.snapshot.yaml
+
+# `results/**` is anchored to this file's directory, unlike the bare `results/`
+# it replaced, which matched at ANY depth. Without this line the archived
+# pre-gate-v2 results under _backup_*/ would start being tracked -- they were
+# not before, and that is not a change this rule was meant to make.
+_backup_*/results/**
 logs/
 __pycache__/
 *.pyc

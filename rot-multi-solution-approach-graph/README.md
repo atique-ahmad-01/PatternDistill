@@ -160,9 +160,10 @@ Or stage by stage, each resumable and each writing files the next one reads:
 python main.py generate      # teacher solutions       (the expensive stage)
 python main.py validate      # correctness metadata
 python main.py build-memory  # memory bank
-python main.py build-graph   # nodes + semantic edges
-python main.py evaluate      # student arms A/B/C/D
-python main.py report        # tables from existing results
+python main.py build-graph      # nodes + semantic edges (arms C/D)
+python main.py build-rot-graph  # RoT step graph (arm F) — see "The arms"
+python main.py evaluate         # student arms A–F
+python main.py report           # tables from existing results
 ```
 
 ### Try it with no GPU at all
@@ -267,16 +268,80 @@ reports both.
 
 | arm | prompt | what it isolates |
 |---|---|---|
-| **A** `baseline` | problem only | the floor |
-| **B** `random_memory` | problem + k *random* memories | **the control** |
-| **C** `full_solution` | problem + k retrieved full solutions | does a complete worked solution help? |
-| **D** `approach_subtasks` | problem + k retrieved approaches and steps | does the *strategy* alone help? |
+| **A** `A_baseline` | problem only | the floor |
+| **B** `B_random_memory` | problem + k *random* memories | **the control** |
+| **C** `C_full_solution` | problem + k retrieved full solutions | does a complete worked solution help? |
+| **D** `D_approach_subtasks` | problem + k retrieved approaches and steps | does the *strategy* alone help? |
+| **E** `E_gated` | second pass over A, only where A produced no answer | is injection better used *conditionally*? |
+| **F** `F_rot` | assembled template injected inside `<think>` | Retrieval-of-Thought proper |
 
 **Arm B is what makes the result interpretable.** Without it, a gain in C or D
 could be "any worked example helps" rather than "retrieval found the right
 memory" — entirely different claims. Everything except the injected block is
 held constant across arms: same system prompt, same decoding, same answer
 contract.
+
+### E_gated — conditional injection
+
+Unconditional injection nets to zero because it does two opposite things at
+once. Measured on D against A: it *fixed* 7 of the 12 problems the baseline got
+wrong, and *broke* 7 of the 36 it already had right. So E solves unaided first
+and injects only where the first pass visibly failed — truncated or
+unparseable, both observable without the gold answer. Gating on `correct` would
+be an oracle and would reproduce `max(baseline, retrieval)` by construction.
+
+E charges itself for **both** passes. A table billing only the retry would hide
+the price and make the arm look strictly better than baseline when it is a
+trade.
+
+### F_rot — Retrieval-of-Thought
+
+Implements [arXiv:2509.21743](https://arxiv.org/abs/2509.21743) and the authors'
+reference code at `github.com/ahme0599/Retrieval-of-Thought`. This is a
+different mechanism from C and D, not a variant:
+
+- **C/D** embed the test problem, find the nearest *train problems*, and show
+  their solutions as reference material. Solution-level RAG.
+- **F** embeds the test problem, scores individual *step nodes*, and walks the
+  graph — first step by `0.75·cos + 0.25·[step 0]`, then by
+  `0.3·cos + 0.7·[sequential child]` — assembling an ordered template up to 8
+  steps that may cross several source solutions. It is injected as an
+  already-open `<think>` block the model continues (Thinking Intervention),
+  not as material described to it.
+
+Needs its own graph: `python main.py build-rot-graph`. It is a separate
+artifact from `build-graph` and uses a different embedder.
+
+**Where the paper and the authors' code disagree, the code is implemented** —
+it is what produced the published numbers.
+
+| paper | reference implementation |
+|---|---|
+| `sim~=(cos+1)/2`, τ=0.85 | raw cosine; shipped graph has min edge similarity 0.8500 |
+| `R_Initial = 0.8·R_Q + 0.2·R_S` | 0.75 / 0.25 (`VARS.py`) |
+| `R = R_Q + R_F` | 0.3·cos + 0.7·flow (`graph_handler.py`) |
+| halt when `max(R) < τ` | halt when `cos < 0.8` **and** combined `< 0.8` |
+
+The last is consequential: under the paper's rule a sequential step scores
+`R ≥ 1 > τ`, so the walk can never stop early.
+
+**Known limitation of this adaptation, measured not assumed.** The reference's
+templates are generic method skeletons — 4 of its 2159 node texts (0.2%) carry
+a 4+ digit literal. Ours are teacher solutions to *specific* problems, and 896
+of 2450 steps (37%) do. Assembled templates therefore tend to name another
+problem's constants, which Thinking Intervention asserts in the student's own
+reasoning voice. `build-rot-graph` reports this share and warns above 5%, and
+`report` prints it per arm. A drop in F is a property of the template *source*
+before it is a verdict on the method.
+
+Two switches in `config.yaml` probe exactly that: `rot.injection: user_prompt`
+delivers the same template as user-turn material instead, and
+`rot.tag_source: predicted` removes the gold-family advantage F otherwise has
+over C and D.
+
+`jinaai/jina-embeddings-v2-small-en` ships modelling code written for
+transformers 4.x, so the pipeline environment pins `transformers<5`. This does
+not affect the vLLM servers, which run in their own.
 
 ---
 

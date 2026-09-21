@@ -1,0 +1,91 @@
+seed: 42
+run_name: no_think
+dataset:
+  path: /home/students/rot-multi-solution-approach-graph/data/RB_DERIV/RB_DERIV_questions.json
+  sha256: 7e043b6a26502438526a4c52c00bfb931fe0f033378c3fbb5d8b03b33e37a1e0
+  records_key: questions
+  fields:
+    id: query_id
+    problem: question
+    answer: gold_answer
+    group: family
+  keep_fields:
+  - uses_object
+  - false_friend_answer
+  - false_friend_changes_answer
+  gradable_only: true
+  split:
+    mode: per_family
+    test_per_family: 3
+    test_size: 48
+    seed: 42
+  limits:
+    max_train: null
+    max_test: null
+teacher:
+  model: Qwen/Qwen3-8B-AWQ
+  base_url: http://localhost:8000/v1
+  api_key: EMPTY
+  n_solutions: 5
+  temperature: 0.8
+  top_p: 0.95
+  top_k: 20
+  enable_thinking: false
+  max_tokens: 12288
+  timeout: 900
+  max_retries: 3
+  concurrency: 8
+student:
+  model: Qwen/Qwen3-1.7B
+  base_url: http://localhost:8001/v1
+  api_key: EMPTY
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+  enable_thinking: false
+  max_tokens: 8192
+  timeout: 900
+  max_retries: 3
+  concurrency: 8
+embedding:
+  model: nomic-ai/nomic-embed-text-v1
+  device: auto
+  batch_size: 64
+  doc_prefix: 'search_document: '
+  query_prefix: 'search_query: '
+memory:
+  include: correct_only
+  min_subtasks: 2
+  max_subtasks: 12
+graph:
+  tau_semantic: 0.82
+  max_neighbors: 8
+  link_approaches: true
+  link_subtasks: true
+  cross_problem_only: true
+retrieval:
+  top_k: 3
+  mode: approach_subtasks
+  index_on: problem
+  max_subtasks_shown: 8
+evaluation:
+  arms:
+  - A_baseline
+  - B_random_memory
+  - C_full_solution
+  - D_approach_subtasks
+  - E_gated
+  baseline_arm: A_baseline
+  report_by_group: true
+  low_diversity_groups:
+  - digital_root
+  - zeckendorf
+  - xor_range
+  - fib_huge
+paths:
+  data_dir: /home/students/rot-multi-solution-approach-graph/data/artifacts
+  results_dir: /home/students/rot-multi-solution-approach-graph/results
+  logs_dir: /home/students/rot-multi-solution-approach-graph/logs
+_config_path: /home/students/rot-multi-solution-approach-graph/config.yaml
+_root: /home/students/rot-multi-solution-approach-graph
+_mock: false

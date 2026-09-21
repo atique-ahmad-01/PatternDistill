@@ -53,7 +53,11 @@ dataset:
 
 # ── Teacher (Qwen3-8B via vLLM) ──────────────────────────────────────────────
 teacher:
-  model: Qwen/Qwen3-8B
+  # AWQ, not bf16. The bf16 8B is 16GB of weights on a 16.3GB card --
+  # it loads and then leaves no room at all for a KV cache. The 4-bit
+  # AWQ build is ~5.5GB and leaves the cache room that thinking mode
+  # at max_model_len 16384 actually needs.
+  model: Qwen/Qwen3-8B-AWQ
   base_url: http://localhost:8000/v1
   api_key: EMPTY
   n_solutions: 5            # independent solutions per problem
@@ -72,7 +76,15 @@ teacher:
   # truncated reply has an unclosed <think> with no parseable answer -- it
   # scores as wrong and is indistinguishable from a genuine failure. Raise this
   # before suspecting the teacher.
-  max_tokens: 8192
+  #
+  # MEASURED on the 8-problem smoke run against the real Qwen3-8B-AWQ:
+  # thinking mean 3402 / median 3231 / max 7002 tokens. At 8192 exactly 3 of 40
+  # samples truncated -- and those 3 were the ONLY parse failures in the run
+  # (37/40 parsed). All 3 were bitcount_range, the family that then scored 1/5.
+  # So truncation, not teacher ability, was what cost that family its memories.
+  # 12288 clears the observed max with room to spare and still fits inside
+  # max_model_len 16384 (prompts measured at 265-308 tokens).
+  max_tokens: 12288
   timeout: 900
   max_retries: 3
   concurrency: 8
@@ -141,6 +153,79 @@ retrieval:
   #   - a retrieved entry whose problem_id or normalised problem text matches
   #     the query is dropped before top-k is taken
 
+# ── RoT (arXiv:2509.21743) ───────────────────────────────────────────────────
+# Retrieval-of-Thought, matched to the authors' reference implementation at
+# github.com/ahme0599/Retrieval-of-Thought. Where the paper's text and that code
+# disagree, these are the CODE's values -- it is what produced the published
+# numbers. Each disagreement is noted below.
+#
+# This is a different mechanism from the `retrieval:` block above, not a variant
+# of it. There, the query scores whole bank entries by problem text and the
+# top-k are shown as reference material. Here the query scores individual STEP
+# nodes, a reward-guided walk assembles them into an ordered template that may
+# cross source solutions, and the template is injected as an already-open
+# reasoning block that the model continues.
+rot:
+  # Semantic edge threshold, RAW cosine. The paper says tau=0.85 on a rescaled
+  # sim~=(cos+1)/2, which would be raw 0.70; the shipped knowledge_graph.graphml
+  # has min edge similarity exactly 0.8500 and every traversal uses sklearn
+  # cosine_similarity directly. Raw it is. Do NOT confuse this with
+  # graph.tau_semantic above (0.82) -- different graph, different purpose.
+  tau_semantic: 0.85
+  # Traversal termination, RAW cosine (VARS.py SIMILARITY_THRESHOLD).
+  sim_threshold: 0.80
+  # First-step score = w_first_query * cos + w_first_s0 * [step 0].
+  # Paper says 0.8 / 0.2; VARS.py says 0.75 / 0.25.
+  w_first_query: 0.75
+  w_first_s0: 0.25
+  # Traversal score = w_trav_query * cos + w_trav_flow * [sequential child].
+  # Paper says R_Q + R_F (i.e. 1.0 / 1.0); graph_handler.py says 0.3 / 0.7.
+  # Either way the sequential child always wins the argmax -- see
+  # rot_retrieval's module docstring.
+  w_trav_query: 0.3
+  w_trav_flow: 0.7
+  # MAX_TEMPLATE_LENGTH.
+  l_max: 8
+  # 0 = uncapped, as the reference (2159 nodes, ~107 semantic neighbours each).
+  # A positive value is a deviation.
+  max_neighbors: 0
+  # An edge between two steps of the same solution restates that they were
+  # written together; sequential edges already carry that relation.
+  cross_template_only: true
+
+  # Candidate filter. The reference requires an exact template_type match and
+  # then keeps nodes sharing at least one knowledge tag, annotating the query
+  # by hand. RB-DERIV's `group` serves as both labels.
+  #   gold      -- use the query's own family (matches the reference; an
+  #                ADVANTAGE over arms C/D, which found the family by
+  #                similarity, and must be reported as one)
+  #   predicted -- infer the tag from the nearest node (same footing as C/D)
+  #   none      -- no filter
+  tag_source: gold
+
+  # ti_prefill  -- template inside an open <think> the model CONTINUES
+  #                (Thinking Intervention, as the reference runs it)
+  # user_prompt -- same template as user-turn reference material (ablation;
+  #                this project's phase-3B found TI did nothing on a 1.7B while
+  #                prompt injection helped, which contradicts the paper)
+  # retrieved -- the template the walk assembled for THIS problem
+  # shuffled  -- the template assembled for a DIFFERENT test problem. The
+  #              control for this arm, matching what B_random_memory does for
+  #              C/D: same machinery, same length distribution, wrong problem.
+  template_source: retrieved
+
+  injection: ti_prefill
+  # project   -- this project's SYSTEM, identical to arms A-E (default; the
+  #              controlled comparison depends on it being held constant)
+  # reference -- the reference implementation's own system prompt, for a strict
+  #              reproduction at the cost of comparability with A-E
+  system_prompt: project
+
+  embedding:
+    model: jinaai/jina-embeddings-v2-small-en
+    device: auto
+    batch_size: 64
+
 # ── Evaluation ───────────────────────────────────────────────────────────────
 evaluation:
   arms:
@@ -148,6 +233,12 @@ evaluation:
     - B_random_memory
     - C_full_solution
     - D_approach_subtasks
+    # Second pass over A_baseline, run ONLY where A failed to produce an answer
+    # (truncated or unparseable). Must be listed after A_baseline: it reads that
+    # arm's result file. Its token cost is billed for BOTH passes.
+    - E_gated
+    # RoT, per arXiv:2509.21743. Needs `build-rot-graph` first.
+    - F_rot
   baseline_arm: A_baseline
 
   # RB-DERIV's README requires per-family reporting: digital_root and

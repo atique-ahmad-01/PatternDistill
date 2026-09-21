@@ -1,0 +1,6 @@
+arm,n,correct,incorrect,unparseable,truncated,accuracy,abs_improvement_pp,rel_improvement_pct,n_finished,mean_input_tokens,mean_output_tokens,mean_thinking_tokens,mean_answer_tokens,mean_latency_s,n_paired_vs_base,paired_output_tokens_vs_base_pct,mean_retrieval_score,same_family_retrieval_rate
+A_baseline,48,36,12,9,9,0.75,0.0,0.0,39,172.58,2766.03,2754.67,11.36,18.97,39,,0.0,
+B_random_memory,48,36,12,7,7,0.75,0.0,0.0,41,609.98,2612.76,2601.78,10.98,18.14,35,-9.3,0.0,0.0764
+C_full_solution,48,35,13,8,8,0.7292,-2.08,-2.78,40,718.54,2258.97,2247.1,11.88,15.88,35,-22.07,0.84,0.875
+D_approach_subtasks,48,36,12,4,4,0.75,0.0,0.0,44,598.23,2766.02,2754.36,11.66,19.24,36,-12.48,0.84,0.875
+E_gated,48,41,7,3,3,0.8542,10.42,13.89,45,281.58,4117.67,4103.31,14.36,28.94,39,0.0,0.85,0.6667
