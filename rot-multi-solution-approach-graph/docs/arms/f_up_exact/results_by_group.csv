@@ -1,0 +1,17 @@
+group,A_baseline,A_baseline_n,F_rot,F_rot_n
+bitcount_range,0.6667,3,0.3333,3
+crt_three,1.0,3,1.0,3
+digital_root,1.0,3,1.0,3
+fib_huge,0.3333,3,0.6667,3
+frobenius,1.0,3,1.0,3
+grundy_124,1.0,3,1.0,3
+grundy_134,0.0,3,0.3333,3
+grundy_23,0.6667,3,1.0,3
+josephus,1.0,3,1.0,3
+lcg_closed,0.0,3,0.0,3
+necklace_burnside,1.0,3,1.0,3
+perm_power,1.0,3,0.6667,3
+power_tower,1.0,3,1.0,3
+wythoff,0.3333,3,1.0,3
+xor_range,1.0,3,1.0,3
+zeckendorf,1.0,3,1.0,3
