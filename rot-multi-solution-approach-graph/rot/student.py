@@ -28,6 +28,7 @@ from pathlib import Path
 from .config import read_jsonl, results_path, write_jsonl
 from .llm import split_thinking_continued, split_thinking_tokens
 from .retrieval import format_memory, hit_metadata
+from .rot_retrieval import abstract_constants
 from .rot_retrieval import format_template as format_rot_template
 from .scoring import extract_answer, extract_answer_open_trace, is_correct
 
@@ -361,6 +362,29 @@ ROT_TEMPLATE_PROMPT = (
     "solution steps logically to solve this problem:\n"
 )
 
+# Phase 8, rot.preamble=trust. The standard preamble ("use them if applicable")
+# invites the student to audit the template before using it, and on families it
+# already solves that audit is where the extra tokens go: josephus 847 -> 4257,
+# xor_range 1012 -> 3068 output tokens against the baseline. This says the
+# method is settled so the reasoning can go to applying it.
+#
+# It is only an honest instruction because tag_source=gold restricts every
+# template to the query's own family. Under tag_source=predicted it would tell
+# the student to trust a method that may be for a different problem type.
+ROT_TRUST_PROMPT = (
+    "Below is a verified method for this type of problem, taken from a solved "
+    "problem of the same kind. Apply it directly to the problem: do not "
+    "re-derive the method, do not try alternative approaches, and check only "
+    "your own arithmetic.\n"
+)
+
+# Added whenever abstract_constants replaced something, in every preamble, so
+# the trust ablation differs from the clean-only arm by the trust sentence alone.
+ROT_PLACEHOLDER_NOTE = (
+    "Values written as ⟨c1⟩, ⟨c2⟩, ... belong to that other problem; use this "
+    "problem's own values in their place.\n"
+)
+
 # Verbatim from the same function's thinking-intervention branch. The reference
 # splices raw <|im_end|>/<|im_start|> markers into the user string and lets
 # continue_final_message resume from there; this sends a real assistant message
@@ -426,8 +450,14 @@ def run_rot_arm(cfg, arm, client, test_problems, rot_retriever, log, resume=True
     exact = rc.get("system_prompt") == "reference"
     system = ROT_REFERENCE_SYSTEM if exact else SYSTEM
     preamble = ROT_REFERENCE_TEMPLATE_PROMPT if exact else ROT_TEMPLATE_PROMPT
+    if rc.get("preamble", "standard") == "trust":
+        preamble = ROT_TRUST_PROMPT
+    abstract = bool(rc.get("abstract_constants", False))
     log.info(f"  [{arm}] injection={rc['injection']} tag_source={rc['tag_source']} "
              f"system={rc.get('system_prompt', 'project')} "
+             f"preamble={rc.get('preamble', 'standard')} "
+             f"single_source={bool(rc.get('single_source', False))} "
+             f"abstract_constants={abstract} "
              f"templates={rc.get('template_source', 'retrieved')} "
              f"max_tok={cfg['student']['max_tokens']} "
              f"thr={rc['sim_threshold']} l_max={rc['l_max']}")
@@ -471,6 +501,12 @@ def run_rot_arm(cfg, arm, client, test_problems, rot_retriever, log, resume=True
                                              query_group=src.get("group"))
         meta["rot_donor_problem_id"] = (src["problem_id"]
                                         if src is not p else None)
+        note = ""
+        if abstract and steps:
+            steps, ameta = abstract_constants(steps, p["problem"])
+            meta.update(ameta)
+            if ameta["rot_abstracted_literals"]:
+                note = ROT_PLACEHOLDER_NOTE
         template = format_rot_template(steps)
 
         prefill, user = None, p["problem"]
@@ -484,7 +520,7 @@ def run_rot_arm(cfg, arm, client, test_problems, rot_retriever, log, resume=True
             # material -- the reference's own non-TI branch. Kept because this
             # project's phase-3B found <think> injection did nothing on a 1.7B
             # while prompt injection helped, which contradicts the paper.
-            user = (f"{preamble}{template}\n\n"
+            user = (f"{preamble}{note}{template}\n\n"
                     f"Problem: {p['problem']}")
 
         t0 = time.perf_counter()
@@ -554,7 +590,7 @@ def run_rot_arm(cfg, arm, client, test_problems, rot_retriever, log, resume=True
              f"({n_ok / max(len(allrows), 1):.1%}); "
              f"mean template {mean_len:.1f} steps; "
              f"{crossed}/{len(allrows)} templates crossed >1 source solution")
-    if crossed == 0:
+    if crossed == 0 and not rc.get("single_source"):
         log.warning(f"  [{arm}] NO template ever left its starting solution. "
                     f"Traversal followed only sequential edges, so this arm is "
                     f"replaying one retrieved solution -- not recombining. "

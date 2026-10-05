@@ -112,6 +112,16 @@ def _validate(cfg):
         if rc["injection"] not in ("ti_prefill", "user_prompt"):
             raise ValueError("rot.injection must be ti_prefill|user_prompt, "
                              f"got {rc['injection']!r}")
+        if rc.get("preamble", "standard") not in ("standard", "trust"):
+            raise ValueError("rot.preamble must be standard|trust, "
+                             f"got {rc['preamble']!r}")
+        if rc.get("preamble") == "trust" and rc["tag_source"] != "gold":
+            # The trust preamble asserts the method is for THIS problem type,
+            # which is only guaranteed when candidates are filtered by gold tag.
+            raise ValueError("rot.preamble=trust requires rot.tag_source=gold")
+        for key in ("single_source", "abstract_constants"):
+            if not isinstance(rc.get(key, False), bool):
+                raise ValueError(f"rot.{key} must be true|false")
 
 
 def set_seeds(seed: int):
