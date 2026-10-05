@@ -1,0 +1,187 @@
+{
+  "run_name": "f_exact_8b",
+  "student_model": "Qwen/Qwen3-8B-AWQ",
+  "teacher_model": "Qwen/Qwen3-8B-AWQ",
+  "retrieval_mode": "approach_subtasks",
+  "top_k": 3,
+  "seed": 42,
+  "baseline_arm": "A_baseline",
+  "n_problems_compared": 48,
+  "summary": [
+    {
+      "arm": "A_baseline",
+      "n": 48,
+      "correct": 44,
+      "incorrect": 4,
+      "unparseable": 1,
+      "truncated": 1,
+      "accuracy": 0.9167,
+      "abs_improvement_pp": 0.0,
+      "rel_improvement_pct": 0.0,
+      "n_finished": 47,
+      "mean_input_tokens": 172.58,
+      "mean_output_tokens": 4900.34,
+      "mean_thinking_tokens": 4859.49,
+      "mean_answer_tokens": 40.85,
+      "mean_latency_s": 50.44,
+      "n_paired_vs_base": 47,
+      "paired_output_tokens_vs_base_pct": null,
+      "mean_retrieval_score": 0.0,
+      "same_family_retrieval_rate": null
+    },
+    {
+      "arm": "F_rot",
+      "n": 48,
+      "correct": 14,
+      "incorrect": 34,
+      "unparseable": 6,
+      "truncated": 6,
+      "accuracy": 0.2917,
+      "abs_improvement_pp": -62.5,
+      "rel_improvement_pct": -68.18,
+      "n_finished": 42,
+      "mean_input_tokens": 448.27,
+      "mean_output_tokens": 582.86,
+      "mean_thinking_tokens": 582.86,
+      "mean_answer_tokens": 0.0,
+      "mean_latency_s": 5.35,
+      "n_paired_vs_base": 41,
+      "paired_output_tokens_vs_base_pct": -88.12,
+      "mean_retrieval_score": 0.0,
+      "same_family_retrieval_rate": 1.0
+    }
+  ],
+  "by_group": [
+    {
+      "group": "bitcount_range",
+      "A_baseline": 1.0,
+      "A_baseline_n": 3,
+      "F_rot": 0.3333,
+      "F_rot_n": 3
+    },
+    {
+      "group": "crt_three",
+      "A_baseline": 1.0,
+      "A_baseline_n": 3,
+      "F_rot": 0.0,
+      "F_rot_n": 3
+    },
+    {
+      "group": "digital_root",
+      "A_baseline": 1.0,
+      "A_baseline_n": 3,
+      "F_rot": 1.0,
+      "F_rot_n": 3
+    },
+    {
+      "group": "fib_huge",
+      "A_baseline": 0.6667,
+      "A_baseline_n": 3,
+      "F_rot": 0.3333,
+      "F_rot_n": 3
+    },
+    {
+      "group": "frobenius",
+      "A_baseline": 1.0,
+      "A_baseline_n": 3,
+      "F_rot": 0.0,
+      "F_rot_n": 3
+    },
+    {
+      "group": "grundy_124",
+      "A_baseline": 1.0,
+      "A_baseline_n": 3,
+      "F_rot": 0.0,
+      "F_rot_n": 3
+    },
+    {
+      "group": "grundy_134",
+      "A_baseline": 1.0,
+      "A_baseline_n": 3,
+      "F_rot": 0.0,
+      "F_rot_n": 3
+    },
+    {
+      "group": "grundy_23",
+      "A_baseline": 1.0,
+      "A_baseline_n": 3,
+      "F_rot": 0.6667,
+      "F_rot_n": 3
+    },
+    {
+      "group": "josephus",
+      "A_baseline": 1.0,
+      "A_baseline_n": 3,
+      "F_rot": 0.0,
+      "F_rot_n": 3
+    },
+    {
+      "group": "lcg_closed",
+      "A_baseline": 1.0,
+      "A_baseline_n": 3,
+      "F_rot": 0.0,
+      "F_rot_n": 3
+    },
+    {
+      "group": "necklace_burnside",
+      "A_baseline": 1.0,
+      "A_baseline_n": 3,
+      "F_rot": 0.6667,
+      "F_rot_n": 3
+    },
+    {
+      "group": "perm_power",
+      "A_baseline": 0.3333,
+      "A_baseline_n": 3,
+      "F_rot": 0.0,
+      "F_rot_n": 3
+    },
+    {
+      "group": "power_tower",
+      "A_baseline": 0.6667,
+      "A_baseline_n": 3,
+      "F_rot": 0.0,
+      "F_rot_n": 3
+    },
+    {
+      "group": "wythoff",
+      "A_baseline": 1.0,
+      "A_baseline_n": 3,
+      "F_rot": 1.0,
+      "F_rot_n": 3
+    },
+    {
+      "group": "xor_range",
+      "A_baseline": 1.0,
+      "A_baseline_n": 3,
+      "F_rot": 0.6667,
+      "F_rot_n": 3
+    },
+    {
+      "group": "zeckendorf",
+      "A_baseline": 1.0,
+      "A_baseline_n": 3,
+      "F_rot": 0.0,
+      "F_rot_n": 3
+    }
+  ],
+  "rot": {
+    "F_rot": {
+      "n": 48,
+      "mean_template_len": 6.98,
+      "mean_source_templates": 2.85,
+      "crossed_share": 0.875,
+      "stop_reasons": {
+        "l_max": 34,
+        "below_threshold": 14
+      },
+      "edge_types": {
+        "initial": 48,
+        "sequential": 196,
+        "semantic": 91
+      },
+      "foreign_constant_share": 0.7292,
+      "empty_template_share": 0.0
+    }
+  }
+}

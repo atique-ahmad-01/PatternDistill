@@ -32,6 +32,7 @@ see `rot_instance_constants` in the build report.
 from __future__ import annotations
 
 import json
+from contextlib import contextmanager
 from datetime import datetime
 from pathlib import Path
 
@@ -104,6 +105,84 @@ def _shim_transformers_onnx():
 
         _pu.find_pruneable_heads_and_indices = find_pruneable_heads_and_indices
 
+    # Third: transformers 5 dropped the encoder-decoder defaults from
+    # PretrainedConfig, and jina's modeling_bert reads `config.is_decoder` and
+    # `config.add_cross_attention` while building its layers. jina's own config
+    # never sets them -- under 4.x both came from the base class as False.
+    # Restoring exactly those defaults keeps the model the plain encoder it is.
+    from transformers import PretrainedConfig
+    for _attr in ("is_decoder", "add_cross_attention"):
+        if not hasattr(PretrainedConfig(), _attr):
+            setattr(PretrainedConfig, _attr, False)
+
+    # Fourth: jina's forward calls `self.get_head_mask(head_mask, n_layers)`,
+    # removed from PreTrainedModel in 5.x. Sentence-transformers never passes a
+    # head mask, and for None the 4.x method returned one None per layer.
+    from transformers import PreTrainedModel
+    if not hasattr(PreTrainedModel, "get_head_mask"):
+        def get_head_mask(self, head_mask, num_hidden_layers,
+                          is_attention_chunked=False):
+            if head_mask is not None:
+                raise NotImplementedError("head masking is not shimmed")
+            return [None] * num_hidden_layers
+
+        PreTrainedModel.get_head_mask = get_head_mask
+
+
+_ALIBI_SIZE = 512
+
+
+@contextmanager
+def _no_meta_init():
+    """Build the model on a real device instead of transformers 5's meta device.
+
+    jina's encoder computes its ALiBi bias in __init__ by multiplying a CPU
+    tensor (`torch.Tensor(slopes)`) with an `arange` that lands on meta, which
+    raises. Scoped to this one load; every other model keeps the 5.x default.
+    """
+    import torch
+    from transformers import PreTrainedModel
+    orig = PreTrainedModel.__dict__.get("get_init_context")
+    if orig is None:               # transformers 4.x: no meta init to undo
+        yield
+        return
+    fn = orig.__func__
+
+    def get_init_context(cls, *a, **k):
+        return [c for c in fn(cls, *a, **k)
+                if not (isinstance(c, torch.device) and c.type == "meta")]
+
+    PreTrainedModel.get_init_context = classmethod(get_init_context)
+    try:
+        yield
+    finally:
+        PreTrainedModel.get_init_context = orig
+
+
+def _restore_alibi(model):
+    """Recompute jina's ALiBi buffer after loading.
+
+    It is a non-persistent buffer -- absent from the checkpoint -- and
+    transformers 5 zeroes such buffers during from_pretrained. A zero ALiBi
+    loads and encodes without error but drops all positional information:
+    against the Sep-20 node embeddings it gave mean cosine 0.977 (min 0.93)
+    instead of 1.0. Rebuilt here, the match is exact (max |diff| 1.3e-7).
+
+    Rebuilt at 512 positions, not jina's 8192: the full table is 8 heads x
+    8192^2 float32 = 2 GiB, which does not fit beside an 8B vLLM server on a
+    16 GB card. Entries depend only on (head, i, j), forward slices
+    alibi[:, :, :seqlen, :seqlen], and jina's own forward regrows the table
+    if an input is longer -- so the values used are identical.
+    """
+    for mod in model.modules():
+        if hasattr(mod, "rebuild_alibi_tensor") and hasattr(mod, "alibi"):
+            dev = mod.alibi.device
+            del mod.alibi              # drop the zeroed table first
+            mod.register_buffer(
+                "alibi",
+                mod.rebuild_alibi_tensor(size=_ALIBI_SIZE, device=dev),
+                persistent=False)
+
 
 def load_embedder(cfg, log):
     """The paper's embedder: jina-embeddings-v2-small-en.
@@ -128,7 +207,13 @@ def load_embedder(cfg, log):
             dev = "cpu"
     log.info(f"RoT embedder: {name} on {dev}")
     try:
-        return SentenceTransformer(name, trust_remote_code=True, device=dev)
+        # Load on CPU so jina's full-size ALiBi table never touches the GPU;
+        # see _restore_alibi.
+        with _no_meta_init():
+            model = SentenceTransformer(name, trust_remote_code=True,
+                                        device="cpu")
+        _restore_alibi(model)
+        return model.to(dev)
     except (ImportError, AttributeError, TypeError) as e:
         import transformers
         raise SystemExit(
@@ -137,7 +222,7 @@ def load_embedder(cfg, log):
             f"transformers {transformers.__version__} is installed. The paper's\n"
             f"embedder ships custom modelling code written against transformers\n"
             f"4.x, and 5.x removed several APIs it imports at module scope.\n"
-            f"_shim_transformers_onnx() patches the two import-time breaks; this\n"
+            f"_shim_transformers_onnx() patches the known transformers-5 breaks; this\n"
             f"failure is past that point and should not be shimmed further.\n"
             f"\n"
             f"Fix the environment instead:\n"
