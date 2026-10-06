@@ -1,0 +1,3 @@
+arm,n,correct,incorrect,unparseable,truncated,accuracy,abs_improvement_pp,rel_improvement_pct,n_finished,mean_input_tokens,mean_output_tokens,mean_thinking_tokens,mean_answer_tokens,mean_latency_s,n_paired_vs_base,paired_output_tokens_vs_base_pct,mean_retrieval_score,same_family_retrieval_rate
+A_baseline,48,36,12,9,9,0.75,0.0,0.0,39,172.58,2766.03,2754.67,11.36,18.97,39,,0.0,
+F_rot,48,38,10,2,2,0.7917,4.17,5.56,46,330.79,2811.67,2800.8,10.87,18.38,37,-0.91,0.0,1.0

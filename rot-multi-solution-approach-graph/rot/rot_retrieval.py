@@ -34,6 +34,7 @@ worth knowing before reading `rot_crossed_templates`.
 
 from __future__ import annotations
 
+import re
 import threading
 
 import numpy as np
@@ -53,6 +54,11 @@ class RoTRetriever:
         self.l_max = self.rc["l_max"]
         self.w_fq, self.w_fs0 = self.rc["w_first_query"], self.rc["w_first_s0"]
         self.w_tq, self.w_tf = self.rc["w_trav_query"], self.rc["w_trav_flow"]
+        # Phase 8. Walk only sequential edges, so the template is one coherent
+        # source solution. Crossing over at the seams is the paper's mechanism,
+        # but on RB-DERIV it yields templates that restate one rule three times
+        # with three different problems' constants (88% of templates crossed).
+        self.single_source = bool(self.rc.get("single_source", False))
         # The embedder is not thread-safe and arms run with `concurrency`
         # workers; see the same guard in retrieval.Retriever.
         self._lock = threading.Lock()
@@ -164,6 +170,8 @@ class RoTRetriever:
             for e in self.adj.get(str(cur), []):
                 b = e["to"]
                 if b in cand_set and b not in T:
+                    if self.single_source and b != seq_child:
+                        continue
                     nbrs[b] = e["type"]
             if not nbrs:
                 meta["rot_stop_reason"] = "no_successors"
@@ -222,3 +230,51 @@ def format_template(steps) -> str:
         else:
             out.append(f"Step {i}: {s}")
     return "\n".join(out)
+
+
+# ── Phase 8: constant abstraction ────────────────────────────────────────────
+
+# 3+ digits, or a comma-grouped number. Two-digit and smaller literals are left
+# alone: they are the method itself far more often than the instance ("mod 4",
+# "n+1", "remainder 2", "every 2nd person").
+# Decimals are not touched ("2.23607" in a Wythoff step is sqrt(5), part of the
+# method), but a sentence-final period or a juxtaposed variable ("7429p") must
+# not block the match.
+_LITERAL = re.compile(r"(?<![\d.])(?:\d{1,3}(?:,\d{3})+|\d{3,})(?!\d|\.\d)")
+
+
+def abstract_constants(steps, problem):
+    """Replace another problem's numeric literals with named placeholders.
+
+    The same literal gets the same placeholder throughout one template, so
+    "n = 777778 ... 777778 + 1" stays readable as "n = <c1> ... <c1> + 1".
+    A literal that also occurs in the QUERY is kept: it is this problem's own
+    value, and hiding it would only cost the student a lookup.
+
+    Returns (steps, meta). Derived facts about a replaced constant ("<c1> mod 4
+    = 2") survive this -- removing those needs a rewrite, not a regex -- so
+    `rot_abstract_residual_4plus` is reported to show what is left.
+    """
+    own = {m.group(0).replace(",", "") for m in _LITERAL.finditer(problem)}
+    names = {}
+
+    def _sub(m):
+        lit = m.group(0).replace(",", "")
+        if lit in own:
+            return m.group(0)
+        if lit not in names:
+            names[lit] = f"⟨c{len(names) + 1}⟩"
+        return names[lit]
+
+    out = [_LITERAL.sub(_sub, str(s)) for s in steps]
+    meta = {
+        "rot_abstracted_literals": len(names),
+        # Steps still carrying a FOREIGN 4+ digit literal; the query's own
+        # values are kept on purpose and do not count.
+        "rot_abstract_residual_4plus": sum(
+            1 for s in out
+            if any(len(lit) >= 4 and lit not in own
+                   for lit in (m.group(0).replace(",", "")
+                               for m in _LITERAL.finditer(s)))),
+    }
+    return out, meta
