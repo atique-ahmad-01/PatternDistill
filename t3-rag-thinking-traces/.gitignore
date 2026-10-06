@@ -1,0 +1,27 @@
+# data/RB_DERIV/ (the dataset) and data/baseline/ (the comparison point) MUST
+# be tracked -- they make this project self-contained. data/artifacts/ holds
+# the memory bank, traces and vectors copied from the RoT project (12M), plus
+# the regenerable T3 rewrites; it travels by rsync, like the RoT project's.
+data/artifacts/
+# Raw per-problem rows are regenerable and large; the summary tables are the
+# findings and are small, so they are tracked. A run's
+# numbers should survive a laptop, and the GPU box is shared -- jobs there get
+# killed to free VRAM.
+#
+# NOTE the `results/**` form. Writing `results/` here instead would exclude the
+# DIRECTORY, and git never descends into an excluded directory -- every `!` line
+# below would then be silently dead. The `!results/*/` line is required for the
+# same reason: the run subdirectories have to be re-included before anything
+# inside them can be.
+results/**
+!results/*/
+!results/*/summary.md
+!results/*/summary.csv
+!results/*/summary.json
+!results/*/by_group.csv
+!results/*/run_manifest.json
+!results/*/config.snapshot.yaml
+
+logs/
+__pycache__/
+*.pyc

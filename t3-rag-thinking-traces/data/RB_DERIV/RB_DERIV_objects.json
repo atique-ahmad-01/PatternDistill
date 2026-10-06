@@ -1,0 +1,486 @@
+{
+  "description": "Reusable technique objects for the derivation-deep reuse benchmark. 'schema' is the object injected at use time (NAME/USE_WHEN/METHOD/CHECK). 'false_friend' is a plausible-but-WRONG METHOD paired with an honest CHECK, for use-time gate experiments; 'changes_answer_on' marks the instances where the corruption actually changes the answer (score false-friend rescue only on those).",
+  "n_objects": 16,
+  "objects": [
+    {
+      "object_id": "lcg_closed",
+      "schema": {
+        "NAME": "lcg_closed",
+        "USE_WHEN": "an affine recurrence x -> (a*x + b) mod m iterated a huge number of times.",
+        "METHOD": "For x(k+1)=(a*x(k)+b) mod m the closed form is x(n) = a^n*x0 + b*(a^n - 1)/(a - 1) (mod m); evaluate the powers by fast modular exponentiation instead of iterating.",
+        "CHECK": "verify the closed form reproduces x(1) = (a*x0 + b) mod m."
+      },
+      "false_friend": {
+        "METHOD": "For x(k+1)=(a*x(k)+b) mod m the closed form is x(n) = a^n * (x0 + b) (mod m).",
+        "CHECK": "verify the formula reproduces x(1) = (a*x0 + b) mod m.",
+        "changes_answer_on": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "n_changed": 12,
+        "n_instances": 12
+      },
+      "n_instances": 12
+    },
+    {
+      "object_id": "perm_power",
+      "schema": {
+        "NAME": "perm_power",
+        "USE_WHEN": "a permutation or functional mapping applied an astronomically large number of times.",
+        "METHOD": "Decompose the permutation into cycles, take the cycle containing the element, and advance (n mod cycle_length) positions along that cycle.",
+        "CHECK": "verify the traced cycle returns to its starting element and that n mod L lies in [0,L)."
+      },
+      "false_friend": {
+        "METHOD": "Advance the element (n mod len(P)) positions along its cycle, where len(P) is the number of elements in the permutation.",
+        "CHECK": "verify the traced cycle returns to its starting element.",
+        "changes_answer_on": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "n_changed": 12,
+        "n_instances": 12
+      },
+      "n_instances": 12
+    },
+    {
+      "object_id": "grundy_134",
+      "schema": {
+        "NAME": "grundy_134",
+        "USE_WHEN": "a subtraction (take-away) game with allowed moves {1, 3, 4} where a losing position is needed far beyond brute-force search.",
+        "METHOD": "The Grundy values of the subtraction game with moves {1, 3, 4} are periodic with period 7; the losing positions (Grundy 0) are exactly n = [0, 2] (mod 7).",
+        "CHECK": "recompute the Grundy values for the first 14 heap sizes from the game rules and confirm they repeat with period 7."
+      },
+      "false_friend": {
+        "METHOD": "The Grundy values of the subtraction game with moves {1, 3, 4} are periodic with period 8; the losing positions are exactly the multiples of 8.",
+        "CHECK": "verify that n=0 is a losing position.",
+        "changes_answer_on": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        "n_changed": 11,
+        "n_instances": 12
+      },
+      "n_instances": 12
+    },
+    {
+      "object_id": "grundy_124",
+      "schema": {
+        "NAME": "grundy_124",
+        "USE_WHEN": "a subtraction (take-away) game with allowed moves {1, 2, 4} where a losing position is needed far beyond brute-force search.",
+        "METHOD": "The Grundy values of the subtraction game with moves {1, 2, 4} are periodic with period 3; the losing positions (Grundy 0) are exactly n = [0] (mod 3).",
+        "CHECK": "recompute the Grundy values for the first 6 heap sizes from the game rules and confirm they repeat with period 3."
+      },
+      "false_friend": {
+        "METHOD": "The Grundy values of the subtraction game with moves {1, 2, 4} are periodic with period 4; the losing positions are exactly the multiples of 4.",
+        "CHECK": "verify that n=0 is a losing position.",
+        "changes_answer_on": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        "n_changed": 10,
+        "n_instances": 12
+      },
+      "n_instances": 12
+    },
+    {
+      "object_id": "grundy_23",
+      "schema": {
+        "NAME": "grundy_23",
+        "USE_WHEN": "a subtraction (take-away) game with allowed moves {2, 3} where a losing position is needed far beyond brute-force search.",
+        "METHOD": "The Grundy values of the subtraction game with moves {2, 3} are periodic with period 5; the losing positions (Grundy 0) are exactly n = [0, 1] (mod 5).",
+        "CHECK": "recompute the Grundy values for the first 10 heap sizes from the game rules and confirm they repeat with period 5."
+      },
+      "false_friend": {
+        "METHOD": "The Grundy values of the subtraction game with moves {2, 3} are periodic with period 6; the losing positions are exactly the multiples of 6.",
+        "CHECK": "verify that n=0 is a losing position.",
+        "changes_answer_on": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ],
+        "n_changed": 10,
+        "n_instances": 12
+      },
+      "n_instances": 12
+    },
+    {
+      "object_id": "wythoff",
+      "schema": {
+        "NAME": "wythoff",
+        "USE_WHEN": "Wythoff's game (two heaps; remove any amount from one heap, or an equal amount from both) cold/losing positions.",
+        "METHOD": "The k-th cold position of Wythoff's game is (floor(k*phi), floor(k*phi^2)) with phi=(1+sqrt5)/2; the SMALLER pile is floor(k*phi).",
+        "CHECK": "verify k=1 gives 1 and k=2 gives 3."
+      },
+      "false_friend": {
+        "METHOD": "The k-th cold position of Wythoff's game is (floor(k*phi^2), floor(k*phi)) with phi=(1+sqrt5)/2; the SMALLER pile is floor(k*phi^2).",
+        "CHECK": "verify k=1 gives a positive integer.",
+        "changes_answer_on": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "n_changed": 12,
+        "n_instances": 12
+      },
+      "n_instances": 12
+    },
+    {
+      "object_id": "power_tower",
+      "schema": {
+        "NAME": "power_tower",
+        "USE_WHEN": "a tower of exponents modulo m, where the exponent is far too large to evaluate directly.",
+        "METHOD": "For a^(b^c) mod m with gcd(a,m)=1, reduce the exponent b^c modulo phi(m) by Euler's theorem, then use fast modular exponentiation.",
+        "CHECK": "verify phi(m) is correct and that gcd(a,m)=1 before reducing the exponent."
+      },
+      "false_friend": {
+        "METHOD": "For a^(b^c) mod m, reduce the exponent b^c modulo m-1 (Fermat), then use fast modular exponentiation.",
+        "CHECK": "verify that gcd(a,m)=1 before reducing the exponent.",
+        "changes_answer_on": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "n_changed": 12,
+        "n_instances": 12
+      },
+      "n_instances": 12
+    },
+    {
+      "object_id": "xor_range",
+      "schema": {
+        "NAME": "xor_range",
+        "USE_WHEN": "the cumulative XOR of a contiguous run of integers starting at 1.",
+        "METHOD": "The XOR of 1..N depends only on N mod 4: remainder 0 -> N, 1 -> 1, 2 -> N+1, 3 -> 0.",
+        "CHECK": "verify the rule on N=1,2,3,4 (which give 1,3,0,4)."
+      },
+      "false_friend": {
+        "METHOD": "The XOR of 1..N depends only on N mod 4: remainder 0 -> 0, 1 -> 1, 2 -> N, 3 -> N+1.",
+        "CHECK": "verify the rule on N=1 (which gives 1).",
+        "changes_answer_on": [
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          1
+        ],
+        "n_changed": 8,
+        "n_instances": 12
+      },
+      "n_instances": 12
+    },
+    {
+      "object_id": "josephus",
+      "schema": {
+        "NAME": "josephus",
+        "USE_WHEN": "a Josephus elimination circle in which every 2nd person is removed.",
+        "METHOD": "Write n = 2^m + L with 2^m the largest power of two <= n; the survivor's 1-indexed position is 2L + 1.",
+        "CHECK": "verify n=1 -> 1, n=2 -> 1, n=3 -> 3."
+      },
+      "false_friend": {
+        "METHOD": "Write n = 2^m + L with 2^m the largest power of two <= n; the survivor's 1-indexed position is 2L - 1.",
+        "CHECK": "verify the formula gives a positive position for n=3.",
+        "changes_answer_on": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "n_changed": 12,
+        "n_instances": 12
+      },
+      "n_instances": 12
+    },
+    {
+      "object_id": "frobenius",
+      "schema": {
+        "NAME": "frobenius",
+        "USE_WHEN": "the largest non-representable amount from two coprime denominations (Frobenius / Chicken McNugget).",
+        "METHOD": "For coprime positive a,b the largest integer not representable as a*x + b*y with x,y >= 0 is a*b - a - b.",
+        "CHECK": "confirm gcd(a,b)=1 and that a*b-a-b+1 IS representable."
+      },
+      "false_friend": {
+        "METHOD": "For coprime positive a,b the largest integer not representable as a*x + b*y with x,y >= 0 is a*b - a - b + 1.",
+        "CHECK": "confirm gcd(a,b)=1.",
+        "changes_answer_on": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "n_changed": 12,
+        "n_instances": 12
+      },
+      "n_instances": 12
+    },
+    {
+      "object_id": "fib_huge",
+      "schema": {
+        "NAME": "fib_huge",
+        "USE_WHEN": "a Fibonacci term whose index is far too large to reach by iteration.",
+        "METHOD": "Use fast doubling: F(2k)=F(k)*(2F(k+1)-F(k)) and F(2k+1)=F(k)^2+F(k+1)^2, recursing on the binary digits of n, reducing mod m throughout -- O(log n) steps.",
+        "CHECK": "verify the recursion reproduces F(10)=55."
+      },
+      "false_friend": {
+        "METHOD": "Reduce the index first: F(n) mod m equals F(n mod m) mod m.",
+        "CHECK": "verify the rule reproduces F(10)=55 when m is large.",
+        "changes_answer_on": [
+          1,
+          1,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0
+        ],
+        "n_changed": 8,
+        "n_instances": 12
+      },
+      "n_instances": 12
+    },
+    {
+      "object_id": "digital_root",
+      "schema": {
+        "NAME": "digital_root",
+        "USE_WHEN": "the repeated digit sum (digital root) of a huge number such as a large power.",
+        "METHOD": "The digital root of n>0 is 1 + (n-1) mod 9, so the digital root of a^b is determined by a^b mod 9, which is computed by fast modular exponentiation.",
+        "CHECK": "verify that the digital root of 99 is 9 and of 10 is 1."
+      },
+      "false_friend": {
+        "METHOD": "The digital root of a^b equals the digital root of a, multiplied by b, reduced to a single digit.",
+        "CHECK": "verify that the digital root of 99 is 9.",
+        "changes_answer_on": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "n_changed": 8,
+        "n_instances": 12
+      },
+      "n_instances": 12
+    },
+    {
+      "object_id": "bitcount_range",
+      "schema": {
+        "NAME": "bitcount_range",
+        "USE_WHEN": "the total number of set bits over a contiguous range of integers starting at 0.",
+        "METHOD": "Count each bit position separately: bit j is set in floor((N+1)/2^(j+1))*2^j + max(0, (N+1) mod 2^(j+1) - 2^j) of the integers 0..N; sum over j.",
+        "CHECK": "verify the total for N=3 is 4 (0,1,1,2)."
+      },
+      "false_friend": {
+        "METHOD": "The total number of set bits over 0..N is approximately N*log2(N)/2, computed as N times the bit length of N, integer-divided by 2.",
+        "CHECK": "verify the total for N=3 is positive.",
+        "changes_answer_on": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "n_changed": 12,
+        "n_instances": 12
+      },
+      "n_instances": 12
+    },
+    {
+      "object_id": "necklace_burnside",
+      "schema": {
+        "NAME": "necklace_burnside",
+        "USE_WHEN": "counting distinct colourings of a cycle up to rotation (necklaces).",
+        "METHOD": "By Burnside's lemma the number of necklaces with n beads and k colours is (1/n) * sum over divisors d of n of phi(d) * k^(n/d).",
+        "CHECK": "verify n=3, k=2 gives 4."
+      },
+      "false_friend": {
+        "METHOD": "The number of necklaces with n beads and k colours is k^n / n.",
+        "CHECK": "verify the formula gives a positive integer for n=3, k=2.",
+        "changes_answer_on": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "n_changed": 12,
+        "n_instances": 12
+      },
+      "n_instances": 12
+    },
+    {
+      "object_id": "zeckendorf",
+      "schema": {
+        "NAME": "zeckendorf",
+        "USE_WHEN": "representing an integer as a sum of non-consecutive Fibonacci numbers (Zeckendorf).",
+        "METHOD": "Zeckendorf's theorem: greedily subtract the LARGEST Fibonacci number not exceeding the remainder, repeating until zero; the representation is unique and uses non-consecutive Fibonacci numbers.",
+        "CHECK": "verify 12 = 8 + 3 + 1 uses 3 terms."
+      },
+      "false_friend": {
+        "METHOD": "Greedily subtract the SMALLEST Fibonacci number not exceeding the remainder, repeating until zero.",
+        "CHECK": "verify the procedure terminates for 12.",
+        "changes_answer_on": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "n_changed": 12,
+        "n_instances": 12
+      },
+      "n_instances": 12
+    },
+    {
+      "object_id": "crt_three",
+      "schema": {
+        "NAME": "crt_three",
+        "USE_WHEN": "a system of three simultaneous congruences with pairwise-coprime moduli.",
+        "METHOD": "Chinese Remainder Theorem: with M = m1*m2*m3 and Mi = M/mi, the unique solution mod M is x = sum_i r_i * Mi * (Mi^-1 mod mi), reduced mod M.",
+        "CHECK": "verify the solution satisfies all three original congruences."
+      },
+      "false_friend": {
+        "METHOD": "Chinese Remainder Theorem: with M = m1*m2*m3, the solution is x = (r1*m2*m3 + r2*m1*m3 + r3*m1*m2) mod M.",
+        "CHECK": "verify the solution is in the range [0, M).",
+        "changes_answer_on": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "n_changed": 12,
+        "n_instances": 12
+      },
+      "n_instances": 12
+    }
+  ]
+}

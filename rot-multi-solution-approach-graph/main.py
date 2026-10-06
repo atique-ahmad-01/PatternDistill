@@ -6,6 +6,8 @@
     python main.py validate               score solutions against gold
     python main.py build-memory           problem -> solution -> approach -> steps
     python main.py build-graph            nodes, semantic edges, embeddings
+    python main.py generalize             teacher rewrites RoT steps as generic templates
+    python main.py build-rot-graph        RoT step graph (rot.step_text picks the texts)
     python main.py evaluate               student arms A/B/C/D on the test split
     python main.py report                 summary tables from existing results
     python main.py all                    every stage in order
@@ -136,6 +138,28 @@ def cmd_build_graph(cfg, args, log):
     return {"graph": grep}
 
 
+def cmd_generalize(cfg, args, log):
+    """Teacher rewrites each memory entry as a generic method template.
+
+    Thinking is off: this is a rewrite, not a solve, and Qwen3's non-thinking
+    sampling settings (temperature 0.7, top_p 0.8) apply.
+    """
+    from rot import generalize as GZ
+    entries = M.load(cfg)
+    if not entries:
+        raise SystemExit("memory bank is empty — run build-memory first")
+    section = dict(cfg["teacher"], enable_thinking=False, temperature=0.7,
+                   top_p=0.8, max_tokens=1024)
+    client = build_client(section, seed=cfg["seed"], mock=cfg.get("_mock"))
+    ok, msg = client.health()
+    if not ok:
+        raise SystemExit(f"teacher unavailable — {msg}\n"
+                         f"Start it with scripts/serve_vllm.sh teacher.")
+    log.info(f"teacher: {msg}")
+    _, rep = GZ.generalize(cfg, client, entries, log, resume=not args.no_resume)
+    return {"generalize": rep}
+
+
 def cmd_build_rot_graph(cfg, args, log):
     """The paper's thought graph: step nodes, sequential + semantic edges."""
     entries = M.load(cfg)
@@ -231,6 +255,7 @@ COMMANDS = {
     "validate": cmd_validate,
     "build-memory": cmd_build_memory,
     "build-graph": cmd_build_graph,
+    "generalize": cmd_generalize,
     "build-rot-graph": cmd_build_rot_graph,
     "evaluate": cmd_evaluate,
     "report": cmd_report,

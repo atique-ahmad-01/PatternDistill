@@ -119,6 +119,9 @@ def _validate(cfg):
             # The trust preamble asserts the method is for THIS problem type,
             # which is only guaranteed when candidates are filtered by gold tag.
             raise ValueError("rot.preamble=trust requires rot.tag_source=gold")
+        if rc.get("step_text", "instance") not in ("instance", "generic"):
+            raise ValueError("rot.step_text must be instance|generic, "
+                             f"got {rc['step_text']!r}")
         for key in ("single_source", "abstract_constants"):
             if not isinstance(rc.get(key, False), bool):
                 raise ValueError(f"rot.{key} must be true|false")

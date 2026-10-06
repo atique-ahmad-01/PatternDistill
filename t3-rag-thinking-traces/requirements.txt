@@ -1,0 +1,25 @@
+# Retrieval-of-Thought pipeline.
+#
+# The teacher and student run in vLLM containers and are reached over HTTP, so
+# vllm itself is NOT required here — only an OpenAI-compatible client.
+
+openai>=1.30.0
+pyyaml>=6.0
+numpy>=1.24
+
+# Embeddings.
+# Similarity is a plain numpy matmul over L2-normalised vectors -- at this
+# scale (a few thousand nodes) that is faster than building a faiss index and
+# one less dependency to pin.
+sentence-transformers>=2.7.0
+torch>=2.1
+einops>=0.7.0           # nomic-embed's trust_remote_code needs it at runtime,
+                        # even though nothing here imports it directly
+
+# The RoT embedder (jina-embeddings-v2-small-en, arXiv:2509.21743) ships custom
+# modelling code written against transformers 4.x. transformers 5.x removed
+# transformers.onnx and find_pruneable_heads_and_indices, which it imports at
+# module scope, and no longer defaults config.is_decoder -- so it cannot load
+# there. This pin applies only to the pipeline environment; the vLLM servers
+# run in their own and are unaffected.
+transformers>=4.40,<5
