@@ -1,0 +1,85 @@
+# T3 RAG over thinking traces (arXiv:2605.03344) on RB-DERIV.
+#
+# dataset, split, student and embedding are copied from the RoT project's
+# config.f_exact.yaml and must stay identical: the frozen split and the copied
+# A_baseline were produced under exactly these settings, and the split refuses
+# to load if its settings change.
+seed: 42
+run_name: t3_struct
+dataset:
+  path: data/RB_DERIV/RB_DERIV_questions.json
+  sha256: 7e043b6a26502438526a4c52c00bfb931fe0f033378c3fbb5d8b03b33e37a1e0
+  records_key: questions
+  fields:
+    id: query_id
+    problem: question
+    answer: gold_answer
+    group: family
+  keep_fields:
+  - uses_object
+  - false_friend_answer
+  - false_friend_changes_answer
+  gradable_only: true
+  split:
+    mode: per_family
+    test_per_family: 3
+    test_size: 48
+    seed: 42
+  limits:
+    max_train: null
+    max_test: null
+teacher:
+  model: Qwen/Qwen3-8B-AWQ
+  base_url: http://localhost:8000/v1
+  api_key: EMPTY
+  temperature: 0.7
+  top_p: 0.8
+  top_k: 20
+  enable_thinking: false
+  timeout: 900
+  max_retries: 3
+  concurrency: 8
+student:
+  model: Qwen/Qwen3-1.7B
+  base_url: http://localhost:8001/v1
+  api_key: EMPTY
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+  enable_thinking: true
+  max_tokens: 15360
+  timeout: 900
+  max_retries: 3
+  concurrency: 8
+embedding:
+  model: nomic-ai/nomic-embed-text-v1
+  device: auto
+  batch_size: 64
+  doc_prefix: 'search_document: '
+  query_prefix: 'search_query: '
+retrieval:
+  # The paper's default, and its most consistent setting across models.
+  top_k: 3
+t3:
+  # struct | semantic | reflect. The paper's best: struct for small models
+  # (MATH), reflect overall (GPT-5, AIME). --variant overrides this.
+  variant: struct
+  # Output cap for one rewrite. The paper's forms average 239-454 words.
+  max_tokens: 1536
+evaluation:
+  arms:
+  - A_baseline
+  - G_t3
+  baseline_arm: A_baseline
+  report_by_group: true
+  low_diversity_groups:
+  - digital_root
+  - zeckendorf
+  - xor_range
+  - fib_huge
+paths:
+  data_dir: data/artifacts
+  # A_baseline from the RoT project's f_exact run; copied into each run dir.
+  baseline_dir: data/baseline
+  results_dir: results
+  logs_dir: logs
