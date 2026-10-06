@@ -346,11 +346,14 @@ ROT_ARMS = {"F_rot"}
 # line that SYSTEM asks of arms A-E. Use it when the claim is "RoT compared
 # against our other arms" -- a different answer format across arms would put a
 # parsing difference inside the comparison. scoring handles \boxed either way.
-ROT_REFERENCE_TEMPLATE_PROMPT = (
+ROT_REFERENCE_CONTRACT = (
     "Solve the math problem and always conclude with:\n"
     "Therefore, the final answer is: $\\boxed{answer}$. Where [answer] is just "
     "the final numerical answer that solves the problem. Ensure the number is "
     "clearly identifiable within the box.\n"
+)
+
+ROT_REFERENCE_TEMPLATE_PROMPT = ROT_REFERENCE_CONTRACT + (
     "You are given a template to solve the problem. Use the given steps if "
     "applicable otherwise use them to guide your reasoning and present the "
     "solution steps logically to solve this problem:\n"
@@ -451,7 +454,9 @@ def run_rot_arm(cfg, arm, client, test_problems, rot_retriever, log, resume=True
     system = ROT_REFERENCE_SYSTEM if exact else SYSTEM
     preamble = ROT_REFERENCE_TEMPLATE_PROMPT if exact else ROT_TEMPLATE_PROMPT
     if rc.get("preamble", "standard") == "trust":
-        preamble = ROT_TRUST_PROMPT
+        # Under the reference prompt the \boxed contract is kept, so the trust
+        # arm differs from its clean arm by the trust sentence alone.
+        preamble = (ROT_REFERENCE_CONTRACT if exact else "") + ROT_TRUST_PROMPT
     abstract = bool(rc.get("abstract_constants", False))
     log.info(f"  [{arm}] injection={rc['injection']} tag_source={rc['tag_source']} "
              f"system={rc.get('system_prompt', 'project')} "
@@ -513,7 +518,7 @@ def run_rot_arm(cfg, arm, client, test_problems, rot_retriever, log, resume=True
         if template and use_ti:
             # The template is flattened to one line, as the reference does:
             # `template_str.replace('\n', ' ')`.
-            user = f"{preamble}\nProblem: {p['problem']}."
+            user = f"{preamble}{note}\nProblem: {p['problem']}."
             prefill = ROT_PREFILL.format(template=template.replace("\n", " ") + " ")
         elif template:
             # Ablation path: same template, delivered as user-turn reference

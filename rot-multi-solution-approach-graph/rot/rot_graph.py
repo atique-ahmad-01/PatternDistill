@@ -259,6 +259,21 @@ def build(cfg, entries, log):
     tau = rc["tau_semantic"]
     cap = rc["max_neighbors"]
 
+    # rot.step_text=generic swaps every step (and the approach it is embedded
+    # with) for its teacher-written generic rewrite. Same entries, same step
+    # counts, so the graph keeps its shape and only the texts change.
+    generic = rc.get("step_text", "instance") == "generic"
+    if generic:
+        from . import generalize as GZ
+        gen = GZ.load(cfg)
+        missing = [e["entry_id"] for e in entries if e["entry_id"] not in gen]
+        if missing:
+            raise SystemExit(f"{len(missing)} memory entries have no generic "
+                             f"rewrite -- re-run `python main.py generalize`")
+        entries = [dict(e, approach=gen[e["entry_id"]]["approach_generic"],
+                        subtasks=gen[e["entry_id"]]["subtasks_generic"])
+                   for e in entries]
+
     # ── V ────────────────────────────────────────────────────────────────────
     nodes, seq_next = [], {}
     for e in entries:
@@ -334,6 +349,7 @@ def build(cfg, entries, log):
             "created": datetime.now().isoformat(timespec="seconds"),
             "paper": "arXiv:2509.21743",
             "template_source": "teacher-generated memory bank (not ReasonFlux-v2)",
+            "step_text": "generic" if generic else "instance",
             "n_nodes": len(nodes),
             "n_templates": len(entries),
             "n_sequential_edges": len(seq_next),
@@ -354,9 +370,9 @@ def build(cfg, entries, log):
         "sequential": {str(k): v for k, v in seq_next.items()},
     }
 
-    gpath = data_path(cfg, "rot_thought_graph.json")
+    gpath, epath = _paths(cfg)
     Path(gpath).write_text(json.dumps(graph, ensure_ascii=False))
-    np.save(data_path(cfg, "rot_node_embeddings.npy"), vecs)
+    np.save(epath, vecs)
 
     log.info(f"  semantic edges: {n_sem} ({cross_tag} cross-tag); "
              f"sequential: {len(seq_next)}")
@@ -375,7 +391,16 @@ def build(cfg, entries, log):
     return graph, vecs, dict(graph["metadata"])
 
 
+def _paths(cfg):
+    """Instance and generic graphs live side by side, so switching
+    rot.step_text never silently evaluates against the other one."""
+    sfx = ".generic" if cfg["rot"].get("step_text", "instance") == "generic" else ""
+    return (data_path(cfg, f"rot_thought_graph{sfx}.json"),
+            data_path(cfg, f"rot_node_embeddings{sfx}.npy"))
+
+
 def load(cfg):
-    g = json.loads(Path(data_path(cfg, "rot_thought_graph.json")).read_text())
-    vecs = np.load(data_path(cfg, "rot_node_embeddings.npy"))
+    gpath, epath = _paths(cfg)
+    g = json.loads(Path(gpath).read_text())
+    vecs = np.load(epath)
     return g, vecs
