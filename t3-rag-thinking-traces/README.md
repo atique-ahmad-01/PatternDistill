@@ -55,6 +55,60 @@ traces (9 truncations to 0-1). The baseline is copied, not re-run, so latency
 is not a same-session comparison, and the random-example control
 (`R_random_t3`) has not been run yet.
 
+No form is significant on its own yet (exact McNemar vs baseline: best
+`reflect` 8 gained / 2 lost, p=0.11).
+
+## Paper plan (suggestion)
+
+**Title:** *Hints, Not Plans: Budget-Aware Retrieval of Thinking Traces for
+Small Reasoning Models*
+
+**Claim:** a small model gets more accurate *and* cheaper *and* faster when
+given retrieved worked examples as hints — not when given a plan to follow.
+
+**Findings to establish**
+
+| # | Finding | Evidence so far |
+|---|---|---|
+| 1 | Plans hurt, hints help: RoT templates make the 1.7B cheap but inaccurate; T3 examples beat the baseline on all three goals | RoT 17-35%; T3 81-87.5% vs 75%, -24 to -40% tokens |
+| 2 | The gain is mostly preventing runaway reasoning | 5 of `reflect`'s 8 gains were baseline truncations |
+| 3 | Forms are complementary; an adaptive cascade approaches the oracle under a token budget | any-form oracle 46/48 vs best single 42/48 |
+| 4 | Answer length predicts failure, so it can drive the cascade | wrong 2,989 vs right 1,717 median tokens |
+
+**Method contribution:** adaptive form cascade — cheapest form first, stop past
+a length threshold, retry with another form.
+
+**Benchmarks**
+
+| benchmark | why |
+|---|---|
+| RB-DERIV (48 test) | current results; exact integer golds |
+| MATH-500 | standard; the paper's small-model setting |
+| AIME 2024/25 | hard; where the paper saw the largest gains |
+
+Skip GSM8K (too easy) and MBPP (code; RoT lost 16pp there).
+
+**Models:** teacher Qwen3-8B; students Qwen3-0.6B, 1.7B, 4B.
+
+**Arms**
+
+| arm | role |
+|---|---|
+| baseline | no examples, same session |
+| concise-only | "be concise" instruction, no examples — tests finding 2 |
+| random examples | does retrieval matter? |
+| RoT (`f_exact`, `p8_clean`) | plans, for finding 1 |
+| T3 `struct` / `semantic` / `reflect` | hints, fixed form |
+| T3 student-error `reflect` | pitfalls from the student's own mistakes |
+| T3 teacher-free | notes written by the student itself |
+| **cascade** | the method |
+
+**Report:** accuracy, output tokens, latency; 3 seeds; paired McNemar /
+bootstrap CIs; accuracy-vs-tokens Pareto plot.
+
+**Order:** random + concise-only + same-session baseline on RB-DERIV (~1 h GPU)
+→ cascade → MATH-500 / AIME with 3 seeds → other student sizes.
+
 ## Run (GPU box, inside tmux)
 
 ```bash
