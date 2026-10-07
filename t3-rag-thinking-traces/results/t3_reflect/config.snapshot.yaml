@@ -1,0 +1,78 @@
+seed: 42
+run_name: t3_reflect
+dataset:
+  path: /home/students/t3-rag-thinking-traces/data/RB_DERIV/RB_DERIV_questions.json
+  sha256: 7e043b6a26502438526a4c52c00bfb931fe0f033378c3fbb5d8b03b33e37a1e0
+  records_key: questions
+  fields:
+    id: query_id
+    problem: question
+    answer: gold_answer
+    group: family
+  keep_fields:
+  - uses_object
+  - false_friend_answer
+  - false_friend_changes_answer
+  gradable_only: true
+  split:
+    mode: per_family
+    test_per_family: 3
+    test_size: 48
+    seed: 42
+  limits:
+    max_train: null
+    max_test: null
+teacher:
+  model: Qwen/Qwen3-8B-AWQ
+  base_url: http://localhost:8000/v1
+  api_key: EMPTY
+  temperature: 0.7
+  top_p: 0.8
+  top_k: 20
+  enable_thinking: false
+  timeout: 900
+  max_retries: 3
+  concurrency: 8
+student:
+  model: Qwen/Qwen3-1.7B
+  base_url: http://localhost:8001/v1
+  api_key: EMPTY
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+  enable_thinking: true
+  max_tokens: 15360
+  timeout: 900
+  max_retries: 3
+  concurrency: 8
+embedding:
+  model: nomic-ai/nomic-embed-text-v1
+  device: auto
+  batch_size: 64
+  doc_prefix: 'search_document: '
+  query_prefix: 'search_query: '
+retrieval:
+  top_k: 3
+  mode: t3_reflect
+t3:
+  variant: reflect
+  max_tokens: 3072
+evaluation:
+  arms:
+  - A_baseline
+  - G_t3
+  baseline_arm: A_baseline
+  report_by_group: true
+  low_diversity_groups:
+  - digital_root
+  - zeckendorf
+  - xor_range
+  - fib_huge
+paths:
+  data_dir: /home/students/t3-rag-thinking-traces/data/artifacts
+  baseline_dir: /home/students/t3-rag-thinking-traces/data/baseline
+  results_dir: /home/students/t3-rag-thinking-traces/results
+  logs_dir: /home/students/t3-rag-thinking-traces/logs
+_config_path: /home/students/t3-rag-thinking-traces/config.yaml
+_root: /home/students/t3-rag-thinking-traces
+_mock: false

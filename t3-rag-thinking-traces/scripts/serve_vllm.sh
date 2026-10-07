@@ -72,7 +72,12 @@ case "${1:-}" in
     MODEL="${TEACHER_MODEL:-Qwen/Qwen3-8B-AWQ}"; PORT=8000; DEVICE="${GPU:-0}" ;;
   student)
     ROLE=student
-    MODEL="${STUDENT_MODEL:-Qwen/Qwen3-1.7B}";   PORT=8001; DEVICE="${GPU:-0}" ;;
+    MODEL="${STUDENT_MODEL:-Qwen/Qwen3-1.7B}";   PORT=8001; DEVICE="${GPU:-0}"
+    # The student's output cap is 15,360 (same as the baseline), so 16384
+    # left ~1,000 tokens of prompt: vLLM rejected every prompt with 3
+    # examples above that (37/48 of semantic) and the rows scored as wrong.
+    # 20480 leaves ~5,000 for the prompt. Qwen3-1.7B supports 32k.
+    MAX_LEN="${STUDENT_MAX_LEN:-20480}" ;;
   check)
     echo "== GPU / driver =="
     nvidia-smi --query-gpu=name,driver_version,memory.total,memory.used \

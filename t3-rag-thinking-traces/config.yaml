@@ -64,8 +64,9 @@ t3:
   # struct | semantic | reflect. The paper's best: struct for small models
   # (MATH), reflect overall (GPT-5, AIME). --variant overrides this.
   variant: struct
-  # Output cap for one rewrite. The paper's forms average 239-454 words.
-  max_tokens: 1536
+  # Output cap for one rewrite. The paper's forms average 239-454 words;
+  # never binding for the short forms, headroom for the _long ones.
+  max_tokens: 3072
 evaluation:
   arms:
   - A_baseline

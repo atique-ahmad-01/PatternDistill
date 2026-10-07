@@ -8,7 +8,7 @@
 
 Common flags:
     --config PATH      default config.yaml
-    --variant V        struct | semantic | reflect (overrides t3.variant;
+    --variant V        struct | semantic | reflect, or *_long (overrides t3.variant;
                        results then land in results/t3_<V>/ unless --run is given)
     --run NAME         name this run; results land in results/<name>/
     --mock             use the offline fake backend (no GPU, no server)

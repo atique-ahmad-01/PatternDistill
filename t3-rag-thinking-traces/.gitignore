@@ -25,3 +25,6 @@ results/**
 logs/
 __pycache__/
 *.pyc
+
+# local backups of earlier result sets
+*.tgz

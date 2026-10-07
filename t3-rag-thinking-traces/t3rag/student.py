@@ -24,7 +24,7 @@ import time
 import zlib
 from pathlib import Path
 
-from .config import read_jsonl, results_path, write_jsonl
+from .config import read_eval, results_path, write_jsonl
 from .retrieval import hit_metadata
 from .scoring import extract_answer, is_correct
 from .t3 import build_user_prompt, format_examples
@@ -61,8 +61,9 @@ def run_arm(cfg, arm, client, test_problems, retriever, texts, log, resume=True)
         # Rows are appended per problem, so a stale file must go or --no-resume
         # would add a second pass and the report would average the two.
         Path(out_path).unlink(missing_ok=True)
-    existing = read_jsonl(out_path) if resume else []
-    have = {r["problem_id"] for r in existing}
+    existing = read_eval(out_path) if resume else []
+    # A request that failed outright is redone, not kept as a wrong answer.
+    have = {r["problem_id"] for r in existing if not r.get("error")}
     todo = [p for p in test_problems if p["problem_id"] not in have]
     if existing:
         log.info(f"  [{arm}] resuming: {len(have)} done, {len(todo)} to go")
@@ -122,7 +123,7 @@ def run_arm(cfg, arm, client, test_problems, retriever, texts, log, resume=True)
 
     client.map(todo, _one, desc=arm, log=log)
 
-    allrows = read_jsonl(out_path)
+    allrows = read_eval(out_path)
     n_ok = sum(1 for r in allrows if r["correct"])
     log.info(f"  [{arm}] {n_ok}/{len(allrows)} correct "
              f"({n_ok / max(len(allrows), 1):.1%})")

@@ -26,7 +26,7 @@ import json
 from collections import Counter, defaultdict
 from pathlib import Path
 
-from .config import read_jsonl, results_path
+from .config import read_eval, results_path
 from .llm import split_thinking_continued, split_thinking_tokens
 
 
@@ -39,7 +39,7 @@ def collect(cfg):
     rows = []
     for arm in cfg["evaluation"]["arms"]:
         p = results_path(cfg, f"eval_{arm}.jsonl")
-        rows.extend(read_jsonl(p))
+        rows.extend(read_eval(p))
     return rows
 
 
