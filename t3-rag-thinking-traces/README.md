@@ -30,6 +30,31 @@ fewer tokens and less time per problem.
 Everything except the examples matches the baseline exactly: same 48 test
 problems, frozen split, student, system prompt, decoding and 15,360-token cap.
 
+Each form also has a `_long` version (`struct_long`, ...) asking for the
+concrete formulas and values, 250-450 words; the short prompts gave 61 / 152 /
+100 words, under the paper's 239-454.
+
+## Results (2026-10-07)
+
+48 test problems; `Δtok` = paired output tokens against the baseline.
+
+| arm | acc | out tok | Δtok | lat s | trunc |
+|---|---:|---:|---:|---:|---:|
+| A_baseline | 75.0% | 2,766 | — | 19.0 | 9 |
+| struct | 83.3% | 2,490 | -29.6% | 17.9 | 0 |
+| semantic | 81.2% | 2,285 | -39.7% | 17.0 | 1 |
+| reflect | **87.5%** | 2,366 | -24.5% | **15.6** | 0 |
+| struct_long (184 words) | 85.4% | 2,477 | -25.3% | 18.4 | 0 |
+| semantic_long (316 words) | 83.3% | **1,986** | **-40.5%** | 15.8 | 1 |
+| reflect_long (194 words) | 83.3% | 2,594 | -24.5% | 19.1 | 0 |
+
+Every form beats the baseline on accuracy and tokens; all but `reflect_long`
+also on latency. One problem is 2.1pp, so the gaps between forms are noise;
+only the gain over the baseline is consistent. Much of it is fewer runaway
+traces (9 truncations to 0-1). The baseline is copied, not re-run, so latency
+is not a same-session comparison, and the random-example control
+(`R_random_t3`) has not been run yet.
+
 ## Run (GPU box, inside tmux)
 
 ```bash

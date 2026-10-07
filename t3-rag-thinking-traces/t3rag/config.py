@@ -74,7 +74,7 @@ def _validate(cfg):
     tc = cfg.get("t3")
     if not tc:
         raise ValueError("config needs a t3 section (t3.variant)")
-    variants = ("struct", "semantic", "reflect")
+    from .t3 import VARIANTS as variants
     if tc["variant"] not in variants:
         raise ValueError(f"t3.variant must be one of {variants}, "
                          f"got {tc['variant']!r}")
@@ -140,3 +140,16 @@ def read_jsonl(path):
             if line:
                 rows.append(json.loads(line))
     return rows
+
+
+def read_eval(path):
+    """Eval rows, one per problem: the LAST row written for each problem_id.
+
+    A row whose request failed (`error` set, e.g. a prompt over the server's
+    context) is redone on resume and the retry appended, so the file can hold
+    two rows for one problem; the later one is the one that counts.
+    """
+    latest = {}
+    for r in read_jsonl(path):
+        latest[r["problem_id"]] = r
+    return list(latest.values())
